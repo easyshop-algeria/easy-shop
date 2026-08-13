@@ -7,95 +7,638 @@
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f7f9fc;color:#172033}
-.top{background:#075bd8;color:white;padding:10px;text-align:center;font-size:14px}
-header{background:white;padding:18px 5%;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.logo{font-size:32px;font-weight:bold;color:#075bd8}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f7fa;
+    color:#172033
+}
+
+.top{
+    background:#075bd8;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:14px
+}
+
+header{
+    background:white;
+    padding:16px 5%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    flex-wrap:wrap;
+    box-shadow:0 2px 10px #0001
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#075bd8
+}
+
 .logo span{color:#111}
-.search{flex:1;max-width:500px;display:flex}
-.search input{width:100%;padding:13px;border:1px solid #ddd;border-radius:8px 0 0 8px}
-.search button{background:#075bd8;color:white;border:0;padding:0 20px;border-radius:0 8px 8px 0}
-.cart{font-size:17px}
-nav{background:#075bd8;color:white;padding:13px 5%;display:flex;gap:25px;justify-content:center;flex-wrap:wrap}
-nav a{color:white;text-decoration:none;font-weight:bold}
-.hero{margin:25px auto;max-width:1200px;background:linear-gradient(110deg,#06265d,#0871e8);color:white;padding:55px 8%;border-radius:18px}
-.hero h1{font-size:42px;margin:0 0 15px}
-.hero p{font-size:20px}
-.hero button{padding:14px 30px;border:0;border-radius:8px;background:white;color:#075bd8;font-weight:bold;font-size:16px}
-.container{max-width:1200px;margin:auto;padding:0 15px}
-.title{text-align:right;margin:35px 0 20px}
-.categories,.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
-.category,.product{background:white;border-radius:14px;padding:20px;text-align:center;box-shadow:0 3px 15px #00000010}
-.category{font-size:20px;font-weight:bold}
-.product .emoji{font-size:70px}
-.product h3{margin:10px 0}
-.price{font-size:21px;color:#075bd8;font-weight:bold}
-.product button{width:100%;padding:11px;background:#075bd8;color:white;border:0;border-radius:7px;margin-top:12px;font-weight:bold}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin:35px 0}
-.feature{background:white;padding:20px;text-align:center;border-radius:12px}
-footer{background:#101827;color:white;text-align:center;padding:30px;margin-top:50px}
+
+.search{
+    flex:1;
+    max-width:500px;
+    display:flex
+}
+
+.search input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px 0 0 8px;
+    font-size:15px
+}
+
+.search button{
+    border:0;
+    background:#075bd8;
+    color:white;
+    padding:0 18px;
+    border-radius:0 8px 8px 0;
+    font-size:18px
+}
+
+.cart{
+    background:#075bd8;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer
+}
+
+nav{
+    background:#075bd8;
+    color:white;
+    padding:12px 5%;
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold
+}
+
+.hero{
+    margin:25px auto;
+    max-width:1200px;
+    padding:35px 20px;
+    border-radius:15px;
+    text-align:center;
+    color:white;
+    background:linear-gradient(135deg,#075bd8,#00a6ff)
+}
+
+.hero h1{
+    margin:0 0 10px;
+    font-size:32px
+}
+
+.hero p{
+    margin:0;
+    font-size:17px
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:0 15px
+}
+
+.title{
+    text-align:center;
+    margin:30px 0 20px
+}
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px
+}
+
+.category{
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 2px 8px #0001;
+    font-weight:bold
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+    margin-bottom:40px
+}
+
+.product{
+    background:white;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 3px 12px #0001;
+    transition:.2s
+}
+
+.product:hover{
+    transform:translateY(-3px)
+}
+
+.product img{
+    width:100%;
+    height:230px;
+    object-fit:contain;
+    background:#fafafa
+}
+
+.product-info{
+    padding:15px
+}
+
+.product h3{
+    margin:5px 0 10px;
+    font-size:18px
+}
+
+.price{
+    color:#075bd8;
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:12px
+}
+
+.add{
+    width:100%;
+    border:0;
+    background:#075bd8;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer
+}
+
+.add:hover{background:#0649ad}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+    margin:30px 0
+}
+
+.feature{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 2px 8px #0001
+}
+
+.shipping{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    margin:30px 0;
+    box-shadow:0 2px 8px #0001
+}
+
+.shipping select{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:16px;
+    margin:10px 0
+}
+
+.shipping-result{
+    font-size:18px;
+    font-weight:bold;
+    color:#075bd8
+}
+
+.loading{
+    text-align:center;
+    padding:40px;
+    font-size:18px
+}
+
+.error{
+    background:#ffe5e5;
+    color:#a00000;
+    padding:15px;
+    border-radius:8px;
+    text-align:center
+}
+
+footer{
+    background:#172033;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:40px
+}
+
 @media(max-width:600px){
-.hero{padding:35px 20px}
-.hero h1{font-size:30px}
-header{justify-content:center}
-.logo{width:100%;text-align:center}
-.search{order:2;width:100%}
-nav{gap:12px;font-size:14px}
+    .logo{width:100%;text-align:center}
+    .search{max-width:none;width:100%}
+    .hero h1{font-size:25px}
+    .product img{height:200px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="top">🚚 توصيل إلى جميع ولايات الجزائر | 💵 الدفع عند الاستلام</div>
-
-<header>
-<div class="logo">EASY <span>SHOP</span></div>
-
-<div class="search">
-<input type="text" placeholder="ابحث عن منتج...">
-<button>🔍</button>
+<div class="top">
+🚚 توصيل إلى جميع ولايات الجزائر
 </div>
 
-<div class="cart">🛒 السلة (<span id="count">0</span>)</div>
+<header>
+
+<div class="logo">
+Easy <span>Shop</span>
+</div>
+
+<div class="search">
+<input id="searchInput" type="text" placeholder="ابحث عن منتج...">
+<button onclick="searchProducts()">🔍</button>
+</div>
+
+<div class="cart">
+🛒 السلة (<span id="cartCount">0</span>)
+</div>
+
 </header>
 
 <nav>
-<a href="#">الرئيسية</a>
-<a href="#home">أدوات منزلية</a>
-<a href="#products">أجهزة وإكسسوارات</a>
-<a href="#products">معدات رياضية</a>
-<a href="#products">ملابس</a>
-<a href="#products">العروض</a>
+<a href="#home">الرئيسية</a>
+<a href="#products">المنتجات</a>
+<a href="#shipping">التوصيل</a>
 </nav>
 
-<section class="hero" id="home">
-<h1>كل ما تحتاجه في مكان واحد</h1>
-<p>منتجات متنوعة، أسعار مناسبة وتوصيل إلى جميع أنحاء الجزائر 🇩🇿</p>
-<button onclick="document.getElementById('products').scrollIntoView()">تسوق الآن</button>
-</section>
-
 <div class="container">
+
+<section class="hero" id="home">
+<h1>🛍️ Easy Shop</h1>
+<p>منتجات مختارة بأسعار مناسبة وتوصيل إلى جميع ولايات الجزائر</p>
+</section>
 
 <h2 class="title">🛍️ تصفح الأقسام</h2>
 
 <div class="categories">
-<div class="category">🏠<br>أدوات منزلية</div>
-<div class="category">⚡<br>أجهزة وإكسسوارات</div>
-<div class="category">🏋️<br>معدات رياضية</div>
-<div class="category">👕<br>ملابس</div>
-<div class="category">🔥<br>عروض وتخفيضات</div>
+<div class="category">🏠 أدوات منزلية</div>
+<div class="category">⚡ أجهزة وإكسسوارات</div>
+<div class="category">🏆 معدات رياضية</div>
+<div class="category">👕 ملابس</div>
+<div class="category">🔥 عروض وتخفيضات</div>
+</div>
+
+<h2 class="title" id="products">⭐ منتجاتنا</h2>
+
+<div id="productsContainer" class="products">
+<div class="loading">جاري تحميل المنتجات...</div>
 </div>
 
 <div class="features">
-<div class="feature">📦<h3>الدفع عند الاستلام</h3><p>ادفع عند استلام طلبك</p></div>
-<div class="feature">🚚<h3>توصيل سريع</h3><p>إلى جميع الولايات</p></div>
-<div class="feature">🛡️<h3>شراء آمن</h3><p>خدمة موثوقة</p></div>
-<div class="feature">💰<h3>أسعار مناسبة</h3><p>عروض مستمرة</p></div>
+<div class="feature">
+📦
+<h3>الدفع عند الاستلام</h3>
+<p>ادفع عند استلام طلبك</p>
 </div>
 
-<h2 class="title" id="products">⭐ منتجات مميزة</h2>
+<div class="feature">
+🚚
+<h3>توصيل سريع</h3>
+<p>إلى جميع الولايات</p>
+</div>
 
-<div class="products">
+<div class="feature">
+🛡️
+<h3>شراء آمن</h3>
+<p>خدمة موثوقة</p>
+</div>
 
-<div class="product
+<div class="feature">
+💰
+<h3>أسعار مناسبة</h3>
+<p>عروض مستمرة</p>
+</div>
+</div>
+
+<section class="shipping" id="shipping">
+
+<h2>🚚 احسب سعر التوصيل</h2>
+
+<select id="wilayaSelect">
+<option value="">اختر ولايتك</option>
+</select>
+
+<div class="shipping-result" id="shippingResult">
+سعر التوصيل سيظهر هنا
+</div>
+
+</section>
+
+</div>
+
+<footer>
+© 2026 Easy Shop - متجر الجزائر
+</footer>
+
+<script>
+
+/* ==============================
+   إعدادات Supabase
+   ============================== */
+
+const SUPABASE_URL =
+"https://vfybnhpfbimmsrwmavu.supabase.co";
+
+/*
+ys   لا تضع Secret key هنا
+*/
+const SUPABASE_KEY =
+"sb_publishable_HR0lPBY3BYJspf_6Lk7RWw_xH3Wk2se"
+
+
+/* ==============================
+   المتغيرات
+   ============================== */
+
+let products = [];
+let shippingRates = [];
+let cart = [];
+
+
+/* ==============================
+   الاتصال بـ Supabase
+   ============================== */
+
+async function supabaseGet(table){
+
+    const response = await fetch(
+        SUPABASE_URL + "/rest/v1/" + table,
+        {
+            headers:{
+                "apikey":SUPABASE_KEY,
+                "Authorization":"Bearer " + SUPABASE_KEY
+            }
+        }
+    );
+
+    if(!response.ok){
+        throw new Error(
+            "Supabase error: " + response.status
+        );
+    }
+
+    return await response.json();
+}
+
+
+/* ==============================
+   تحميل المنتجات
+   ============================== */
+
+async function loadProducts(){
+
+    const container =
+        document.getElementById("productsContainer");
+
+    try{
+
+        products = await supabaseGet(
+            "products?select=id,name,price,image_url,stock&order=id"
+        );
+
+        if(!products.length){
+
+            container.innerHTML =
+                '<div class="error">لا توجد منتجات حاليًا</div>';
+
+            return;
+        }
+
+        displayProducts(products);
+
+    }catch(error){
+
+        console.error(error);
+
+        container.innerHTML =
+            '<div class="error">' +
+            'تعذر تحميل المنتجات. تأكد من إعدادات Supabase.' +
+            '</div>';
+    }
+}
+
+
+/* ==============================
+   عرض المنتجات
+   ============================== */
+
+function displayProducts(list){
+
+    const container =
+        document.getElementById("productsContainer");
+
+    container.innerHTML = "";
+
+    list.forEach(product => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "product";
+
+        const image =
+            product.image_url ||
+            "https://via.placeholder.com/500x500?text=Easy+Shop";
+
+        card.innerHTML = `
+            <img src="${image}" alt="${product.name}">
+            <div class="product-info">
+
+                <h3>${product.name}</h3>
+
+                <div class="price">
+                    ${Number(product.price).toLocaleString("ar-DZ")} دج
+                </div>
+
+                <button class="add"
+                    onclick="addToCart(${product.id})">
+                    🛒 أضف إلى السلة
+                </button>
+
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+
+/* ==============================
+   تحميل أسعار التوصيل
+   ============================== */
+
+async function loadShipping(){
+
+    try{
+
+        shippingRates =
+            await supabaseGet(
+                "shipping_rates?select=wilaya_code,wilaya_name,price&order=wilaya_code"
+            );
+
+        const select =
+            document.getElementById("wilayaSelect");
+
+        shippingRates.forEach(rate => {
+
+            const option =
+                document.createElement("option");
+
+            option.value = rate.price;
+
+            option.textContent =
+                rate.wilaya_name +
+                " - " +
+                Number(rate.price).toLocaleString("ar-DZ") +
+                " دج";
+
+            select.appendChild(option);
+        });
+
+    }catch(error){
+
+        console.error(error);
+
+        document.getElementById("shippingResult")
+            .textContent =
+            "تعذر تحميل أسعار التوصيل";
+    }
+}
+
+
+/* ==============================
+   اختيار الولاية
+   ============================== */
+
+document
+.getElementById("wilayaSelect")
+.addEventListener("change", function(){
+
+    if(this.value === ""){
+
+        document.getElementById("shippingResult")
+            .textContent =
+            "سعر التوصيل سيظهر هنا";
+
+        return;
+    }
+
+    document.getElementById("shippingResult")
+        .textContent =
+        "🚚 سعر التوصيل: " +
+        Number(this.value).toLocaleString("ar-DZ") +
+        " دج";
+});
+
+
+/* ==============================
+   السلة
+   ============================== */
+
+function addToCart(id){
+
+    const product =
+        products.find(p => p.id === id);
+
+    if(!product) return;
+
+    cart.push(product);
+
+    updateCart();
+
+    alert(
+        "تمت إضافة " +
+        product.name +
+        " إلى السلة 🛒"
+    );
+}
+
+
+function updateCart(){
+
+    document.getElementById("cartCount")
+        .textContent = cart.length;
+}
+
+
+/* ==============================
+   البحث
+   ============================== */
+
+function searchProducts(){
+
+    const input =
+        document.getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+    if(!input){
+
+        displayProducts(products);
+
+        return;
+    }
+
+    const results =
+        products.filter(product =>
+            product.name
+                .toLowerCase()
+                .includes(input)
+        );
+
+    displayProducts(results);
+}
+
+
+/* البحث عند الضغط Enter */
+
+document
+.getElementById("searchInput")
+.addEventListener("keydown", function(event){
+
+    if(event.key === "Enter"){
+        searchProducts();
+    }
+
+});
+
+
+/* ==============================
+   التشغيل
+   ============================== */
+
+loadProducts();
+loadShipping();
+
+</script>
+
+</body>
+</html>
