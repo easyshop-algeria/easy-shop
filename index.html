@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Easy Shop Algeria | إيزي شوب الجزائر</title>
 
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -23,6 +30,12 @@ button{
   font-family:inherit;
   cursor:pointer;
   border:0;
+}
+
+input,
+textarea,
+select{
+  font-family:inherit;
 }
 
 .topbar{
@@ -264,6 +277,10 @@ footer{
   z-index:50;
 }
 
+.overlay.open{
+  display:block;
+}
+
 .drawer{
   position:fixed;
   top:0;
@@ -280,10 +297,6 @@ footer{
 
 .drawer.open{
   left:0;
-}
-
-.overlay.open{
-  display:block;
 }
 
 .drawer-head{
@@ -320,27 +333,10 @@ footer{
   background:#e9eeee;
 }
 
-.total-box{
-  margin-top:20px;
-  background:#f5f7fa;
-  border-radius:12px;
-  padding:15px;
-}
-
-.total-row{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
-.total-final{
-  display:flex;
-  justify-content:space-between;
-  color:#087f5b;
+.total{
   font-size:21px;
   font-weight:bold;
-  border-top:1px solid #ddd;
-  padding-top:12px;
+  margin:20px 0;
 }
 
 .checkout{
@@ -350,7 +346,6 @@ footer{
   padding:14px;
   border-radius:10px;
   font-weight:bold;
-  margin-top:15px;
 }
 
 .modal{
@@ -371,10 +366,12 @@ footer{
 
 .modal-box{
   background:white;
-  width:550px;
+  width:560px;
   max-width:100%;
   border-radius:18px;
   padding:25px;
+  max-height:95vh;
+  overflow:auto;
 }
 
 .modal-box h2{
@@ -399,32 +396,41 @@ footer{
   border-radius:9px;
   padding:12px;
   outline:0;
-  font-family:inherit;
   font-size:15px;
 }
 
-.delivery-info{
-  background:#f0faf6;
-  border:1px solid #c9eadc;
-  border-radius:12px;
-  padding:14px;
-  margin-top:15px;
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  border-color:#087f5b;
 }
 
-.delivery-row{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:8px;
+.summary{
+  background:#f2fbf7;
+  border:1px solid #bce9d9;
+  border-radius:14px;
+  padding:18px;
+  margin-top:18px;
+  margin-bottom:18px;
 }
 
-.delivery-total{
+.summary-row{
   display:flex;
   justify-content:space-between;
+  gap:15px;
+  padding:8px 0;
+  border-bottom:1px solid #dceee7;
+}
+
+.summary-row:last-child{
+  border-bottom:0;
+}
+
+.summary-total{
   color:#087f5b;
+  font-size:23px;
   font-weight:bold;
-  font-size:20px;
-  border-top:1px solid #c9eadc;
-  padding-top:10px;
+  margin-top:8px;
 }
 
 .form-actions{
@@ -436,7 +442,7 @@ footer{
 .cancel{
   flex:1;
   background:#eee;
-  padding:12px;
+  padding:13px;
   border-radius:9px;
 }
 
@@ -444,7 +450,7 @@ footer{
   flex:2;
   background:#087f5b;
   color:white;
-  padding:12px;
+  padding:13px;
   border-radius:9px;
   font-weight:bold;
 }
@@ -458,34 +464,49 @@ footer{
   position:fixed;
   bottom:25px;
   right:25px;
+  left:25px;
+  max-width:500px;
+  margin:auto;
   background:#172033;
   color:white;
   padding:14px 20px;
   border-radius:10px;
   z-index:200;
   display:none;
-  max-width:90%;
+  text-align:center;
 }
 
 .toast.show{
   display:block;
 }
 
-.toast.error{
-  background:#c92a2a;
-}
-
 .toast.success{
   background:#087f5b;
 }
 
+.toast.error{
+  background:#d32f2f;
+}
+
+.delivery-info{
+  background:#f7f9fb;
+  border-radius:10px;
+  padding:10px;
+  margin-top:8px;
+  font-size:13px;
+  color:#555;
+}
+
 @media(max-width:900px){
+
   .products{
     grid-template-columns:repeat(3,1fr);
   }
+
 }
 
 @media(max-width:650px){
+
   .header-inner{
     flex-wrap:wrap;
   }
@@ -519,9 +540,11 @@ footer{
   .drawer{
     width:360px;
   }
+
 }
 
 @media(max-width:420px){
+
   .products{
     grid-template-columns:1fr 1fr;
   }
@@ -533,8 +556,15 @@ footer{
   .price{
     font-size:17px;
   }
+
+  .modal-box{
+    padding:18px;
+  }
+
 }
+
 </style>
+
 </head>
 
 <body>
@@ -544,6 +574,7 @@ footer{
 </div>
 
 <header>
+
   <div class="header-inner">
 
     <div class="logo">
@@ -551,32 +582,54 @@ footer{
     </div>
 
     <div class="search">
+
       <input
         id="searchInput"
         type="text"
         placeholder="ابحث عن منتج..."
       >
-      <button onclick="searchProducts()">🔍</button>
+
+      <button onclick="searchProducts()">
+        🔍
+      </button>
+
     </div>
 
-    <button class="cart-btn" onclick="openCart()">
+    <button
+      class="cart-btn"
+      onclick="openCart()"
+    >
       🛒
-      <span class="cart-count" id="cartCount">0</span>
+      <span
+        class="cart-count"
+        id="cartCount"
+      >0</span>
     </button>
 
   </div>
+
 </header>
 
 <main class="container">
 
 <section class="hero">
+
   <div>
-    <h1>إيزي شوب الجزائر 🇩🇿</h1>
-    <p>منتجات مختارة • أسعار مناسبة • توصيل إلى 58 ولاية</p>
+
+    <h1>
+      إيزي شوب الجزائر 🇩🇿
+    </h1>
+
+    <p>
+      منتجات مختارة • أسعار مناسبة • توصيل إلى 58 ولاية
+    </p>
+
     <button onclick="scrollToProducts()">
       اكتشف المنتجات الآن
     </button>
+
   </div>
+
 </section>
 
 <div class="section-title">
@@ -622,20 +675,36 @@ footer{
 
 </div>
 
-<div class="section-title" id="productsSection">
-  <h2>منتجاتنا</h2>
+<div
+  class="section-title"
+  id="productsSection"
+>
+
+  <h2>
+    منتجاتنا
+  </h2>
+
 </div>
 
-<div class="products" id="products"></div>
+<div
+  class="products"
+  id="products"
+></div>
 
 </main>
 
 <footer>
-  <p>Easy Shop Algeria 🇩🇿</p>
 
-  <p style="margin-top:8px;font-size:13px">
+  <p>
+    Easy Shop Algeria 🇩🇿
+  </p>
+
+  <p
+    style="margin-top:8px;font-size:13px"
+  >
     الدفع عند الاستلام • توصيل 58 ولاية • ضمان الاستبدال
   </p>
+
 </footer>
 
 <div
@@ -644,11 +713,16 @@ footer{
   onclick="closeCart()"
 ></div>
 
-<aside class="drawer" id="cartDrawer">
+<aside
+  class="drawer"
+  id="cartDrawer"
+>
 
   <div class="drawer-head">
 
-    <h2>🛒 سلة المشتريات</h2>
+    <h2>
+      🛒 سلة المشتريات
+    </h2>
 
     <button
       class="close"
@@ -661,28 +735,11 @@ footer{
 
   <div id="cartItems"></div>
 
-  <div class="total-box">
+  <div class="total">
 
-    <div class="total-row">
-      <span>المنتجات:</span>
-      <strong>
-        <span id="cartProductsTotal">0</span> دج
-      </strong>
-    </div>
-
-    <div class="total-row">
-      <span>التوصيل:</span>
-      <strong>
-        <span id="cartDelivery">يحدد عند الطلب</span>
-      </strong>
-    </div>
-
-    <div class="total-final">
-      <span>الإجمالي:</span>
-      <span>
-        <span id="cartTotal">0</span> دج
-      </span>
-    </div>
+    الإجمالي:
+    <span id="cartTotal">0</span>
+    دج
 
   </div>
 
@@ -702,11 +759,15 @@ footer{
 
   <div class="modal-box">
 
-    <h2>📦 معلومات الطلب</h2>
+    <h2>
+      📦 معلومات الطلب
+    </h2>
 
     <div class="form-group">
 
-      <label>الاسم واللقب</label>
+      <label>
+        الاسم واللقب
+      </label>
 
       <input
         id="customerName"
@@ -718,7 +779,9 @@ footer{
 
     <div class="form-group">
 
-      <label>رقم الهاتف</label>
+      <label>
+        رقم الهاتف
+      </label>
 
       <input
         id="customerPhone"
@@ -730,12 +793,11 @@ footer{
 
     <div class="form-group">
 
-      <label>الولاية</label>
+      <label>
+        الولاية
+      </label>
 
-      <select
-        id="wilaya"
-        onchange="updateDelivery()"
-      >
+      <select id="wilaya">
 
         <option value="">
           اختر الولاية
@@ -806,7 +868,9 @@ footer{
 
     <div class="form-group">
 
-      <label>البلدية</label>
+      <label>
+        البلدية
+      </label>
 
       <input
         id="municipality"
@@ -818,7 +882,9 @@ footer{
 
     <div class="form-group">
 
-      <label>العنوان بالتفصيل</label>
+      <label>
+        العنوان بالتفصيل
+      </label>
 
       <textarea
         id="customerAddress"
@@ -830,16 +896,18 @@ footer{
 
     <div class="form-group">
 
-      <label>طريقة التوصيل</label>
+      <label>
+        طريقة التوصيل
+      </label>
 
       <select id="deliveryMethod">
 
-        <option value="home">
+        <option value="التوصيل إلى المنزل">
           🏠 التوصيل إلى المنزل
         </option>
 
-        <option value="office">
-          📦 التوصيل إلى المكتب
+        <option value="التوصيل إلى المكتب">
+          🏢 التوصيل إلى المكتب
         </option>
 
       </select>
@@ -850,26 +918,54 @@ footer{
       class="delivery-info"
       id="deliveryInfo"
     >
+      اختر الولاية لمعرفة سعر التوصيل.
+    </div>
 
-      <div class="delivery-row">
-        <span>مجموع المنتجات:</span>
-        <strong>
-          <span id="checkoutProductsTotal">0</span> دج
-        </strong>
-      </div>
+    <div class="summary">
 
-      <div class="delivery-row">
-        <span>سعر التوصيل:</span>
-        <strong>
-          <span id="deliveryPrice">اختر الولاية</span>
-        </strong>
-      </div>
+      <div class="summary-row">
 
-      <div class="delivery-total">
-        <span>الإجمالي النهائي:</span>
         <span>
-          <span id="checkoutTotal">0</span> دج
+          مجموع المنتجات:
         </span>
+
+        <strong>
+          <span id="summaryProducts">
+            0
+          </span>
+          دج
+        </strong>
+
+      </div>
+
+      <div class="summary-row">
+
+        <span>
+          سعر التوصيل:
+        </span>
+
+        <strong>
+          <span id="summaryDelivery">
+            0
+          </span>
+          دج
+        </strong>
+
+      </div>
+
+      <div class="summary-row summary-total">
+
+        <span>
+          الإجمالي النهائي:
+        </span>
+
+        <strong>
+          <span id="summaryTotal">
+            0
+          </span>
+          دج
+        </strong>
+
       </div>
 
     </div>
@@ -902,13 +998,11 @@ footer{
   id="toast"
 ></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
 
-/* =========================================
+/* =========================================================
    SUPABASE
-========================================= */
+========================================================= */
 
 const SUPABASE_URL =
   "https://obbdfpbejxmbyabriuwu.supabase.co";
@@ -923,9 +1017,9 @@ const supabaseClient =
   );
 
 
-/* =========================================
+/* =========================================================
    PRODUCTS
-========================================= */
+========================================================= */
 
 const products = [
 
@@ -979,119 +1073,132 @@ const products = [
 
 ];
 
-
 let cart = [];
 
 
-/* =========================================
-   DELIVERY AREAS
-========================================= */
+/* =========================================================
+   SHIPPING
+========================================================= */
 
 /*
-  16 الجزائر = 400 دج
+  الجزائر العاصمة = 400
 
-  600 دج:
-  باقي الولايات الشمالية والداخلية
+  الولايات الشمالية والداخلية = 600
 
-  800 دج:
-  الولايات الصحراوية
+  الولايات الصحراوية = 800
 
-  1200 دج:
+  الصحراء القصوى = 1200
+*/
+
+const shippingPrices = {
+
+  capital:400,
+
+  northInterior:600,
+
+  south:800,
+
+  deepSouth:1200
+
+};
+
+
+/*
   الصحراء القصوى
 */
 
-const delivery600 = [
+const deepSouthWilayas = [
 
-  "02","03","04","05","06","09","10",
-  "12","13","14","15","17","18","19",
-  "20","21","22","23","24","25","26",
-  "27","28","29","34","35","36","38",
-  "40","41","42","43","44","46","48"
-
-];
-
-
-const delivery800 = [
-
-  "01",   // أدرار
-  "07",   // بسكرة
-  "08",   // بشار
-  "30",   // ورقلة
-  "32",   // البيض
-  "39",   // الوادي
-  "45",   // النعامة
-  "47",   // غرداية
-  "49",   // تيميمون
-  "51",   // أولاد جلال
-  "52",   // بني عباس
-  "55",   // تقرت
-  "57",   // المغير
-  "58"    // المنيعة
+  "11",
+  "33",
+  "37",
+  "50",
+  "53",
+  "54",
+  "56"
 
 ];
 
 
-const delivery1200 = [
+/*
+  الولايات الصحراوية
+*/
 
-  "11",   // تمنراست
-  "33",   // إليزي
-  "37",   // تندوف
-  "50",   // برج باجي مختار
-  "53",   // عين صالح
-  "54",   // عين قزام
-  "56"    // جانت
+const southWilayas = [
+
+  "01",
+  "08",
+  "30",
+  "32",
+  "39",
+  "45",
+  "47",
+  "49",
+  "51",
+  "52",
+  "55",
+  "57",
+  "58"
 
 ];
 
 
-/* =========================================
-   DELIVERY PRICE
-========================================= */
+/*
+  باقي الولايات = 600
+*/
 
-function getDeliveryPrice(wilaya){
 
-  if(!wilaya){
-    return 0;
+function getShippingPrice(wilayaCode){
+
+  if(wilayaCode === "16"){
+    return shippingPrices.capital;
   }
 
-  /* الجزائر العاصمة */
-
-  if(wilaya === "16"){
-    return 400;
+  if(deepSouthWilayas.includes(wilayaCode)){
+    return shippingPrices.deepSouth;
   }
 
-  /* الصحراء القصوى */
-
-  if(delivery1200.includes(wilaya)){
-    return 1200;
+  if(southWilayas.includes(wilayaCode)){
+    return shippingPrices.south;
   }
 
-  /* الصحراء */
-
-  if(delivery800.includes(wilaya)){
-    return 800;
-  }
-
-  /* الشمالية والداخلية */
-
-  return 600;
+  return shippingPrices.northInterior;
 }
 
 
-/* =========================================
+function getShippingLabel(wilayaCode){
+
+  if(wilayaCode === "16"){
+    return "الجزائر العاصمة";
+  }
+
+  if(deepSouthWilayas.includes(wilayaCode)){
+    return "الصحراء القصوى";
+  }
+
+  if(southWilayas.includes(wilayaCode)){
+    return "الولايات الصحراوية";
+  }
+
+  return "الولايات الشمالية والداخلية";
+}
+
+
+/* =========================================================
    FORMAT PRICE
-========================================= */
+========================================================= */
 
 function formatPrice(price){
 
-  return Number(price).toLocaleString("fr-DZ");
+  return Number(price || 0)
+    .toLocaleString("fr-DZ");
 
 }
 
 
-/* =========================================
-   PRODUCTS
-========================================= */
+/* =========================================================
+   RENDER PRODUCTS
+========================================================= */
 
 function renderProducts(list = products){
 
@@ -1144,9 +1251,9 @@ function renderProducts(list = products){
 }
 
 
-/* =========================================
+/* =========================================================
    ADD TO CART
-========================================= */
+========================================================= */
 
 function addToCart(id){
 
@@ -1167,8 +1274,11 @@ function addToCart(id){
   }else{
 
     cart.push({
+
       ...product,
+
       quantity:1
+
     });
 
   }
@@ -1183,30 +1293,16 @@ function addToCart(id){
 }
 
 
-/* =========================================
-   CART TOTAL
-========================================= */
-
-function getProductsTotal(){
-
-  return cart.reduce(
-    (sum,item) =>
-      sum + item.price * item.quantity,
-    0
-  );
-
-}
-
-
-/* =========================================
-   UPDATE CART
-========================================= */
+/* =========================================================
+   CART
+========================================================= */
 
 function updateCart(){
 
   const count =
     cart.reduce(
-      (sum,item) => sum + item.quantity,
+      (sum,item) =>
+        sum + item.quantity,
       0
     );
 
@@ -1216,21 +1312,15 @@ function updateCart(){
 
 
   const box =
-    document.getElementById("cartItems");
+    document.getElementById(
+      "cartItems"
+    );
 
 
   if(cart.length === 0){
 
     box.innerHTML =
       '<div class="empty">السلة فارغة</div>';
-
-    document.getElementById(
-      "cartProductsTotal"
-    ).textContent = "0";
-
-    document.getElementById(
-      "cartDelivery"
-    ).textContent = "يحدد عند الطلب";
 
     document.getElementById(
       "cartTotal"
@@ -1240,61 +1330,57 @@ function updateCart(){
   }
 
 
-  box.innerHTML = cart.map(item => `
+  box.innerHTML =
+    cart.map(item => `
 
-    <div class="cart-item">
+      <div class="cart-item">
 
-      <div>
+        <div>
 
-        <strong>
-          ${item.name}
-        </strong>
+          <strong>
+            ${item.name}
+          </strong>
 
-        <div style="margin-top:5px">
-          ${formatPrice(item.price)} دج
+          <div style="margin-top:5px">
+            ${formatPrice(item.price)}
+            دج
+          </div>
+
+        </div>
+
+        <div class="qty">
+
+          <button
+            onclick="changeQuantity(${item.id},1)"
+          >
+            +
+          </button>
+
+          <span>
+            ${item.quantity}
+          </span>
+
+          <button
+            onclick="changeQuantity(${item.id},-1)"
+          >
+            −
+          </button>
+
         </div>
 
       </div>
 
-      <div class="qty">
-
-        <button
-          onclick="changeQuantity(${item.id},1)"
-        >
-          +
-        </button>
-
-        <span>
-          ${item.quantity}
-        </span>
-
-        <button
-          onclick="changeQuantity(${item.id},-1)"
-        >
-          −
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join("");
+    `).join("");
 
 
   const total =
-    getProductsTotal();
-
-
-  document.getElementById(
-    "cartProductsTotal"
-  ).textContent =
-    formatPrice(total);
-
-
-  document.getElementById(
-    "cartDelivery"
-  ).textContent =
-    "يحدد عند الطلب";
+    cart.reduce(
+      (sum,item) =>
+        sum +
+        item.price *
+        item.quantity,
+      0
+    );
 
 
   document.getElementById(
@@ -1305,9 +1391,9 @@ function updateCart(){
 }
 
 
-/* =========================================
+/* =========================================================
    QUANTITY
-========================================= */
+========================================================= */
 
 function changeQuantity(id,change){
 
@@ -1331,12 +1417,14 @@ function changeQuantity(id,change){
 
   updateCart();
 
+  updateCheckoutSummary();
+
 }
 
 
-/* =========================================
+/* =========================================================
    CART OPEN / CLOSE
-========================================= */
+========================================================= */
 
 function openCart(){
 
@@ -1364,9 +1452,9 @@ function closeCart(){
 }
 
 
-/* =========================================
+/* =========================================================
    CHECKOUT
-========================================= */
+========================================================= */
 
 function openCheckout(){
 
@@ -1380,11 +1468,11 @@ function openCheckout(){
     return;
   }
 
+  updateCheckoutSummary();
+
   document
     .getElementById("checkoutModal")
     .classList.add("open");
-
-  updateCheckoutTotal();
 
 }
 
@@ -1398,101 +1486,170 @@ function closeCheckout(){
 }
 
 
-/* =========================================
-   UPDATE DELIVERY
-========================================= */
+/* =========================================================
+   PRODUCT TOTAL
+========================================================= */
 
-function updateDelivery(){
+function getProductsTotal(){
 
-  const wilaya =
-    document.getElementById(
-      "wilaya"
-    ).value;
+  return cart.reduce(
+    (sum,item) =>
+      sum +
+      Number(item.price) *
+      Number(item.quantity),
+    0
+  );
+
+}
 
 
-  const delivery =
-    getDeliveryPrice(wilaya);
+/* =========================================================
+   UPDATE CHECKOUT SUMMARY
+========================================================= */
 
+function updateCheckoutSummary(){
 
   const productsTotal =
     getProductsTotal();
 
 
-  const total =
-    productsTotal + delivery;
-
-
-  document.getElementById(
-    "checkoutProductsTotal"
-  ).textContent =
-    formatPrice(productsTotal);
-
-
-  if(!wilaya){
-
+  const wilayaCode =
     document.getElementById(
-      "deliveryPrice"
-    ).textContent =
-      "اختر الولاية";
+      "wilaya"
+    ).value;
 
-  }else{
 
-    document.getElementById(
-      "deliveryPrice"
-    ).textContent =
-      formatPrice(delivery) + " دج";
+  let deliveryPrice = 0;
+
+
+  if(wilayaCode){
+
+    deliveryPrice =
+      getShippingPrice(
+        wilayaCode
+      );
 
   }
 
 
+  const finalTotal =
+    productsTotal +
+    deliveryPrice;
+
+
   document.getElementById(
-    "checkoutTotal"
+    "summaryProducts"
   ).textContent =
-    formatPrice(total);
+    formatPrice(productsTotal);
+
+
+  document.getElementById(
+    "summaryDelivery"
+  ).textContent =
+    formatPrice(deliveryPrice);
+
+
+  document.getElementById(
+    "summaryTotal"
+  ).textContent =
+    formatPrice(finalTotal);
+
+
+  const info =
+    document.getElementById(
+      "deliveryInfo"
+    );
+
+
+  if(!wilayaCode){
+
+    info.textContent =
+      "اختر الولاية لمعرفة سعر التوصيل.";
+
+    return;
+
+  }
+
+
+  const label =
+    getShippingLabel(
+      wilayaCode
+    );
+
+
+  info.textContent =
+    "سعر التوصيل: " +
+    formatPrice(deliveryPrice) +
+    " دج • " +
+    label;
 
 }
 
 
-/* =========================================
-   UPDATE CHECKOUT TOTAL
-========================================= */
+/* =========================================================
+   WILAYA CHANGE
+========================================================= */
 
-function updateCheckoutTotal(){
+document
+  .getElementById("wilaya")
+  .addEventListener(
+    "change",
+    updateCheckoutSummary
+  );
 
-  updateDelivery();
 
-}
-
-
-/* =========================================
+/* =========================================================
    CONFIRM ORDER
-========================================= */
+========================================================= */
 
 async function confirmOrder(){
 
+  const button =
+    document.getElementById(
+      "confirmButton"
+    );
+
+
+  if(cart.length === 0){
+
+    showToast(
+      "السلة فارغة",
+      "error"
+    );
+
+    return;
+  }
+
+
   const name =
     document
-      .getElementById("customerName")
+      .getElementById(
+        "customerName"
+      )
       .value
       .trim();
 
 
   const phone =
     document
-      .getElementById("customerPhone")
+      .getElementById(
+        "customerPhone"
+      )
       .value
       .trim();
 
 
   const wilayaSelect =
-    document.getElementById("wilaya");
+    document.getElementById(
+      "wilaya"
+    );
 
 
   const wilayaCode =
     wilayaSelect.value;
 
 
-  const wilaya =
+  const wilayaName =
     wilayaSelect.options[
       wilayaSelect.selectedIndex
     ]?.text || "";
@@ -1500,21 +1657,27 @@ async function confirmOrder(){
 
   const municipality =
     document
-      .getElementById("municipality")
+      .getElementById(
+        "municipality"
+      )
       .value
       .trim();
 
 
   const address =
     document
-      .getElementById("customerAddress")
+      .getElementById(
+        "customerAddress"
+      )
       .value
       .trim();
 
 
   const deliveryMethod =
     document
-      .getElementById("deliveryMethod")
+      .getElementById(
+        "deliveryMethod"
+      )
       .value;
 
 
@@ -1535,56 +1698,46 @@ async function confirmOrder(){
   }
 
 
-  if(cart.length === 0){
-
-    showToast(
-      "السلة فارغة",
-      "error"
-    );
-
-    return;
-  }
-
-
   const productsTotal =
     getProductsTotal();
 
 
   const deliveryPrice =
-    getDeliveryPrice(
+    getShippingPrice(
       wilayaCode
     );
 
 
-  const totalPrice =
+  const finalTotal =
     productsTotal +
     deliveryPrice;
 
 
   /*
-    نحفظ المنتجات والكميات
-    داخل JSON في قاعدة البيانات.
+    تجهيز المنتجات للحفظ
   */
 
-  const orderProducts =
+  const productsData =
     cart.map(item => ({
 
       id:item.id,
 
       name:item.name,
 
-      price:item.price,
+      price:Number(item.price),
 
-      quantity:item.quantity
+      quantity:Number(item.quantity),
+
+      subtotal:
+        Number(item.price) *
+        Number(item.quantity)
 
     }));
 
 
-  const button =
-    document.getElementById(
-      "confirmButton"
-    );
-
+  /*
+    منع الضغط مرتين
+  */
 
   button.disabled = true;
 
@@ -1593,6 +1746,10 @@ async function confirmOrder(){
 
 
   try{
+
+    /*
+      حفظ الطلب في Supabase
+    */
 
     const { data, error } =
       await supabaseClient
@@ -1603,24 +1760,53 @@ async function confirmOrder(){
 
           phone:phone,
 
-          wilaya:wilaya,
+          status:"new",
 
-          municipality:municipality,
+          delivery_price:
+            deliveryPrice,
 
-          address:address,
+          products_total:
+            productsTotal,
 
-          delivery_method:deliveryMethod,
+          total_price:
+            finalTotal,
 
-          products_total:productsTotal,
+          products:
+            productsData,
 
-          delivery_price:deliveryPrice,
+          delivery_method:
+            deliveryMethod,
 
-          total_price:totalPrice,
+          subtotal:
+            productsTotal,
 
-          products:orderProducts
+          shipping_cost:
+            deliveryPrice,
+
+          total:
+            finalTotal,
+
+          address:
+            address,
+
+          notes:
+            "",
+
+          delivery_type:
+            deliveryMethod,
+
+          wilaya_code:
+            wilayaCode,
+
+          wilaya_name:
+            wilayaName,
+
+          municipality:
+            municipality
 
         })
-        .select();
+        .select()
+        .single();
 
 
     if(error){
@@ -1635,13 +1821,12 @@ async function confirmOrder(){
     }
 
 
-    console.log(
-      "Order created:",
-      data
-    );
-
+    /*
+      نجاح
+    */
 
     closeCheckout();
+
     closeCart();
 
 
@@ -1650,45 +1835,93 @@ async function confirmOrder(){
     updateCart();
 
 
-    document.getElementById(
-      "customerName"
-    ).value = "";
+    /*
+      تنظيف الحقول
+    */
 
-    document.getElementById(
-      "customerPhone"
-    ).value = "";
-
-    document.getElementById(
-      "wilaya"
-    ).value = "";
-
-    document.getElementById(
-      "municipality"
-    ).value = "";
-
-    document.getElementById(
-      "customerAddress"
-    ).value = "";
+    document
+      .getElementById(
+        "customerName"
+      )
+      .value = "";
 
 
-    document.getElementById(
-      "deliveryMethod"
-    ).value = "home";
+    document
+      .getElementById(
+        "customerPhone"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "wilaya"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "municipality"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "customerAddress"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "deliveryMethod"
+      )
+      .value =
+      "التوصيل إلى المنزل";
+
+
+    updateCheckoutSummary();
 
 
     showToast(
-      "تم تأكيد طلبك بنجاح ✓",
+      "تم تسجيل طلبك بنجاح ✓ شكراً لثقتك بـ Easy Shop Algeria",
       "success"
     );
 
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "ORDER ERROR:",
+      error
+    );
+
+
+    /*
+      عرض الخطأ الحقيقي في Console
+      ورسالة مفهومة للمستخدم
+    */
+
+    let message =
+      "حدث خطأ أثناء تسجيل الطلب. حاول مرة أخرى.";
+
+
+    if(
+      error &&
+      error.message
+    ){
+
+      console.error(
+        error.message
+      );
+
+    }
 
 
     showToast(
-      "حدث خطأ أثناء تسجيل الطلب. حاول مرة أخرى.",
+      message,
       "error"
     );
 
@@ -1705,9 +1938,9 @@ async function confirmOrder(){
 }
 
 
-/* =========================================
-   FILTER
-========================================= */
+/* =========================================================
+   FILTER CATEGORY
+========================================================= */
 
 function filterCategory(
   category,
@@ -1715,20 +1948,29 @@ function filterCategory(
 ){
 
   document
-    .querySelectorAll(".category")
+    .querySelectorAll(
+      ".category"
+    )
     .forEach(btn =>
-      btn.classList.remove("active")
+      btn.classList.remove(
+        "active"
+      )
     );
 
 
-  button.classList.add("active");
+  button.classList.add(
+    "active"
+  );
 
 
   if(category === "all"){
 
-    renderProducts(products);
+    renderProducts(
+      products
+    );
 
     return;
+
   }
 
 
@@ -1736,7 +1978,8 @@ function filterCategory(
 
     products.filter(
       product =>
-        product.category === category
+        product.category ===
+        category
     )
 
   );
@@ -1744,15 +1987,17 @@ function filterCategory(
 }
 
 
-/* =========================================
+/* =========================================================
    SEARCH
-========================================= */
+========================================================= */
 
 function searchProducts(){
 
   const query =
     document
-      .getElementById("searchInput")
+      .getElementById(
+        "searchInput"
+      )
       .value
       .trim()
       .toLowerCase();
@@ -1760,61 +2005,73 @@ function searchProducts(){
 
   if(!query){
 
-    renderProducts(products);
+    renderProducts(
+      products
+    );
 
     return;
+
   }
 
 
   const results =
-    products.filter(product =>
-
-      product.name
-        .toLowerCase()
-        .includes(query)
-
+    products.filter(
+      product =>
+        product.name
+          .toLowerCase()
+          .includes(query)
     );
 
 
-  renderProducts(results);
+  renderProducts(
+    results
+  );
 
 }
 
 
 document
-  .getElementById("searchInput")
+  .getElementById(
+    "searchInput"
+  )
   .addEventListener(
     "input",
     searchProducts
   );
 
 
-/* =========================================
+/* =========================================================
    SCROLL
-========================================= */
+========================================================= */
 
 function scrollToProducts(){
 
   document
-    .getElementById("productsSection")
+    .getElementById(
+      "productsSection"
+    )
     .scrollIntoView({
+
       behavior:"smooth"
+
     });
 
 }
 
 
-/* =========================================
+/* =========================================================
    TOAST
-========================================= */
+========================================================= */
 
 function showToast(
   message,
-  type = "success"
+  type="success"
 ){
 
   const toast =
-    document.getElementById("toast");
+    document.getElementById(
+      "toast"
+    );
 
 
   toast.textContent =
@@ -1822,8 +2079,8 @@ function showToast(
 
 
   toast.classList.remove(
-    "error",
-    "success"
+    "success",
+    "error"
   );
 
 
@@ -1839,20 +2096,22 @@ function showToast(
       "show"
     );
 
-  },3000);
+  },4000);
 
 }
 
 
-/* =========================================
+/* =========================================================
    START
-========================================= */
+========================================================= */
 
 renderProducts();
 
 updateCart();
 
+updateCheckoutSummary();
+
 </script>
 
 </body>
-</html>
+          </html>
