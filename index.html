@@ -7,7 +7,6 @@
 <title>Easy Shop Algeria | إيزي شوب الجزائر</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -26,16 +25,6 @@ button{
   border:0;
 }
 
-input,
-textarea,
-select{
-  font-family:inherit;
-}
-
-/* =========================
-   TOP BAR
-========================= */
-
 .topbar{
   background:#087f5b;
   color:white;
@@ -43,10 +32,6 @@ select{
   padding:9px;
   font-size:14px;
 }
-
-/* =========================
-   HEADER
-========================= */
 
 header{
   background:white;
@@ -120,19 +105,11 @@ header{
   justify-content:center;
 }
 
-/* =========================
-   CONTAINER
-========================= */
-
 .container{
   max-width:1200px;
   margin:auto;
   padding:20px;
 }
-
-/* =========================
-   HERO
-========================= */
 
 .hero{
   background:linear-gradient(135deg,#08b779,#05a66d);
@@ -166,10 +143,6 @@ header{
   margin-top:20px;
 }
 
-/* =========================
-   SECTION
-========================= */
-
 .section-title{
   display:flex;
   justify-content:space-between;
@@ -180,10 +153,6 @@ header{
 .section-title h2{
   font-size:24px;
 }
-
-/* =========================
-   CATEGORIES
-========================= */
 
 .categories{
   display:flex;
@@ -206,10 +175,6 @@ header{
   background:#087f5b;
   color:white;
 }
-
-/* =========================
-   PRODUCTS
-========================= */
 
 .products{
   display:grid;
@@ -283,10 +248,6 @@ header{
   border-radius:15px;
 }
 
-/* =========================
-   FOOTER
-========================= */
-
 footer{
   margin-top:45px;
   background:#101c32;
@@ -294,10 +255,6 @@ footer{
   padding:25px;
   text-align:center;
 }
-
-/* =========================
-   CART
-========================= */
 
 .overlay{
   display:none;
@@ -307,14 +264,10 @@ footer{
   z-index:50;
 }
 
-.overlay.open{
-  display:block;
-}
-
 .drawer{
   position:fixed;
   top:0;
-  right:-430px;
+  left:-430px;
   width:400px;
   max-width:92%;
   height:100%;
@@ -323,11 +276,14 @@ footer{
   transition:.25s;
   padding:22px;
   overflow:auto;
-  box-shadow:-5px 0 20px rgba(0,0,0,.15);
 }
 
 .drawer.open{
-  right:0;
+  left:0;
+}
+
+.overlay.open{
+  display:block;
 }
 
 .drawer-head{
@@ -351,14 +307,6 @@ footer{
   border-bottom:1px solid #eee;
 }
 
-.cart-item-info{
-  flex:1;
-}
-
-.cart-item-name{
-  font-weight:bold;
-}
-
 .qty{
   display:flex;
   align-items:center;
@@ -372,14 +320,27 @@ footer{
   background:#e9eeee;
 }
 
-.qty button:hover{
-  background:#dce5e2;
+.total-box{
+  margin-top:20px;
+  background:#f5f7fa;
+  border-radius:12px;
+  padding:15px;
 }
 
-.total{
+.total-row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.total-final{
+  display:flex;
+  justify-content:space-between;
+  color:#087f5b;
   font-size:21px;
   font-weight:bold;
-  margin:20px 0;
+  border-top:1px solid #ddd;
+  padding-top:12px;
 }
 
 .checkout{
@@ -389,15 +350,8 @@ footer{
   padding:14px;
   border-radius:10px;
   font-weight:bold;
+  margin-top:15px;
 }
-
-.checkout:hover{
-  background:#066b4d;
-}
-
-/* =========================
-   MODAL
-========================= */
 
 .modal{
   display:none;
@@ -408,6 +362,7 @@ footer{
   align-items:center;
   justify-content:center;
   padding:20px;
+  overflow:auto;
 }
 
 .modal.open{
@@ -416,10 +371,8 @@ footer{
 
 .modal-box{
   background:white;
-  width:520px;
+  width:550px;
   max-width:100%;
-  max-height:92vh;
-  overflow:auto;
   border-radius:18px;
   padding:25px;
 }
@@ -447,13 +400,31 @@ footer{
   padding:12px;
   outline:0;
   font-family:inherit;
-  background:white;
+  font-size:15px;
 }
 
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus{
-  border-color:#087f5b;
+.delivery-info{
+  background:#f0faf6;
+  border:1px solid #c9eadc;
+  border-radius:12px;
+  padding:14px;
+  margin-top:15px;
+}
+
+.delivery-row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.delivery-total{
+  display:flex;
+  justify-content:space-between;
+  color:#087f5b;
+  font-weight:bold;
+  font-size:20px;
+  border-top:1px solid #c9eadc;
+  padding-top:10px;
 }
 
 .form-actions{
@@ -478,46 +449,10 @@ footer{
   font-weight:bold;
 }
 
-.confirm:hover{
-  background:#066b4d;
-}
-
 .confirm:disabled{
   opacity:.6;
   cursor:not-allowed;
 }
-
-/* =========================
-   ORDER SUMMARY
-========================= */
-
-.order-summary{
-  background:#f5f7fa;
-  border-radius:10px;
-  padding:14px;
-  margin-top:15px;
-  font-size:14px;
-}
-
-.order-summary-title{
-  font-weight:bold;
-  margin-bottom:8px;
-}
-
-.order-summary-item{
-  display:flex;
-  justify-content:space-between;
-  padding:5px 0;
-  border-bottom:1px solid #e5e5e5;
-}
-
-.order-summary-item:last-child{
-  border-bottom:0;
-}
-
-/* =========================
-   TOAST
-========================= */
 
 .toast{
   position:fixed;
@@ -530,45 +465,27 @@ footer{
   z-index:200;
   display:none;
   max-width:90%;
-  box-shadow:0 5px 20px rgba(0,0,0,.2);
 }
 
 .toast.show{
   display:block;
 }
 
-.toast.success{
-  background:#087f5b;
-}
-
 .toast.error{
   background:#c92a2a;
 }
 
-/* =========================
-   LOADING
-========================= */
-
-.loading{
-  text-align:center;
-  padding:20px;
-  color:#777;
+.toast.success{
+  background:#087f5b;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
 @media(max-width:900px){
-
   .products{
     grid-template-columns:repeat(3,1fr);
   }
-
 }
 
 @media(max-width:650px){
-
   .header-inner{
     flex-wrap:wrap;
   }
@@ -590,10 +507,6 @@ footer{
     font-size:27px;
   }
 
-  .hero p{
-    font-size:16px;
-  }
-
   .products{
     grid-template-columns:repeat(2,1fr);
     gap:12px;
@@ -606,11 +519,9 @@ footer{
   .drawer{
     width:360px;
   }
-
 }
 
 @media(max-width:420px){
-
   .products{
     grid-template-columns:1fr 1fr;
   }
@@ -622,36 +533,17 @@ footer{
   .price{
     font-size:17px;
   }
-
-  .hero{
-    padding:20px;
-  }
-
-  .hero h1{
-    font-size:24px;
-  }
-
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     TOP BAR
-========================= -->
-
 <div class="topbar">
 🚚 توصيل سريع إلى 58 ولاية الجزائر • الدفع عند الاستلام
 </div>
 
-<!-- =========================
-     HEADER
-========================= -->
-
 <header>
-
   <div class="header-inner">
 
     <div class="logo">
@@ -659,148 +551,92 @@ footer{
     </div>
 
     <div class="search">
-
       <input
         id="searchInput"
         type="text"
         placeholder="ابحث عن منتج..."
       >
-
-      <button onclick="searchProducts()">
-        🔍
-      </button>
-
+      <button onclick="searchProducts()">🔍</button>
     </div>
 
-    <button
-      class="cart-btn"
-      onclick="openCart()"
-    >
+    <button class="cart-btn" onclick="openCart()">
       🛒
-      <span
-        class="cart-count"
-        id="cartCount"
-      >0</span>
+      <span class="cart-count" id="cartCount">0</span>
     </button>
 
   </div>
-
 </header>
-
-<!-- =========================
-     MAIN
-========================= -->
 
 <main class="container">
 
-  <section class="hero">
-
-    <div>
-
-      <h1>
-        إيزي شوب الجزائر 🇩🇿
-      </h1>
-
-      <p>
-        منتجات مختارة • أسعار مناسبة • توصيل إلى 58 ولاية
-      </p>
-
-      <button onclick="scrollToProducts()">
-        اكتشف المنتجات الآن
-      </button>
-
-    </div>
-
-  </section>
-
-  <!-- CATEGORIES -->
-
-  <div class="section-title">
-
-    <h2>
-      الفئات
-    </h2>
-
+<section class="hero">
+  <div>
+    <h1>إيزي شوب الجزائر 🇩🇿</h1>
+    <p>منتجات مختارة • أسعار مناسبة • توصيل إلى 58 ولاية</p>
+    <button onclick="scrollToProducts()">
+      اكتشف المنتجات الآن
+    </button>
   </div>
+</section>
 
-  <div class="categories">
+<div class="section-title">
+  <h2>الفئات</h2>
+</div>
 
-    <button
-      class="category active"
-      onclick="filterCategory('all',this)"
-    >
-      الكل
-    </button>
+<div class="categories">
 
-    <button
-      class="category"
-      onclick="filterCategory('home',this)"
-    >
-      🏠 أدوات منزلية
-    </button>
-
-    <button
-      class="category"
-      onclick="filterCategory('electronics',this)"
-    >
-      ⚡ إلكترونيات
-    </button>
-
-    <button
-      class="category"
-      onclick="filterCategory('sports',this)"
-    >
-      🏆 رياضة
-    </button>
-
-    <button
-      class="category"
-      onclick="filterCategory('men',this)"
-    >
-      👕 رجالية
-    </button>
-
-  </div>
-
-  <!-- PRODUCTS -->
-
-  <div
-    class="section-title"
-    id="productsSection"
+  <button
+    class="category active"
+    onclick="filterCategory('all',this)"
   >
+    الكل
+  </button>
 
-    <h2>
-      منتجاتنا
-    </h2>
+  <button
+    class="category"
+    onclick="filterCategory('home',this)"
+  >
+    🏠 أدوات منزلية
+  </button>
 
-  </div>
+  <button
+    class="category"
+    onclick="filterCategory('electronics',this)"
+  >
+    ⚡ إلكترونيات
+  </button>
 
-  <div
-    class="products"
-    id="products"
-  ></div>
+  <button
+    class="category"
+    onclick="filterCategory('sports',this)"
+  >
+    🏆 رياضة
+  </button>
+
+  <button
+    class="category"
+    onclick="filterCategory('men',this)"
+  >
+    👕 رجالية
+  </button>
+
+</div>
+
+<div class="section-title" id="productsSection">
+  <h2>منتجاتنا</h2>
+</div>
+
+<div class="products" id="products"></div>
 
 </main>
 
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer>
-
-  <p>
-    Easy Shop Algeria 🇩🇿
-  </p>
+  <p>Easy Shop Algeria 🇩🇿</p>
 
   <p style="margin-top:8px;font-size:13px">
     الدفع عند الاستلام • توصيل 58 ولاية • ضمان الاستبدال
   </p>
-
 </footer>
-
-<!-- =========================
-     CART OVERLAY
-========================= -->
 
 <div
   class="overlay"
@@ -808,20 +644,11 @@ footer{
   onclick="closeCart()"
 ></div>
 
-<!-- =========================
-     CART DRAWER
-========================= -->
-
-<aside
-  class="drawer"
-  id="cartDrawer"
->
+<aside class="drawer" id="cartDrawer">
 
   <div class="drawer-head">
 
-    <h2>
-      🛒 سلة المشتريات
-    </h2>
+    <h2>🛒 سلة المشتريات</h2>
 
     <button
       class="close"
@@ -834,15 +661,28 @@ footer{
 
   <div id="cartItems"></div>
 
-  <div class="total">
+  <div class="total-box">
 
-    الإجمالي:
+    <div class="total-row">
+      <span>المنتجات:</span>
+      <strong>
+        <span id="cartProductsTotal">0</span> دج
+      </strong>
+    </div>
 
-    <span id="cartTotal">
-      0
-    </span>
+    <div class="total-row">
+      <span>التوصيل:</span>
+      <strong>
+        <span id="cartDelivery">يحدد عند الطلب</span>
+      </strong>
+    </div>
 
-    دج
+    <div class="total-final">
+      <span>الإجمالي:</span>
+      <span>
+        <span id="cartTotal">0</span> دج
+      </span>
+    </div>
 
   </div>
 
@@ -855,10 +695,6 @@ footer{
 
 </aside>
 
-<!-- =========================
-     CHECKOUT MODAL
-========================= -->
-
 <div
   class="modal"
   id="checkoutModal"
@@ -866,17 +702,11 @@ footer{
 
   <div class="modal-box">
 
-    <h2>
-      📦 معلومات الطلب
-    </h2>
-
-    <!-- NAME -->
+    <h2>📦 معلومات الطلب</h2>
 
     <div class="form-group">
 
-      <label>
-        الاسم واللقب
-      </label>
+      <label>الاسم واللقب</label>
 
       <input
         id="customerName"
@@ -886,107 +716,97 @@ footer{
 
     </div>
 
-    <!-- PHONE -->
-
     <div class="form-group">
 
-      <label>
-        رقم الهاتف
-      </label>
+      <label>رقم الهاتف</label>
 
       <input
         id="customerPhone"
         type="tel"
-        inputmode="tel"
         placeholder="05 / 06 / 07"
       >
 
     </div>
 
-    <!-- WILAYA -->
-
     <div class="form-group">
 
-      <label>
-        الولاية
-      </label>
+      <label>الولاية</label>
 
-      <select id="wilaya">
+      <select
+        id="wilaya"
+        onchange="updateDelivery()"
+      >
 
         <option value="">
           اختر الولاية
         </option>
 
-        <option>01 - أدرار</option>
-        <option>02 - الشلف</option>
-        <option>03 - الأغواط</option>
-        <option>04 - أم البواقي</option>
-        <option>05 - باتنة</option>
-        <option>06 - بجاية</option>
-        <option>07 - بسكرة</option>
-        <option>08 - بشار</option>
-        <option>09 - البليدة</option>
-        <option>10 - البويرة</option>
-        <option>11 - تمنراست</option>
-        <option>12 - تبسة</option>
-        <option>13 - تلمسان</option>
-        <option>14 - تيارت</option>
-        <option>15 - تيزي وزو</option>
-        <option>16 - الجزائر</option>
-        <option>17 - الجلفة</option>
-        <option>18 - جيجل</option>
-        <option>19 - سطيف</option>
-        <option>20 - سعيدة</option>
-        <option>21 - سكيكدة</option>
-        <option>22 - سيدي بلعباس</option>
-        <option>23 - عنابة</option>
-        <option>24 - قالمة</option>
-        <option>25 - قسنطينة</option>
-        <option>26 - المدية</option>
-        <option>27 - مستغانم</option>
-        <option>28 - المسيلة</option>
-        <option>29 - معسكر</option>
-        <option>30 - ورقلة</option>
-        <option>31 - وهران</option>
-        <option>32 - البيض</option>
-        <option>33 - إليزي</option>
-        <option>34 - برج بوعريريج</option>
-        <option>35 - بومرداس</option>
-        <option>36 - الطارف</option>
-        <option>37 - تندوف</option>
-        <option>38 - تيسمسيلت</option>
-        <option>39 - الوادي</option>
-        <option>40 - خنشلة</option>
-        <option>41 - سوق أهراس</option>
-        <option>42 - تيبازة</option>
-        <option>43 - ميلة</option>
-        <option>44 - عين الدفلى</option>
-        <option>45 - النعامة</option>
-        <option>46 - عين تموشنت</option>
-        <option>47 - غرداية</option>
-        <option>48 - غليزان</option>
-        <option>49 - تيميمون</option>
-        <option>50 - برج باجي مختار</option>
-        <option>51 - أولاد جلال</option>
-        <option>52 - بني عباس</option>
-        <option>53 - عين صالح</option>
-        <option>54 - عين قزام</option>
-        <option>55 - تقرت</option>
-        <option>56 - جانت</option>
-        <option>57 - المغير</option>
-        <option>58 - المنيعة</option>
+        <option value="01">01 - أدرار</option>
+        <option value="02">02 - الشلف</option>
+        <option value="03">03 - الأغواط</option>
+        <option value="04">04 - أم البواقي</option>
+        <option value="05">05 - باتنة</option>
+        <option value="06">06 - بجاية</option>
+        <option value="07">07 - بسكرة</option>
+        <option value="08">08 - بشار</option>
+        <option value="09">09 - البليدة</option>
+        <option value="10">10 - البويرة</option>
+        <option value="11">11 - تمنراست</option>
+        <option value="12">12 - تبسة</option>
+        <option value="13">13 - تلمسان</option>
+        <option value="14">14 - تيارت</option>
+        <option value="15">15 - تيزي وزو</option>
+        <option value="16">16 - الجزائر</option>
+        <option value="17">17 - الجلفة</option>
+        <option value="18">18 - جيجل</option>
+        <option value="19">19 - سطيف</option>
+        <option value="20">20 - سعيدة</option>
+        <option value="21">21 - سكيكدة</option>
+        <option value="22">22 - سيدي بلعباس</option>
+        <option value="23">23 - عنابة</option>
+        <option value="24">24 - قالمة</option>
+        <option value="25">25 - قسنطينة</option>
+        <option value="26">26 - المدية</option>
+        <option value="27">27 - مستغانم</option>
+        <option value="28">28 - المسيلة</option>
+        <option value="29">29 - معسكر</option>
+        <option value="30">30 - ورقلة</option>
+        <option value="31">31 - وهران</option>
+        <option value="32">32 - البيض</option>
+        <option value="33">33 - إليزي</option>
+        <option value="34">34 - برج بوعريريج</option>
+        <option value="35">35 - بومرداس</option>
+        <option value="36">36 - الطارف</option>
+        <option value="37">37 - تندوف</option>
+        <option value="38">38 - تيسمسيلت</option>
+        <option value="39">39 - الوادي</option>
+        <option value="40">40 - خنشلة</option>
+        <option value="41">41 - سوق أهراس</option>
+        <option value="42">42 - تيبازة</option>
+        <option value="43">43 - ميلة</option>
+        <option value="44">44 - عين الدفلى</option>
+        <option value="45">45 - النعامة</option>
+        <option value="46">46 - عين تموشنت</option>
+        <option value="47">47 - غرداية</option>
+        <option value="48">48 - غليزان</option>
+        <option value="49">49 - تيميمون</option>
+        <option value="50">50 - برج باجي مختار</option>
+        <option value="51">51 - أولاد جلال</option>
+        <option value="52">52 - بني عباس</option>
+        <option value="53">53 - عين صالح</option>
+        <option value="54">54 - عين قزام</option>
+        <option value="55">55 - تقرت</option>
+        <option value="56">56 - جانت</option>
+        <option value="57">57 - المغير</option>
+        <option value="58">58 - المنيعة</option>
 
       </select>
 
     </div>
 
-    <!-- MUNICIPALITY -->
-
     <div class="form-group">
 
-      <label>
-        البلدية
-      </label>
+      <label>البلدية</label>
 
       <input
         id="municipality"
@@ -996,52 +816,63 @@ footer{
 
     </div>
 
-    <!-- ADDRESS -->
-
     <div class="form-group">
 
-      <label>
-        العنوان بالتفصيل
-      </label>
+      <label>العنوان بالتفصيل</label>
 
       <textarea
         id="customerAddress"
         rows="3"
-        placeholder="اكتب العنوان بالتفصيل"
+        placeholder="الحي، الشارع، رقم المنزل..."
       ></textarea>
 
     </div>
 
-    <!-- DELIVERY -->
-
     <div class="form-group">
 
-      <label>
-        طريقة التوصيل
-      </label>
+      <label>طريقة التوصيل</label>
 
-      <select id="deliveryType">
+      <select id="deliveryMethod">
 
         <option value="home">
-          التوصيل إلى المنزل
+          🏠 التوصيل إلى المنزل
         </option>
 
         <option value="office">
-          التوصيل إلى المكتب
+          📦 التوصيل إلى المكتب
         </option>
 
       </select>
 
     </div>
 
-    <!-- SUMMARY -->
-
     <div
-      class="order-summary"
-      id="orderSummary"
-    ></div>
+      class="delivery-info"
+      id="deliveryInfo"
+    >
 
-    <!-- ACTIONS -->
+      <div class="delivery-row">
+        <span>مجموع المنتجات:</span>
+        <strong>
+          <span id="checkoutProductsTotal">0</span> دج
+        </strong>
+      </div>
+
+      <div class="delivery-row">
+        <span>سعر التوصيل:</span>
+        <strong>
+          <span id="deliveryPrice">اختر الولاية</span>
+        </strong>
+      </div>
+
+      <div class="delivery-total">
+        <span>الإجمالي النهائي:</span>
+        <span>
+          <span id="checkoutTotal">0</span> دج
+        </span>
+      </div>
+
+    </div>
 
     <div class="form-actions">
 
@@ -1066,43 +897,35 @@ footer{
 
 </div>
 
-<!-- =========================
-     TOAST
-========================= -->
-
 <div
   class="toast"
   id="toast"
 ></div>
 
-<!-- =========================
-     SUPABASE
-========================= -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-/* =====================================================
-   SUPABASE CONFIGURATION
-===================================================== */
+/* =========================================
+   SUPABASE
+========================================= */
 
 const SUPABASE_URL =
   "https://obbdfpbejxmbyabriuwu.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
+const SUPABASE_KEY =
   "sb_publishable_tkJrAS8Jupol-KcbNov0DA_LDhbtwit";
 
 const supabaseClient =
   window.supabase.createClient(
     SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
+    SUPABASE_KEY
   );
 
 
-/* =====================================================
+/* =========================================
    PRODUCTS
-===================================================== */
+========================================= */
 
 const products = [
 
@@ -1157,16 +980,107 @@ const products = [
 ];
 
 
-/* =====================================================
-   CART
-===================================================== */
-
 let cart = [];
 
 
-/* =====================================================
-   PRICE FORMAT
-===================================================== */
+/* =========================================
+   DELIVERY AREAS
+========================================= */
+
+/*
+  16 الجزائر = 400 دج
+
+  600 دج:
+  باقي الولايات الشمالية والداخلية
+
+  800 دج:
+  الولايات الصحراوية
+
+  1200 دج:
+  الصحراء القصوى
+*/
+
+const delivery600 = [
+
+  "02","03","04","05","06","09","10",
+  "12","13","14","15","17","18","19",
+  "20","21","22","23","24","25","26",
+  "27","28","29","34","35","36","38",
+  "40","41","42","43","44","46","48"
+
+];
+
+
+const delivery800 = [
+
+  "01",   // أدرار
+  "07",   // بسكرة
+  "08",   // بشار
+  "30",   // ورقلة
+  "32",   // البيض
+  "39",   // الوادي
+  "45",   // النعامة
+  "47",   // غرداية
+  "49",   // تيميمون
+  "51",   // أولاد جلال
+  "52",   // بني عباس
+  "55",   // تقرت
+  "57",   // المغير
+  "58"    // المنيعة
+
+];
+
+
+const delivery1200 = [
+
+  "11",   // تمنراست
+  "33",   // إليزي
+  "37",   // تندوف
+  "50",   // برج باجي مختار
+  "53",   // عين صالح
+  "54",   // عين قزام
+  "56"    // جانت
+
+];
+
+
+/* =========================================
+   DELIVERY PRICE
+========================================= */
+
+function getDeliveryPrice(wilaya){
+
+  if(!wilaya){
+    return 0;
+  }
+
+  /* الجزائر العاصمة */
+
+  if(wilaya === "16"){
+    return 400;
+  }
+
+  /* الصحراء القصوى */
+
+  if(delivery1200.includes(wilaya)){
+    return 1200;
+  }
+
+  /* الصحراء */
+
+  if(delivery800.includes(wilaya)){
+    return 800;
+  }
+
+  /* الشمالية والداخلية */
+
+  return 600;
+}
+
+
+/* =========================================
+   FORMAT PRICE
+========================================= */
 
 function formatPrice(price){
 
@@ -1175,18 +1089,14 @@ function formatPrice(price){
 }
 
 
-/* =====================================================
-   RENDER PRODUCTS
-===================================================== */
+/* =========================================
+   PRODUCTS
+========================================= */
 
 function renderProducts(list = products){
 
   const box =
     document.getElementById("products");
-
-  if(!box){
-    return;
-  }
 
   if(list.length === 0){
 
@@ -1234,25 +1144,21 @@ function renderProducts(list = products){
 }
 
 
-/* =====================================================
+/* =========================================
    ADD TO CART
-===================================================== */
+========================================= */
 
 function addToCart(id){
 
   const product =
-    products.find(
-      p => p.id === id
-    );
+    products.find(p => p.id === id);
 
   if(!product){
     return;
   }
 
   const existing =
-    cart.find(
-      item => item.id === id
-    );
+    cart.find(item => item.id === id);
 
   if(existing){
 
@@ -1277,40 +1183,54 @@ function addToCart(id){
 }
 
 
-/* =====================================================
+/* =========================================
+   CART TOTAL
+========================================= */
+
+function getProductsTotal(){
+
+  return cart.reduce(
+    (sum,item) =>
+      sum + item.price * item.quantity,
+    0
+  );
+
+}
+
+
+/* =========================================
    UPDATE CART
-===================================================== */
+========================================= */
 
 function updateCart(){
 
   const count =
     cart.reduce(
-      (sum,item) =>
-        sum + item.quantity,
+      (sum,item) => sum + item.quantity,
       0
     );
 
-  const countElement =
-    document.getElementById("cartCount");
+  document.getElementById(
+    "cartCount"
+  ).textContent = count;
 
-  if(countElement){
-
-    countElement.textContent =
-      count;
-
-  }
 
   const box =
     document.getElementById("cartItems");
 
-  if(!box){
-    return;
-  }
 
   if(cart.length === 0){
 
     box.innerHTML =
       '<div class="empty">السلة فارغة</div>';
+
+    document.getElementById(
+      "cartProductsTotal"
+    ).textContent = "0";
+
+    document.getElementById(
+      "cartDelivery"
+    ).textContent = "يحدد عند الطلب";
 
     document.getElementById(
       "cartTotal"
@@ -1319,55 +1239,63 @@ function updateCart(){
     return;
   }
 
-  box.innerHTML =
-    cart.map(item => `
 
-      <div class="cart-item">
+  box.innerHTML = cart.map(item => `
 
-        <div class="cart-item-info">
+    <div class="cart-item">
 
-          <div class="cart-item-name">
-            ${item.name}
-          </div>
+      <div>
 
-          <div style="margin-top:5px">
-            ${formatPrice(item.price)} دج
-          </div>
+        <strong>
+          ${item.name}
+        </strong>
 
-        </div>
-
-        <div class="qty">
-
-          <button
-            onclick="changeQuantity(${item.id},1)"
-          >
-            +
-          </button>
-
-          <span>
-            ${item.quantity}
-          </span>
-
-          <button
-            onclick="changeQuantity(${item.id},-1)"
-          >
-            −
-          </button>
-
+        <div style="margin-top:5px">
+          ${formatPrice(item.price)} دج
         </div>
 
       </div>
 
-    `).join("");
+      <div class="qty">
+
+        <button
+          onclick="changeQuantity(${item.id},1)"
+        >
+          +
+        </button>
+
+        <span>
+          ${item.quantity}
+        </span>
+
+        <button
+          onclick="changeQuantity(${item.id},-1)"
+        >
+          −
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
 
   const total =
-    cart.reduce(
-      (sum,item) =>
-        sum +
-        item.price *
-        item.quantity,
-      0
-    );
+    getProductsTotal();
+
+
+  document.getElementById(
+    "cartProductsTotal"
+  ).textContent =
+    formatPrice(total);
+
+
+  document.getElementById(
+    "cartDelivery"
+  ).textContent =
+    "يحدد عند الطلب";
+
 
   document.getElementById(
     "cartTotal"
@@ -1377,16 +1305,14 @@ function updateCart(){
 }
 
 
-/* =====================================================
-   CHANGE QUANTITY
-===================================================== */
+/* =========================================
+   QUANTITY
+========================================= */
 
 function changeQuantity(id,change){
 
   const item =
-    cart.find(
-      p => p.id === id
-    );
+    cart.find(p => p.id === id);
 
   if(!item){
     return;
@@ -1408,9 +1334,9 @@ function changeQuantity(id,change){
 }
 
 
-/* =====================================================
-   OPEN CART
-===================================================== */
+/* =========================================
+   CART OPEN / CLOSE
+========================================= */
 
 function openCart(){
 
@@ -1425,10 +1351,6 @@ function openCart(){
 }
 
 
-/* =====================================================
-   CLOSE CART
-===================================================== */
-
 function closeCart(){
 
   document
@@ -1442,9 +1364,9 @@ function closeCart(){
 }
 
 
-/* =====================================================
-   OPEN CHECKOUT
-===================================================== */
+/* =========================================
+   CHECKOUT
+========================================= */
 
 function openCheckout(){
 
@@ -1458,18 +1380,14 @@ function openCheckout(){
     return;
   }
 
-  renderOrderSummary();
-
   document
     .getElementById("checkoutModal")
     .classList.add("open");
 
+  updateCheckoutTotal();
+
 }
 
-
-/* =====================================================
-   CLOSE CHECKOUT
-===================================================== */
 
 function closeCheckout(){
 
@@ -1480,143 +1398,77 @@ function closeCheckout(){
 }
 
 
-/* =====================================================
-   ORDER SUMMARY
-===================================================== */
+/* =========================================
+   UPDATE DELIVERY
+========================================= */
 
-function renderOrderSummary(){
+function updateDelivery(){
 
-  const summary =
+  const wilaya =
     document.getElementById(
-      "orderSummary"
-    );
+      "wilaya"
+    ).value;
 
-  if(!summary){
-    return;
-  }
+
+  const delivery =
+    getDeliveryPrice(wilaya);
+
+
+  const productsTotal =
+    getProductsTotal();
+
 
   const total =
-    cart.reduce(
-      (sum,item) =>
-        sum +
-        item.price *
-        item.quantity,
-      0
-    );
-
-  summary.innerHTML = `
-
-    <div class="order-summary-title">
-      ملخص الطلب
-    </div>
-
-    ${cart.map(item => `
-
-      <div class="order-summary-item">
-
-        <span>
-          ${item.name}
-          × ${item.quantity}
-        </span>
-
-        <strong>
-          ${formatPrice(
-            item.price *
-            item.quantity
-          )} دج
-        </strong>
-
-      </div>
-
-    `).join("")}
-
-    <div
-      style="
-        margin-top:10px;
-        font-size:18px;
-        font-weight:bold;
-        color:#087f5b;
-      "
-    >
-      الإجمالي:
-      ${formatPrice(total)} دج
-    </div>
-
-  `;
-
-}
+    productsTotal + delivery;
 
 
-/* =====================================================
-   GET WILAYA CODE
-===================================================== */
+  document.getElementById(
+    "checkoutProductsTotal"
+  ).textContent =
+    formatPrice(productsTotal);
 
-function getWilayaCode(wilaya){
 
   if(!wilaya){
-    return "";
+
+    document.getElementById(
+      "deliveryPrice"
+    ).textContent =
+      "اختر الولاية";
+
+  }else{
+
+    document.getElementById(
+      "deliveryPrice"
+    ).textContent =
+      formatPrice(delivery) + " دج";
+
   }
 
-  return wilaya
-    .split("-")[0]
-    .trim();
+
+  document.getElementById(
+    "checkoutTotal"
+  ).textContent =
+    formatPrice(total);
 
 }
 
 
-/* =====================================================
-   GET WILAYA NAME
-===================================================== */
+/* =========================================
+   UPDATE CHECKOUT TOTAL
+========================================= */
 
-function getWilayaName(wilaya){
+function updateCheckoutTotal(){
 
-  if(!wilaya){
-    return "";
-  }
-
-  const parts =
-    wilaya.split("-");
-
-  if(parts.length < 2){
-    return wilaya.trim();
-  }
-
-  return parts
-    .slice(1)
-    .join("-")
-    .trim();
+  updateDelivery();
 
 }
 
 
-/* =====================================================
-   VALIDATE PHONE
-===================================================== */
-
-function validatePhone(phone){
-
-  const clean =
-    phone.replace(
-      /[\s\-]/g,
-      ""
-    );
-
-  return /^(0)(5|6|7)[0-9]{8}$/.test(
-    clean
-  );
-
-}
-
-
-/* =====================================================
+/* =========================================
    CONFIRM ORDER
-===================================================== */
+========================================= */
 
 async function confirmOrder(){
-
-  /* -----------------------------------------------
-     GET FORM DATA
-  ------------------------------------------------ */
 
   const name =
     document
@@ -1624,16 +1476,27 @@ async function confirmOrder(){
       .value
       .trim();
 
+
   const phone =
     document
       .getElementById("customerPhone")
       .value
       .trim();
 
+
+  const wilayaSelect =
+    document.getElementById("wilaya");
+
+
+  const wilayaCode =
+    wilayaSelect.value;
+
+
   const wilaya =
-    document
-      .getElementById("wilaya")
-      .value;
+    wilayaSelect.options[
+      wilayaSelect.selectedIndex
+    ]?.text || "";
+
 
   const municipality =
     document
@@ -1641,81 +1504,36 @@ async function confirmOrder(){
       .value
       .trim();
 
+
   const address =
     document
       .getElementById("customerAddress")
       .value
       .trim();
 
-  const deliveryType =
+
+  const deliveryMethod =
     document
-      .getElementById("deliveryType")
+      .getElementById("deliveryMethod")
       .value;
 
 
-  /* -----------------------------------------------
-     BASIC VALIDATION
-  ------------------------------------------------ */
-
-  if(!name){
+  if(
+    !name ||
+    !phone ||
+    !wilayaCode ||
+    !municipality ||
+    !address
+  ){
 
     showToast(
-      "يرجى كتابة الاسم واللقب",
+      "يرجى ملء جميع معلومات الطلب",
       "error"
     );
 
     return;
   }
 
-  if(!phone){
-
-    showToast(
-      "يرجى كتابة رقم الهاتف",
-      "error"
-    );
-
-    return;
-  }
-
-  if(!validatePhone(phone)){
-
-    showToast(
-      "رقم الهاتف غير صحيح",
-      "error"
-    );
-
-    return;
-  }
-
-  if(!wilaya){
-
-    showToast(
-      "يرجى اختيار الولاية",
-      "error"
-    );
-
-    return;
-  }
-
-  if(!municipality){
-
-    showToast(
-      "يرجى كتابة البلدية",
-      "error"
-    );
-
-    return;
-  }
-
-  if(!address){
-
-    showToast(
-      "يرجى كتابة العنوان",
-      "error"
-    );
-
-    return;
-  }
 
   if(cart.length === 0){
 
@@ -1728,88 +1546,53 @@ async function confirmOrder(){
   }
 
 
-  /* -----------------------------------------------
-     DISABLE BUTTON
-  ------------------------------------------------ */
+  const productsTotal =
+    getProductsTotal();
 
-  const confirmButton =
+
+  const deliveryPrice =
+    getDeliveryPrice(
+      wilayaCode
+    );
+
+
+  const totalPrice =
+    productsTotal +
+    deliveryPrice;
+
+
+  /*
+    نحفظ المنتجات والكميات
+    داخل JSON في قاعدة البيانات.
+  */
+
+  const orderProducts =
+    cart.map(item => ({
+
+      id:item.id,
+
+      name:item.name,
+
+      price:item.price,
+
+      quantity:item.quantity
+
+    }));
+
+
+  const button =
     document.getElementById(
       "confirmButton"
     );
 
-  confirmButton.disabled = true;
 
-  confirmButton.textContent =
-    "جاري إرسال الطلب...";
+  button.disabled = true;
+
+  button.textContent =
+    "جاري تسجيل الطلب...";
 
 
   try{
-
-    /* -------------------------------------------
-       CALCULATE TOTAL
-    -------------------------------------------- */
-
-    const subtotal =
-      cart.reduce(
-        (sum,item) =>
-          sum +
-          item.price *
-          item.quantity,
-        0
-      );
-
-    /*
-      حاليًا تكلفة التوصيل = 0.
-      يمكننا لاحقًا إضافة أسعار التوصيل
-      حسب الولاية.
-    */
-
-    const shippingCost = 0;
-
-    const total =
-      subtotal +
-      shippingCost;
-
-
-    /* -------------------------------------------
-       CREATE PRODUCTS DESCRIPTION
-    -------------------------------------------- */
-
-    const orderProducts =
-      cart.map(item => ({
-        id:item.id,
-        name:item.name,
-        price:item.price,
-        quantity:item.quantity
-      }));
-
-
-    /* -------------------------------------------
-       NOTES
-    -------------------------------------------- */
-
-    const notes =
-      JSON.stringify(
-        orderProducts,
-        null,
-        2
-      );
-
-
-    /* -------------------------------------------
-       WILAYA
-    -------------------------------------------- */
-
-    const wilayaCode =
-      getWilayaCode(wilaya);
-
-    const wilayaName =
-      getWilayaName(wilaya);
-
-
-    /* -------------------------------------------
-       INSERT INTO SUPABASE
-    -------------------------------------------- */
 
     const { data, error } =
       await supabaseClient
@@ -1820,34 +1603,25 @@ async function confirmOrder(){
 
           phone:phone,
 
-          wilaya_code:wilayaCode,
-
-          wilaya_name:wilayaName,
+          wilaya:wilaya,
 
           municipality:municipality,
 
           address:address,
 
-          notes:notes,
+          delivery_method:deliveryMethod,
 
-          delivery_type:deliveryType,
+          products_total:productsTotal,
 
-          subtotal:subtotal,
+          delivery_price:deliveryPrice,
 
-          shipping_cost:shippingCost,
+          total_price:totalPrice,
 
-          total:total,
-
-          status:"pending"
+          products:orderProducts
 
         })
-        .select()
-        .single();
+        .select();
 
-
-    /* -------------------------------------------
-       ERROR
-    -------------------------------------------- */
 
     if(error){
 
@@ -1861,10 +1635,6 @@ async function confirmOrder(){
     }
 
 
-    /* -------------------------------------------
-       SUCCESS
-    -------------------------------------------- */
-
     console.log(
       "Order created:",
       data
@@ -1872,7 +1642,6 @@ async function confirmOrder(){
 
 
     closeCheckout();
-
     closeCart();
 
 
@@ -1881,77 +1650,54 @@ async function confirmOrder(){
     updateCart();
 
 
-    /* -------------------------------------------
-       CLEAR FORM
-    -------------------------------------------- */
+    document.getElementById(
+      "customerName"
+    ).value = "";
 
-    document
-      .getElementById("customerName")
-      .value = "";
+    document.getElementById(
+      "customerPhone"
+    ).value = "";
 
-    document
-      .getElementById("customerPhone")
-      .value = "";
+    document.getElementById(
+      "wilaya"
+    ).value = "";
 
-    document
-      .getElementById("wilaya")
-      .value = "";
+    document.getElementById(
+      "municipality"
+    ).value = "";
 
-    document
-      .getElementById("municipality")
-      .value = "";
-
-    document
-      .getElementById("customerAddress")
-      .value = "";
-
-    document
-      .getElementById("deliveryType")
-      .value = "home";
+    document.getElementById(
+      "customerAddress"
+    ).value = "";
 
 
-    /* -------------------------------------------
-       SUCCESS MESSAGE
-    -------------------------------------------- */
+    document.getElementById(
+      "deliveryMethod"
+    ).value = "home";
+
 
     showToast(
-      "تم تسجيل طلبك بنجاح ✓",
+      "تم تأكيد طلبك بنجاح ✓",
       "success"
     );
 
 
   }catch(error){
 
-    console.error(
-      "ORDER ERROR:",
-      error
-    );
-
-
-    let message =
-      "حدث خطأ أثناء تسجيل الطلب";
-
-
-    if(error && error.message){
-
-      message =
-        "خطأ: " +
-        error.message;
-
-    }
+    console.error(error);
 
 
     showToast(
-      message,
+      "حدث خطأ أثناء تسجيل الطلب. حاول مرة أخرى.",
       "error"
     );
 
 
   }finally{
 
-    confirmButton.disabled = false;
+    button.disabled = false;
 
-    confirmButton.textContent =
+    button.textContent =
       "تأكيد الطلب";
 
   }
@@ -1959,9 +1705,9 @@ async function confirmOrder(){
 }
 
 
-/* =====================================================
-   FILTER CATEGORY
-===================================================== */
+/* =========================================
+   FILTER
+========================================= */
 
 function filterCategory(
   category,
@@ -1971,10 +1717,9 @@ function filterCategory(
   document
     .querySelectorAll(".category")
     .forEach(btn =>
-      btn.classList.remove(
-        "active"
-      )
+      btn.classList.remove("active")
     );
+
 
   button.classList.add("active");
 
@@ -1991,8 +1736,7 @@ function filterCategory(
 
     products.filter(
       product =>
-        product.category ===
-        category
+        product.category === category
     )
 
   );
@@ -2000,9 +1744,9 @@ function filterCategory(
 }
 
 
-/* =====================================================
+/* =========================================
    SEARCH
-===================================================== */
+========================================= */
 
 function searchProducts(){
 
@@ -2037,10 +1781,6 @@ function searchProducts(){
 }
 
 
-/* =====================================================
-   SEARCH EVENT
-===================================================== */
-
 document
   .getElementById("searchInput")
   .addEventListener(
@@ -2049,60 +1789,64 @@ document
   );
 
 
-/* =====================================================
-   SCROLL TO PRODUCTS
-===================================================== */
+/* =========================================
+   SCROLL
+========================================= */
 
 function scrollToProducts(){
 
   document
-    .getElementById(
-      "productsSection"
-    )
+    .getElementById("productsSection")
     .scrollIntoView({
-
       behavior:"smooth"
-
     });
 
 }
 
 
-/* =====================================================
+/* =========================================
    TOAST
-===================================================== */
+========================================= */
 
 function showToast(
   message,
-  type = ""
+  type = "success"
 ){
 
   const toast =
-    document.getElementById(
-      "toast"
-    );
+    document.getElementById("toast");
+
 
   toast.textContent =
     message;
 
-  toast.className =
-    "toast show " +
-    type;
+
+  toast.classList.remove(
+    "error",
+    "success"
+  );
+
+
+  toast.classList.add(
+    "show",
+    type
+  );
 
 
   setTimeout(() => {
 
-    toast.className =
-      "toast";
+    toast.classList.remove(
+      "show"
+    );
 
-  },3500);
+  },3000);
 
 }
 
 
-/* =====================================================
-   INITIALIZE
-===================================================== */
+/* =========================================
+   START
+========================================= */
 
 renderProducts();
 
