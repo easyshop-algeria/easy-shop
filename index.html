@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Easy Shop Algeria | إيزي شوب الجزائر</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -24,6 +26,16 @@ button{
   border:0;
 }
 
+input,
+textarea,
+select{
+  font-family:inherit;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
 .topbar{
   background:#087f5b;
   color:white;
@@ -31,6 +43,10 @@ button{
   padding:9px;
   font-size:14px;
 }
+
+/* =========================
+   HEADER
+========================= */
 
 header{
   background:white;
@@ -104,11 +120,19 @@ header{
   justify-content:center;
 }
 
+/* =========================
+   CONTAINER
+========================= */
+
 .container{
   max-width:1200px;
   margin:auto;
   padding:20px;
 }
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
   background:linear-gradient(135deg,#08b779,#05a66d);
@@ -142,6 +166,10 @@ header{
   margin-top:20px;
 }
 
+/* =========================
+   SECTION
+========================= */
+
 .section-title{
   display:flex;
   justify-content:space-between;
@@ -152,6 +180,10 @@ header{
 .section-title h2{
   font-size:24px;
 }
+
+/* =========================
+   CATEGORIES
+========================= */
 
 .categories{
   display:flex;
@@ -174,6 +206,10 @@ header{
   background:#087f5b;
   color:white;
 }
+
+/* =========================
+   PRODUCTS
+========================= */
 
 .products{
   display:grid;
@@ -247,6 +283,10 @@ header{
   border-radius:15px;
 }
 
+/* =========================
+   FOOTER
+========================= */
+
 footer{
   margin-top:45px;
   background:#101c32;
@@ -254,6 +294,10 @@ footer{
   padding:25px;
   text-align:center;
 }
+
+/* =========================
+   CART
+========================= */
 
 .overlay{
   display:none;
@@ -263,10 +307,14 @@ footer{
   z-index:50;
 }
 
+.overlay.open{
+  display:block;
+}
+
 .drawer{
   position:fixed;
   top:0;
-  left:-430px;
+  right:-430px;
   width:400px;
   max-width:92%;
   height:100%;
@@ -275,14 +323,11 @@ footer{
   transition:.25s;
   padding:22px;
   overflow:auto;
+  box-shadow:-5px 0 20px rgba(0,0,0,.15);
 }
 
 .drawer.open{
-  left:0;
-}
-
-.overlay.open{
-  display:block;
+  right:0;
 }
 
 .drawer-head{
@@ -306,6 +351,14 @@ footer{
   border-bottom:1px solid #eee;
 }
 
+.cart-item-info{
+  flex:1;
+}
+
+.cart-item-name{
+  font-weight:bold;
+}
+
 .qty{
   display:flex;
   align-items:center;
@@ -317,6 +370,10 @@ footer{
   height:27px;
   border-radius:6px;
   background:#e9eeee;
+}
+
+.qty button:hover{
+  background:#dce5e2;
 }
 
 .total{
@@ -333,6 +390,14 @@ footer{
   border-radius:10px;
   font-weight:bold;
 }
+
+.checkout:hover{
+  background:#066b4d;
+}
+
+/* =========================
+   MODAL
+========================= */
 
 .modal{
   display:none;
@@ -351,8 +416,10 @@ footer{
 
 .modal-box{
   background:white;
-  width:500px;
+  width:520px;
   max-width:100%;
+  max-height:92vh;
+  overflow:auto;
   border-radius:18px;
   padding:25px;
 }
@@ -380,6 +447,13 @@ footer{
   padding:12px;
   outline:0;
   font-family:inherit;
+  background:white;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  border-color:#087f5b;
 }
 
 .form-actions{
@@ -401,7 +475,49 @@ footer{
   color:white;
   padding:12px;
   border-radius:9px;
+  font-weight:bold;
 }
+
+.confirm:hover{
+  background:#066b4d;
+}
+
+.confirm:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+/* =========================
+   ORDER SUMMARY
+========================= */
+
+.order-summary{
+  background:#f5f7fa;
+  border-radius:10px;
+  padding:14px;
+  margin-top:15px;
+  font-size:14px;
+}
+
+.order-summary-title{
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.order-summary-item{
+  display:flex;
+  justify-content:space-between;
+  padding:5px 0;
+  border-bottom:1px solid #e5e5e5;
+}
+
+.order-summary-item:last-child{
+  border-bottom:0;
+}
+
+/* =========================
+   TOAST
+========================= */
 
 .toast{
   position:fixed;
@@ -413,19 +529,46 @@ footer{
   border-radius:10px;
   z-index:200;
   display:none;
+  max-width:90%;
+  box-shadow:0 5px 20px rgba(0,0,0,.2);
 }
 
 .toast.show{
   display:block;
 }
 
+.toast.success{
+  background:#087f5b;
+}
+
+.toast.error{
+  background:#c92a2a;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+  text-align:center;
+  padding:20px;
+  color:#777;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media(max-width:900px){
+
   .products{
     grid-template-columns:repeat(3,1fr);
   }
+
 }
 
 @media(max-width:650px){
+
   .header-inner{
     flex-wrap:wrap;
   }
@@ -447,6 +590,10 @@ footer{
     font-size:27px;
   }
 
+  .hero p{
+    font-size:16px;
+  }
+
   .products{
     grid-template-columns:repeat(2,1fr);
     gap:12px;
@@ -459,9 +606,11 @@ footer{
   .drawer{
     width:360px;
   }
+
 }
 
 @media(max-width:420px){
+
   .products{
     grid-template-columns:1fr 1fr;
   }
@@ -473,17 +622,36 @@ footer{
   .price{
     font-size:17px;
   }
+
+  .hero{
+    padding:20px;
+  }
+
+  .hero h1{
+    font-size:24px;
+  }
+
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- =========================
+     TOP BAR
+========================= -->
+
 <div class="topbar">
 🚚 توصيل سريع إلى 58 ولاية الجزائر • الدفع عند الاستلام
 </div>
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
+
   <div class="header-inner">
 
     <div class="logo">
@@ -491,96 +659,264 @@ footer{
     </div>
 
     <div class="search">
-      <input id="searchInput" type="text" placeholder="ابحث عن منتج...">
-      <button onclick="searchProducts()">🔍</button>
+
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="ابحث عن منتج..."
+      >
+
+      <button onclick="searchProducts()">
+        🔍
+      </button>
+
     </div>
 
-    <button class="cart-btn" onclick="openCart()">
+    <button
+      class="cart-btn"
+      onclick="openCart()"
+    >
       🛒
-      <span class="cart-count" id="cartCount">0</span>
+      <span
+        class="cart-count"
+        id="cartCount"
+      >0</span>
     </button>
 
   </div>
+
 </header>
+
+<!-- =========================
+     MAIN
+========================= -->
 
 <main class="container">
 
-<section class="hero">
-  <div>
-    <h1>إيزي شوب الجزائر 🇩🇿</h1>
-    <p>منتجات مختارة • أسعار مناسبة • توصيل إلى 58 ولاية</p>
-    <button onclick="scrollToProducts()">اكتشف المنتجات الآن</button>
+  <section class="hero">
+
+    <div>
+
+      <h1>
+        إيزي شوب الجزائر 🇩🇿
+      </h1>
+
+      <p>
+        منتجات مختارة • أسعار مناسبة • توصيل إلى 58 ولاية
+      </p>
+
+      <button onclick="scrollToProducts()">
+        اكتشف المنتجات الآن
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- CATEGORIES -->
+
+  <div class="section-title">
+
+    <h2>
+      الفئات
+    </h2>
+
   </div>
-</section>
 
-<div class="section-title">
-  <h2>الفئات</h2>
-</div>
+  <div class="categories">
 
-<div class="categories">
-  <button class="category active" onclick="filterCategory('all',this)">الكل</button>
-  <button class="category" onclick="filterCategory('home',this)">🏠 أدوات منزلية</button>
-  <button class="category" onclick="filterCategory('electronics',this)">⚡ إلكترونيات</button>
-  <button class="category" onclick="filterCategory('sports',this)">🏆 رياضة</button>
-  <button class="category" onclick="filterCategory('men',this)">👕 رجالية</button>
-</div>
+    <button
+      class="category active"
+      onclick="filterCategory('all',this)"
+    >
+      الكل
+    </button>
 
-<div class="section-title" id="productsSection">
-  <h2>منتجاتنا</h2>
-</div>
+    <button
+      class="category"
+      onclick="filterCategory('home',this)"
+    >
+      🏠 أدوات منزلية
+    </button>
 
-<div class="products" id="products"></div>
+    <button
+      class="category"
+      onclick="filterCategory('electronics',this)"
+    >
+      ⚡ إلكترونيات
+    </button>
+
+    <button
+      class="category"
+      onclick="filterCategory('sports',this)"
+    >
+      🏆 رياضة
+    </button>
+
+    <button
+      class="category"
+      onclick="filterCategory('men',this)"
+    >
+      👕 رجالية
+    </button>
+
+  </div>
+
+  <!-- PRODUCTS -->
+
+  <div
+    class="section-title"
+    id="productsSection"
+  >
+
+    <h2>
+      منتجاتنا
+    </h2>
+
+  </div>
+
+  <div
+    class="products"
+    id="products"
+  ></div>
 
 </main>
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
-  <p>Easy Shop Algeria 🇩🇿</p>
+
+  <p>
+    Easy Shop Algeria 🇩🇿
+  </p>
+
   <p style="margin-top:8px;font-size:13px">
     الدفع عند الاستلام • توصيل 58 ولاية • ضمان الاستبدال
   </p>
+
 </footer>
 
-<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<!-- =========================
+     CART OVERLAY
+========================= -->
 
-<aside class="drawer" id="cartDrawer">
+<div
+  class="overlay"
+  id="overlay"
+  onclick="closeCart()"
+></div>
+
+<!-- =========================
+     CART DRAWER
+========================= -->
+
+<aside
+  class="drawer"
+  id="cartDrawer"
+>
 
   <div class="drawer-head">
-    <h2>🛒 سلة المشتريات</h2>
-    <button class="close" onclick="closeCart()">✕</button>
+
+    <h2>
+      🛒 سلة المشتريات
+    </h2>
+
+    <button
+      class="close"
+      onclick="closeCart()"
+    >
+      ✕
+    </button>
+
   </div>
 
   <div id="cartItems"></div>
 
   <div class="total">
-    الإجمالي: <span id="cartTotal">0</span> دج
+
+    الإجمالي:
+
+    <span id="cartTotal">
+      0
+    </span>
+
+    دج
+
   </div>
 
-  <button class="checkout" onclick="openCheckout()">
+  <button
+    class="checkout"
+    onclick="openCheckout()"
+  >
     إتمام الطلب
   </button>
 
 </aside>
 
-<div class="modal" id="checkoutModal">
+<!-- =========================
+     CHECKOUT MODAL
+========================= -->
+
+<div
+  class="modal"
+  id="checkoutModal"
+>
 
   <div class="modal-box">
 
-    <h2>📦 معلومات الطلب</h2>
+    <h2>
+      📦 معلومات الطلب
+    </h2>
+
+    <!-- NAME -->
 
     <div class="form-group">
-      <label>الاسم واللقب</label>
-      <input id="customerName" type="text" placeholder="اكتب اسمك الكامل">
+
+      <label>
+        الاسم واللقب
+      </label>
+
+      <input
+        id="customerName"
+        type="text"
+        placeholder="اكتب اسمك الكامل"
+      >
+
     </div>
 
-    <div class="form-group">
-      <label>رقم الهاتف</label>
-      <input id="customerPhone" type="tel" placeholder="05 / 06 / 07">
-    </div>
+    <!-- PHONE -->
 
     <div class="form-group">
-      <label>الولاية</label>
+
+      <label>
+        رقم الهاتف
+      </label>
+
+      <input
+        id="customerPhone"
+        type="tel"
+        inputmode="tel"
+        placeholder="05 / 06 / 07"
+      >
+
+    </div>
+
+    <!-- WILAYA -->
+
+    <div class="form-group">
+
+      <label>
+        الولاية
+      </label>
+
       <select id="wilaya">
-        <option value="">اختر الولاية</option>
+
+        <option value="">
+          اختر الولاية
+        </option>
+
         <option>01 - أدرار</option>
         <option>02 - الشلف</option>
         <option>03 - الأغواط</option>
@@ -639,27 +975,137 @@ footer{
         <option>56 - جانت</option>
         <option>57 - المغير</option>
         <option>58 - المنيعة</option>
+
       </select>
+
     </div>
+
+    <!-- MUNICIPALITY -->
 
     <div class="form-group">
-      <label>العنوان</label>
-      <textarea id="customerAddress" rows="3" placeholder="البلدية والعنوان بالتفصيل"></textarea>
+
+      <label>
+        البلدية
+      </label>
+
+      <input
+        id="municipality"
+        type="text"
+        placeholder="اكتب اسم البلدية"
+      >
+
     </div>
 
+    <!-- ADDRESS -->
+
+    <div class="form-group">
+
+      <label>
+        العنوان بالتفصيل
+      </label>
+
+      <textarea
+        id="customerAddress"
+        rows="3"
+        placeholder="اكتب العنوان بالتفصيل"
+      ></textarea>
+
+    </div>
+
+    <!-- DELIVERY -->
+
+    <div class="form-group">
+
+      <label>
+        طريقة التوصيل
+      </label>
+
+      <select id="deliveryType">
+
+        <option value="home">
+          التوصيل إلى المنزل
+        </option>
+
+        <option value="office">
+          التوصيل إلى المكتب
+        </option>
+
+      </select>
+
+    </div>
+
+    <!-- SUMMARY -->
+
+    <div
+      class="order-summary"
+      id="orderSummary"
+    ></div>
+
+    <!-- ACTIONS -->
+
     <div class="form-actions">
-      <button class="cancel" onclick="closeCheckout()">إلغاء</button>
-      <button class="confirm" onclick="confirmOrder()">تأكيد الطلب</button>
+
+      <button
+        class="cancel"
+        onclick="closeCheckout()"
+      >
+        إلغاء
+      </button>
+
+      <button
+        class="confirm"
+        id="confirmButton"
+        onclick="confirmOrder()"
+      >
+        تأكيد الطلب
+      </button>
+
     </div>
 
   </div>
+
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- =========================
+     TOAST
+========================= -->
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
+/* =====================================================
+   SUPABASE CONFIGURATION
+===================================================== */
+
+const SUPABASE_URL =
+  "https://obbdfpbejxmbyabriuwu.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_tkJrAS8Jupol-KcbNov0DA_LDhbtwit";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+/* =====================================================
+   PRODUCTS
+===================================================== */
+
 const products = [
+
   {
     id:1,
     name:"حامل جوال متعدد الاستخدام",
@@ -667,6 +1113,7 @@ const products = [
     category:"electronics",
     icon:"📱"
   },
+
   {
     id:2,
     name:"كرة القدم المصغرة للأطفال",
@@ -674,6 +1121,7 @@ const products = [
     category:"sports",
     icon:"⚽"
   },
+
   {
     id:3,
     name:"مظلة شمسية للسيارات",
@@ -681,6 +1129,7 @@ const products = [
     category:"home",
     icon:"🚗"
   },
+
   {
     id:4,
     name:"منظم منزلي عملي",
@@ -688,6 +1137,7 @@ const products = [
     category:"home",
     icon:"🏠"
   },
+
   {
     id:5,
     name:"حقيبة رياضية",
@@ -695,6 +1145,7 @@ const products = [
     category:"sports",
     icon:"🎒"
   },
+
   {
     id:6,
     name:"تيشيرت رجالي",
@@ -702,26 +1153,56 @@ const products = [
     category:"men",
     icon:"👕"
   }
+
 ];
+
+
+/* =====================================================
+   CART
+===================================================== */
 
 let cart = [];
 
+
+/* =====================================================
+   PRICE FORMAT
+===================================================== */
+
 function formatPrice(price){
-  return price.toLocaleString("fr-DZ");
+
+  return Number(price).toLocaleString("fr-DZ");
+
 }
+
+
+/* =====================================================
+   RENDER PRODUCTS
+===================================================== */
 
 function renderProducts(list = products){
 
-  const box = document.getElementById("products");
+  const box =
+    document.getElementById("products");
+
+  if(!box){
+    return;
+  }
 
   if(list.length === 0){
-    box.innerHTML = '<div class="empty">لم يتم العثور على منتجات.</div>';
+
+    box.innerHTML =
+      '<div class="empty">لم يتم العثور على منتجات.</div>';
+
     return;
   }
 
   box.innerHTML = list.map(product => `
+
     <article class="product">
-      <div class="product-img">${product.icon}</div>
+
+      <div class="product-img">
+        ${product.icon}
+      </div>
 
       <div class="product-info">
 
@@ -737,249 +1218,894 @@ function renderProducts(list = products){
           ✓ متوفر
         </div>
 
-        <button class="add-btn"
-          onclick="addToCart(${product.id})">
+        <button
+          class="add-btn"
+          onclick="addToCart(${product.id})"
+        >
           أضف إلى السلة
         </button>
 
       </div>
+
     </article>
+
   `).join("");
+
 }
+
+
+/* =====================================================
+   ADD TO CART
+===================================================== */
 
 function addToCart(id){
 
-  const product = products.find(p => p.id === id);
+  const product =
+    products.find(
+      p => p.id === id
+    );
 
-  if(!product) return;
+  if(!product){
+    return;
+  }
 
-  const existing = cart.find(item => item.id === id);
+  const existing =
+    cart.find(
+      item => item.id === id
+    );
 
   if(existing){
+
     existing.quantity++;
+
   }else{
+
     cart.push({
       ...product,
       quantity:1
     });
+
   }
 
   updateCart();
 
-  showToast("تمت إضافة المنتج إلى السلة ✓");
+  showToast(
+    "تمت إضافة المنتج إلى السلة ✓",
+    "success"
+  );
+
 }
+
+
+/* =====================================================
+   UPDATE CART
+===================================================== */
 
 function updateCart(){
 
-  const count = cart.reduce(
-    (sum,item) => sum + item.quantity,
-    0
-  );
+  const count =
+    cart.reduce(
+      (sum,item) =>
+        sum + item.quantity,
+      0
+    );
 
-  document.getElementById("cartCount").textContent = count;
+  const countElement =
+    document.getElementById("cartCount");
 
-  const box = document.getElementById("cartItems");
+  if(countElement){
+
+    countElement.textContent =
+      count;
+
+  }
+
+  const box =
+    document.getElementById("cartItems");
+
+  if(!box){
+    return;
+  }
 
   if(cart.length === 0){
+
     box.innerHTML =
       '<div class="empty">السلة فارغة</div>';
 
-    document.getElementById("cartTotal").textContent = "0";
+    document.getElementById(
+      "cartTotal"
+    ).textContent = "0";
 
     return;
   }
 
-  box.innerHTML = cart.map(item => `
-    <div class="cart-item">
+  box.innerHTML =
+    cart.map(item => `
 
-      <div>
-        <strong>${item.name}</strong>
-        <div style="margin-top:5px">
-          ${formatPrice(item.price)} دج
+      <div class="cart-item">
+
+        <div class="cart-item-info">
+
+          <div class="cart-item-name">
+            ${item.name}
+          </div>
+
+          <div style="margin-top:5px">
+            ${formatPrice(item.price)} دج
+          </div>
+
         </div>
+
+        <div class="qty">
+
+          <button
+            onclick="changeQuantity(${item.id},1)"
+          >
+            +
+          </button>
+
+          <span>
+            ${item.quantity}
+          </span>
+
+          <button
+            onclick="changeQuantity(${item.id},-1)"
+          >
+            −
+          </button>
+
+        </div>
+
       </div>
 
-      <div class="qty">
+    `).join("");
 
-        <button onclick="changeQuantity(${item.id},1)">
-          +
-        </button>
+  const total =
+    cart.reduce(
+      (sum,item) =>
+        sum +
+        item.price *
+        item.quantity,
+      0
+    );
 
-        <span>${item.quantity}</span>
-
-        <button onclick="changeQuantity(${item.id},-1)">
-          −
-        </button>
-
-      </div>
-
-    </div>
-  `).join("");
-
-  const total = cart.reduce(
-    (sum,item) => sum + item.price * item.quantity,
-    0
-  );
-
-  document.getElementById("cartTotal").textContent =
+  document.getElementById(
+    "cartTotal"
+  ).textContent =
     formatPrice(total);
+
 }
+
+
+/* =====================================================
+   CHANGE QUANTITY
+===================================================== */
 
 function changeQuantity(id,change){
 
-  const item = cart.find(p => p.id === id);
+  const item =
+    cart.find(
+      p => p.id === id
+    );
 
-  if(!item) return;
+  if(!item){
+    return;
+  }
 
   item.quantity += change;
 
   if(item.quantity <= 0){
-    cart = cart.filter(p => p.id !== id);
+
+    cart =
+      cart.filter(
+        p => p.id !== id
+      );
+
   }
 
   updateCart();
+
 }
+
+
+/* =====================================================
+   OPEN CART
+===================================================== */
 
 function openCart(){
 
-  document.getElementById("cartDrawer")
+  document
+    .getElementById("cartDrawer")
     .classList.add("open");
 
-  document.getElementById("overlay")
+  document
+    .getElementById("overlay")
     .classList.add("open");
+
 }
+
+
+/* =====================================================
+   CLOSE CART
+===================================================== */
 
 function closeCart(){
 
-  document.getElementById("cartDrawer")
+  document
+    .getElementById("cartDrawer")
     .classList.remove("open");
 
-  document.getElementById("overlay")
+  document
+    .getElementById("overlay")
     .classList.remove("open");
+
 }
+
+
+/* =====================================================
+   OPEN CHECKOUT
+===================================================== */
 
 function openCheckout(){
 
   if(cart.length === 0){
-    showToast("السلة فارغة");
+
+    showToast(
+      "السلة فارغة",
+      "error"
+    );
+
     return;
   }
 
-  document.getElementById("checkoutModal")
+  renderOrderSummary();
+
+  document
+    .getElementById("checkoutModal")
     .classList.add("open");
+
 }
+
+
+/* =====================================================
+   CLOSE CHECKOUT
+===================================================== */
 
 function closeCheckout(){
 
-  document.getElementById("checkoutModal")
+  document
+    .getElementById("checkoutModal")
     .classList.remove("open");
+
 }
 
-function confirmOrder(){
+
+/* =====================================================
+   ORDER SUMMARY
+===================================================== */
+
+function renderOrderSummary(){
+
+  const summary =
+    document.getElementById(
+      "orderSummary"
+    );
+
+  if(!summary){
+    return;
+  }
+
+  const total =
+    cart.reduce(
+      (sum,item) =>
+        sum +
+        item.price *
+        item.quantity,
+      0
+    );
+
+  summary.innerHTML = `
+
+    <div class="order-summary-title">
+      ملخص الطلب
+    </div>
+
+    ${cart.map(item => `
+
+      <div class="order-summary-item">
+
+        <span>
+          ${item.name}
+          × ${item.quantity}
+        </span>
+
+        <strong>
+          ${formatPrice(
+            item.price *
+            item.quantity
+          )} دج
+        </strong>
+
+      </div>
+
+    `).join("")}
+
+    <div
+      style="
+        margin-top:10px;
+        font-size:18px;
+        font-weight:bold;
+        color:#087f5b;
+      "
+    >
+      الإجمالي:
+      ${formatPrice(total)} دج
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   GET WILAYA CODE
+===================================================== */
+
+function getWilayaCode(wilaya){
+
+  if(!wilaya){
+    return "";
+  }
+
+  return wilaya
+    .split("-")[0]
+    .trim();
+
+}
+
+
+/* =====================================================
+   GET WILAYA NAME
+===================================================== */
+
+function getWilayaName(wilaya){
+
+  if(!wilaya){
+    return "";
+  }
+
+  const parts =
+    wilaya.split("-");
+
+  if(parts.length < 2){
+    return wilaya.trim();
+  }
+
+  return parts
+    .slice(1)
+    .join("-")
+    .trim();
+
+}
+
+
+/* =====================================================
+   VALIDATE PHONE
+===================================================== */
+
+function validatePhone(phone){
+
+  const clean =
+    phone.replace(
+      /[\s\-]/g,
+      ""
+    );
+
+  return /^(0)(5|6|7)[0-9]{8}$/.test(
+    clean
+  );
+
+}
+
+
+/* =====================================================
+   CONFIRM ORDER
+===================================================== */
+
+async function confirmOrder(){
+
+  /* -----------------------------------------------
+     GET FORM DATA
+  ------------------------------------------------ */
 
   const name =
-    document.getElementById("customerName").value.trim();
+    document
+      .getElementById("customerName")
+      .value
+      .trim();
 
   const phone =
-    document.getElementById("customerPhone").value.trim();
+    document
+      .getElementById("customerPhone")
+      .value
+      .trim();
 
   const wilaya =
-    document.getElementById("wilaya").value;
+    document
+      .getElementById("wilaya")
+      .value;
+
+  const municipality =
+    document
+      .getElementById("municipality")
+      .value
+      .trim();
 
   const address =
-    document.getElementById("customerAddress").value.trim();
+    document
+      .getElementById("customerAddress")
+      .value
+      .trim();
 
-  if(!name || !phone || !wilaya || !address){
+  const deliveryType =
+    document
+      .getElementById("deliveryType")
+      .value;
 
-    showToast("يرجى ملء جميع معلومات الطلب");
+
+  /* -----------------------------------------------
+     BASIC VALIDATION
+  ------------------------------------------------ */
+
+  if(!name){
+
+    showToast(
+      "يرجى كتابة الاسم واللقب",
+      "error"
+    );
 
     return;
   }
 
-  /*
-    في هذه المرحلة لا نرسل الطلب إلى Supabase.
-    سنربطه بقاعدة البيانات بعد اختبار الواجهة.
-  */
+  if(!phone){
 
-  closeCheckout();
-  closeCart();
+    showToast(
+      "يرجى كتابة رقم الهاتف",
+      "error"
+    );
 
-  cart = [];
-  updateCart();
+    return;
+  }
 
-  document.getElementById("customerName").value = "";
-  document.getElementById("customerPhone").value = "";
-  document.getElementById("wilaya").value = "";
-  document.getElementById("customerAddress").value = "";
+  if(!validatePhone(phone)){
 
-  showToast("تم تسجيل الطلب تجريبيًا ✓");
+    showToast(
+      "رقم الهاتف غير صحيح",
+      "error"
+    );
+
+    return;
+  }
+
+  if(!wilaya){
+
+    showToast(
+      "يرجى اختيار الولاية",
+      "error"
+    );
+
+    return;
+  }
+
+  if(!municipality){
+
+    showToast(
+      "يرجى كتابة البلدية",
+      "error"
+    );
+
+    return;
+  }
+
+  if(!address){
+
+    showToast(
+      "يرجى كتابة العنوان",
+      "error"
+    );
+
+    return;
+  }
+
+  if(cart.length === 0){
+
+    showToast(
+      "السلة فارغة",
+      "error"
+    );
+
+    return;
+  }
+
+
+  /* -----------------------------------------------
+     DISABLE BUTTON
+  ------------------------------------------------ */
+
+  const confirmButton =
+    document.getElementById(
+      "confirmButton"
+    );
+
+  confirmButton.disabled = true;
+
+  confirmButton.textContent =
+    "جاري إرسال الطلب...";
+
+
+  try{
+
+    /* -------------------------------------------
+       CALCULATE TOTAL
+    -------------------------------------------- */
+
+    const subtotal =
+      cart.reduce(
+        (sum,item) =>
+          sum +
+          item.price *
+          item.quantity,
+        0
+      );
+
+    /*
+      حاليًا تكلفة التوصيل = 0.
+      يمكننا لاحقًا إضافة أسعار التوصيل
+      حسب الولاية.
+    */
+
+    const shippingCost = 0;
+
+    const total =
+      subtotal +
+      shippingCost;
+
+
+    /* -------------------------------------------
+       CREATE PRODUCTS DESCRIPTION
+    -------------------------------------------- */
+
+    const orderProducts =
+      cart.map(item => ({
+        id:item.id,
+        name:item.name,
+        price:item.price,
+        quantity:item.quantity
+      }));
+
+
+    /* -------------------------------------------
+       NOTES
+    -------------------------------------------- */
+
+    const notes =
+      JSON.stringify(
+        orderProducts,
+        null,
+        2
+      );
+
+
+    /* -------------------------------------------
+       WILAYA
+    -------------------------------------------- */
+
+    const wilayaCode =
+      getWilayaCode(wilaya);
+
+    const wilayaName =
+      getWilayaName(wilaya);
+
+
+    /* -------------------------------------------
+       INSERT INTO SUPABASE
+    -------------------------------------------- */
+
+    const { data, error } =
+      await supabaseClient
+        .from("orders")
+        .insert({
+
+          customer_name:name,
+
+          phone:phone,
+
+          wilaya_code:wilayaCode,
+
+          wilaya_name:wilayaName,
+
+          municipality:municipality,
+
+          address:address,
+
+          notes:notes,
+
+          delivery_type:deliveryType,
+
+          subtotal:subtotal,
+
+          shipping_cost:shippingCost,
+
+          total:total,
+
+          status:"pending"
+
+        })
+        .select()
+        .single();
+
+
+    /* -------------------------------------------
+       ERROR
+    -------------------------------------------- */
+
+    if(error){
+
+      console.error(
+        "Supabase error:",
+        error
+      );
+
+      throw error;
+
+    }
+
+
+    /* -------------------------------------------
+       SUCCESS
+    -------------------------------------------- */
+
+    console.log(
+      "Order created:",
+      data
+    );
+
+
+    closeCheckout();
+
+    closeCart();
+
+
+    cart = [];
+
+    updateCart();
+
+
+    /* -------------------------------------------
+       CLEAR FORM
+    -------------------------------------------- */
+
+    document
+      .getElementById("customerName")
+      .value = "";
+
+    document
+      .getElementById("customerPhone")
+      .value = "";
+
+    document
+      .getElementById("wilaya")
+      .value = "";
+
+    document
+      .getElementById("municipality")
+      .value = "";
+
+    document
+      .getElementById("customerAddress")
+      .value = "";
+
+    document
+      .getElementById("deliveryType")
+      .value = "home";
+
+
+    /* -------------------------------------------
+       SUCCESS MESSAGE
+    -------------------------------------------- */
+
+    showToast(
+      "تم تسجيل طلبك بنجاح ✓",
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "ORDER ERROR:",
+      error
+    );
+
+
+    let message =
+      "حدث خطأ أثناء تسجيل الطلب";
+
+
+    if(error && error.message){
+
+      message =
+        "خطأ: " +
+        error.message;
+
+    }
+
+
+    showToast(
+      message,
+      "error"
+    );
+
+
+  }finally{
+
+    confirmButton.disabled = false;
+
+    confirmButton.textContent =
+      "تأكيد الطلب";
+
+  }
+
 }
 
-function filterCategory(category,button){
 
-  document.querySelectorAll(".category")
-    .forEach(btn => btn.classList.remove("active"));
+/* =====================================================
+   FILTER CATEGORY
+===================================================== */
+
+function filterCategory(
+  category,
+  button
+){
+
+  document
+    .querySelectorAll(".category")
+    .forEach(btn =>
+      btn.classList.remove(
+        "active"
+      )
+    );
 
   button.classList.add("active");
 
+
   if(category === "all"){
+
     renderProducts(products);
+
     return;
   }
 
+
   renderProducts(
+
     products.filter(
-      product => product.category === category
+      product =>
+        product.category ===
+        category
     )
+
   );
+
 }
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
 
 function searchProducts(){
 
   const query =
-    document.getElementById("searchInput")
+    document
+      .getElementById("searchInput")
       .value
       .trim()
       .toLowerCase();
 
+
   if(!query){
+
     renderProducts(products);
+
     return;
   }
 
-  const results = products.filter(product =>
-    product.name.toLowerCase().includes(query)
-  );
+
+  const results =
+    products.filter(product =>
+
+      product.name
+        .toLowerCase()
+        .includes(query)
+
+    );
+
 
   renderProducts(results);
+
 }
 
-document.getElementById("searchInput")
-  .addEventListener("input", searchProducts);
+
+/* =====================================================
+   SEARCH EVENT
+===================================================== */
+
+document
+  .getElementById("searchInput")
+  .addEventListener(
+    "input",
+    searchProducts
+  );
+
+
+/* =====================================================
+   SCROLL TO PRODUCTS
+===================================================== */
 
 function scrollToProducts(){
 
-  document.getElementById("productsSection")
+  document
+    .getElementById(
+      "productsSection"
+    )
     .scrollIntoView({
+
       behavior:"smooth"
+
     });
+
 }
 
-function showToast(message){
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(
+  message,
+  type = ""
+){
 
   const toast =
-    document.getElementById("toast");
+    document.getElementById(
+      "toast"
+    );
 
-  toast.textContent = message;
+  toast.textContent =
+    message;
 
-  toast.classList.add("show");
+  toast.className =
+    "toast show " +
+    type;
+
 
   setTimeout(() => {
-    toast.classList.remove("show");
-  },2500);
+
+    toast.className =
+      "toast";
+
+  },3500);
+
 }
 
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
 renderProducts();
+
 updateCart();
 
 </script>
