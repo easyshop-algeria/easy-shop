@@ -2,579 +2,120 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Easy Shop Algeria | إيزي شوب الجزائر</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Easy Shop Algeria 🇩🇿</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-
-body{
-  font-family:Arial,Tahoma,sans-serif;
-  background:#f5f7fa;
-  color:#172033;
-}
-
+body{font-family:Arial,Tahoma,sans-serif;background:#f5f7fa;color:#172033}
 button{font-family:inherit;cursor:pointer;border:0}
 input,textarea,select{font-family:inherit}
 
-.topbar{
-  background:#087f5b;
-  color:white;
-  text-align:center;
-  padding:9px;
-  font-size:14px;
-}
+.topbar{background:#087f5b;color:white;text-align:center;padding:9px;font-size:14px}
+header{background:white;position:sticky;top:0;z-index:20;box-shadow:0 2px 10px #00000014}
+.header-inner{max-width:1200px;margin:auto;padding:16px 20px;display:flex;align-items:center;gap:18px}
+.logo{color:#087f5b;font-size:25px;font-weight:bold;white-space:nowrap}
+.search{flex:1;display:flex;background:#f1f4f6;border-radius:12px;overflow:hidden;border:1px solid #e0e5e8}
+.search input{width:100%;border:0;outline:0;background:transparent;padding:13px;font-size:15px}
+.search button{background:#087f5b;color:white;padding:0 18px}
+.cart-btn{position:relative;background:white;border:1px solid #ddd;border-radius:12px;padding:12px 16px;font-size:18px}
+.cart-count{position:absolute;top:-7px;left:-7px;background:#e03131;color:white;width:22px;height:22px;border-radius:50%;font-size:12px;display:flex;align-items:center;justify-content:center}
 
-header{
-  background:white;
-  position:sticky;
-  top:0;
-  z-index:20;
-  box-shadow:0 2px 10px rgba(0,0,0,.08);
-}
-
-.header-inner{
-  max-width:1200px;
-  margin:auto;
-  padding:16px 20px;
-  display:flex;
-  align-items:center;
-  gap:18px;
-}
-
-.logo{
-  color:#087f5b;
-  font-size:25px;
-  font-weight:bold;
-  white-space:nowrap;
-}
-
-.search{
-  flex:1;
-  display:flex;
-  background:#f1f4f6;
-  border-radius:12px;
-  overflow:hidden;
-  border:1px solid #e0e5e8;
-}
-
-.search input{
-  width:100%;
-  border:0;
-  outline:0;
-  background:transparent;
-  padding:13px;
-  font-size:15px;
-}
-
-.search button{
-  background:#087f5b;
-  color:white;
-  padding:0 18px;
-}
-
-.cart-btn{
-  position:relative;
-  background:#fff;
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:12px 16px;
-  font-size:18px;
-}
-
-.cart-count{
-  position:absolute;
-  top:-7px;
-  left:-7px;
-  background:#e03131;
-  color:white;
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  font-size:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:20px;
-}
-
-.hero{
-  background:linear-gradient(135deg,#08b779,#05a66d);
-  color:white;
-  border-radius:20px;
-  padding:40px;
-  min-height:230px;
-  display:flex;
-  align-items:center;
-  margin-bottom:25px;
-}
-
+.container{max-width:1200px;margin:auto;padding:20px}
+.hero{background:linear-gradient(135deg,#08b779,#05a66d);color:white;border-radius:20px;padding:40px;min-height:230px;display:flex;align-items:center;margin-bottom:25px}
 .hero h1{font-size:36px;margin-bottom:12px}
-.hero p{font-size:18px;opacity:.95}
+.hero p{font-size:18px}
+.hero button{background:white;color:#087f5b;padding:13px 25px;border-radius:10px;font-weight:bold;margin-top:20px}
 
-.hero button{
-  background:white;
-  color:#087f5b;
-  padding:13px 25px;
-  border-radius:10px;
-  font-weight:bold;
-  margin-top:20px;
-}
-
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:25px 0 15px;
-}
-
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:25px 0 15px}
 .section-title h2{font-size:24px}
+.categories{display:flex;gap:12px;overflow:auto;padding-bottom:8px}
+.category{flex:0 0 auto;background:white;border:1px solid #e2e7ea;border-radius:12px;padding:12px 20px;font-weight:bold}
+.category.active,.category:hover{background:#087f5b;color:white}
 
-.categories{
-  display:flex;
-  gap:12px;
-  overflow:auto;
-  padding-bottom:8px;
-}
-
-.category{
-  flex:0 0 auto;
-  background:white;
-  border:1px solid #e2e7ea;
-  border-radius:12px;
-  padding:12px 20px;
-  font-weight:bold;
-}
-
-.category:hover,.category.active{
-  background:#087f5b;
-  color:white;
-}
-
-.products{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-
-.product{
-  background:white;
-  border-radius:16px;
-  overflow:hidden;
-  border:1px solid #e5e9ec;
-  transition:.2s;
-}
-
-.product:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-.product-img{
-  height:190px;
-  background:#e9eef2;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:55px;
-}
-
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.product{background:white;border-radius:16px;overflow:hidden;border:1px solid #e5e9ec}
+.product-img{height:190px;background:#e9eef2;display:flex;align-items:center;justify-content:center;font-size:65px}
 .product-info{padding:15px}
+.product-name{font-size:17px;font-weight:bold;min-height:42px}
+.price{color:#087f5b;font-size:20px;font-weight:bold;margin:10px 0}
+.stock{color:#087f5b;font-size:13px;margin-bottom:10px}
+.add-btn,.checkout,.confirm,.admin-btn{width:100%;background:#087f5b;color:white;padding:12px;border-radius:9px;font-weight:bold}
+.empty{text-align:center;padding:35px;color:#777;background:white;border-radius:15px}
 
-.product-name{
-  font-size:17px;
-  font-weight:bold;
-  min-height:42px;
-}
+footer{margin-top:45px;background:#101c32;color:white;padding:25px;text-align:center}
+.admin-link{margin-top:18px;background:#1c2c46;color:white;padding:10px 18px;border-radius:9px}
 
-.price{
-  color:#087f5b;
-  font-size:20px;
-  font-weight:bold;
-  margin:10px 0;
-}
-
-.stock{
-  color:#087f5b;
-  font-size:13px;
-  margin-bottom:10px;
-}
-
-.add-btn{
-  width:100%;
-  background:#087f5b;
-  color:white;
-  padding:12px;
-  border-radius:9px;
-  font-weight:bold;
-}
-
-footer{
-  margin-top:45px;
-  background:#101c32;
-  color:white;
-  padding:25px;
-  text-align:center;
-}
-
-.overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  z-index:50;
-}
-
+.overlay{display:none;position:fixed;inset:0;background:#0007;z-index:50}
 .overlay.open{display:block}
 
-.drawer{
-  position:fixed;
-  top:0;
-  left:-430px;
-  width:400px;
-  max-width:92%;
-  height:100%;
-  background:white;
-  z-index:60;
-  transition:.25s;
-  padding:22px;
-  overflow:auto;
-}
-
+.drawer{position:fixed;top:0;left:-430px;width:400px;max-width:92%;height:100%;background:white;z-index:60;transition:.25s;padding:22px;overflow:auto}
 .drawer.open{left:0}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.close{background:#eee;border-radius:8px;padding:8px 12px}
+.cart-item{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #eee}
+.qty{display:flex;align-items:center;gap:7px}
+.qty button{width:27px;height:27px;border-radius:6px;background:#e9eeee}
+.total{font-size:21px;font-weight:bold;margin:20px 0}
 
-.drawer-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
-}
-
-.close{
-  background:#eee;
-  border-radius:8px;
-  padding:8px 12px;
-}
-
-.cart-item{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:12px 0;
-  border-bottom:1px solid #eee;
-}
-
-.qty{
-  display:flex;
-  align-items:center;
-  gap:7px;
-}
-
-.qty button{
-  width:27px;
-  height:27px;
-  border-radius:6px;
-  background:#e9eeee;
-}
-
-.total{
-  font-size:21px;
-  font-weight:bold;
-  margin:20px 0;
-}
-
-.checkout{
-  width:100%;
-  background:#087f5b;
-  color:white;
-  padding:14px;
-  border-radius:10px;
-  font-weight:bold;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.5);
-  z-index:100;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  overflow:auto;
-}
-
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:100;align-items:center;justify-content:center;padding:20px;overflow:auto}
 .modal.open{display:flex}
-
-.modal-box{
-  background:white;
-  width:560px;
-  max-width:100%;
-  border-radius:18px;
-  padding:25px;
-  max-height:95vh;
-  overflow:auto;
-}
-
-.modal-box h2{margin-bottom:18px}
-
+.modal-box{background:white;width:650px;max-width:100%;border-radius:18px;padding:25px;max-height:95vh;overflow:auto}
 .form-group{margin-bottom:13px}
+.form-group label{display:block;margin-bottom:6px;font-weight:bold}
+.form-group input,.form-group textarea,.form-group select{width:100%;border:1px solid #d9dfe3;border-radius:9px;padding:12px;outline:0;font-size:15px}
+.form-actions{display:flex;gap:10px;margin-top:18px}
+.cancel{flex:1;background:#eee;padding:13px;border-radius:9px}
+.confirm{flex:2}
+.summary{background:#f2fbf7;border:1px solid #bce9d9;border-radius:14px;padding:18px;margin:18px 0}
+.summary-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #dceee7}
+.summary-total{color:#087f5b;font-size:23px;font-weight:bold}
 
-.form-group label{
-  display:block;
-  margin-bottom:6px;
-  font-weight:bold;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select{
-  width:100%;
-  border:1px solid #d9dfe3;
-  border-radius:9px;
-  padding:12px;
-  outline:0;
-  font-size:15px;
-}
-
-.summary{
-  background:#f2fbf7;
-  border:1px solid #bce9d9;
-  border-radius:14px;
-  padding:18px;
-  margin-top:18px;
-  margin-bottom:18px;
-}
-
-.summary-row{
-  display:flex;
-  justify-content:space-between;
-  padding:8px 0;
-  border-bottom:1px solid #dceee7;
-}
-
-.summary-row:last-child{border-bottom:0}
-
-.summary-total{
-  color:#087f5b;
-  font-size:23px;
-  font-weight:bold;
-}
-
-.form-actions{
-  display:flex;
-  gap:10px;
-  margin-top:18px;
-}
-
-.cancel{
-  flex:1;
-  background:#eee;
-  padding:13px;
-  border-radius:9px;
-}
-
-.confirm{
-  flex:2;
-  background:#087f5b;
-  color:white;
-  padding:13px;
-  border-radius:9px;
-  font-weight:bold;
-}
-
-.confirm:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-}
-
-.toast{
-  position:fixed;
-  bottom:25px;
-  right:25px;
-  left:25px;
-  max-width:500px;
-  margin:auto;
-  background:#172033;
-  color:white;
-  padding:14px 20px;
-  border-radius:10px;
-  z-index:300;
-  display:none;
-  text-align:center;
-}
-
+.toast{position:fixed;bottom:25px;right:25px;left:25px;max-width:550px;margin:auto;background:#172033;color:white;padding:14px 20px;border-radius:10px;z-index:300;display:none;text-align:center}
 .toast.show{display:block}
 .toast.success{background:#087f5b}
 .toast.error{background:#d32f2f}
 
-.delivery-info{
-  background:#f7f9fb;
-  border-radius:10px;
-  padding:10px;
-  margin-top:8px;
-  font-size:13px;
-  color:#555;
-}
+.admin-panel{display:none;background:#f5f7fa;min-height:100vh;padding-bottom:50px}
+.admin-header{background:#101c32;color:white;padding:20px}
+.admin-header-inner{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.admin-header button{background:#d32f2f;color:white;padding:10px 18px;border-radius:8px}
+.orders-container{max-width:1200px;margin:auto;padding:20px}
+.orders-tools{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.orders-tools select,.orders-tools input{padding:12px;border:1px solid #ddd;border-radius:9px;background:white}
+.order-card{background:white;border-radius:15px;margin-bottom:18px;padding:18px;border:1px solid #e2e7ea;box-shadow:0 3px 12px #0000000a}
+.order-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid #eee;padding-bottom:12px;margin-bottom:12px}
+.order-id{font-size:12px;color:#777}
+.status{padding:7px 12px;border-radius:20px;font-size:13px;font-weight:bold;background:#fff3cd}
+.order-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:15px}
+.order-products{background:#f7f9fb;border-radius:10px;padding:12px;margin:12px 0}
+.order-actions{display:flex;gap:8px;flex-wrap:wrap}
+.order-actions select{padding:10px;border:1px solid #ddd;border-radius:8px}
+.order-actions button{background:#087f5b;color:white;padding:10px 15px;border-radius:8px}
+.admin-login{text-align:center}
+.admin-login h2{margin-bottom:20px}
+.logout-btn{background:#d32f2f!important}
 
-/* ================= ADMIN ================= */
-
-.admin-button{
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  z-index:30;
-  background:#172033;
-  color:white;
-  padding:11px 16px;
-  border-radius:10px;
-  box-shadow:0 4px 15px rgba(0,0,0,.2);
-}
-
-.admin-modal .modal-box{
-  width:1100px;
-}
-
-.admin-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:20px;
-  flex-wrap:wrap;
-}
-
-.admin-actions{
-  display:flex;
-  gap:8px;
-}
-
-.admin-actions button{
-  padding:10px 14px;
-  border-radius:8px;
-  background:#087f5b;
-  color:white;
-}
-
-.logout-btn{
-  background:#d32f2f !important;
-}
-
-.orders-table-wrap{
-  overflow-x:auto;
-  border:1px solid #ddd;
-  border-radius:12px;
-}
-
-.orders-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:1000px;
-}
-
-.orders-table th,
-.orders-table td{
-  padding:11px;
-  border-bottom:1px solid #eee;
-  text-align:right;
-  vertical-align:top;
-}
-
-.orders-table th{
-  background:#f1f5f3;
-  color:#172033;
-}
-
-.orders-table tr:hover{
-  background:#fafafa;
-}
-
-.status-select{
-  padding:7px;
-  border-radius:7px;
-  border:1px solid #ddd;
-}
-
-.order-products{
-  white-space:normal;
-  line-height:1.7;
-}
-
-.admin-login{
-  max-width:430px;
-  margin:auto;
-}
-
-.admin-login button{
-  width:100%;
-  background:#087f5b;
-  color:white;
-  padding:13px;
-  border-radius:9px;
-  font-weight:bold;
-}
-
-.admin-error{
-  color:#d32f2f;
-  margin:10px 0;
-  display:none;
-}
-
-.order-count{
-  background:#087f5b;
-  color:white;
-  border-radius:20px;
-  padding:6px 12px;
-  font-size:14px;
-}
-
-@media(max-width:900px){
-  .products{grid-template-columns:repeat(3,1fr)}
-}
-
+@media(max-width:900px){.products{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:650px){
-
-  .header-inner{flex-wrap:wrap}
-
-  .logo{flex:1}
-
-  .search{
-    order:3;
-    flex-basis:100%;
-  }
-
-  .hero{
-    padding:25px;
-  }
-
-  .hero h1{font-size:27px}
-
-  .products{
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-  }
-
-  .product-img{height:150px}
-
-  .drawer{width:360px}
-
-  .admin-button{
-    bottom:15px;
-    left:15px;
-  }
+.header-inner{flex-wrap:wrap}
+.logo{flex:1}
+.search{order:3;flex-basis:100%}
+.hero{padding:25px}
+.hero h1{font-size:27px}
+.products{grid-template-columns:repeat(2,1fr);gap:12px}
+.product-img{height:150px}
+.drawer{width:360px}
+.order-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
+
+<div id="shopPage">
 
 <div class="topbar">
 🚚 توصيل سريع إلى 58 ولاية الجزائر • الدفع عند الاستلام
@@ -608,18 +149,14 @@ footer{
 </div>
 </section>
 
-<div class="section-title">
-<h2>الفئات</h2>
-</div>
+<div class="section-title"><h2>الفئات</h2></div>
 
 <div class="categories">
-
 <button class="category active" onclick="filterCategory('all',this)">الكل</button>
 <button class="category" onclick="filterCategory('home',this)">🏠 أدوات منزلية</button>
 <button class="category" onclick="filterCategory('electronics',this)">⚡ إلكترونيات</button>
 <button class="category" onclick="filterCategory('sports',this)">🏆 رياضة</button>
 <button class="category" onclick="filterCategory('men',this)">👕 رجالية</button>
-
 </div>
 
 <div class="section-title" id="productsSection">
@@ -632,18 +169,11 @@ footer{
 
 <footer>
 <p>Easy Shop Algeria 🇩🇿</p>
-<p style="margin-top:8px;font-size:13px">
-الدفع عند الاستلام • توصيل 58 ولاية • ضمان الاستبدال
-</p>
+<p style="margin-top:8px;font-size:13px">الدفع عند الاستلام • توصيل 58 ولاية • ضمان الاستبدال</p>
+<button class="admin-link" onclick="openAdminLogin()">⚙️ إدارة الطلبات</button>
 </footer>
 
-
-<!-- زر الإدارة -->
-
-<button class="admin-button" onclick="openAdmin()">
-⚙️ إدارة الطلبات
-</button>
-
+</div>
 
 <!-- CART -->
 
@@ -653,7 +183,6 @@ footer{
 
 <div class="drawer-head">
 <h2>🛒 سلة المشتريات</h2>
-
 <button class="close" onclick="closeCart()">✕</button>
 </div>
 
@@ -661,16 +190,12 @@ footer{
 
 <div class="total">
 الإجمالي:
-<span id="cartTotal">0</span>
-دج
+<span id="cartTotal">0</span> دج
 </div>
 
-<button class="checkout" onclick="openCheckout()">
-إتمام الطلب
-</button>
+<button class="checkout" onclick="openCheckout()">إتمام الطلب</button>
 
 </aside>
-
 
 <!-- CHECKOUT -->
 
@@ -682,7 +207,7 @@ footer{
 
 <div class="form-group">
 <label>الاسم واللقب</label>
-<input id="customerName" type="text" placeholder="اكتب اسمك الكامل">
+<input id="customerName" placeholder="اكتب اسمك الكامل">
 </div>
 
 <div class="form-group">
@@ -692,11 +217,8 @@ footer{
 
 <div class="form-group">
 <label>الولاية</label>
-
 <select id="wilaya">
-
 <option value="">اختر الولاية</option>
-
 <option value="01">01 - أدرار</option>
 <option value="02">02 - الشلف</option>
 <option value="03">03 - الأغواط</option>
@@ -755,13 +277,12 @@ footer{
 <option value="56">56 - جانت</option>
 <option value="57">57 - المغير</option>
 <option value="58">58 - المنيعة</option>
-
 </select>
 </div>
 
 <div class="form-group">
 <label>البلدية</label>
-<input id="municipality" type="text" placeholder="اكتب اسم البلدية">
+<input id="municipality" placeholder="اكتب اسم البلدية">
 </div>
 
 <div class="form-group">
@@ -771,145 +292,111 @@ footer{
 
 <div class="form-group">
 <label>طريقة التوصيل</label>
-
 <select id="deliveryMethod">
 <option value="التوصيل إلى المنزل">🏠 التوصيل إلى المنزل</option>
 <option value="التوصيل إلى المكتب">🏢 التوصيل إلى المكتب</option>
 </select>
-
-</div>
-
-<div class="delivery-info" id="deliveryInfo">
-اختر الولاية لمعرفة سعر التوصيل.
 </div>
 
 <div class="summary">
-
 <div class="summary-row">
-<span>مجموع المنتجات:</span>
+<span>مجموع المنتجات</span>
 <strong><span id="summaryProducts">0</span> دج</strong>
 </div>
-
 <div class="summary-row">
-<span>سعر التوصيل:</span>
+<span>سعر التوصيل</span>
 <strong><span id="summaryDelivery">0</span> دج</strong>
 </div>
-
 <div class="summary-row summary-total">
-<span>الإجمالي النهائي:</span>
+<span>الإجمالي النهائي</span>
 <strong><span id="summaryTotal">0</span> دج</strong>
 </div>
-
 </div>
 
 <div class="form-actions">
-
 <button class="cancel" onclick="closeCheckout()">إلغاء</button>
-
-<button class="confirm" id="confirmButton" onclick="confirmOrder()">
-تأكيد الطلب
-</button>
-
+<button class="confirm" id="confirmButton" onclick="confirmOrder()">تأكيد الطلب</button>
 </div>
 
 </div>
 </div>
 
+<!-- ADMIN LOGIN -->
 
-<!-- ADMIN -->
+<div class="modal" id="adminLoginModal">
 
-<div class="modal admin-modal" id="adminModal">
-
-<div class="modal-box">
-
-<div id="adminLoginBox" class="admin-login">
+<div class="modal-box admin-login">
 
 <h2>🔐 دخول الإدارة</h2>
 
 <div class="form-group">
 <label>البريد الإلكتروني</label>
-<input id="adminEmail" type="email" placeholder="البريد الإلكتروني">
+<input id="adminEmail" type="email" value="easyshop.algeria23@gmail.com">
 </div>
 
 <div class="form-group">
 <label>كلمة المرور</label>
-<input id="adminPassword" type="password" placeholder="كلمة المرور">
+<input id="adminPassword" type="password" placeholder="كلمة مرور الإدارة">
 </div>
 
-<div class="admin-error" id="adminLoginError"></div>
-
-<button onclick="adminLogin()">
-دخول
-</button>
-
-<button class="cancel" style="width:100%;margin-top:10px" onclick="closeAdmin()">
-إغلاق
-</button>
-
+<div class="form-actions">
+<button class="cancel" onclick="closeAdminLogin()">إلغاء</button>
+<button class="confirm" onclick="adminLogin()">دخول</button>
 </div>
 
+</div>
+</div>
 
-<div id="adminPanel" style="display:none">
+<!-- ADMIN -->
+
+<section class="admin-panel" id="adminPanel">
 
 <div class="admin-header">
 
+<div class="admin-header-inner">
+
 <div>
-<h2>📋 إدارة الطلبات</h2>
-<span class="order-count" id="orderCount">0 طلب</span>
+<h2>⚙️ إدارة الطلبات</h2>
+<div style="font-size:13px;margin-top:5px">Easy Shop Algeria</div>
 </div>
 
-<div class="admin-actions">
-
-<button onclick="loadOrders()">
-🔄 تحديث
-</button>
-
-<button class="logout-btn" onclick="adminLogout()">
-خروج
-</button>
-
-</div>
-
-</div>
-
-<div class="orders-table-wrap">
-
-<table class="orders-table">
-
-<thead>
-<tr>
-<th>التاريخ</th>
-<th>العميل</th>
-<th>الهاتف</th>
-<th>الموقع</th>
-<th>المنتجات</th>
-<th>المنتجات</th>
-<th>التوصيل</th>
-<th>الإجمالي</th>
-<th>الحالة</th>
-</tr>
-</thead>
-
-<tbody id="ordersBody"></tbody>
-
-</table>
-
-</div>
-
-</div>
+<button class="logout-btn" onclick="adminLogout()">تسجيل الخروج</button>
 
 </div>
 </div>
 
+<div class="orders-container">
+
+<div class="orders-tools">
+
+<input id="orderSearch" placeholder="🔎 بحث بالاسم أو الهاتف">
+
+<select id="statusFilter" onchange="renderOrders()">
+<option value="all">كل الطلبات</option>
+<option value="new">جديدة</option>
+<option value="pending">قيد المعالجة</option>
+<option value="shipped">تم الشحن</option>
+<option value="completed">مكتملة</option>
+<option value="cancelled">ملغاة</option>
+</select>
+
+<button class="admin-btn" style="width:auto" onclick="loadOrders()">🔄 تحديث</button>
+
+</div>
+
+<div id="ordersList"></div>
+
+</div>
+
+</section>
 
 <div class="toast" id="toast"></div>
 
-
 <script>
 
-/* =====================================================
+/* =========================
    SUPABASE
-===================================================== */
+========================= */
 
 const SUPABASE_URL =
 "https://obbdfpbejxmbyabriuwu.supabase.co";
@@ -924,161 +411,94 @@ SUPABASE_KEY
 );
 
 
-/* =====================================================
+/* =========================
    PRODUCTS
-===================================================== */
+========================= */
 
 const products=[
-
-{
-id:1,
-name:"حامل جوال متعدد الاستخدام",
-price:1800,
-category:"electronics",
-icon:"📱"
-},
-
-{
-id:2,
-name:"كرة القدم المصغرة للأطفال",
-price:3200,
-category:"sports",
-icon:"⚽"
-},
-
-{
-id:3,
-name:"مظلة شمسية للسيارات",
-price:2500,
-category:"home",
-icon:"🚗"
-},
-
-{
-id:4,
-name:"منظم منزلي عملي",
-price:2200,
-category:"home",
-icon:"🏠"
-},
-
-{
-id:5,
-name:"حقيبة رياضية",
-price:3500,
-category:"sports",
-icon:"🎒"
-},
-
-{
-id:6,
-name:"تيشيرت رجالي",
-price:2800,
-category:"men",
-icon:"👕"
-}
-
+{id:1,name:"حامل جوال متعدد الاستخدام",price:1800,category:"electronics",icon:"📱"},
+{id:2,name:"كرة القدم المصغرة للأطفال",price:3200,category:"sports",icon:"⚽"},
+{id:3,name:"مظلة شمسية للسيارات",price:2500,category:"home",icon:"🚗"},
+{id:4,name:"منظم منزلي عملي",price:2200,category:"home",icon:"🏠"},
+{id:5,name:"حقيبة رياضية",price:3500,category:"sports",icon:"🎒"},
+{id:6,name:"تيشيرت رجالي",price:2800,category:"men",icon:"👕"}
 ];
 
 let cart=[];
+let allOrders=[];
 
 
-/* =====================================================
+/* =========================
    SHIPPING
-===================================================== */
+========================= */
 
-const shippingPrices={
-capital:400,
-northInterior:600,
-south:800,
-deepSouth:1200
-};
+const deepSouth=["11","33","37","50","53","54","56"];
 
-const deepSouthWilayas=[
-"11","33","37","50","53","54","56"
-];
-
-const southWilayas=[
-"01","08","30","32","39","45","47","49","51","52","55","57","58"
-];
+const south=["01","08","30","32","39","45","47","49","51","52","55","57","58"];
 
 function getShippingPrice(code){
 
-if(code==="16")
-return shippingPrices.capital;
+if(code==="16") return 400;
 
-if(deepSouthWilayas.includes(code))
-return shippingPrices.deepSouth;
+if(deepSouth.includes(code)) return 1200;
 
-if(southWilayas.includes(code))
-return shippingPrices.south;
+if(south.includes(code)) return 800;
 
-return shippingPrices.northInterior;
-}
+return 600;
 
-function getShippingLabel(code){
-
-if(code==="16")
-return "الجزائر العاصمة";
-
-if(deepSouthWilayas.includes(code))
-return "الصحراء القصوى";
-
-if(southWilayas.includes(code))
-return "الولايات الصحراوية";
-
-return "الولايات الشمالية والداخلية";
 }
 
 
-/* =====================================================
-   FORMAT
-===================================================== */
+/* =========================
+   HELPERS
+========================= */
 
-function formatPrice(price){
-return Number(price||0).toLocaleString("fr-DZ");
+function formatPrice(n){
+return Number(n||0).toLocaleString("fr-DZ");
+}
+
+function showToast(message,type="success"){
+
+const t=document.getElementById("toast");
+
+t.textContent=message;
+t.className="toast show "+type;
+
+setTimeout(()=>{
+t.className="toast";
+},4000);
+
 }
 
 
-/* =====================================================
+/* =========================
    PRODUCTS
-===================================================== */
+========================= */
 
 function renderProducts(list=products){
 
 const box=document.getElementById("products");
 
 if(!list.length){
-
 box.innerHTML='<div class="empty">لم يتم العثور على منتجات.</div>';
 return;
-
 }
 
-box.innerHTML=list.map(product=>`
+box.innerHTML=list.map(p=>`
 
 <article class="product">
 
-<div class="product-img">
-${product.icon}
-</div>
+<div class="product-img">${p.icon}</div>
 
 <div class="product-info">
 
-<div class="product-name">
-${product.name}
-</div>
+<div class="product-name">${p.name}</div>
 
-<div class="price">
-${formatPrice(product.price)} دج
-</div>
+<div class="price">${formatPrice(p.price)} دج</div>
 
-<div class="stock">
-✓ متوفر
-</div>
+<div class="stock">✓ متوفر</div>
 
-<button class="add-btn"
-onclick="addToCart(${product.id})">
+<button class="add-btn" onclick="addToCart(${p.id})">
 أضف إلى السلة
 </button>
 
@@ -1090,9 +510,9 @@ onclick="addToCart(${product.id})">
 }
 
 
-/* =====================================================
+/* =========================
    CART
-===================================================== */
+========================= */
 
 function addToCart(id){
 
@@ -1100,24 +520,20 @@ const product=products.find(p=>p.id===id);
 
 if(!product)return;
 
-const existing=cart.find(item=>item.id===id);
+const existing=cart.find(p=>p.id===id);
 
-if(existing)
-existing.quantity++;
-else
-cart.push({...product,quantity:1});
+if(existing) existing.quantity++;
+else cart.push({...product,quantity:1});
 
 updateCart();
 
-showToast("تمت إضافة المنتج إلى السلة ✓","success");
-}
+showToast("تمت إضافة المنتج إلى السلة ✓");
 
+}
 
 function updateCart(){
 
-const count=cart.reduce(
-(sum,item)=>sum+item.quantity,0
-);
+const count=cart.reduce((s,p)=>s+p.quantity,0);
 
 document.getElementById("cartCount").textContent=count;
 
@@ -1130,6 +546,7 @@ box.innerHTML='<div class="empty">السلة فارغة</div>';
 document.getElementById("cartTotal").textContent="0";
 
 return;
+
 }
 
 box.innerHTML=cart.map(item=>`
@@ -1138,9 +555,7 @@ box.innerHTML=cart.map(item=>`
 
 <div>
 <strong>${item.name}</strong>
-<div style="margin-top:5px">
-${formatPrice(item.price)} دج
-</div>
+<div>${formatPrice(item.price)} دج</div>
 </div>
 
 <div class="qty">
@@ -1157,13 +572,13 @@ ${formatPrice(item.price)} دج
 
 `).join("");
 
-const total=getProductsTotal();
+const total=cart.reduce(
+(s,p)=>s+p.price*p.quantity,0
+);
 
-document.getElementById("cartTotal").textContent=
-formatPrice(total);
+document.getElementById("cartTotal").textContent=formatPrice(total);
 
 }
-
 
 function changeQuantity(id,change){
 
@@ -1178,20 +593,8 @@ cart=cart.filter(p=>p.id!==id);
 
 updateCart();
 updateCheckoutSummary();
-}
-
-
-function getProductsTotal(){
-
-return cart.reduce(
-(sum,item)=>
-sum+
-Number(item.price)*Number(item.quantity),
-0
-);
 
 }
-
 
 function openCart(){
 
@@ -1199,7 +602,6 @@ document.getElementById("cartDrawer").classList.add("open");
 document.getElementById("overlay").classList.add("open");
 
 }
-
 
 function closeCart(){
 
@@ -1209,17 +611,23 @@ document.getElementById("overlay").classList.remove("open");
 }
 
 
-/* =====================================================
+/* =========================
    CHECKOUT
-===================================================== */
+========================= */
+
+function getProductsTotal(){
+
+return cart.reduce(
+(s,p)=>s+p.price*p.quantity,0
+);
+
+}
 
 function openCheckout(){
 
 if(!cart.length){
-
 showToast("السلة فارغة","error");
 return;
-
 }
 
 updateCheckoutSummary();
@@ -1229,114 +637,71 @@ document.getElementById("checkoutModal").classList.add("open");
 }
 
 function closeCheckout(){
-
 document.getElementById("checkoutModal").classList.remove("open");
-
 }
-
 
 function updateCheckoutSummary(){
 
-const productsTotal=getProductsTotal();
+const productTotal=getProductsTotal();
 
 const code=document.getElementById("wilaya").value;
 
 const delivery=code?getShippingPrice(code):0;
 
-const total=productsTotal+delivery;
-
 document.getElementById("summaryProducts").textContent=
-formatPrice(productsTotal);
+formatPrice(productTotal);
 
 document.getElementById("summaryDelivery").textContent=
 formatPrice(delivery);
 
 document.getElementById("summaryTotal").textContent=
-formatPrice(total);
-
-const info=document.getElementById("deliveryInfo");
-
-if(!code){
-
-info.textContent="اختر الولاية لمعرفة سعر التوصيل.";
-return;
+formatPrice(productTotal+delivery);
 
 }
-
-info.textContent=
-"سعر التوصيل: "+
-formatPrice(delivery)+
-" دج • "+
-getShippingLabel(code);
-
-}
-
 
 document.getElementById("wilaya")
 .addEventListener("change",updateCheckoutSummary);
 
 
-/* =====================================================
-   CONFIRM ORDER
-===================================================== */
+/* =========================
+   SAVE ORDER
+========================= */
 
 async function confirmOrder(){
 
-const button=document.getElementById("confirmButton");
-
 if(!cart.length){
-
 showToast("السلة فارغة","error");
 return;
-
 }
 
+const button=document.getElementById("confirmButton");
+
 const name=document.getElementById("customerName").value.trim();
-
 const phone=document.getElementById("customerPhone").value.trim();
-
-const select=document.getElementById("wilaya");
-
-const code=select.value;
-
-const wilayaName=
-select.options[select.selectedIndex]?.text||"";
-
-const municipality=
-document.getElementById("municipality").value.trim();
-
-const address=
-document.getElementById("customerAddress").value.trim();
-
-const deliveryMethod=
-document.getElementById("deliveryMethod").value;
+const wilaya=document.getElementById("wilaya");
+const code=wilaya.value;
+const wilayaName=wilaya.options[wilaya.selectedIndex]?.text||"";
+const municipality=document.getElementById("municipality").value.trim();
+const address=document.getElementById("customerAddress").value.trim();
+const deliveryMethod=document.getElementById("deliveryMethod").value;
 
 if(!name||!phone||!code||!municipality||!address){
 
-showToast(
-"يرجى ملء جميع معلومات الطلب",
-"error"
-);
-
+showToast("يرجى ملء جميع معلومات الطلب","error");
 return;
 
 }
 
 const productsTotal=getProductsTotal();
-
 const deliveryPrice=getShippingPrice(code);
-
-const finalTotal=productsTotal+deliveryPrice;
+const total=productsTotal+deliveryPrice;
 
 const productsData=cart.map(item=>({
-
 id:item.id,
 name:item.name,
 price:Number(item.price),
 quantity:Number(item.quantity),
-subtotal:
-Number(item.price)*Number(item.quantity)
-
+subtotal:Number(item.price)*Number(item.quantity)
 }));
 
 button.disabled=true;
@@ -1354,7 +719,7 @@ status:"new",
 
 delivery_price:deliveryPrice,
 products_total:productsTotal,
-total_price:finalTotal,
+total_price:total,
 
 products:productsData,
 
@@ -1362,13 +727,14 @@ delivery_method:deliveryMethod,
 
 subtotal:productsTotal,
 shipping_cost:deliveryPrice,
-total:finalTotal,
+total:total,
 
 address:address,
 notes:"",
+
 delivery_type:deliveryMethod,
 
-wilaya_code:code,
+wilaya_code:Number(code),
 wilaya_name:wilayaName,
 municipality:municipality
 
@@ -1387,14 +753,11 @@ document.getElementById("customerPhone").value="";
 document.getElementById("wilaya").value="";
 document.getElementById("municipality").value="";
 document.getElementById("customerAddress").value="";
-document.getElementById("deliveryMethod").value=
-"التوصيل إلى المنزل";
 
 updateCheckoutSummary();
 
 showToast(
-"تم تسجيل طلبك بنجاح ✓ شكراً لثقتك بـ Easy Shop Algeria",
-"success"
+"تم تسجيل طلبك بنجاح ✓ شكراً لثقتك بـ Easy Shop Algeria"
 );
 
 }catch(error){
@@ -1402,7 +765,7 @@ showToast(
 console.error(error);
 
 showToast(
-"حدث خطأ أثناء تسجيل الطلب. حاول مرة أخرى.",
+"حدث خطأ أثناء تسجيل الطلب: "+error.message,
 "error"
 );
 
@@ -1416,42 +779,22 @@ button.textContent="تأكيد الطلب";
 }
 
 
-/* =====================================================
+/* =========================
    SEARCH / FILTER
-===================================================== */
-
-function filterCategory(category,button){
-
-document.querySelectorAll(".category")
-.forEach(btn=>btn.classList.remove("active"));
-
-button.classList.add("active");
-
-renderProducts(
-category==="all"
-?products
-:products.filter(p=>p.category===category)
-);
-
-}
-
+========================= */
 
 function searchProducts(){
 
-const query=document.getElementById("searchInput")
-.value.trim().toLowerCase();
+const q=document.getElementById("searchInput").value
+.trim().toLowerCase();
 
-if(!query){
-
-renderProducts(products);
+if(!q){
+renderProducts();
 return;
-
 }
 
 renderProducts(
-products.filter(product=>
-product.name.toLowerCase().includes(query)
-)
+products.filter(p=>p.name.toLowerCase().includes(q))
 );
 
 }
@@ -1459,6 +802,24 @@ product.name.toLowerCase().includes(query)
 document.getElementById("searchInput")
 .addEventListener("input",searchProducts);
 
+
+function filterCategory(category,button){
+
+document.querySelectorAll(".category")
+.forEach(b=>b.classList.remove("active"));
+
+button.classList.add("active");
+
+if(category==="all"){
+renderProducts();
+return;
+}
+
+renderProducts(
+products.filter(p=>p.category===category)
+);
+
+}
 
 function scrollToProducts(){
 
@@ -1468,263 +829,327 @@ document.getElementById("productsSection")
 }
 
 
-/* =====================================================
+/* =========================
    ADMIN LOGIN
-===================================================== */
+========================= */
 
-async function openAdmin(){
+function openAdminLogin(){
 
-document.getElementById("adminModal").classList.add("open");
-
-const {
-data:{session}
-}=await supabaseClient.auth.getSession();
-
-if(session){
-
-showAdminPanel();
-loadOrders();
-
-}else{
-
-showAdminLogin();
+document.getElementById("adminLoginModal")
+.classList.add("open");
 
 }
 
-}
+function closeAdminLogin(){
 
-
-function closeAdmin(){
-
-document.getElementById("adminModal").classList.remove("open");
+document.getElementById("adminLoginModal")
+.classList.remove("open");
 
 }
-
-
-function showAdminLogin(){
-
-document.getElementById("adminLoginBox").style.display="block";
-document.getElementById("adminPanel").style.display="none";
-
-}
-
-
-function showAdminPanel(){
-
-document.getElementById("adminLoginBox").style.display="none";
-document.getElementById("adminPanel").style.display="block";
-
-}
-
 
 async function adminLogin(){
 
-const email=
-document.getElementById("adminEmail").value.trim();
-
-const password=
-document.getElementById("adminPassword").value;
-
-const errorBox=
-document.getElementById("adminLoginError");
-
-errorBox.style.display="none";
+const email=document.getElementById("adminEmail").value.trim();
+const password=document.getElementById("adminPassword").value;
 
 if(!email||!password){
 
-errorBox.textContent="أدخل البريد الإلكتروني وكلمة المرور.";
-errorBox.style.display="block";
+showToast("أدخل البريد وكلمة المرور","error");
 return;
 
 }
 
-const {error}=await supabaseClient.auth.signInWithPassword({
+try{
+
+const {data,error}=await supabaseClient.auth
+.signInWithPassword({
 email:email,
 password:password
 });
 
-if(error){
+if(error)throw error;
+
+if(!data.user){
+
+throw new Error("لم يتم تسجيل الدخول");
+
+}
+
+closeAdminLogin();
+
+showAdmin();
+
+await loadOrders();
+
+showToast("تم الدخول إلى الإدارة ✓");
+
+}catch(error){
 
 console.error(error);
 
-errorBox.textContent=
-"فشل تسجيل الدخول. تأكد من البريد وكلمة المرور.";
-
-errorBox.style.display="block";
-
-return;
+showToast(
+"فشل تسجيل الدخول: "+error.message,
+"error"
+);
 
 }
 
-showAdminPanel();
-loadOrders();
+}
+
+
+/* =========================
+   SHOW ADMIN
+========================= */
+
+function showAdmin(){
+
+document.getElementById("shopPage").style.display="none";
+
+document.getElementById("adminPanel").style.display="block";
+
+window.scrollTo(0,0);
 
 }
 
+function hideAdmin(){
+
+document.getElementById("adminPanel").style.display="none";
+
+document.getElementById("shopPage").style.display="block";
+
+}
 
 async function adminLogout(){
 
 await supabaseClient.auth.signOut();
 
-showAdminLogin();
+hideAdmin();
 
-document.getElementById("adminEmail").value="";
-document.getElementById("adminPassword").value="";
+showToast("تم تسجيل الخروج");
 
 }
 
 
-/* =====================================================
+/* =========================
    LOAD ORDERS
-===================================================== */
+========================= */
 
 async function loadOrders(){
 
-const body=document.getElementById("ordersBody");
+const list=document.getElementById("ordersList");
 
-body.innerHTML=`
-<tr>
-<td colspan="9" style="text-align:center;padding:30px">
-جاري تحميل الطلبات...
-</td>
-</tr>
-`;
+list.innerHTML=
+'<div class="empty">جاري تحميل الطلبات...</div>';
+
+try{
 
 const {data,error}=await supabaseClient
 .from("orders")
 .select("*")
 .order("created_at",{ascending:false});
 
-if(error){
+if(error)throw error;
+
+allOrders=data||[];
+
+renderOrders();
+
+}catch(error){
 
 console.error(error);
 
-body.innerHTML=`
-<tr>
-<td colspan="9" style="text-align:center;color:#d32f2f;padding:30px">
-تعذر تحميل الطلبات.
-<br>
-تأكد من صلاحيات RLS.
-</td>
-</tr>
+list.innerHTML=`
+<div class="empty">
+❌ لم نستطع تحميل الطلبات.
+<br><br>
+${error.message}
+</div>
 `;
+
+}
+
+}
+
+
+/* =========================
+   RENDER ORDERS
+========================= */
+
+function statusText(status){
+
+const names={
+new:"جديد",
+pending:"قيد المعالجة",
+shipped:"تم الشحن",
+completed:"مكتمل",
+cancelled:"ملغى"
+};
+
+return names[status]||status;
+
+}
+
+function renderOrders(){
+
+const list=document.getElementById("ordersList");
+
+const search=
+(document.getElementById("orderSearch")?.value||"")
+.toLowerCase().trim();
+
+const filter=
+document.getElementById("statusFilter")?.value||"all";
+
+let orders=allOrders.filter(order=>{
+
+const matchesStatus=
+filter==="all"||order.status===filter;
+
+const text=(
+(order.customer_name||"")+" "+
+(order.phone||"")+" "+
+(order.wilaya_name||"")+" "+
+(order.municipality||"")
+).toLowerCase();
+
+return matchesStatus&&(!search||text.includes(search));
+
+});
+
+if(!orders.length){
+
+list.innerHTML=
+'<div class="empty">لا توجد طلبات.</div>';
 
 return;
 
 }
 
-document.getElementById("orderCount").textContent=
-`${data.length} طلب`;
+list.innerHTML=orders.map(order=>{
 
-if(!data.length){
+let productsHtml="";
 
-body.innerHTML=`
-<tr>
-<td colspan="9" style="text-align:center;padding:30px">
-لا توجد طلبات.
-</td>
-</tr>
-`;
+try{
 
-return;
+const items=Array.isArray(order.products)
+?order.products
+:[];
 
-}
+productsHtml=items.map(item=>`
+<div style="padding:5px 0">
+${item.name} × ${item.quantity}
+— ${formatPrice(item.subtotal||item.price*item.quantity)} دج
+</div>
+`).join("");
 
-body.innerHTML=data.map(order=>{
+}catch(e){}
 
 const date=order.created_at
 ?new Date(order.created_at).toLocaleString("ar-DZ")
 :"";
 
-let productsText="";
+return `
 
-if(Array.isArray(order.products)){
+<div class="order-card">
 
-productsText=order.products.map(item=>
-`${item.name} × ${item.quantity}`
-).join("<br>");
+<div class="order-head">
 
-}else{
+<div>
+<strong>👤 ${order.customer_name||"-"}</strong>
+<div class="order-id">
+رقم الطلب: ${order.id||"-"}
+</div>
+<div class="order-id">${date}</div>
+</div>
 
-productsText="—";
+<div class="status">
+${statusText(order.status)}
+</div>
 
-}
+</div>
 
-return`
+<div class="order-grid">
 
-<tr>
-
-<td>${date}</td>
-
-<td>
-<strong>${escapeHtml(order.customer_name||"")}</strong>
-</td>
-
-<td>
-${escapeHtml(order.phone||"")}
-</td>
-
-<td>
-${escapeHtml(order.wilaya_name||"")}
+<div>
+<strong>📞 الهاتف:</strong>
 <br>
-${escapeHtml(order.municipality||"")}
+${order.phone||"-"}
+</div>
+
+<div>
+<strong>📍 الولاية:</strong>
 <br>
-<small>${escapeHtml(order.address||"")}</small>
-</td>
+${order.wilaya_name||"-"}
+</div>
 
-<td class="order-products">
-${productsText}
-</td>
+<div>
+<strong>🏘️ البلدية:</strong>
+<br>
+${order.municipality||"-"}
+</div>
 
-<td>
-${formatPrice(order.products_total||order.subtotal||0)}
- دج
-</td>
+<div>
+<strong>🚚 التوصيل:</strong>
+<br>
+${order.delivery_method||order.delivery_type||"-"}
+</div>
 
-<td>
-${formatPrice(order.shipping_cost||order.delivery_price||0)}
- دج
-</td>
+<div style="grid-column:1/-1">
+<strong>🏠 العنوان:</strong>
+<br>
+${order.address||"-"}
+</div>
 
-<td>
-<strong style="color:#087f5b">
-${formatPrice(order.total||order.total_price||0)}
- دج
-</strong>
-</td>
+</div>
 
-<td>
+<div class="order-products">
 
-<select
-class="status-select"
-onchange="updateOrderStatus('${order.id}',this.value)"
->
+<strong>🛍️ المنتجات:</strong>
 
-<option value="new" ${order.status==="new"?"selected":""}>
-جديد
-</option>
+${productsHtml||"لا توجد تفاصيل"}
 
-<option value="pending" ${order.status==="pending"?"selected":""}>
-قيد المعالجة
-</option>
+<hr style="margin:10px 0;border:0;border-top:1px solid #ddd">
 
-<option value="shipped" ${order.status==="shipped"?"selected":""}>
-تم الشحن
-</option>
+<div>
+مجموع المنتجات:
+<strong>${formatPrice(order.products_total||order.subtotal)} دج</strong>
+</div>
 
-<option value="completed" ${order.status==="completed"?"selected":""}>
-مكتمل
-</option>
+<div>
+التوصيل:
+<strong>${formatPrice(order.delivery_price||order.shipping_cost)} دج</strong>
+</div>
 
-<option value="cancelled" ${order.status==="cancelled"?"selected":""}>
-ملغى
-</option>
+<div style="font-size:20px;color:#087f5b;margin-top:8px">
+الإجمالي:
+<strong>${formatPrice(order.total_price||order.total)} دج</strong>
+</div>
+
+</div>
+
+<div class="order-actions">
+
+<select id="status-${order.id}">
+
+<option value="new" ${order.status==="new"?"selected":""}>جديد</option>
+
+<option value="pending" ${order.status==="pending"?"selected":""}>قيد المعالجة</option>
+
+<option value="shipped" ${order.status==="shipped"?"selected":""}>تم الشحن</option>
+
+<option value="completed" ${order.status==="completed"?"selected":""}>مكتمل</option>
+
+<option value="cancelled" ${order.status==="cancelled"?"selected":""}>ملغى</option>
 
 </select>
 
-</td>
+<button onclick="updateOrderStatus('${order.id}')">
+حفظ الحالة
+</button>
 
-</tr>
+</div>
+
+</div>
 
 `;
 
@@ -1732,83 +1157,72 @@ onchange="updateOrderStatus('${order.id}',this.value)"
 
 }
 
+document.getElementById("orderSearch")
+.addEventListener("input",renderOrders);
 
-/* =====================================================
-   UPDATE STATUS
-===================================================== */
 
-async function updateOrderStatus(id,status){
+/* =========================
+   UPDATE ORDER
+========================= */
+
+async function updateOrderStatus(id){
+
+const select=document.getElementById("status-"+id);
+
+const status=select.value;
+
+try{
 
 const {error}=await supabaseClient
 .from("orders")
 .update({status:status})
 .eq("id",id);
 
-if(error){
+if(error)throw error;
+
+showToast("تم تحديث حالة الطلب ✓");
+
+await loadOrders();
+
+}catch(error){
 
 console.error(error);
 
 showToast(
-"تعذر تحديث حالة الطلب",
+"فشل تحديث الطلب: "+error.message,
 "error"
 );
 
-return;
-
 }
-
-showToast(
-"تم تحديث حالة الطلب ✓",
-"success"
-);
 
 }
 
 
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHtml(value){
-
-return String(value??"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-function showToast(message,type="success"){
-
-const toast=document.getElementById("toast");
-
-toast.textContent=message;
-
-toast.classList.remove("success","error");
-
-toast.classList.add("show",type);
-
-setTimeout(()=>{
-toast.classList.remove("show");
-},4000);
-
-}
-
-
-/* =====================================================
+/* =========================
    START
-===================================================== */
+========================= */
 
 renderProducts();
 updateCart();
 updateCheckoutSummary();
+
+
+/*
+  إذا كان المستخدم مسجلاً بالفعل
+  نتحقق من جلسة Supabase.
+*/
+
+supabaseClient.auth.getSession()
+.then(async ({data})=>{
+
+if(data.session){
+
+showAdmin();
+await loadOrders();
+
+}
+
+});
 
 </script>
 
