@@ -5,23 +5,16 @@
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Easy Shop Algeria | إيزي شوب الجزائر</title>
-
-<!-- =========================================================
-     FONTS
-========================================================= -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Tajawal:wght@400;500;600;700;800;900&display=swap"
+href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap"
 rel="stylesheet"
 >
 
@@ -31,7 +24,7 @@ rel="stylesheet"
 <style>
 
 /* =========================================================
-   GENERAL
+GENERAL
 ========================================================= */
 
 *{
@@ -45,21 +38,10 @@ scroll-behavior:smooth;
 }
 
 body{
-font-family:"Tajawal",Arial,sans-serif;
+font-family:"Cairo","Noto Kufi Arabic",Arial,sans-serif;
 background:#f5f7fa;
 color:#172033;
 line-height:1.7;
-}
-
-h1,
-h2,
-h3,
-.logo,
-.product-name,
-.section-title h2,
-.hero h1,
-.admin-head h1{
-font-family:"El Messiri","Tajawal",Arial,sans-serif;
 }
 
 button,
@@ -84,55 +66,24 @@ display:none!important;
 
 
 /* =========================================================
-   COLORS
-========================================================= */
-
-:root{
-
---green:#087f5b;
---green-dark:#056247;
---green-light:#06a873;
-
---dark:#101c32;
-
---bg:#f5f7fa;
-
---border:#e2e7ea;
-
---red:#e03131;
-
-}
-
-
-/* =========================================================
-   TOPBAR
+STORE
 ========================================================= */
 
 .topbar{
-background:linear-gradient(
-135deg,
-var(--green-dark),
-var(--green)
-);
+background:#087f5b;
 color:white;
 text-align:center;
-padding:9px 12px;
+padding:8px 12px;
 font-size:13px;
-font-weight:700;
+font-weight:600;
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
 header{
-background:rgba(255,255,255,.97);
+background:white;
 position:sticky;
 top:0;
 z-index:20;
-box-shadow:0 2px 18px rgba(0,0,0,.08);
-backdrop-filter:blur(12px);
+box-shadow:0 2px 15px rgba(0,0,0,.08);
 }
 
 .header-inner{
@@ -145,26 +96,20 @@ gap:18px;
 }
 
 .logo{
-color:var(--green);
-font-size:25px;
+color:#087f5b;
+font-size:24px;
 font-weight:800;
 white-space:nowrap;
-letter-spacing:-.6px;
+letter-spacing:-.5px;
 }
 
 .search{
 flex:1;
 display:flex;
 background:#f1f4f6;
-border-radius:14px;
+border-radius:13px;
 overflow:hidden;
 border:1px solid #e0e5e8;
-transition:.2s;
-}
-
-.search:focus-within{
-border-color:#75c9af;
-box-shadow:0 0 0 3px rgba(8,127,91,.08);
 }
 
 .search input{
@@ -177,15 +122,10 @@ font-size:15px;
 }
 
 .search button{
-background:var(--green);
+background:#087f5b;
 color:white;
-padding:0 21px;
+padding:0 20px;
 font-size:18px;
-transition:.2s;
-}
-
-.search button:hover{
-background:var(--green-dark);
 }
 
 .cart-btn{
@@ -195,12 +135,6 @@ border:1px solid #ddd;
 border-radius:12px;
 padding:11px 16px;
 font-size:18px;
-transition:.2s;
-}
-
-.cart-btn:hover{
-border-color:var(--green);
-transform:translateY(-1px);
 }
 
 .cart-count{
@@ -219,36 +153,14 @@ justify-content:center;
 font-weight:bold;
 }
 
-
-/* =========================================================
-   CONTAINER
-========================================================= */
-
 .container{
 max-width:1200px;
 margin:auto;
 padding:20px;
 }
 
-
-/* =========================================================
-   HERO
-========================================================= */
-
 .hero{
-background:
-radial-gradient(
-circle at 80% 20%,
-rgba(255,255,255,.13),
-transparent 35%
-),
-linear-gradient(
-135deg,
-#056247,
-#087f5b,
-#06a873
-);
-
+background:linear-gradient(135deg,#087f5b,#06a873);
 color:white;
 border-radius:22px;
 padding:42px;
@@ -257,23 +169,10 @@ display:flex;
 align-items:center;
 margin-bottom:28px;
 box-shadow:0 12px 30px rgba(8,127,91,.18);
-overflow:hidden;
-position:relative;
-}
-
-.hero:after{
-content:"";
-position:absolute;
-width:230px;
-height:230px;
-border:1px solid rgba(255,255,255,.12);
-border-radius:50%;
-left:-60px;
-bottom:-100px;
 }
 
 .hero h1{
-font-size:38px;
+font-size:36px;
 font-weight:800;
 margin-bottom:12px;
 }
@@ -285,24 +184,13 @@ opacity:.96;
 
 .hero button{
 background:white;
-color:var(--green);
+color:#087f5b;
 padding:13px 25px;
 border-radius:11px;
 font-weight:800;
 margin-top:20px;
 box-shadow:0 5px 15px rgba(0,0,0,.1);
-transition:.2s;
 }
-
-.hero button:hover{
-transform:translateY(-2px);
-box-shadow:0 8px 20px rgba(0,0,0,.16);
-}
-
-
-/* =========================================================
-   SECTION TITLE
-========================================================= */
 
 .section-title{
 display:flex;
@@ -312,13 +200,13 @@ margin:28px 0 15px;
 }
 
 .section-title h2{
-font-size:24px;
+font-size:23px;
 font-weight:800;
 }
 
 
 /* =========================================================
-   CATEGORIES
+CATEGORIES
 ========================================================= */
 
 .categories{
@@ -326,13 +214,12 @@ display:flex;
 gap:13px;
 overflow:auto;
 padding-bottom:10px;
-scrollbar-width:thin;
 }
 
 .category{
 flex:0 0 auto;
 background:white;
-border:1px solid var(--border);
+border:1px solid #e2e7ea;
 border-radius:14px;
 padding:10px 18px;
 font-weight:700;
@@ -344,11 +231,10 @@ gap:8px;
 
 .category:hover,
 .category.active{
-background:var(--green);
+background:#087f5b;
 color:white;
-border-color:var(--green);
+border-color:#087f5b;
 transform:translateY(-1px);
-box-shadow:0 5px 14px rgba(8,127,91,.14);
 }
 
 .category img{
@@ -360,7 +246,7 @@ object-fit:cover;
 
 
 /* =========================================================
-   PRODUCTS
+PRODUCTS
 ========================================================= */
 
 .products{
@@ -371,11 +257,11 @@ gap:18px;
 
 .product{
 background:white;
-border-radius:18px;
+border-radius:17px;
 overflow:hidden;
 border:1px solid #e5e9ec;
 box-shadow:0 4px 15px rgba(0,0,0,.04);
-transition:.25s;
+transition:.2s;
 }
 
 .product:hover{
@@ -383,200 +269,14 @@ transform:translateY(-3px);
 box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
-
-/* =========================================================
-   PRODUCT GALLERY
-========================================================= */
-
-.product-gallery{
-height:230px;
+.product-img{
+height:210px;
 background:#eef2f4;
-position:relative;
-overflow:hidden;
-}
-
-.gallery-main-image{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
-cursor:zoom-in;
-transition:.35s;
-}
-
-.gallery-main-image:hover{
-transform:scale(1.035);
-}
-
-.gallery-icon{
-width:100%;
-height:100%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:60px;
-}
-
-
-/* =========================================================
-   IMAGE COUNTER
-========================================================= */
-
-.gallery-count{
-position:absolute;
-right:10px;
-bottom:10px;
-z-index:7;
-
-background:rgba(0,0,0,.65);
-color:white;
-
-padding:5px 10px;
-
-border-radius:20px;
-
-font-size:12px;
-font-weight:700;
-
-backdrop-filter:blur(5px);
-}
-
-
-/* =========================================================
-   GALLERY ARROWS
-========================================================= */
-
-.gallery-arrow{
-position:absolute;
-
-top:50%;
-
-transform:translateY(-50%);
-
-width:40px;
-height:40px;
-
-border-radius:50%;
-
-background:rgba(0,0,0,.55);
-
-color:white;
-
-font-size:29px;
-
-line-height:30px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-z-index:8;
-
-transition:.2s;
-}
-
-.gallery-arrow:hover{
-background:var(--green);
-transform:translateY(-50%) scale(1.05);
-}
-
-.gallery-prev{
-right:10px;
-}
-
-.gallery-next{
-left:10px;
-}
-
-
-/* =========================================================
-   GALLERY DOTS
-========================================================= */
-
-.gallery-dots{
-position:absolute;
-bottom:10px;
-left:50%;
-transform:translateX(-50%);
-
-display:flex;
-gap:5px;
-
-z-index:8;
-}
-
-.gallery-dot{
-width:7px;
-height:7px;
-
-border-radius:50%;
-
-background:rgba(255,255,255,.65);
-
-border:1px solid rgba(0,0,0,.1);
-
-padding:0;
-}
-
-.gallery-dot.active{
-background:white;
-width:19px;
-border-radius:10px;
-}
-
-
-/* =========================================================
-   THUMBNAILS
-========================================================= */
-
-.gallery-thumbnails{
-display:flex;
-gap:7px;
-padding:8px;
-background:white;
-overflow-x:auto;
-border-bottom:1px solid #e5e9ec;
-scrollbar-width:thin;
-}
-
-.gallery-thumb{
-flex:0 0 52px;
-width:52px;
-height:52px;
-
-padding:2px;
-
-border:2px solid transparent;
-
-border-radius:9px;
-
 overflow:hidden;
-
-background:#f1f3f4;
-
-transition:.2s;
 }
-
-.gallery-thumb:hover{
-border-color:#8ccfbc;
-}
-
-.gallery-thumb img{
-width:100%;
-height:100%;
-object-fit:cover;
-border-radius:5px;
-}
-
-.gallery-thumb.active{
-border-color:var(--green);
-box-shadow:0 0 0 1px rgba(8,127,91,.1);
-}
-
-
-/* =========================================================
-   PRODUCT INFO
-========================================================= */
 
 .product-info{
 padding:15px;
@@ -589,32 +289,26 @@ min-height:48px;
 }
 
 .price{
-color:var(--green);
-font-size:21px;
-font-weight:900;
+color:#087f5b;
+font-size:20px;
+font-weight:800;
 margin:8px 0;
 }
 
 .stock{
-color:var(--green);
+color:#087f5b;
 font-size:13px;
 margin-bottom:10px;
-font-weight:700;
+font-weight:600;
 }
 
 .add-btn{
 width:100%;
-background:var(--green);
+background:#087f5b;
 color:white;
 padding:12px;
 border-radius:10px;
 font-weight:800;
-transition:.2s;
-}
-
-.add-btn:hover{
-background:var(--green-dark);
-transform:translateY(-1px);
 }
 
 .empty{
@@ -628,14 +322,108 @@ grid-column:1/-1;
 
 
 /* =========================================================
-   LIGHTBOX
+PRODUCT GALLERY
+========================================================= */
+
+.product-gallery{
+position:relative;
+height:210px;
+background:#eef2f4;
+overflow:hidden;
+}
+
+.gallery-main-image{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+cursor:pointer;
+transition:.25s;
+}
+
+.gallery-main-image:hover{
+transform:scale(1.03);
+}
+
+.gallery-icon{
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:60px;
+}
+
+.gallery-arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:38px;
+height:38px;
+border-radius:50%;
+background:rgba(0,0,0,.55);
+color:white;
+font-size:30px;
+line-height:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:5;
+}
+
+.gallery-arrow:hover{
+background:#087f5b;
+}
+
+.gallery-prev{
+right:10px;
+}
+
+.gallery-next{
+left:10px;
+}
+
+.gallery-thumbnails{
+display:flex;
+gap:7px;
+padding:8px;
+background:white;
+overflow-x:auto;
+border-bottom:1px solid #e5e9ec;
+}
+
+.gallery-thumb{
+flex:0 0 52px;
+width:52px;
+height:52px;
+padding:2px;
+border:2px solid transparent;
+border-radius:8px;
+overflow:hidden;
+background:#f1f3f4;
+}
+
+.gallery-thumb img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:5px;
+}
+
+.gallery-thumb.active{
+border-color:#087f5b;
+}
+
+
+/* =========================================================
+LIGHTBOX
 ========================================================= */
 
 .lightbox{
 display:none;
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.92);
+background:rgba(0,0,0,.9);
 z-index:500;
 align-items:center;
 justify-content:center;
@@ -647,8 +435,8 @@ display:flex;
 }
 
 .lightbox img{
-max-width:92%;
-max-height:82vh;
+max-width:95%;
+max-height:85vh;
 object-fit:contain;
 border-radius:10px;
 }
@@ -657,46 +445,25 @@ border-radius:10px;
 position:absolute;
 top:20px;
 right:25px;
-
 background:white;
 color:#222;
-
 width:42px;
 height:42px;
-
 border-radius:50%;
-
 font-size:24px;
 font-weight:bold;
-
-z-index:10;
 }
 
 .lightbox-arrow{
 position:absolute;
-
 top:50%;
-
 transform:translateY(-50%);
-
-width:50px;
-height:50px;
-
+width:48px;
+height:48px;
 border-radius:50%;
-
-background:rgba(255,255,255,.18);
-
+background:rgba(255,255,255,.2);
 color:white;
-
 font-size:35px;
-
-z-index:10;
-
-transition:.2s;
-}
-
-.lightbox-arrow:hover{
-background:var(--green);
 }
 
 .lightbox-prev{
@@ -707,26 +474,9 @@ right:25px;
 left:25px;
 }
 
-.lightbox-counter{
-position:absolute;
-bottom:25px;
-left:50%;
-transform:translateX(-50%);
-
-background:rgba(255,255,255,.16);
-
-color:white;
-
-padding:7px 15px;
-
-border-radius:20px;
-
-font-weight:bold;
-}
-
 
 /* =========================================================
-   FOOTER
+FOOTER
 ========================================================= */
 
 footer{
@@ -747,7 +497,7 @@ border-radius:9px;
 
 
 /* =========================================================
-   CART
+CART
 ========================================================= */
 
 .overlay{
@@ -771,10 +521,9 @@ max-width:92%;
 height:100%;
 background:white;
 z-index:60;
-transition:.28s;
+transition:.25s;
 padding:22px;
 overflow:auto;
-box-shadow:10px 0 30px rgba(0,0,0,.15);
 }
 
 .drawer.open{
@@ -788,10 +537,6 @@ align-items:center;
 margin-bottom:20px;
 }
 
-.drawer-head h2{
-font-family:"El Messiri","Tajawal",sans-serif;
-}
-
 .close{
 background:#eee;
 border-radius:8px;
@@ -801,23 +546,50 @@ padding:8px 12px;
 .cart-item{
 display:flex;
 justify-content:space-between;
+align-items:center;
 gap:10px;
-padding:12px 0;
+padding:14px 0;
 border-bottom:1px solid #eee;
+}
+
+.cart-item-info{
+flex:1;
+min-width:0;
+}
+
+.cart-item-name{
+font-weight:800;
+font-size:15px;
+}
+
+.cart-item-price{
+margin-top:4px;
+color:#087f5b;
+font-weight:600;
 }
 
 .qty{
 display:flex;
 align-items:center;
-gap:7px;
+gap:6px;
+flex-wrap:nowrap;
 }
 
 .qty button{
-width:27px;
-height:27px;
-border-radius:6px;
+width:30px;
+height:30px;
+border-radius:7px;
 background:#e9eeee;
 font-weight:bold;
+}
+
+.qty .remove-btn{
+width:32px;
+height:32px;
+background:#ffe5e5;
+color:#d32f2f;
+font-size:15px;
+margin-right:3px;
 }
 
 .total{
@@ -828,20 +600,16 @@ margin:20px 0;
 
 .checkout{
 width:100%;
-background:var(--green);
+background:#087f5b;
 color:white;
 padding:14px;
 border-radius:10px;
 font-weight:bold;
 }
 
-.checkout:hover{
-background:var(--green-dark);
-}
-
 
 /* =========================================================
-   MODALS
+MODALS
 ========================================================= */
 
 .modal{
@@ -868,11 +636,6 @@ border-radius:18px;
 padding:25px;
 max-height:95vh;
 overflow:auto;
-box-shadow:0 20px 60px rgba(0,0,0,.2);
-}
-
-.modal-box h2{
-font-family:"El Messiri","Tajawal",sans-serif;
 }
 
 .form-group{
@@ -895,14 +658,6 @@ padding:12px;
 outline:0;
 font-size:15px;
 background:white;
-transition:.2s;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus{
-border-color:var(--green);
-box-shadow:0 0 0 3px rgba(8,127,91,.08);
 }
 
 .summary{
@@ -920,12 +675,8 @@ padding:8px 0;
 border-bottom:1px solid #dceee7;
 }
 
-.summary-row:last-child{
-border-bottom:0;
-}
-
 .summary-total{
-color:var(--green);
+color:#087f5b;
 font-size:23px;
 font-weight:bold;
 }
@@ -945,16 +696,11 @@ border-radius:9px;
 
 .confirm{
 flex:2;
-background:var(--green);
+background:#087f5b;
 color:white;
 padding:13px;
 border-radius:9px;
 font-weight:bold;
-}
-
-.confirm:disabled{
-opacity:.65;
-cursor:not-allowed;
 }
 
 .delivery-info{
@@ -968,7 +714,7 @@ color:#555;
 
 
 /* =========================================================
-   IMAGE PREVIEW
+IMAGE PREVIEW
 ========================================================= */
 
 .image-preview{
@@ -1023,12 +769,11 @@ border-radius:50%;
 background:#e03131;
 color:white;
 font-weight:bold;
-z-index:2;
 }
 
 
 /* =========================================================
-   TOAST
+TOAST
 ========================================================= */
 
 .toast{
@@ -1038,23 +783,14 @@ right:25px;
 left:25px;
 max-width:650px;
 margin:auto;
-
 background:#172033;
 color:white;
-
 padding:14px 20px;
-
 border-radius:10px;
-
 z-index:600;
-
 display:none;
-
 text-align:center;
-
 font-weight:600;
-
-box-shadow:0 8px 25px rgba(0,0,0,.18);
 }
 
 .toast.show{
@@ -1071,7 +807,7 @@ background:#d32f2f;
 
 
 /* =========================================================
-   ADMIN
+ADMIN
 ========================================================= */
 
 .admin-page{
@@ -1108,11 +844,6 @@ border-radius:9px;
 font-weight:bold;
 }
 
-
-/* =========================================================
-   ADMIN NAV
-========================================================= */
-
 .admin-nav{
 max-width:1200px;
 margin:20px auto 0;
@@ -1134,15 +865,10 @@ white-space:nowrap;
 }
 
 .admin-nav button.active{
-background:var(--green);
+background:#087f5b;
 color:white;
-border-color:var(--green);
+border-color:#087f5b;
 }
-
-
-/* =========================================================
-   ADMIN SECTION
-========================================================= */
 
 .admin-section{
 display:none;
@@ -1154,7 +880,7 @@ display:block;
 
 
 /* =========================================================
-   STATS
+STATS
 ========================================================= */
 
 .stats{
@@ -1192,7 +918,7 @@ margin-top:8px;
 }
 
 .stat-green{
-color:var(--green);
+color:#087f5b;
 }
 
 .stat-purple{
@@ -1209,7 +935,7 @@ color:#b8860b;
 
 
 /* =========================================================
-   ADMIN TOOLS
+ADMIN TOOLS
 ========================================================= */
 
 .admin-tools{
@@ -1236,7 +962,7 @@ min-width:220px;
 }
 
 .refresh{
-background:var(--green);
+background:#087f5b;
 color:white;
 padding:13px 20px;
 border-radius:10px;
@@ -1245,7 +971,7 @@ font-weight:bold;
 
 
 /* =========================================================
-   ORDERS
+ORDERS
 ========================================================= */
 
 .orders-list{
@@ -1352,7 +1078,7 @@ border-bottom:0;
 text-align:left;
 font-size:22px;
 font-weight:bold;
-color:var(--green);
+color:#087f5b;
 margin-top:12px;
 }
 
@@ -1372,7 +1098,7 @@ background:white;
 }
 
 .save-status{
-background:var(--green);
+background:#087f5b;
 color:white;
 padding:12px 20px;
 border-radius:9px;
@@ -1381,7 +1107,7 @@ font-weight:bold;
 
 .call-btn{
 background:#e8f7ef;
-color:var(--green);
+color:#087f5b;
 padding:12px 18px;
 border-radius:9px;
 text-decoration:none;
@@ -1398,7 +1124,7 @@ font-weight:bold;
 
 
 /* =========================================================
-   PRODUCTS ADMIN
+PRODUCT ADMIN
 ========================================================= */
 
 .products-admin{
@@ -1421,7 +1147,7 @@ font-size:25px;
 
 .add-product-btn,
 .add-category-btn{
-background:var(--green);
+background:#087f5b;
 color:white;
 padding:13px 20px;
 border-radius:10px;
@@ -1472,7 +1198,7 @@ margin-bottom:8px;
 .admin-product-price{
 font-size:20px;
 font-weight:bold;
-color:var(--green);
+color:#087f5b;
 }
 
 .admin-product-stock{
@@ -1515,7 +1241,7 @@ font-weight:bold;
 }
 
 .product-active{
-color:var(--green);
+color:#087f5b;
 }
 
 .product-hidden{
@@ -1524,7 +1250,7 @@ color:#c62828;
 
 
 /* =========================================================
-   CATEGORY ADMIN
+CATEGORY ADMIN
 ========================================================= */
 
 .categories-admin{
@@ -1612,7 +1338,7 @@ font-weight:bold;
 
 
 /* =========================================================
-   LOGIN
+LOGIN
 ========================================================= */
 
 .login-box{
@@ -1643,7 +1369,7 @@ color:#777;
 
 
 /* =========================================================
-   RESPONSIVE
+RESPONSIVE
 ========================================================= */
 
 @media(max-width:900px){
@@ -1681,15 +1407,10 @@ flex-basis:100%;
 
 .hero{
 padding:25px;
-min-height:210px;
 }
 
 .hero h1{
 font-size:27px;
-}
-
-.hero p{
-font-size:15px;
 }
 
 .products{
@@ -1697,33 +1418,9 @@ grid-template-columns:repeat(2,1fr);
 gap:12px;
 }
 
+.product-img,
 .product-gallery{
-height:170px;
-}
-
-.product-info{
-padding:12px;
-}
-
-.product-name{
-font-size:15px;
-min-height:45px;
-}
-
-.price{
-font-size:18px;
-}
-
-.gallery-arrow{
-width:34px;
-height:34px;
-font-size:25px;
-}
-
-.gallery-thumb{
-flex-basis:45px;
-width:45px;
-height:45px;
+height:150px;
 }
 
 .drawer{
@@ -1765,34 +1462,36 @@ align-items:stretch;
 grid-template-columns:repeat(3,1fr);
 }
 
-.modal{
-padding:10px;
+.gallery-thumb{
+flex-basis:45px;
+width:45px;
+height:45px;
 }
 
-.modal-box{
-padding:18px;
-border-radius:15px;
+.gallery-arrow{
+width:34px;
+height:34px;
+font-size:25px;
 }
 
-.lightbox-arrow{
-width:42px;
-height:42px;
-font-size:29px;
+.cart-item{
+align-items:flex-start;
 }
 
-.lightbox-prev{
-right:10px;
+.qty{
+gap:4px;
 }
 
-.lightbox-next{
-left:10px;
+.qty button{
+width:28px;
+height:28px;
 }
 
 }
 
 
 /* =========================================================
-   PRINT
+PRINT
 ========================================================= */
 
 @media print{
@@ -1825,9 +1524,7 @@ STORE
 <div id="storePage">
 
 <div class="topbar">
-
 🚚 توصيل سريع إلى 58 ولاية الجزائر • الدفع عند الاستلام
-
 </div>
 
 
@@ -1836,9 +1533,7 @@ STORE
 <div class="header-inner">
 
 <div class="logo">
-
 🛍️ Easy Shop Algeria
-
 </div>
 
 
@@ -1851,9 +1546,7 @@ placeholder="ابحث عن منتج..."
 >
 
 <button onclick="searchProducts()">
-
 🔍
-
 </button>
 
 </div>
@@ -1958,9 +1651,7 @@ Easy Shop Algeria 🇩🇿
 </p>
 
 <p style="margin-top:8px;font-size:13px">
-
 الدفع عند الاستلام • توصيل 58 ولاية • ضمان الاستبدال
-
 </p>
 
 
@@ -1968,9 +1659,7 @@ Easy Shop Algeria 🇩🇿
 class="admin-link"
 onclick="openAdminLogin()"
 >
-
 ⚙️ إدارة المتجر
-
 </button>
 
 </footer>
@@ -2063,7 +1752,6 @@ id="checkoutModal"
 <input
 id="customerName"
 type="text"
-autocomplete="name"
 placeholder="اكتب اسمك الكامل"
 >
 
@@ -2079,8 +1767,6 @@ placeholder="اكتب اسمك الكامل"
 <input
 id="customerPhone"
 type="tel"
-inputmode="tel"
-autocomplete="tel"
 placeholder="05 / 06 / 07"
 >
 
@@ -2181,21 +1867,6 @@ placeholder="اكتب اسم البلدية"
 <div class="form-group">
 
 <label>
-العنوان بالتفصيل
-</label>
-
-<textarea
-id="customerAddress"
-rows="3"
-placeholder="الحي، الشارع، رقم المنزل..."
-></textarea>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
 طريقة التوصيل
 </label>
 
@@ -2218,9 +1889,7 @@ placeholder="الحي، الشارع، رقم المنزل..."
 class="delivery-info"
 id="deliveryInfo"
 >
-
 اختر الولاية لمعرفة سعر التوصيل.
-
 </div>
 
 
@@ -2306,9 +1975,7 @@ id="loginModal"
 <div class="modal-box login-box">
 
 <h2 style="text-align:center;margin-bottom:20px">
-
 🔐 دخول الإدارة
-
 </h2>
 
 
@@ -2598,7 +2265,6 @@ LIGHTBOX
 <div
 class="lightbox"
 id="lightbox"
-onclick="handleLightboxBackground(event)"
 >
 
 <button
@@ -2610,7 +2276,7 @@ onclick="closeLightbox()"
 
 <button
 class="lightbox-arrow lightbox-prev"
-onclick="changeLightbox(1);event.stopPropagation();"
+onclick="changeLightbox(-1)"
 >
 ›
 </button>
@@ -2619,22 +2285,14 @@ onclick="changeLightbox(1);event.stopPropagation();"
 id="lightboxImage"
 src=""
 alt=""
-onclick="event.stopPropagation();"
 >
 
 <button
 class="lightbox-arrow lightbox-next"
-onclick="changeLightbox(-1);event.stopPropagation();"
+onclick="changeLightbox(1)"
 >
 ‹
 </button>
-
-<div
-class="lightbox-counter"
-id="lightboxCounter"
->
-1 / 1
-</div>
 
 </div>
 
@@ -2707,9 +2365,7 @@ onclick="showAdminSection('categories')"
 </div>
 
 
-<!-- =========================================================
-ORDERS
-========================================================= -->
+<!-- ORDERS -->
 
 <div
 id="ordersSection"
@@ -2879,9 +2535,7 @@ id="ordersList"
 </div>
 
 
-<!-- =========================================================
-PRODUCTS
-========================================================= -->
+<!-- PRODUCTS -->
 
 <div
 id="productsSectionAdmin"
@@ -2923,9 +2577,7 @@ id="adminProductsGrid"
 </div>
 
 
-<!-- =========================================================
-CATEGORIES
-========================================================= -->
+<!-- CATEGORIES -->
 
 <div
 id="categoriesSectionAdmin"
@@ -2979,7 +2631,7 @@ id="toast"
 <script>
 
 /* =========================================================
-   SUPABASE
+SUPABASE
 ========================================================= */
 
 const SUPABASE_URL =
@@ -2996,7 +2648,7 @@ SUPABASE_KEY
 
 
 /* =========================================================
-   DATA
+DATA
 ========================================================= */
 
 let products = [];
@@ -3023,14 +2675,7 @@ let lightboxIndex = 0;
 
 
 /* =========================================================
-   PRODUCT GALLERY STATE
-========================================================= */
-
-const galleryIndexes = {};
-
-
-/* =========================================================
-   SHIPPING
+SHIPPING
 ========================================================= */
 
 const deepSouthWilayas = [
@@ -3093,7 +2738,7 @@ return "الولايات الشمالية والداخلية";
 
 
 /* =========================================================
-   FORMAT
+FORMAT
 ========================================================= */
 
 function formatPrice(price){
@@ -3105,12 +2750,12 @@ return Number(price || 0)
 
 
 /* =========================================================
-   ESCAPE
+ESCAPE
 ========================================================= */
 
 function escapeHtml(value){
 
-return String(value ?? "")
+return String(value || "")
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
@@ -3121,7 +2766,7 @@ return String(value ?? "")
 
 
 /* =========================================================
-   LOAD CATEGORIES
+LOAD CATEGORIES
 ========================================================= */
 
 async function loadCategories(){
@@ -3168,7 +2813,7 @@ renderAdminCategories();
 
 
 /* =========================================================
-   RENDER STORE CATEGORIES
+RENDER CATEGORIES
 ========================================================= */
 
 function renderCategories(){
@@ -3231,7 +2876,7 @@ box.innerHTML = html;
 
 
 /* =========================================================
-   PRODUCT CATEGORY SELECT
+PRODUCT CATEGORY SELECT
 ========================================================= */
 
 function populateProductCategories(){
@@ -3240,10 +2885,6 @@ const select =
 document.getElementById(
 "productCategory"
 );
-
-
-if(!select)
-return;
 
 
 if(!categories.length){
@@ -3274,7 +2915,7 @@ ${escapeHtml(category.name)}
 
 
 /* =========================================================
-   LOAD PRODUCTS
+LOAD PRODUCTS
 ========================================================= */
 
 async function loadProducts(){
@@ -3297,15 +2938,6 @@ console.error(
 "PRODUCTS ERROR:",
 error
 );
-
-document.getElementById(
-"products"
-).innerHTML =
-`
-<div class="empty">
-تعذر تحميل المنتجات.
-</div>
-`;
 
 return;
 
@@ -3412,7 +3044,7 @@ renderProducts(products);
 
 
 /* =========================================================
-   GET PRODUCT IMAGES
+GET PRODUCT IMAGES
 ========================================================= */
 
 function getProductImages(product){
@@ -3442,7 +3074,7 @@ return [];
 
 
 /* =========================================================
-   RENDER PRODUCTS
+RENDER PRODUCTS
 ========================================================= */
 
 function renderProducts(
@@ -3481,9 +3113,6 @@ const galleryId =
 product.id;
 
 
-galleryIndexes[product.id] = 0;
-
-
 let mainImage;
 
 
@@ -3496,8 +3125,7 @@ id="${galleryId}-main"
 src="${escapeHtml(images[0])}"
 alt="${escapeHtml(product.name)}"
 class="gallery-main-image"
-data-gallery-index="0"
-onclick="openLightboxForProduct('${escapeHtml(product.id)}')"
+onclick="openLightboxForProduct('${product.id}')"
 >
 
 `;
@@ -3521,60 +3149,19 @@ images.length > 1
 `
 
 <button
-type="button"
 class="gallery-arrow gallery-prev"
-onclick="changeProductImage('${escapeHtml(product.id)}',1);event.stopPropagation();"
-aria-label="الصورة التالية"
+onclick="changeProductImage('${product.id}',1)"
 >
 ›
 </button>
 
 <button
-type="button"
 class="gallery-arrow gallery-next"
-onclick="changeProductImage('${escapeHtml(product.id)}',-1);event.stopPropagation();"
-aria-label="الصورة السابقة"
+onclick="changeProductImage('${product.id}',-1)"
 >
 ‹
 </button>
 
-`
-:
-"";
-
-
-const count =
-images.length > 1
-?
-`
-<div class="gallery-count">
-${images.length} صور
-</div>
-`
-:
-"";
-
-
-const dots =
-images.length > 1
-?
-`
-<div class="gallery-dots">
-
-${images.map(
-(image,index) => `
-
-<button
-type="button"
-class="gallery-dot ${index === 0 ? "active" : ""}"
-onclick="setProductImage('${escapeHtml(product.id)}',${index});event.stopPropagation();"
-aria-label="الصورة ${index + 1}"
-></button>
-
-`
-).join("")}
-
-</div>
 `
 :
 "";
@@ -3591,7 +3178,6 @@ ${images.map(
 (image,index) => `
 
 <button
-type="button"
 class="gallery-thumb ${
 index === 0
 ?
@@ -3599,7 +3185,10 @@ index === 0
 :
 ""
 }"
-onclick="setProductImage('${escapeHtml(product.id)}',${index});event.stopPropagation();"
+onclick="setProductImage(
+'${product.id}',
+${index}
+)"
 >
 
 <img
@@ -3623,17 +3212,11 @@ return `
 
 <article class="product">
 
-<div
-class="product-gallery"
->
+<div class="product-img product-gallery">
 
 ${mainImage}
 
 ${arrows}
-
-${count}
-
-${dots}
 
 </div>
 
@@ -3642,39 +3225,25 @@ ${thumbnails}
 <div class="product-info">
 
 <div class="product-name">
-
-${escapeHtml(
-product.name
-)}
-
+${escapeHtml(product.name)}
 </div>
 
 
 <div class="price">
-
-${formatPrice(
-product.price
-)}
-دج
-
+${formatPrice(product.price)} دج
 </div>
 
 
 <div class="stock">
-
 ✓ متوفر
-
 </div>
 
 
 <button
-type="button"
 class="add-btn"
-onclick="addToCart('${escapeHtml(product.id)}')"
+onclick="addToCart('${product.id}')"
 >
-
 أضف إلى السلة
-
 </button>
 
 </div>
@@ -3689,7 +3258,7 @@ onclick="addToCart('${escapeHtml(product.id)}')"
 
 
 /* =========================================================
-   CHANGE PRODUCT IMAGE
+PRODUCT GALLERY
 ========================================================= */
 
 function changeProductImage(
@@ -3717,10 +3286,27 @@ if(images.length < 2)
 return;
 
 
-let current =
-Number(
-galleryIndexes[id] || 0
+const main =
+document.getElementById(
+"gallery-" +
+id +
+"-main"
 );
+
+
+if(!main)
+return;
+
+
+let current =
+images.findIndex(
+image =>
+image === main.src
+);
+
+
+if(current < 0)
+current = 0;
 
 
 current += direction;
@@ -3735,17 +3321,17 @@ if(current >= images.length)
 current = 0;
 
 
-setProductImage(
+main.src =
+images[current];
+
+
+updateGalleryThumbs(
 id,
 current
 );
 
 }
 
-
-/* =========================================================
-   SET PRODUCT IMAGE
-========================================================= */
 
 function setProductImage(
 id,
@@ -3772,9 +3358,31 @@ if(!images[index])
 return;
 
 
-galleryIndexes[id] =
-index;
+const main =
+document.getElementById(
+"gallery-" +
+id +
+"-main"
+);
 
+
+if(main)
+main.src =
+images[index];
+
+
+updateGalleryThumbs(
+id,
+index
+);
+
+}
+
+
+function updateGalleryThumbs(
+id,
+index
+){
 
 const main =
 document.getElementById(
@@ -3784,19 +3392,12 @@ id +
 );
 
 
-if(main){
-
-main.src =
-images[index];
-
-main.dataset.galleryIndex =
-index;
-
-}
+if(!main)
+return;
 
 
 const card =
-main?.closest(
+main.closest(
 ".product"
 );
 
@@ -3805,29 +3406,16 @@ if(!card)
 return;
 
 
-card
-.querySelectorAll(
+const thumbs =
+card.querySelectorAll(
 ".gallery-thumb"
-)
-.forEach(
+);
+
+
+thumbs.forEach(
 (thumb,i) => {
 
 thumb.classList.toggle(
-"active",
-i === index
-);
-
-});
-
-
-card
-.querySelectorAll(
-".gallery-dot"
-)
-.forEach(
-(dot,i) => {
-
-dot.classList.toggle(
 "active",
 i === index
 );
@@ -3838,7 +3426,7 @@ i === index
 
 
 /* =========================================================
-   LIGHTBOX
+LIGHTBOX
 ========================================================= */
 
 function openLightboxForProduct(id){
@@ -3863,10 +3451,23 @@ if(!lightboxImages.length)
 return;
 
 
-lightboxIndex =
-Number(
-galleryIndexes[id] || 0
+const main =
+document.getElementById(
+"gallery-" +
+id +
+"-main"
 );
+
+
+lightboxIndex =
+lightboxImages.findIndex(
+image =>
+image === main?.src
+);
+
+
+if(lightboxIndex < 0)
+lightboxIndex = 0;
 
 
 document.getElementById(
@@ -3875,9 +3476,6 @@ document.getElementById(
 lightboxImages[
 lightboxIndex
 ];
-
-
-updateLightboxCounter();
 
 
 document.getElementById(
@@ -3889,16 +3487,6 @@ document.getElementById(
 }
 
 
-function updateLightboxCounter(){
-
-document.getElementById(
-"lightboxCounter"
-).textContent =
-`${lightboxIndex + 1} / ${lightboxImages.length}`;
-
-}
-
-
 function closeLightbox(){
 
 document.getElementById(
@@ -3906,20 +3494,6 @@ document.getElementById(
 ).classList.remove(
 "open"
 );
-
-}
-
-
-function handleLightboxBackground(event){
-
-if(
-event.target ===
-document.getElementById("lightbox")
-){
-
-closeLightbox();
-
-}
 
 }
 
@@ -3956,48 +3530,11 @@ lightboxImages[
 lightboxIndex
 ];
 
-
-updateLightboxCounter();
-
 }
 
 
 /* =========================================================
-   KEYBOARD GALLERY
-========================================================= */
-
-document.addEventListener(
-"keydown",
-event => {
-
-const lightbox =
-document.getElementById(
-"lightbox"
-);
-
-
-if(
-lightbox &&
-lightbox.classList.contains("open")
-){
-
-if(event.key === "Escape")
-closeLightbox();
-
-if(event.key === "ArrowRight")
-changeLightbox(1);
-
-if(event.key === "ArrowLeft")
-changeLightbox(-1);
-
-}
-
-}
-);
-
-
-/* =========================================================
-   CART
+CART
 ========================================================= */
 
 function addToCart(id){
@@ -4062,12 +3599,16 @@ Number(item.quantity),
 }
 
 
+/* =========================================================
+UPDATE CART
+========================================================= */
+
 function updateCart(){
 
 const count =
 cart.reduce(
 (sum,item) =>
-sum + item.quantity,
+sum + Number(item.quantity),
 0
 );
 
@@ -4104,13 +3645,15 @@ cart.map(item => `
 
 <div class="cart-item">
 
-<div>
+<div class="cart-item-info">
 
-<strong>
+<div class="cart-item-name">
+
 ${escapeHtml(item.name)}
-</strong>
 
-<div style="margin-top:5px">
+</div>
+
+<div class="cart-item-price">
 
 ${formatPrice(item.price)} دج
 
@@ -4122,8 +3665,7 @@ ${formatPrice(item.price)} دج
 <div class="qty">
 
 <button
-type="button"
-onclick="changeQuantity('${escapeHtml(item.id)}',1)"
+onclick="changeQuantity('${item.id}',1)"
 >
 +
 </button>
@@ -4133,10 +3675,18 @@ ${item.quantity}
 </span>
 
 <button
-type="button"
-onclick="changeQuantity('${escapeHtml(item.id)}',-1)"
+onclick="changeQuantity('${item.id}',-1)"
 >
 −
+</button>
+
+
+<button
+class="remove-btn"
+onclick="removeFromCart('${item.id}')"
+title="حذف المنتج"
+>
+🗑️
 </button>
 
 </div>
@@ -4155,6 +3705,48 @@ getProductsTotal()
 
 }
 
+
+/* =========================================================
+REMOVE FROM CART
+========================================================= */
+
+function removeFromCart(id){
+
+const exists =
+cart.some(
+item =>
+String(item.id) ===
+String(id)
+);
+
+
+if(!exists)
+return;
+
+
+cart =
+cart.filter(
+item =>
+String(item.id) !==
+String(id)
+);
+
+
+updateCart();
+
+updateCheckoutSummary();
+
+showToast(
+"تم حذف المنتج من السلة ✓",
+"success"
+);
+
+}
+
+
+/* =========================================================
+CHANGE QUANTITY
+========================================================= */
 
 function changeQuantity(
 id,
@@ -4195,6 +3787,10 @@ updateCheckoutSummary();
 }
 
 
+/* =========================================================
+OPEN CART
+========================================================= */
+
 function openCart(){
 
 document
@@ -4222,7 +3818,7 @@ document
 
 
 /* =========================================================
-   CHECKOUT
+CHECKOUT
 ========================================================= */
 
 function openCheckout(){
@@ -4263,18 +3859,10 @@ const productsTotal =
 getProductsTotal();
 
 
-const wilayaElement =
+const code =
 document.getElementById(
 "wilaya"
-);
-
-
-if(!wilayaElement)
-return;
-
-
-const code =
-wilayaElement.value;
+).value;
 
 
 const delivery =
@@ -4344,7 +3932,7 @@ updateCheckoutSummary
 
 
 /* =========================================================
-   CONFIRM ORDER
+CONFIRM ORDER
 ========================================================= */
 
 async function confirmOrder(){
@@ -4362,15 +3950,21 @@ return;
 
 
 const name =
-document.getElementById(
+document
+.getElementById(
 "customerName"
-).value.trim();
+)
+.value
+.trim();
 
 
 const phone =
-document.getElementById(
+document
+.getElementById(
 "customerPhone"
-).value.trim();
+)
+.value
+.trim();
 
 
 const wilayaSelect =
@@ -4391,60 +3985,31 @@ wilayaSelect.selectedIndex
 
 
 const municipality =
-document.getElementById(
+document
+.getElementById(
 "municipality"
-).value.trim();
-
-
-const address =
-document.getElementById(
-"customerAddress"
-).value.trim();
+)
+.value
+.trim();
 
 
 const deliveryMethod =
-document.getElementById(
+document
+.getElementById(
 "deliveryMethod"
-).value;
+)
+.value;
 
 
 if(
 !name ||
 !phone ||
 !wilayaCode ||
-!municipality ||
-!address
+!municipality
 ){
 
 showToast(
-"يرجى ملء جميع معلومات الطلب",
-"error"
-);
-
-return;
-
-}
-
-
-/*
-التحقق من رقم الهاتف الجزائري
-*/
-
-const cleanPhone =
-phone.replace(
-/[\s-]/g,
-""
-);
-
-
-if(
-!/^0(5|6|7)\d{8}$/.test(
-cleanPhone
-)
-){
-
-showToast(
-"أدخل رقم هاتف جزائري صحيح مثل 0550123456",
+"يرجى ملء الاسم والهاتف والولاية والبلدية",
 "error"
 );
 
@@ -4492,10 +4057,6 @@ document.getElementById(
 );
 
 
-if(button.disabled)
-return;
-
-
 button.disabled = true;
 
 button.textContent =
@@ -4505,16 +4066,19 @@ button.textContent =
 try{
 
 /*
+=========================================================
 مهم:
-نرسل فقط الحقول الموجودة في جدول orders
-والتي ظهرت في قاعدة بياناتك.
+لا نستخدم select().single()
+بعد insert حتى لا يتحول نجاح الطلب
+إلى خطأ إذا كانت RLS تمنع القراءة.
+=========================================================
 */
 
 const orderData = {
 
 customer_name:name,
 
-phone:cleanPhone,
+phone:phone,
 
 status:"new",
 
@@ -4534,8 +4098,6 @@ shipping_cost:deliveryPrice,
 
 total:finalTotal,
 
-address:address,
-
 notes:"",
 
 delivery_type:deliveryMethod,
@@ -4549,41 +4111,33 @@ municipality:municipality
 };
 
 
-console.log(
-"ORDER DATA:",
-orderData
-);
+/*
+إرسال الطلب
+*/
 
-
-const result =
+const {error} =
 await supabaseClient
 .from("orders")
-.insert(orderData)
-.select("id, order_number")
-.single();
+.insert(orderData);
 
 
-if(result.error){
+if(error){
 
 console.error(
-"SUPABASE ORDER ERROR:",
-result.error
+"ORDER INSERT ERROR:",
+error
 );
 
-throw result.error;
+throw error;
 
 }
 
 
 /*
-الطلب تم بنجاح
+=========================================================
+نجاح الطلب
+=========================================================
 */
-
-console.log(
-"ORDER CREATED:",
-result.data
-);
-
 
 closeCheckout();
 
@@ -4616,22 +4170,15 @@ document.getElementById(
 
 
 document.getElementById(
-"customerAddress"
-).value = "";
+"deliveryMethod"
+).value =
+"التوصيل إلى المنزل";
 
 
 updateCheckoutSummary();
 
 
-const orderNumber =
-result.data?.order_number;
-
-
 showToast(
-orderNumber
-?
-`تم تسجيل طلبك بنجاح ✓ رقم الطلب #${orderNumber}`
-:
 "تم تسجيل طلبك بنجاح ✓ شكراً لثقتك بـ Easy Shop Algeria",
 "success"
 );
@@ -4640,26 +4187,45 @@ orderNumber
 }catch(error){
 
 console.error(
-"CONFIRM ORDER ERROR:",
+"SUPABASE ORDER ERROR:",
 error
 );
 
 
-/*
-نعرض الخطأ الحقيقي للمستخدم.
-هذا مهم جدًا لمعرفة إذا كانت المشكلة
-من RLS أو من عمود في قاعدة البيانات.
-*/
+let errorMessage =
+"حدث خطأ أثناء تسجيل الطلب.";
 
-const errorMessage =
-error?.message ||
-error?.details ||
-error?.hint ||
-"خطأ غير معروف";
+
+if(error){
+
+if(error.message){
+
+errorMessage +=
+" " +
+error.message;
+
+}
+
+else if(error.details){
+
+errorMessage +=
+" " +
+error.details;
+
+}
+
+else if(error.hint){
+
+errorMessage +=
+" " +
+error.hint;
+
+}
+
+}
 
 
 showToast(
-"تعذر تسجيل الطلب: " +
 errorMessage,
 "error"
 );
@@ -4677,7 +4243,7 @@ button.textContent =
 
 
 /* =========================================================
-   FILTER / SEARCH
+FILTER / SEARCH
 ========================================================= */
 
 function filterCategory(
@@ -4774,7 +4340,7 @@ behavior:"smooth"
 
 
 /* =========================================================
-   ADMIN LOGIN
+ADMIN LOGIN
 ========================================================= */
 
 function openAdminLogin(){
@@ -4929,7 +4495,7 @@ window.scrollTo(0,0);
 
 
 /* =========================================================
-   ADMIN TABS
+ADMIN TABS
 ========================================================= */
 
 function showAdminSection(
@@ -5026,7 +4592,7 @@ loadCategories();
 
 
 /* =========================================================
-   ORDER STATUS
+ORDER STATUS
 ========================================================= */
 
 function statusText(status){
@@ -5072,7 +4638,7 @@ return classes[status] || "";
 
 
 /* =========================================================
-   LOAD ORDERS
+LOAD ORDERS
 ========================================================= */
 
 async function loadOrders(){
@@ -5108,12 +4674,7 @@ if(error){
 console.error(error);
 
 list.innerHTML =
-`
-<div class="no-orders">
-تعذر تحميل الطلبات.<br>
-<small>${escapeHtml(error.message)}</small>
-</div>
-`;
+'<div class="no-orders">تعذر تحميل الطلبات.</div>';
 
 return;
 
@@ -5132,7 +4693,7 @@ renderOrders();
 
 
 /* =========================================================
-   STATS
+STATS
 ========================================================= */
 
 function updateStats(){
@@ -5227,39 +4788,24 @@ formatPrice(sales) +
 
 
 /* =========================================================
-   RENDER ORDERS
+RENDER ORDERS
 ========================================================= */
 
 function renderOrders(){
 
-const searchElement =
+const search =
 document.getElementById(
 "orderSearch"
-);
-
-
-const filterElement =
-document.getElementById(
-"statusFilter"
-);
-
-
-const search =
-searchElement
-?
-searchElement.value
+)
+.value
 .trim()
-.toLowerCase()
-:
-"";
+.toLowerCase();
 
 
 const filter =
-filterElement
-?
-filterElement.value
-:
-"all";
+document.getElementById(
+"statusFilter"
+).value;
 
 
 const filtered =
@@ -5354,8 +4900,8 @@ ${item.quantity}
 ${formatPrice(
 item.subtotal ??
 (
-Number(item.price || 0) *
-Number(item.quantity || 0)
+item.price *
+item.quantity
 )
 )}
 
@@ -5391,7 +4937,7 @@ order.customer_name || "-"
 
 رقم الطلب:
 <strong>
-#${escapeHtml(getOrderNumber(order))}
+#${getOrderNumber(order)}
 </strong>
 
 <br>
@@ -5486,22 +5032,6 @@ order.delivery_method ||
 
 </div>
 
-
-<div
-class="info-box"
-style="grid-column:1/-1"
->
-
-<strong>
-🏠 العنوان
-</strong>
-
-${escapeHtml(
-order.address || "-"
-)}
-
-</div>
-
 </div>
 
 
@@ -5529,7 +5059,7 @@ ${formatPrice(total)}
 <div class="status-actions">
 
 <select
-id="status-${escapeHtml(order.id)}"
+id="status-${order.id}"
 >
 
 <option value="new"
@@ -5567,7 +5097,7 @@ ${order.status === "cancelled" ? "selected" : ""}
 
 <button
 class="save-status"
-onclick="saveOrderStatus('${escapeHtml(order.id)}')"
+onclick="saveOrderStatus('${order.id}')"
 >
 حفظ الحالة
 </button>
@@ -5583,7 +5113,7 @@ href="tel:${escapeHtml(order.phone || "")}"
 
 <button
 class="delete-order"
-onclick="deleteOrder('${escapeHtml(order.id)}')"
+onclick="deleteOrder('${order.id}')"
 >
 🗑️ حذف
 </button>
@@ -5600,7 +5130,7 @@ onclick="deleteOrder('${escapeHtml(order.id)}')"
 
 
 /* =========================================================
-   ORDER NUMBER
+ORDER NUMBER
 ========================================================= */
 
 function getOrderNumber(order){
@@ -5637,7 +5167,7 @@ return index + 1;
 
 
 /* =========================================================
-   SAVE STATUS
+SAVE STATUS
 ========================================================= */
 
 async function saveOrderStatus(id){
@@ -5647,10 +5177,6 @@ document.getElementById(
 "status-" +
 id
 );
-
-
-if(!select)
-return;
 
 
 const newStatus =
@@ -5711,7 +5237,7 @@ showToast(
 
 
 /* =========================================================
-   DELETE ORDER
+DELETE ORDER
 ========================================================= */
 
 async function deleteOrder(id){
@@ -5771,7 +5297,7 @@ showToast(
 
 
 /* =========================================================
-   LOAD ADMIN PRODUCTS
+LOAD ADMIN PRODUCTS
 ========================================================= */
 
 async function loadAdminProducts(){
@@ -5780,10 +5306,6 @@ const grid =
 document.getElementById(
 "adminProductsGrid"
 );
-
-
-if(!grid)
-return;
 
 
 grid.innerHTML =
@@ -5807,12 +5329,7 @@ if(error){
 console.error(error);
 
 grid.innerHTML =
-`
-<div class="no-orders">
-تعذر تحميل المنتجات.<br>
-<small>${escapeHtml(error.message)}</small>
-</div>
-`;
+'<div class="no-orders">تعذر تحميل المنتجات.</div>';
 
 return;
 
@@ -5915,7 +5432,7 @@ p.active !== false
 
 
 /* =========================================================
-   RENDER ADMIN PRODUCTS
+RENDER ADMIN PRODUCTS
 ========================================================= */
 
 function renderAdminProducts(){
@@ -6045,21 +5562,17 @@ active
 
 <button
 class="edit-product"
-onclick="editProduct('${escapeHtml(product.id)}')"
+onclick="editProduct('${product.id}')"
 >
-
 ✏️ تعديل
-
 </button>
 
 
 <button
 class="delete-product"
-onclick="deleteProduct('${escapeHtml(product.id)}')"
+onclick="deleteProduct('${product.id}')"
 >
-
 🗑️ حذف
-
 </button>
 
 </div>
@@ -6067,7 +5580,7 @@ onclick="deleteProduct('${escapeHtml(product.id)}')"
 
 <button
 class="toggle-product"
-onclick="toggleProduct('${escapeHtml(product.id)}',${active})"
+onclick="toggleProduct('${product.id}',${active})"
 >
 
 ${
@@ -6092,7 +5605,7 @@ active
 
 
 /* =========================================================
-   OPEN PRODUCT MODAL
+OPEN PRODUCT MODAL
 ========================================================= */
 
 function openProductModal(){
@@ -6174,7 +5687,7 @@ document
 
 
 /* =========================================================
-   PRODUCT IMAGE PREVIEW
+PRODUCT IMAGE PREVIEW
 ========================================================= */
 
 function previewProductImages(event){
@@ -6199,15 +5712,6 @@ index,
 
 
 renderNewImagesPreview();
-
-
-/*
-نفرغ input حتى لا يبقى اختيار قديم
-*/
-
-document.getElementById(
-"productImage"
-).value = "";
 
 }
 
@@ -6239,7 +5743,6 @@ alt=""
 >
 
 <button
-type="button"
 class="preview-remove"
 onclick="removeNewProductImage(${index})"
 >
@@ -6258,7 +5761,7 @@ onclick="removeNewProductImage(${index})"
 
 
 /* =========================================================
-   UPLOAD PRODUCT IMAGE
+UPLOAD PRODUCT IMAGE
 ========================================================= */
 
 async function uploadProductImage(
@@ -6321,7 +5824,7 @@ return data.publicUrl;
 
 
 /* =========================================================
-   SAVE PRODUCT
+SAVE PRODUCT
 ========================================================= */
 
 async function saveProduct(){
@@ -6390,9 +5893,7 @@ return;
 }
 
 
-if(
-!category
-){
+if(!category){
 
 showToast(
 "اختر فئة المنتج.",
@@ -6526,15 +6027,10 @@ if(result.error)
 throw result.error;
 
 
-/*
-الصورة الأولى في products
-*/
-
 const firstImage =
 uploadedUrls[0];
 
 
-const imageResult =
 await supabaseClient
 .from("products")
 .update({
@@ -6544,10 +6040,6 @@ image_url:firstImage
 "id",
 productId
 );
-
-
-if(imageResult.error)
-throw imageResult.error;
 
 }
 
@@ -6595,7 +6087,7 @@ button.textContent =
 
 
 /* =========================================================
-   EDIT PRODUCT
+EDIT PRODUCT
 ========================================================= */
 
 async function editProduct(id){
@@ -6679,7 +6171,7 @@ document
 
 
 /* =========================================================
-   EXISTING PRODUCT IMAGES
+EXISTING PRODUCT IMAGES
 ========================================================= */
 
 function renderExistingProductImages(){
@@ -6703,7 +6195,6 @@ alt=""
 >
 
 <button
-type="button"
 class="preview-remove"
 onclick="removeExistingProductImage(${index})"
 >
@@ -6728,14 +6219,13 @@ index,
 1
 );
 
-
 renderExistingProductImages();
 
 }
 
 
 /* =========================================================
-   DELETE PRODUCT
+DELETE PRODUCT
 ========================================================= */
 
 async function deleteProduct(id){
@@ -6798,7 +6288,7 @@ showToast(
 
 
 /* =========================================================
-   TOGGLE PRODUCT
+TOGGLE PRODUCT
 ========================================================= */
 
 async function toggleProduct(
@@ -6852,7 +6342,7 @@ await loadAdminProducts();
 
 
 /* =========================================================
-   OPEN CATEGORY
+OPEN CATEGORY
 ========================================================= */
 
 function openCategoryModal(){
@@ -6910,7 +6400,7 @@ document
 
 
 /* =========================================================
-   CATEGORY IMAGE PREVIEW
+CATEGORY IMAGE PREVIEW
 ========================================================= */
 
 function previewCategoryImage(
@@ -6947,7 +6437,7 @@ alt=""
 
 
 /* =========================================================
-   UPLOAD CATEGORY IMAGE
+UPLOAD CATEGORY IMAGE
 ========================================================= */
 
 async function uploadCategoryImage(
@@ -7010,7 +6500,7 @@ return data.publicUrl;
 
 
 /* =========================================================
-   SAVE CATEGORY
+SAVE CATEGORY
 ========================================================= */
 
 async function saveCategory(){
@@ -7170,7 +6660,7 @@ button.textContent =
 
 
 /* =========================================================
-   RENDER ADMIN CATEGORIES
+RENDER ADMIN CATEGORIES
 ========================================================= */
 
 function renderAdminCategories(){
@@ -7251,7 +6741,7 @@ category.description || ""
 
 <button
 class="edit-category"
-onclick="editCategory('${escapeHtml(category.id)}')"
+onclick="editCategory('${category.id}')"
 >
 ✏️ تعديل
 </button>
@@ -7259,7 +6749,7 @@ onclick="editCategory('${escapeHtml(category.id)}')"
 
 <button
 class="delete-category"
-onclick="deleteCategory('${escapeHtml(category.id)}')"
+onclick="deleteCategory('${category.id}')"
 >
 🗑️ حذف
 </button>
@@ -7279,7 +6769,7 @@ onclick="deleteCategory('${escapeHtml(category.id)}')"
 
 
 /* =========================================================
-   EDIT CATEGORY
+EDIT CATEGORY
 ========================================================= */
 
 function editCategory(id){
@@ -7358,7 +6848,7 @@ document
 
 
 /* =========================================================
-   DELETE CATEGORY
+DELETE CATEGORY
 ========================================================= */
 
 async function deleteCategory(id){
@@ -7371,7 +6861,7 @@ if(
 return;
 
 
-const {data:categoryProducts,error:productsError} =
+const {data:categoryProducts,error:checkError} =
 await supabaseClient
 .from("products")
 .select("id")
@@ -7381,9 +6871,9 @@ id
 );
 
 
-if(productsError){
+if(checkError){
 
-console.error(productsError);
+console.error(checkError);
 
 showToast(
 "تعذر التحقق من منتجات القسم.",
@@ -7447,7 +6937,7 @@ await loadCategories();
 
 
 /* =========================================================
-   TOAST
+TOAST
 ========================================================= */
 
 function showToast(
@@ -7470,12 +6960,6 @@ toast.className =
 type;
 
 
-clearTimeout(
-window.toastTimer
-);
-
-
-window.toastTimer =
 setTimeout(
 () => {
 
@@ -7484,19 +6968,17 @@ toast.classList.remove(
 );
 
 },
-6500
+6000
 );
 
 }
 
 
 /* =========================================================
-   START
+START
 ========================================================= */
 
 async function startApp(){
-
-try{
 
 await loadCategories();
 
@@ -7507,21 +6989,9 @@ updateCart();
 updateCheckoutSummary();
 
 
-const {data,error} =
+const {data} =
 await supabaseClient.auth
 .getSession();
-
-
-if(error){
-
-console.error(
-"SESSION ERROR:",
-error
-);
-
-return;
-
-}
 
 
 if(data.session){
@@ -7533,15 +7003,6 @@ await loadOrders();
 await loadAdminProducts();
 
 await loadCategories();
-
-}
-
-}catch(error){
-
-console.error(
-"START APP ERROR:",
-error
-);
 
 }
 
