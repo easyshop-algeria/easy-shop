@@ -3,752 +3,930 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Easy Shop Algeria | إيزي شوب الجزائر</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
 
 body{
-  font-family:Arial,Tahoma,sans-serif;
-  background:#f5f7fa;
-  color:#172033;
+font-family:Arial,Tahoma,sans-serif;
+background:#f5f7fa;
+color:#172033;
 }
 
 button,input,textarea,select{
-  font-family:inherit;
+font-family:inherit;
 }
 
 button{
-  cursor:pointer;
-  border:0;
+cursor:pointer;
+border:0;
 }
 
 .topbar{
-  background:#087f5b;
-  color:white;
-  text-align:center;
-  padding:9px;
-  font-size:14px;
+background:#087f5b;
+color:white;
+text-align:center;
+padding:9px;
+font-size:14px;
 }
 
 header{
-  background:white;
-  position:sticky;
-  top:0;
-  z-index:20;
-  box-shadow:0 2px 10px rgba(0,0,0,.08);
+background:white;
+position:sticky;
+top:0;
+z-index:20;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
 .header-inner{
-  max-width:1200px;
-  margin:auto;
-  padding:16px 20px;
-  display:flex;
-  align-items:center;
-  gap:18px;
+max-width:1200px;
+margin:auto;
+padding:16px 20px;
+display:flex;
+align-items:center;
+gap:18px;
 }
 
 .logo{
-  color:#087f5b;
-  font-size:25px;
-  font-weight:bold;
-  white-space:nowrap;
+color:#087f5b;
+font-size:25px;
+font-weight:bold;
+white-space:nowrap;
 }
 
 .search{
-  flex:1;
-  display:flex;
-  background:#f1f4f6;
-  border-radius:12px;
-  overflow:hidden;
-  border:1px solid #e0e5e8;
+flex:1;
+display:flex;
+background:#f1f4f6;
+border-radius:12px;
+overflow:hidden;
+border:1px solid #e0e5e8;
 }
 
 .search input{
-  width:100%;
-  border:0;
-  outline:0;
-  background:transparent;
-  padding:13px;
-  font-size:15px;
+width:100%;
+border:0;
+outline:0;
+background:transparent;
+padding:13px;
+font-size:15px;
 }
 
 .search button{
-  background:#087f5b;
-  color:white;
-  padding:0 18px;
+background:#087f5b;
+color:white;
+padding:0 18px;
 }
 
 .cart-btn{
-  position:relative;
-  background:white;
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:12px 16px;
-  font-size:18px;
+position:relative;
+background:white;
+border:1px solid #ddd;
+border-radius:12px;
+padding:12px 16px;
+font-size:18px;
 }
 
 .cart-count{
-  position:absolute;
-  top:-7px;
-  left:-7px;
-  background:#e03131;
-  color:white;
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  font-size:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+position:absolute;
+top:-7px;
+left:-7px;
+background:#e03131;
+color:white;
+width:22px;
+height:22px;
+border-radius:50%;
+font-size:12px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .container{
-  max-width:1200px;
-  margin:auto;
-  padding:20px;
+max-width:1200px;
+margin:auto;
+padding:20px;
 }
 
 .hero{
-  background:linear-gradient(135deg,#08b779,#05a66d);
-  color:white;
-  border-radius:20px;
-  padding:40px;
-  min-height:230px;
-  display:flex;
-  align-items:center;
-  margin-bottom:25px;
+background:linear-gradient(135deg,#08b779,#05a66d);
+color:white;
+border-radius:20px;
+padding:40px;
+min-height:230px;
+display:flex;
+align-items:center;
+margin-bottom:25px;
 }
 
 .hero h1{
-  font-size:36px;
-  margin-bottom:12px;
+font-size:36px;
+margin-bottom:12px;
 }
 
 .hero p{
-  font-size:18px;
+font-size:18px;
 }
 
 .hero button{
-  background:white;
-  color:#087f5b;
-  padding:13px 25px;
-  border-radius:10px;
-  font-weight:bold;
-  margin-top:20px;
+background:white;
+color:#087f5b;
+padding:13px 25px;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
 }
 
 .section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:25px 0 15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:25px 0 15px;
 }
 
 .categories{
-  display:flex;
-  gap:12px;
-  overflow:auto;
-  padding-bottom:8px;
+display:flex;
+gap:12px;
+overflow:auto;
+padding-bottom:8px;
 }
 
 .category{
-  flex:0 0 auto;
-  background:white;
-  border:1px solid #e2e7ea;
-  border-radius:12px;
-  padding:12px 20px;
-  font-weight:bold;
+flex:0 0 auto;
+background:white;
+border:1px solid #e2e7ea;
+border-radius:12px;
+padding:12px 20px;
+font-weight:bold;
 }
 
 .category:hover,
 .category.active{
-  background:#087f5b;
-  color:white;
+background:#087f5b;
+color:white;
 }
 
 .products{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
 }
 
 .product{
-  background:white;
-  border-radius:16px;
-  overflow:hidden;
-  border:1px solid #e5e9ec;
+background:white;
+border-radius:16px;
+overflow:hidden;
+border:1px solid #e5e9ec;
 }
 
 .product-img{
-  height:190px;
-  background:#e9eef2;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:55px;
+height:190px;
+background:#e9eef2;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:55px;
 }
 
 .product-info{
-  padding:15px;
+padding:15px;
 }
 
 .product-name{
-  font-size:17px;
-  font-weight:bold;
-  min-height:42px;
+font-size:17px;
+font-weight:bold;
+min-height:42px;
 }
 
 .price{
-  color:#087f5b;
-  font-size:20px;
-  font-weight:bold;
-  margin:10px 0;
+color:#087f5b;
+font-size:20px;
+font-weight:bold;
+margin:10px 0;
 }
 
 .stock{
-  color:#087f5b;
-  font-size:13px;
-  margin-bottom:10px;
+color:#087f5b;
+font-size:13px;
+margin-bottom:10px;
 }
 
 .add-btn{
-  width:100%;
-  background:#087f5b;
-  color:white;
-  padding:12px;
-  border-radius:9px;
-  font-weight:bold;
+width:100%;
+background:#087f5b;
+color:white;
+padding:12px;
+border-radius:9px;
+font-weight:bold;
 }
 
 .empty{
-  text-align:center;
-  padding:35px;
-  color:#777;
-  background:white;
-  border-radius:15px;
+text-align:center;
+padding:35px;
+color:#777;
+background:white;
+border-radius:15px;
 }
 
 footer{
-  margin-top:45px;
-  background:#101c32;
-  color:white;
-  padding:25px;
-  text-align:center;
+margin-top:45px;
+background:#101c32;
+color:white;
+padding:25px;
+text-align:center;
 }
 
 .admin-link{
-  margin-top:15px;
-  background:#1d2b43;
-  color:white;
-  padding:10px 18px;
-  border-radius:8px;
+margin-top:15px;
+background:#1d2b43;
+color:white;
+padding:10px 18px;
+border-radius:8px;
 }
 
 .overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  z-index:50;
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+z-index:50;
 }
 
 .overlay.open{
-  display:block;
+display:block;
 }
 
 .drawer{
-  position:fixed;
-  top:0;
-  left:-430px;
-  width:400px;
-  max-width:92%;
-  height:100%;
-  background:white;
-  z-index:60;
-  transition:.25s;
-  padding:22px;
-  overflow:auto;
+position:fixed;
+top:0;
+left:-430px;
+width:400px;
+max-width:92%;
+height:100%;
+background:white;
+z-index:60;
+transition:.25s;
+padding:22px;
+overflow:auto;
 }
 
 .drawer.open{
-  left:0;
+left:0;
 }
 
 .drawer-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
 }
 
 .close{
-  background:#eee;
-  border-radius:8px;
-  padding:8px 12px;
+background:#eee;
+border-radius:8px;
+padding:8px 12px;
 }
 
 .cart-item{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:12px 0;
-  border-bottom:1px solid #eee;
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:12px 0;
+border-bottom:1px solid #eee;
 }
 
 .qty{
-  display:flex;
-  align-items:center;
-  gap:7px;
+display:flex;
+align-items:center;
+gap:7px;
 }
 
 .qty button{
-  width:27px;
-  height:27px;
-  border-radius:6px;
-  background:#e9eeee;
+width:27px;
+height:27px;
+border-radius:6px;
+background:#e9eeee;
 }
 
 .total{
-  font-size:21px;
-  font-weight:bold;
-  margin:20px 0;
+font-size:21px;
+font-weight:bold;
+margin:20px 0;
 }
 
 .checkout{
-  width:100%;
-  background:#087f5b;
-  color:white;
-  padding:14px;
-  border-radius:10px;
-  font-weight:bold;
+width:100%;
+background:#087f5b;
+color:white;
+padding:14px;
+border-radius:10px;
+font-weight:bold;
 }
 
 .modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.5);
-  z-index:100;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  overflow:auto;
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.5);
+z-index:100;
+align-items:center;
+justify-content:center;
+padding:20px;
+overflow:auto;
 }
 
 .modal.open{
-  display:flex;
+display:flex;
 }
 
 .modal-box{
-  background:white;
-  width:560px;
-  max-width:100%;
-  border-radius:18px;
-  padding:25px;
-  max-height:95vh;
-  overflow:auto;
+background:white;
+width:560px;
+max-width:100%;
+border-radius:18px;
+padding:25px;
+max-height:95vh;
+overflow:auto;
 }
 
 .form-group{
-  margin-bottom:13px;
+margin-bottom:13px;
 }
 
 .form-group label{
-  display:block;
-  margin-bottom:6px;
-  font-weight:bold;
+display:block;
+margin-bottom:6px;
+font-weight:bold;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select{
-  width:100%;
-  border:1px solid #d9dfe3;
-  border-radius:9px;
-  padding:12px;
-  outline:0;
-  font-size:15px;
+width:100%;
+border:1px solid #d9dfe3;
+border-radius:9px;
+padding:12px;
+outline:0;
+font-size:15px;
 }
 
 .summary{
-  background:#f2fbf7;
-  border:1px solid #bce9d9;
-  border-radius:14px;
-  padding:18px;
-  margin:18px 0;
+background:#f2fbf7;
+border:1px solid #bce9d9;
+border-radius:14px;
+padding:18px;
+margin:18px 0;
 }
 
 .summary-row{
-  display:flex;
-  justify-content:space-between;
-  padding:8px 0;
-  border-bottom:1px solid #dceee7;
+display:flex;
+justify-content:space-between;
+padding:8px 0;
+border-bottom:1px solid #dceee7;
 }
 
 .summary-total{
-  color:#087f5b;
-  font-size:23px;
-  font-weight:bold;
+color:#087f5b;
+font-size:23px;
+font-weight:bold;
 }
 
 .form-actions{
-  display:flex;
-  gap:10px;
-  margin-top:18px;
+display:flex;
+gap:10px;
+margin-top:18px;
 }
 
 .cancel{
-  flex:1;
-  background:#eee;
-  padding:13px;
-  border-radius:9px;
+flex:1;
+background:#eee;
+padding:13px;
+border-radius:9px;
 }
 
 .confirm{
-  flex:2;
-  background:#087f5b;
-  color:white;
-  padding:13px;
-  border-radius:9px;
-  font-weight:bold;
+flex:2;
+background:#087f5b;
+color:white;
+padding:13px;
+border-radius:9px;
+font-weight:bold;
 }
 
 .delivery-info{
-  background:#f7f9fb;
-  border-radius:10px;
-  padding:10px;
-  margin-top:8px;
-  font-size:13px;
-  color:#555;
+background:#f7f9fb;
+border-radius:10px;
+padding:10px;
+margin-top:8px;
+font-size:13px;
+color:#555;
 }
 
 .toast{
-  position:fixed;
-  bottom:25px;
-  right:25px;
-  left:25px;
-  max-width:500px;
-  margin:auto;
-  background:#172033;
-  color:white;
-  padding:14px 20px;
-  border-radius:10px;
-  z-index:200;
-  display:none;
-  text-align:center;
+position:fixed;
+bottom:25px;
+right:25px;
+left:25px;
+max-width:500px;
+margin:auto;
+background:#172033;
+color:white;
+padding:14px 20px;
+border-radius:10px;
+z-index:200;
+display:none;
+text-align:center;
 }
 
 .toast.show{
-  display:block;
+display:block;
 }
 
 .toast.success{
-  background:#087f5b;
+background:#087f5b;
 }
 
 .toast.error{
-  background:#d32f2f;
+background:#d32f2f;
 }
 
-/* =========================
-   ADMIN
-========================= */
+/* ADMIN */
 
 .admin-page{
-  display:none;
-  min-height:100vh;
-  background:#f5f7fa;
+display:none;
+min-height:100vh;
+background:#f5f7fa;
 }
 
 .admin-head{
-  background:#101c32;
-  color:white;
-  padding:25px 20px;
+background:#101c32;
+color:white;
+padding:25px 20px;
 }
 
 .admin-head-inner{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
+max-width:1200px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
 }
 
 .admin-head h1{
-  font-size:30px;
+font-size:30px;
 }
 
 .logout{
-  background:#e03131;
-  color:white;
-  padding:12px 20px;
-  border-radius:9px;
-  font-weight:bold;
+background:#e03131;
+color:white;
+padding:12px 20px;
+border-radius:9px;
+font-weight:bold;
 }
 
+/* STATISTICS */
+
+.stats-grid{
+max-width:1200px;
+margin:auto;
+padding:20px 20px 5px;
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:14px;
+}
+
+.stat-card{
+background:white;
+border:1px solid #e0e5e8;
+border-radius:16px;
+padding:17px;
+box-shadow:0 3px 12px rgba(0,0,0,.04);
+}
+
+.stat-icon{
+font-size:27px;
+margin-bottom:8px;
+}
+
+.stat-title{
+font-size:13px;
+color:#777;
+margin-bottom:7px;
+}
+
+.stat-value{
+font-size:23px;
+font-weight:bold;
+}
+
+.stat-sales .stat-value{
+color:#087f5b;
+}
+
+.stat-new .stat-value{
+color:#856404;
+}
+
+.stat-shipped .stat-value{
+color:#673ab7;
+}
+
+.stat-delivered .stat-value{
+color:#087f5b;
+}
+
+.stat-cancelled .stat-value{
+color:#c62828;
+}
+
+/* PERIOD */
+
+.period-grid{
+max-width:1200px;
+margin:auto;
+padding:10px 20px 5px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.period-card{
+background:white;
+border:1px solid #e0e5e8;
+border-radius:16px;
+padding:18px;
+}
+
+.period-card h3{
+font-size:15px;
+color:#777;
+margin-bottom:8px;
+}
+
+.period-value{
+font-size:25px;
+font-weight:bold;
+color:#087f5b;
+}
+
+/* BEST PRODUCTS */
+
+.best-products{
+max-width:1200px;
+margin:auto;
+padding:10px 20px 20px;
+}
+
+.best-box{
+background:white;
+border:1px solid #e0e5e8;
+border-radius:16px;
+padding:18px;
+}
+
+.best-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:11px 0;
+border-bottom:1px solid #eee;
+}
+
+.best-row:last-child{
+border-bottom:0;
+}
+
+.best-name{
+font-weight:bold;
+}
+
+.best-quantity{
+color:#087f5b;
+font-weight:bold;
+}
+
+/* TOOLS */
+
 .admin-tools{
-  max-width:1200px;
-  margin:auto;
-  padding:20px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+max-width:1200px;
+margin:auto;
+padding:15px 20px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
 }
 
 .admin-tools input,
 .admin-tools select{
-  background:white;
-  border:1px solid #ddd;
-  border-radius:10px;
-  padding:13px;
-  font-size:15px;
+background:white;
+border:1px solid #ddd;
+border-radius:10px;
+padding:13px;
+font-size:15px;
 }
 
 .admin-tools input{
-  flex:1;
-  min-width:220px;
+flex:1;
+min-width:220px;
 }
 
 .refresh{
-  background:#087f5b;
-  color:white;
-  padding:13px 20px;
-  border-radius:10px;
-  font-weight:bold;
+background:#087f5b;
+color:white;
+padding:13px 20px;
+border-radius:10px;
+font-weight:bold;
 }
 
 .orders-list{
-  max-width:1200px;
-  margin:auto;
-  padding:0 20px 30px;
+max-width:1200px;
+margin:auto;
+padding:0 20px 30px;
 }
 
 .order-card{
-  background:white;
-  border:1px solid #e0e5e8;
-  border-radius:18px;
-  margin-bottom:18px;
-  padding:20px;
-  box-shadow:0 3px 12px rgba(0,0,0,.04);
+background:white;
+border:1px solid #e0e5e8;
+border-radius:18px;
+margin-bottom:18px;
+padding:20px;
+box-shadow:0 3px 12px rgba(0,0,0,.04);
 }
 
 .order-top{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  align-items:flex-start;
-  border-bottom:1px solid #eee;
-  padding-bottom:15px;
+display:flex;
+justify-content:space-between;
+gap:15px;
+align-items:flex-start;
+border-bottom:1px solid #eee;
+padding-bottom:15px;
 }
 
 .order-name{
-  font-size:20px;
-  font-weight:bold;
+font-size:20px;
+font-weight:bold;
 }
 
 .order-id{
-  font-size:12px;
-  color:#777;
-  margin-top:5px;
+font-size:13px;
+color:#777;
+margin-top:5px;
 }
 
 .status-badge{
-  padding:8px 13px;
-  border-radius:20px;
-  font-weight:bold;
-  font-size:13px;
-  background:#fff3cd;
-  color:#856404;
+padding:8px 13px;
+border-radius:20px;
+font-weight:bold;
+font-size:13px;
+background:#fff3cd;
+color:#856404;
 }
 
 .status-processing{
-  background:#e8f0ff;
-  color:#2457a6;
+background:#e8f0ff;
+color:#2457a6;
 }
 
 .status-shipped{
-  background:#e8ddff;
-  color:#673ab7;
+background:#e8ddff;
+color:#673ab7;
 }
 
 .status-delivered{
-  background:#d9f7e8;
-  color:#087f5b;
+background:#d9f7e8;
+color:#087f5b;
 }
 
 .status-cancelled{
-  background:#ffe1e1;
-  color:#c62828;
+background:#ffe1e1;
+color:#c62828;
 }
 
 .order-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-  padding:18px 0;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+padding:18px 0;
 }
 
 .info-box{
-  background:#f8fafb;
-  border-radius:12px;
-  padding:13px;
+background:#f8fafb;
+border-radius:12px;
+padding:13px;
 }
 
 .info-box strong{
-  display:block;
-  margin-bottom:6px;
+display:block;
+margin-bottom:6px;
 }
 
 .products-box{
-  background:#f8fafb;
-  border-radius:12px;
-  padding:15px;
-  margin-bottom:15px;
+background:#f8fafb;
+border-radius:12px;
+padding:15px;
+margin-bottom:15px;
 }
 
 .product-line{
-  display:flex;
-  justify-content:space-between;
-  padding:8px 0;
-  border-bottom:1px solid #e5e9ec;
+display:flex;
+justify-content:space-between;
+padding:8px 0;
+border-bottom:1px solid #e5e9ec;
 }
 
 .product-line:last-child{
-  border-bottom:0;
+border-bottom:0;
 }
 
 .order-total{
-  text-align:left;
-  font-size:22px;
-  font-weight:bold;
-  color:#087f5b;
-  margin-top:12px;
+text-align:left;
+font-size:22px;
+font-weight:bold;
+color:#087f5b;
+margin-top:12px;
 }
 
 .status-actions{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  margin-top:15px;
+display:flex;
+gap:10px;
+align-items:center;
+margin-top:15px;
 }
 
 .status-actions select{
-  flex:1;
-  border:1px solid #ddd;
-  border-radius:9px;
-  padding:12px;
-  background:white;
+flex:1;
+border:1px solid #ddd;
+border-radius:9px;
+padding:12px;
+background:white;
 }
 
 .save-status{
-  background:#087f5b;
-  color:white;
-  padding:12px 20px;
-  border-radius:9px;
-  font-weight:bold;
+background:#087f5b;
+color:white;
+padding:12px 20px;
+border-radius:9px;
+font-weight:bold;
 }
 
 .call-btn{
-  background:#e8f7ef;
-  color:#087f5b;
-  padding:12px 18px;
-  border-radius:9px;
-  text-decoration:none;
-  font-weight:bold;
+background:#e8f7ef;
+color:#087f5b;
+padding:12px 18px;
+border-radius:9px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.order-actions{
+display:flex;
+gap:10px;
+margin-top:12px;
+flex-wrap:wrap;
+}
+
+.edit-btn{
+background:#e8f0ff;
+color:#2457a6;
+padding:11px 18px;
+border-radius:9px;
+font-weight:bold;
+}
+
+.delete-btn{
+background:#ffe1e1;
+color:#c62828;
+padding:11px 18px;
+border-radius:9px;
+font-weight:bold;
 }
 
 .login-box{
-  width:500px;
+width:500px;
 }
 
 .login-error{
-  color:#d32f2f;
-  text-align:center;
-  margin-top:12px;
-  font-weight:bold;
+color:#d32f2f;
+text-align:center;
+margin-top:12px;
+font-weight:bold;
 }
 
 .loading{
-  text-align:center;
-  padding:30px;
-  background:white;
-  border-radius:15px;
+text-align:center;
+padding:30px;
+background:white;
+border-radius:15px;
 }
 
 .no-orders{
-  text-align:center;
-  padding:45px;
-  background:white;
-  border-radius:15px;
-  color:#777;
+text-align:center;
+padding:45px;
+background:white;
+border-radius:15px;
+color:#777;
+}
+
+@media(max-width:1100px){
+
+.stats-grid{
+grid-template-columns:repeat(3,1fr);
+}
+
 }
 
 @media(max-width:900px){
-  .products{
-    grid-template-columns:repeat(3,1fr);
-  }
+
+.products{
+grid-template-columns:repeat(3,1fr);
+}
+
 }
 
 @media(max-width:650px){
 
-  .header-inner{
-    flex-wrap:wrap;
-  }
-
-  .logo{
-    flex:1;
-  }
-
-  .search{
-    order:3;
-    flex-basis:100%;
-  }
-
-  .hero{
-    padding:25px;
-  }
-
-  .hero h1{
-    font-size:27px;
-  }
-
-  .products{
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-  }
-
-  .product-img{
-    height:150px;
-  }
-
-  .drawer{
-    width:360px;
-  }
-
-  .order-grid{
-    grid-template-columns:1fr;
-  }
-
-  .order-top{
-    flex-direction:column;
-  }
-
-  .status-actions{
-    flex-wrap:wrap;
-  }
+.header-inner{
+flex-wrap:wrap;
 }
+
+.logo{
+flex:1;
+}
+
+.search{
+order:3;
+flex-basis:100%;
+}
+
+.hero{
+padding:25px;
+}
+
+.hero h1{
+font-size:27px;
+}
+
+.products{
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.product-img{
+height:150px;
+}
+
+.drawer{
+width:360px;
+}
+
+.order-grid{
+grid-template-columns:1fr;
+}
+
+.order-top{
+flex-direction:column;
+}
+
+.status-actions{
+flex-wrap:wrap;
+}
+
+.stats-grid{
+grid-template-columns:repeat(2,1fr);
+padding:12px;
+}
+
+.period-grid{
+grid-template-columns:1fr;
+padding:10px 12px;
+}
+
+.admin-tools{
+padding:12px;
+}
+
+.orders-list{
+padding:0 12px 30px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     STORE
-========================= -->
+<!-- STORE -->
 
 <div id="storePage">
 
@@ -821,38 +999,28 @@ id="cartCount"
 
 <div class="categories">
 
-<button
-class="category active"
-onclick="filterCategory('all',this)"
->
+<button class="category active"
+onclick="filterCategory('all',this)">
 الكل
 </button>
 
-<button
-class="category"
-onclick="filterCategory('home',this)"
->
+<button class="category"
+onclick="filterCategory('home',this)">
 🏠 أدوات منزلية
 </button>
 
-<button
-class="category"
-onclick="filterCategory('electronics',this)"
->
+<button class="category"
+onclick="filterCategory('electronics',this)">
 ⚡ إلكترونيات
 </button>
 
-<button
-class="category"
-onclick="filterCategory('sports',this)"
->
+<button class="category"
+onclick="filterCategory('sports',this)">
 🏆 رياضة
 </button>
 
-<button
-class="category"
-onclick="filterCategory('men',this)"
->
+<button class="category"
+onclick="filterCategory('men',this)">
 👕 رجالية
 </button>
 
@@ -893,10 +1061,7 @@ onclick="openAdminLogin()"
 
 </div>
 
-
-<!-- =========================
-     CART
-========================= -->
+<!-- CART -->
 
 <div
 class="overlay"
@@ -911,14 +1076,11 @@ id="cartDrawer"
 
 <div class="drawer-head">
 
-<h2>
-🛒 سلة المشتريات
-</h2>
+<h2>🛒 سلة المشتريات</h2>
 
 <button
 class="close"
-onclick="closeCart()"
->
+onclick="closeCart()">
 ✕
 </button>
 
@@ -936,17 +1098,13 @@ onclick="closeCart()"
 
 <button
 class="checkout"
-onclick="openCheckout()"
->
+onclick="openCheckout()">
 إتمام الطلب
 </button>
 
 </aside>
 
-
-<!-- =========================
-     CHECKOUT
-========================= -->
+<!-- CHECKOUT -->
 
 <div
 class="modal"
@@ -955,15 +1113,11 @@ id="checkoutModal"
 
 <div class="modal-box">
 
-<h2>
-📦 معلومات الطلب
-</h2>
+<h2>📦 معلومات الطلب</h2>
 
 <div class="form-group">
 
-<label>
-الاسم واللقب
-</label>
+<label>الاسم واللقب</label>
 
 <input
 id="customerName"
@@ -975,9 +1129,7 @@ placeholder="اكتب اسمك الكامل"
 
 <div class="form-group">
 
-<label>
-رقم الهاتف
-</label>
+<label>رقم الهاتف</label>
 
 <input
 id="customerPhone"
@@ -989,15 +1141,11 @@ placeholder="05 / 06 / 07"
 
 <div class="form-group">
 
-<label>
-الولاية
-</label>
+<label>الولاية</label>
 
 <select id="wilaya">
 
-<option value="">
-اختر الولاية
-</option>
+<option value="">اختر الولاية</option>
 
 <option value="01">01 - أدرار</option>
 <option value="02">02 - الشلف</option>
@@ -1064,9 +1212,7 @@ placeholder="05 / 06 / 07"
 
 <div class="form-group">
 
-<label>
-البلدية
-</label>
+<label>البلدية</label>
 
 <input
 id="municipality"
@@ -1078,9 +1224,7 @@ placeholder="اكتب اسم البلدية"
 
 <div class="form-group">
 
-<label>
-العنوان بالتفصيل
-</label>
+<label>العنوان بالتفصيل</label>
 
 <textarea
 id="customerAddress"
@@ -1092,9 +1236,7 @@ placeholder="الحي، الشارع، رقم المنزل..."
 
 <div class="form-group">
 
-<label>
-طريقة التوصيل
-</label>
+<label>طريقة التوصيل</label>
 
 <select id="deliveryMethod">
 
@@ -1112,50 +1254,31 @@ placeholder="الحي، الشارع، رقم المنزل..."
 
 <div
 class="delivery-info"
-id="deliveryInfo"
->
+id="deliveryInfo">
 اختر الولاية لمعرفة سعر التوصيل.
 </div>
 
 <div class="summary">
 
 <div class="summary-row">
-
-<span>
-مجموع المنتجات:
-</span>
-
+<span>مجموع المنتجات:</span>
 <strong>
-<span id="summaryProducts">0</span>
-دج
+<span id="summaryProducts">0</span> دج
 </strong>
-
 </div>
 
 <div class="summary-row">
-
-<span>
-سعر التوصيل:
-</span>
-
+<span>سعر التوصيل:</span>
 <strong>
-<span id="summaryDelivery">0</span>
-دج
+<span id="summaryDelivery">0</span> دج
 </strong>
-
 </div>
 
 <div class="summary-row summary-total">
-
-<span>
-الإجمالي النهائي:
-</span>
-
+<span>الإجمالي النهائي:</span>
 <strong>
-<span id="summaryTotal">0</span>
-دج
+<span id="summaryTotal">0</span> دج
 </strong>
-
 </div>
 
 </div>
@@ -1164,34 +1287,27 @@ id="deliveryInfo"
 
 <button
 class="cancel"
-onclick="closeCheckout()"
->
+onclick="closeCheckout()">
 إلغاء
 </button>
 
 <button
 class="confirm"
 id="confirmButton"
-onclick="confirmOrder()"
->
+onclick="confirmOrder()">
 تأكيد الطلب
 </button>
 
 </div>
 
 </div>
-
 </div>
 
-
-<!-- =========================
-     ADMIN LOGIN
-========================= -->
+<!-- LOGIN -->
 
 <div
 class="modal"
-id="loginModal"
->
+id="loginModal">
 
 <div class="modal-box login-box">
 
@@ -1201,66 +1317,53 @@ id="loginModal"
 
 <div class="form-group">
 
-<label>
-البريد الإلكتروني
-</label>
+<label>البريد الإلكتروني</label>
 
 <input
 id="adminEmail"
 type="email"
-placeholder="البريد الإلكتروني"
->
+placeholder="البريد الإلكتروني">
 
 </div>
 
 <div class="form-group">
 
-<label>
-كلمة المرور
-</label>
+<label>كلمة المرور</label>
 
 <input
 id="adminPassword"
 type="password"
-placeholder="كلمة المرور"
->
+placeholder="كلمة المرور">
 
 </div>
 
 <button
 class="confirm"
 id="loginButton"
-onclick="adminLogin()"
->
+onclick="adminLogin()">
 دخول
 </button>
 
 <button
 class="cancel"
 style="width:100%;margin-top:10px"
-onclick="closeAdminLogin()"
->
+onclick="closeAdminLogin()">
 إغلاق
 </button>
 
 <div
 id="loginError"
-class="login-error"
-></div>
-
+class="login-error">
 </div>
 
 </div>
+</div>
 
-
-<!-- =========================
-     ADMIN
-========================= -->
+<!-- ADMIN -->
 
 <div
 id="adminPage"
-class="admin-page"
->
+class="admin-page">
 
 <div class="admin-head">
 
@@ -1268,20 +1371,15 @@ class="admin-page"
 
 <div>
 
-<h1>
-إدارة الطلبات ⚙️
-</h1>
+<h1>إدارة الطلبات ⚙️</h1>
 
-<div>
-Easy Shop Algeria
-</div>
+<div>Easy Shop Algeria</div>
 
 </div>
 
 <button
 class="logout"
-onclick="adminLogout()"
->
+onclick="adminLogout()">
 تسجيل الخروج
 </button>
 
@@ -1289,50 +1387,122 @@ onclick="adminLogout()"
 
 </div>
 
+<!-- STATS -->
+
+<div class="stats-grid">
+
+<div class="stat-card stat-sales">
+<div class="stat-icon">💰</div>
+<div class="stat-title">إجمالي المبيعات</div>
+<div class="stat-value" id="statSales">0 دج</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">📦</div>
+<div class="stat-title">إجمالي الطلبات</div>
+<div class="stat-value" id="statOrders">0</div>
+</div>
+
+<div class="stat-card stat-new">
+<div class="stat-icon">🆕</div>
+<div class="stat-title">طلبات جديدة</div>
+<div class="stat-value" id="statNew">0</div>
+</div>
+
+<div class="stat-card stat-shipped">
+<div class="stat-icon">🚚</div>
+<div class="stat-title">تم الشحن</div>
+<div class="stat-value" id="statShipped">0</div>
+</div>
+
+<div class="stat-card stat-delivered">
+<div class="stat-icon">✅</div>
+<div class="stat-title">تم التوصيل</div>
+<div class="stat-value" id="statDelivered">0</div>
+</div>
+
+<div class="stat-card stat-cancelled">
+<div class="stat-icon">❌</div>
+<div class="stat-title">الطلبات الملغاة</div>
+<div class="stat-value" id="statCancelled">0</div>
+</div>
+
+</div>
+
+<!-- PERIOD -->
+
+<div class="period-grid">
+
+<div class="period-card">
+
+<h3>📅 مبيعات اليوم</h3>
+
+<div
+class="period-value"
+id="statToday">
+0 دج
+</div>
+
+</div>
+
+<div class="period-card">
+
+<h3>📆 مبيعات هذا الشهر</h3>
+
+<div
+class="period-value"
+id="statMonth">
+0 دج
+</div>
+
+</div>
+
+</div>
+
+<!-- BEST PRODUCTS -->
+
+<div class="best-products">
+
+<div class="best-box">
+
+<h3 style="margin-bottom:10px">
+🏆 أكثر المنتجات مبيعاً
+</h3>
+
+<div id="bestProducts">
+لا توجد بيانات بعد.
+</div>
+
+</div>
+
+</div>
+
+<!-- TOOLS -->
+
 <div class="admin-tools">
 
 <input
 id="orderSearch"
 type="text"
 placeholder="🔎 بحث بالاسم أو الهاتف"
-oninput="renderOrders()"
->
+oninput="renderOrders()">
 
 <select
 id="statusFilter"
-onchange="renderOrders()"
->
+onchange="renderOrders()">
 
-<option value="all">
-كل الطلبات
-</option>
-
-<option value="new">
-جديد
-</option>
-
-<option value="processing">
-قيد المعالجة
-</option>
-
-<option value="shipped">
-تم الشحن
-</option>
-
-<option value="delivered">
-تم التوصيل
-</option>
-
-<option value="cancelled">
-ملغى
-</option>
+<option value="all">كل الطلبات</option>
+<option value="new">جديد</option>
+<option value="processing">قيد المعالجة</option>
+<option value="shipped">تم الشحن</option>
+<option value="delivered">تم التوصيل</option>
+<option value="cancelled">ملغى</option>
 
 </select>
 
 <button
 class="refresh"
-onclick="loadOrders()"
->
+onclick="loadOrders()">
 🔄 تحديث
 </button>
 
@@ -1340,8 +1510,7 @@ onclick="loadOrders()"
 
 <div
 class="orders-list"
-id="ordersList"
->
+id="ordersList">
 
 <div class="loading">
 جاري تحميل الطلبات...
@@ -1351,17 +1520,179 @@ id="ordersList"
 
 </div>
 
+<!-- EDIT ORDER -->
+
+<div
+class="modal"
+id="editOrderModal">
+
+<div class="modal-box">
+
+<h2 style="margin-bottom:20px">
+✏️ تعديل الطلب
+</h2>
+
+<input
+type="hidden"
+id="editOrderId">
+
+<div class="form-group">
+
+<label>الاسم واللقب</label>
+
+<input
+id="editCustomerName"
+type="text">
+
+</div>
+
+<div class="form-group">
+
+<label>رقم الهاتف</label>
+
+<input
+id="editCustomerPhone"
+type="tel">
+
+</div>
+
+<div class="form-group">
+
+<label>الولاية</label>
+
+<select id="editWilaya">
+
+<option value="">اختر الولاية</option>
+
+<option value="01">01 - أدرار</option>
+<option value="02">02 - الشلف</option>
+<option value="03">03 - الأغواط</option>
+<option value="04">04 - أم البواقي</option>
+<option value="05">05 - باتنة</option>
+<option value="06">06 - بجاية</option>
+<option value="07">07 - بسكرة</option>
+<option value="08">08 - بشار</option>
+<option value="09">09 - البليدة</option>
+<option value="10">10 - البويرة</option>
+<option value="11">11 - تمنراست</option>
+<option value="12">12 - تبسة</option>
+<option value="13">13 - تلمسان</option>
+<option value="14">14 - تيارت</option>
+<option value="15">15 - تيزي وزو</option>
+<option value="16">16 - الجزائر</option>
+<option value="17">17 - الجلفة</option>
+<option value="18">18 - جيجل</option>
+<option value="19">19 - سطيف</option>
+<option value="20">20 - سعيدة</option>
+<option value="21">21 - سكيكدة</option>
+<option value="22">22 - سيدي بلعباس</option>
+<option value="23">23 - عنابة</option>
+<option value="24">24 - قالمة</option>
+<option value="25">25 - قسنطينة</option>
+<option value="26">26 - المدية</option>
+<option value="27">27 - مستغانم</option>
+<option value="28">28 - المسيلة</option>
+<option value="29">29 - معسكر</option>
+<option value="30">30 - ورقلة</option>
+<option value="31">31 - وهران</option>
+<option value="32">32 - البيض</option>
+<option value="33">33 - إليزي</option>
+<option value="34">34 - برج بوعريريج</option>
+<option value="35">35 - بومرداس</option>
+<option value="36">36 - الطارف</option>
+<option value="37">37 - تندوف</option>
+<option value="38">38 - تيسمسيلت</option>
+<option value="39">39 - الوادي</option>
+<option value="40">40 - خنشلة</option>
+<option value="41">41 - سوق أهراس</option>
+<option value="42">42 - تيبازة</option>
+<option value="43">43 - ميلة</option>
+<option value="44">44 - عين الدفلى</option>
+<option value="45">45 - النعامة</option>
+<option value="46">46 - عين تموشنت</option>
+<option value="47">47 - غرداية</option>
+<option value="48">48 - غليزان</option>
+<option value="49">49 - تيميمون</option>
+<option value="50">50 - برج باجي مختار</option>
+<option value="51">51 - أولاد جلال</option>
+<option value="52">52 - بني عباس</option>
+<option value="53">53 - عين صالح</option>
+<option value="54">54 - عين قزام</option>
+<option value="55">55 - تقرت</option>
+<option value="56">56 - جانت</option>
+<option value="57">57 - المغير</option>
+<option value="58">58 - المنيعة</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>البلدية</label>
+
+<input
+id="editMunicipality"
+type="text">
+
+</div>
+
+<div class="form-group">
+
+<label>العنوان</label>
+
+<textarea
+id="editAddress"
+rows="3"></textarea>
+
+</div>
+
+<div class="form-group">
+
+<label>طريقة التوصيل</label>
+
+<select id="editDelivery">
+
+<option value="التوصيل إلى المنزل">
+🏠 التوصيل إلى المنزل
+</option>
+
+<option value="التوصيل إلى المكتب">
+🏢 التوصيل إلى المكتب
+</option>
+
+</select>
+
+</div>
+
+<div class="form-actions">
+
+<button
+class="cancel"
+onclick="closeEditOrder()">
+إلغاء
+</button>
+
+<button
+class="confirm"
+onclick="saveEditedOrder()">
+💾 حفظ التعديلات
+</button>
+
+</div>
+
+</div>
+</div>
 
 <div
 class="toast"
-id="toast"
-></div>
-
+id="toast">
+</div>
 
 <script>
 
 /* =========================
-   SUPABASE
+SUPABASE
 ========================= */
 
 const SUPABASE_URL =
@@ -1378,10 +1709,10 @@ SUPABASE_KEY
 
 
 /* =========================
-   PRODUCTS
+PRODUCTS
 ========================= */
 
-const products = [
+const products=[
 
 {
 id:1,
@@ -1433,53 +1764,31 @@ icon:"👕"
 
 ];
 
-let cart = [];
-let orders = [];
+let cart=[];
+let orders=[];
 
 
 /* =========================
-   SHIPPING
+SHIPPING
 ========================= */
 
-const deepSouthWilayas = [
-"11",
-"33",
-"37",
-"50",
-"53",
-"54",
-"56"
+const deepSouthWilayas=[
+"11","33","37","50","53","54","56"
 ];
 
-const southWilayas = [
-"01",
-"08",
-"30",
-"32",
-"39",
-"45",
-"47",
-"49",
-"51",
-"52",
-"55",
-"57",
-"58"
+const southWilayas=[
+"01","08","30","32","39","45","47","49","51","52","55","57","58"
 ];
 
 function getShippingPrice(code){
 
-if(code === "16"){
-return 400;
-}
+if(code==="16") return 400;
 
-if(deepSouthWilayas.includes(code)){
+if(deepSouthWilayas.includes(code))
 return 1200;
-}
 
-if(southWilayas.includes(code)){
+if(southWilayas.includes(code))
 return 800;
-}
 
 return 600;
 
@@ -1487,17 +1796,14 @@ return 600;
 
 function getShippingLabel(code){
 
-if(code === "16"){
+if(code==="16")
 return "الجزائر العاصمة";
-}
 
-if(deepSouthWilayas.includes(code)){
+if(deepSouthWilayas.includes(code))
 return "الصحراء القصوى";
-}
 
-if(southWilayas.includes(code)){
+if(southWilayas.includes(code))
 return "الولايات الصحراوية";
-}
 
 return "الولايات الشمالية والداخلية";
 
@@ -1505,37 +1811,34 @@ return "الولايات الشمالية والداخلية";
 
 
 /* =========================
-   FORMAT
+FORMAT
 ========================= */
 
 function formatPrice(price){
 
-return Number(price || 0)
+return Number(price||0)
 .toLocaleString("fr-DZ");
 
 }
 
 
 /* =========================
-   PRODUCTS
+PRODUCTS
 ========================= */
 
-function renderProducts(list = products){
+function renderProducts(list=products){
 
-const box =
-document.getElementById("products");
+const box=document.getElementById("products");
 
-if(list.length === 0){
+if(!list.length){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="empty">لم يتم العثور على منتجات.</div>';
 
 return;
-
 }
 
-box.innerHTML =
-list.map(product => `
+box.innerHTML=list.map(product=>`
 
 <article class="product">
 
@@ -1559,8 +1862,7 @@ ${formatPrice(product.price)} دج
 
 <button
 class="add-btn"
-onclick="addToCart(${product.id})"
->
+onclick="addToCart(${product.id})">
 أضف إلى السلة
 </button>
 
@@ -1574,37 +1876,21 @@ onclick="addToCart(${product.id})"
 
 
 /* =========================
-   CART
+CART
 ========================= */
 
 function addToCart(id){
 
-const product =
-products.find(
-p => p.id === id
-);
+const product=products.find(p=>p.id===id);
 
-if(!product){
-return;
-}
+if(!product)return;
 
-const existing =
-cart.find(
-item => item.id === id
-);
+const existing=cart.find(p=>p.id===id);
 
-if(existing){
-
+if(existing)
 existing.quantity++;
-
-}else{
-
-cart.push({
-...product,
-quantity:1
-});
-
-}
+else
+cart.push({...product,quantity:1});
 
 updateCart();
 
@@ -1615,64 +1901,45 @@ showToast(
 
 }
 
-
 function getProductsTotal(){
 
 return cart.reduce(
-(sum,item) =>
-sum +
-Number(item.price) *
-Number(item.quantity),
+(sum,item)=>
+sum+
+Number(item.price)*Number(item.quantity),
 0
 );
 
 }
-
 
 function updateCart(){
 
-const count =
-cart.reduce(
-(sum,item) =>
-sum + item.quantity,
+const count=cart.reduce(
+(sum,item)=>sum+item.quantity,
 0
 );
 
-document.getElementById(
-"cartCount"
-).textContent = count;
+document.getElementById("cartCount").textContent=count;
 
+const box=document.getElementById("cartItems");
 
-const box =
-document.getElementById(
-"cartItems"
-);
+if(!cart.length){
 
-
-if(cart.length === 0){
-
-box.innerHTML =
+box.innerHTML=
 '<div class="empty">السلة فارغة</div>';
 
-document.getElementById(
-"cartTotal"
-).textContent = "0";
+document.getElementById("cartTotal").textContent="0";
 
 return;
-
 }
 
-
-box.innerHTML =
-cart.map(item => `
+box.innerHTML=cart.map(item=>`
 
 <div class="cart-item">
 
 <div>
 
-<strong>
-${item.name}
-</strong>
+<strong>${item.name}</strong>
 
 <div style="margin-top:5px">
 ${formatPrice(item.price)} دج
@@ -1682,19 +1949,13 @@ ${formatPrice(item.price)} دج
 
 <div class="qty">
 
-<button
-onclick="changeQuantity(${item.id},1)"
->
+<button onclick="changeQuantity(${item.id},1)">
 +
 </button>
 
-<span>
-${item.quantity}
-</span>
+<span>${item.quantity}</span>
 
-<button
-onclick="changeQuantity(${item.id},-1)"
->
+<button onclick="changeQuantity(${item.id},-1)">
 −
 </button>
 
@@ -1704,36 +1965,22 @@ onclick="changeQuantity(${item.id},-1)"
 
 `).join("");
 
-
-document.getElementById(
-"cartTotal"
-).textContent =
-formatPrice(
-getProductsTotal()
-);
+document.getElementById("cartTotal").textContent=
+formatPrice(getProductsTotal());
 
 }
-
 
 function changeQuantity(id,change){
 
-const item =
-cart.find(
-p => p.id === id
-);
+const item=cart.find(p=>p.id===id);
 
-if(!item){
-return;
-}
+if(!item)return;
 
-item.quantity += change;
+item.quantity+=change;
 
-if(item.quantity <= 0){
+if(item.quantity<=0){
 
-cart =
-cart.filter(
-p => p.id !== id
-);
+cart=cart.filter(p=>p.id!==id);
 
 }
 
@@ -1744,214 +1991,132 @@ updateCheckoutSummary();
 
 
 /* =========================
-   CART OPEN
+CART OPEN
 ========================= */
 
 function openCart(){
 
-document
-.getElementById("cartDrawer")
+document.getElementById("cartDrawer")
 .classList.add("open");
 
-document
-.getElementById("overlay")
+document.getElementById("overlay")
 .classList.add("open");
 
 }
 
 function closeCart(){
 
-document
-.getElementById("cartDrawer")
+document.getElementById("cartDrawer")
 .classList.remove("open");
 
-document
-.getElementById("overlay")
+document.getElementById("overlay")
 .classList.remove("open");
 
 }
 
 
 /* =========================
-   CHECKOUT
+CHECKOUT
 ========================= */
 
 function openCheckout(){
 
-if(cart.length === 0){
+if(!cart.length){
 
-showToast(
-"السلة فارغة",
-"error"
-);
+showToast("السلة فارغة","error");
 
 return;
-
 }
 
 updateCheckoutSummary();
 
-document
-.getElementById("checkoutModal")
+document.getElementById("checkoutModal")
 .classList.add("open");
 
 }
 
 function closeCheckout(){
 
-document
-.getElementById("checkoutModal")
+document.getElementById("checkoutModal")
 .classList.remove("open");
 
 }
 
-
-/* =========================
-   CHECKOUT SUMMARY
-========================= */
-
 function updateCheckoutSummary(){
 
-const productsTotal =
-getProductsTotal();
+const productsTotal=getProductsTotal();
 
-const wilayaCode =
-document.getElementById(
-"wilaya"
-).value;
+const code=document.getElementById("wilaya").value;
 
-let deliveryPrice = 0;
+const delivery=code?
+getShippingPrice(code):0;
 
-if(wilayaCode){
+const total=productsTotal+delivery;
 
-deliveryPrice =
-getShippingPrice(
-wilayaCode
-);
+document.getElementById("summaryProducts")
+.textContent=formatPrice(productsTotal);
 
-}
+document.getElementById("summaryDelivery")
+.textContent=formatPrice(delivery);
 
-const finalTotal =
-productsTotal +
-deliveryPrice;
+document.getElementById("summaryTotal")
+.textContent=formatPrice(total);
 
+const info=document.getElementById("deliveryInfo");
 
-document.getElementById(
-"summaryProducts"
-).textContent =
-formatPrice(productsTotal);
+if(!code){
 
-document.getElementById(
-"summaryDelivery"
-).textContent =
-formatPrice(deliveryPrice);
-
-document.getElementById(
-"summaryTotal"
-).textContent =
-formatPrice(finalTotal);
-
-
-const info =
-document.getElementById(
-"deliveryInfo"
-);
-
-if(!wilayaCode){
-
-info.textContent =
+info.textContent=
 "اختر الولاية لمعرفة سعر التوصيل.";
 
 return;
-
 }
 
-info.textContent =
-"سعر التوصيل: " +
-formatPrice(deliveryPrice) +
-" دج • " +
-getShippingLabel(wilayaCode);
+info.textContent=
+"سعر التوصيل: "+
+formatPrice(delivery)+
+" دج • "+
+getShippingLabel(code);
 
 }
-
-
-document
-.getElementById("wilaya")
-.addEventListener(
-"change",
-updateCheckoutSummary
-);
 
 
 /* =========================
-   CONFIRM ORDER
+CONFIRM ORDER
 ========================= */
 
 async function confirmOrder(){
 
-if(cart.length === 0){
+if(!cart.length){
 
-showToast(
-"السلة فارغة",
-"error"
-);
+showToast("السلة فارغة","error");
 
 return;
-
 }
 
-const button =
-document.getElementById(
-"confirmButton"
-);
+const button=document.getElementById("confirmButton");
 
+const name=document.getElementById("customerName").value.trim();
 
-const name =
-document.getElementById(
-"customerName"
-).value.trim();
+const phone=document.getElementById("customerPhone").value.trim();
 
-const phone =
-document.getElementById(
-"customerPhone"
-).value.trim();
+const select=document.getElementById("wilaya");
 
-const wilayaSelect =
-document.getElementById(
-"wilaya"
-);
+const wilayaCode=select.value;
 
-const wilayaCode =
-wilayaSelect.value;
+const wilayaName=
+select.options[select.selectedIndex]?.text||"";
 
-const wilayaName =
-wilayaSelect.options[
-wilayaSelect.selectedIndex
-]?.text || "";
+const municipality=
+document.getElementById("municipality").value.trim();
 
-const municipality =
-document.getElementById(
-"municipality"
-).value.trim();
+const address=
+document.getElementById("customerAddress").value.trim();
 
-const address =
-document.getElementById(
-"customerAddress"
-).value.trim();
+const deliveryMethod=
+document.getElementById("deliveryMethod").value;
 
-const deliveryMethod =
-document.getElementById(
-"deliveryMethod"
-).value;
-
-
-if(
-!name ||
-!phone ||
-!wilayaCode ||
-!municipality ||
-!address
-){
+if(!name||!phone||!wilayaCode||!municipality||!address){
 
 showToast(
 "يرجى ملء جميع معلومات الطلب",
@@ -1959,171 +2124,97 @@ showToast(
 );
 
 return;
-
 }
 
+const productsTotal=getProductsTotal();
 
-const productsTotal =
-getProductsTotal();
+const deliveryPrice=getShippingPrice(wilayaCode);
 
-const deliveryPrice =
-getShippingPrice(
-wilayaCode
-);
+const finalTotal=productsTotal+deliveryPrice;
 
-const finalTotal =
-productsTotal +
-deliveryPrice;
-
-
-const productsData =
-cart.map(item => ({
+const productsData=cart.map(item=>({
 
 id:item.id,
-
 name:item.name,
-
 price:Number(item.price),
-
 quantity:Number(item.quantity),
-
-subtotal:
-Number(item.price) *
-Number(item.quantity)
+subtotal:Number(item.price)*Number(item.quantity)
 
 }));
 
-
-button.disabled = true;
-
-button.textContent =
-"جاري تسجيل الطلب...";
-
+button.disabled=true;
+button.textContent="جاري تسجيل الطلب...";
 
 try{
 
-const {error} =
-await supabaseClient
+const {error}=await supabaseClient
 .from("orders")
 .insert({
 
 customer_name:name,
-
 phone:phone,
-
 status:"new",
 
-delivery_price:
-deliveryPrice,
+delivery_price:deliveryPrice,
+products_total:productsTotal,
+total_price:finalTotal,
 
-products_total:
-productsTotal,
+products:productsData,
 
-total_price:
-finalTotal,
+delivery_method:deliveryMethod,
 
-products:
-productsData,
+subtotal:productsTotal,
+shipping_cost:deliveryPrice,
+total:finalTotal,
 
-delivery_method:
-deliveryMethod,
-
-subtotal:
-productsTotal,
-
-shipping_cost:
-deliveryPrice,
-
-total:
-finalTotal,
-
-address:
-address,
-
+address:address,
 notes:"",
 
-delivery_type:
-deliveryMethod,
+delivery_type:deliveryMethod,
 
-wilaya_code:
-wilayaCode,
-
-wilaya_name:
-wilayaName,
-
-municipality:
-municipality
+wilaya_code:wilayaCode,
+wilaya_name:wilayaName,
+municipality:municipality
 
 });
 
-
-if(error){
-
-throw error;
-
-}
-
+if(error)throw error;
 
 closeCheckout();
 closeCart();
 
-cart = [];
+cart=[];
 
 updateCart();
 
-
-document.getElementById(
-"customerName"
-).value = "";
-
-document.getElementById(
-"customerPhone"
-).value = "";
-
-document.getElementById(
-"wilaya"
-).value = "";
-
-document.getElementById(
-"municipality"
-).value = "";
-
-document.getElementById(
-"customerAddress"
-).value = "";
-
-document.getElementById(
-"deliveryMethod"
-).value =
+document.getElementById("customerName").value="";
+document.getElementById("customerPhone").value="";
+document.getElementById("wilaya").value="";
+document.getElementById("municipality").value="";
+document.getElementById("customerAddress").value="";
+document.getElementById("deliveryMethod").value=
 "التوصيل إلى المنزل";
 
 updateCheckoutSummary();
-
 
 showToast(
 "تم تسجيل طلبك بنجاح ✓ شكراً لثقتك بـ Easy Shop Algeria",
 "success"
 );
 
-
 }catch(error){
 
-console.error(
-"ORDER ERROR:",
-error
-);
+console.error(error);
 
 showToast(
-"حدث خطأ أثناء تسجيل الطلب. حاول مرة أخرى.",
+"حدث خطأ أثناء تسجيل الطلب.",
 "error"
 );
 
 }finally{
 
-button.disabled = false;
-
-button.textContent =
-"تأكيد الطلب";
+button.disabled=false;
+button.textContent="تأكيد الطلب";
 
 }
 
@@ -2131,74 +2222,50 @@ button.textContent =
 
 
 /* =========================
-   FILTER
+FILTER
 ========================= */
 
-function filterCategory(
-category,
-button
-){
+function filterCategory(category,button){
 
-document
-.querySelectorAll(".category")
-.forEach(
-btn =>
-btn.classList.remove(
-"active"
-)
-);
+document.querySelectorAll(".category")
+.forEach(btn=>btn.classList.remove("active"));
 
-button.classList.add(
-"active"
-);
+button.classList.add("active");
 
-if(category === "all"){
+if(category==="all"){
 
 renderProducts(products);
-
 return;
 
 }
 
 renderProducts(
-products.filter(
-product =>
-product.category === category
-)
+products.filter(p=>p.category===category)
 );
 
 }
 
 
 /* =========================
-   SEARCH
+SEARCH
 ========================= */
 
 function searchProducts(){
 
-const query =
-document
-.getElementById(
-"searchInput"
-)
-.value
-.trim()
-.toLowerCase();
+const query=
+document.getElementById("searchInput")
+.value.trim().toLowerCase();
 
 if(!query){
 
 renderProducts(products);
-
 return;
 
 }
 
 renderProducts(
-products.filter(
-product =>
-product.name
-.toLowerCase()
-.includes(query)
+products.filter(p=>
+p.name.toLowerCase().includes(query)
 )
 );
 
@@ -2206,101 +2273,69 @@ product.name
 
 
 /* =========================
-   ADMIN LOGIN
+ADMIN LOGIN
 ========================= */
 
 function openAdminLogin(){
 
-document.getElementById(
-"loginError"
-).textContent = "";
+document.getElementById("loginError").textContent="";
 
-document
-.getElementById("loginModal")
+document.getElementById("loginModal")
 .classList.add("open");
 
 }
 
 function closeAdminLogin(){
 
-document
-.getElementById("loginModal")
+document.getElementById("loginModal")
 .classList.remove("open");
 
 }
 
-
 async function adminLogin(){
 
-const email =
-document
-.getElementById(
-"adminEmail"
-)
-.value
-.trim();
+const email=
+document.getElementById("adminEmail")
+.value.trim();
 
-const password =
-document
-.getElementById(
-"adminPassword"
-)
+const password=
+document.getElementById("adminPassword")
 .value;
 
-const button =
-document.getElementById(
-"loginButton"
-);
+const button=
+document.getElementById("loginButton");
 
+if(!email||!password){
 
-if(!email || !password){
-
-document.getElementById(
-"loginError"
-).textContent =
+document.getElementById("loginError")
+.textContent=
 "أدخل البريد الإلكتروني وكلمة المرور.";
 
 return;
-
 }
 
+button.disabled=true;
+button.textContent="جاري الدخول...";
 
-button.disabled = true;
-
-button.textContent =
-"جاري الدخول...";
-
-
-const {error} =
-await supabaseClient.auth
+const {error}=await supabaseClient.auth
 .signInWithPassword({
-
-email:email,
-
-password:password
-
+email,
+password
 });
 
-
-button.disabled = false;
-
-button.textContent =
-"دخول";
-
+button.disabled=false;
+button.textContent="دخول";
 
 if(error){
 
-document.getElementById(
-"loginError"
-).textContent =
+document.getElementById("loginError")
+.textContent=
 "فشل تسجيل الدخول.";
 
 console.error(error);
 
 return;
-
 }
-
 
 closeAdminLogin();
 
@@ -2312,39 +2347,30 @@ loadOrders();
 
 
 /* =========================
-   ADMIN PAGE
+ADMIN PAGE
 ========================= */
 
 function showAdminPage(){
 
-document.getElementById(
-"storePage"
-).style.display =
-"none";
+document.getElementById("storePage")
+.style.display="none";
 
-document.getElementById(
-"adminPage"
-).style.display =
-"block";
+document.getElementById("adminPage")
+.style.display="block";
 
 window.scrollTo(0,0);
 
 }
-
 
 async function adminLogout(){
 
 await supabaseClient.auth.signOut();
 
-document.getElementById(
-"adminPage"
-).style.display =
-"none";
+document.getElementById("adminPage")
+.style.display="none";
 
-document.getElementById(
-"storePage"
-).style.display =
-"block";
+document.getElementById("storePage")
+.style.display="block";
 
 window.scrollTo(0,0);
 
@@ -2352,88 +2378,68 @@ window.scrollTo(0,0);
 
 
 /* =========================
-   STATUS
+STATUS
 ========================= */
 
 function statusText(status){
 
-const statuses = {
+const statuses={
 
 new:"جديد",
-
 processing:"قيد المعالجة",
-
 shipped:"تم الشحن",
-
 delivered:"تم التوصيل",
-
 cancelled:"ملغى"
 
 };
 
-return statuses[status] || "جديد";
+return statuses[status]||"جديد";
 
 }
 
-
 function statusClass(status){
 
-const classes = {
+const classes={
 
 processing:"status-processing",
-
 shipped:"status-shipped",
-
 delivered:"status-delivered",
-
 cancelled:"status-cancelled"
 
 };
 
-return classes[status] || "";
+return classes[status]||"";
 
 }
 
 
 /* =========================
-   LOAD ORDERS
+LOAD ORDERS
 ========================= */
 
 async function loadOrders(){
 
-document.getElementById(
-"ordersList"
-).innerHTML =
+document.getElementById("ordersList").innerHTML=
 '<div class="loading">جاري تحميل الطلبات...</div>';
 
-
-const {data,error} =
-await supabaseClient
+const {data,error}=await supabaseClient
 .from("orders")
 .select("*")
-.order(
-"created_at",
-{
-ascending:false
-}
-);
-
+.order("created_at",{ascending:false});
 
 if(error){
 
 console.error(error);
 
-document.getElementById(
-"ordersList"
-).innerHTML =
+document.getElementById("ordersList").innerHTML=
 '<div class="no-orders">تعذر تحميل الطلبات.</div>';
 
 return;
-
 }
 
+orders=data||[];
 
-orders = data || [];
+updateStatistics();
 
 renderOrders();
 
@@ -2441,108 +2447,242 @@ renderOrders();
 
 
 /* =========================
-   RENDER ORDERS
+STATISTICS
 ========================= */
 
-function renderOrders(){
+function getOrderTotal(order){
 
-const search =
-document.getElementById(
-"orderSearch"
-)
-.value
-.trim()
-.toLowerCase();
-
-const filter =
-document.getElementById(
-"statusFilter"
-).value;
-
-
-const filtered =
-orders.filter(order => {
-
-const statusMatch =
-filter === "all" ||
-order.status === filter;
-
-const text =
+return Number(
+order.total ??
+order.total_price ??
 (
-(order.customer_name || "") +
-" " +
-(order.phone || "")
+Number(order.products_total||0)+
+Number(order.delivery_price||0)
 )
-.toLowerCase();
+);
 
-const searchMatch =
-!search ||
-text.includes(search);
+}
 
-return statusMatch &&
-searchMatch;
+function updateStatistics(){
+
+const totalOrders=orders.length;
+
+const newOrders=
+orders.filter(o=>o.status==="new").length;
+
+const shipped=
+orders.filter(o=>o.status==="shipped").length;
+
+const delivered=
+orders.filter(o=>o.status==="delivered").length;
+
+const cancelled=
+orders.filter(o=>o.status==="cancelled").length;
+
+const validOrders=
+orders.filter(o=>o.status!=="cancelled");
+
+const sales=
+validOrders.reduce(
+(sum,o)=>sum+getOrderTotal(o),
+0
+);
+
+document.getElementById("statOrders")
+.textContent=totalOrders;
+
+document.getElementById("statNew")
+.textContent=newOrders;
+
+document.getElementById("statShipped")
+.textContent=shipped;
+
+document.getElementById("statDelivered")
+.textContent=delivered;
+
+document.getElementById("statCancelled")
+.textContent=cancelled;
+
+document.getElementById("statSales")
+.textContent=formatPrice(sales)+" دج";
+
+
+/* TODAY */
+
+const now=new Date();
+
+const todaySales=
+validOrders
+.filter(order=>{
+
+if(!order.created_at)return false;
+
+const d=new Date(order.created_at);
+
+return d.getFullYear()===now.getFullYear() &&
+d.getMonth()===now.getMonth() &&
+d.getDate()===now.getDate();
+
+})
+.reduce(
+(sum,o)=>sum+getOrderTotal(o),
+0
+);
+
+document.getElementById("statToday")
+.textContent=
+formatPrice(todaySales)+" دج";
+
+
+/* MONTH */
+
+const monthSales=
+validOrders
+.filter(order=>{
+
+if(!order.created_at)return false;
+
+const d=new Date(order.created_at);
+
+return d.getFullYear()===now.getFullYear() &&
+d.getMonth()===now.getMonth();
+
+})
+.reduce(
+(sum,o)=>sum+getOrderTotal(o),
+0
+);
+
+document.getElementById("statMonth")
+.textContent=
+formatPrice(monthSales)+" دج";
+
+
+/* BEST PRODUCTS */
+
+const productStats={};
+
+validOrders.forEach(order=>{
+
+const list=
+Array.isArray(order.products)
+?order.products:[];
+
+list.forEach(item=>{
+
+const name=item.name||"منتج";
+
+if(!productStats[name])
+productStats[name]=0;
+
+productStats[name]+=
+Number(item.quantity||0);
 
 });
 
+});
 
-const box =
-document.getElementById(
-"ordersList"
-);
+const best=
+Object.entries(productStats)
+.sort((a,b)=>b[1]-a[1])
+.slice(0,5);
 
+const bestBox=
+document.getElementById("bestProducts");
 
-if(filtered.length === 0){
+if(!best.length){
 
-box.innerHTML =
-'<div class="no-orders">لا توجد طلبات مطابقة.</div>';
+bestBox.innerHTML=
+'<div style="color:#777">لا توجد بيانات بعد.</div>';
 
 return;
+}
+
+bestBox.innerHTML=
+best.map((item,index)=>`
+
+<div class="best-row">
+
+<div class="best-name">
+${index+1}. ${item[0]}
+</div>
+
+<div class="best-quantity">
+${item[1]} قطعة
+</div>
+
+</div>
+
+`).join("");
 
 }
 
 
-box.innerHTML =
-filtered.map(order => {
+/* =========================
+RENDER ORDERS
+========================= */
 
-const productsData =
-Array.isArray(order.products)
-? order.products
-: [];
+function renderOrders(){
 
+const search=
+document.getElementById("orderSearch")
+.value.trim().toLowerCase();
 
-const total =
-Number(
-order.total ??
-order.total_price ??
+const filter=
+document.getElementById("statusFilter").value;
+
+const filtered=orders.filter(order=>{
+
+const statusMatch=
+filter==="all" ||
+order.status===filter;
+
+const text=
 (
-Number(
-order.products_total || 0
-) +
-Number(
-order.delivery_price || 0
-)
-)
-);
+(order.customer_name||"")+
+" "+
+(order.phone||"")
+).toLowerCase();
 
+const searchMatch=
+!search||text.includes(search);
 
-const productsHtml =
-productsData.map(item => `
+return statusMatch&&searchMatch;
+
+});
+
+const box=document.getElementById("ordersList");
+
+if(!filtered.length){
+
+box.innerHTML=
+'<div class="no-orders">لا توجد طلبات مطابقة.</div>';
+
+return;
+}
+
+box.innerHTML=
+filtered.map(order=>{
+
+const productsData=
+Array.isArray(order.products)
+?order.products:[];
+
+const total=getOrderTotal(order);
+
+const productsHtml=
+productsData.map(item=>`
 
 <div class="product-line">
 
 <span>
-${item.name}
-×
-${item.quantity}
+${item.name} × ${item.quantity}
 </span>
 
 <strong>
 ${formatPrice(
 item.subtotal ??
-(
-item.price *
-item.quantity
-)
+Number(item.price||0)*Number(item.quantity||0)
 )}
 دج
 </strong>
@@ -2551,6 +2691,17 @@ item.quantity
 
 `).join("");
 
+/*
+  رقم الطلب:
+  إذا كان order_number موجوداً نعرضه.
+  وإلا نستعمل id كحل احتياطي.
+*/
+
+const orderNumber=
+order.order_number !== null &&
+order.order_number !== undefined
+?order.order_number
+:"-";
 
 return `
 
@@ -2561,24 +2712,32 @@ return `
 <div>
 
 <div class="order-name">
-👤 ${order.customer_name || "-"}
+👤 ${order.customer_name||"-"}
 </div>
 
 <div class="order-id">
-رقم الطلب: #${order.order_number || "-"}
+
+رقم الطلب:
+<strong style="color:#087f5b">
+#${orderNumber}
+</strong>
+
 <br>
-${order.created_at
-? new Date(order.created_at)
+
+${order.created_at?
+new Date(order.created_at)
 .toLocaleString("ar-DZ")
-: ""}
+:""}
+
 </div>
 
 </div>
 
 <span
-class="status-badge ${statusClass(order.status)}"
->
+class="status-badge ${statusClass(order.status)}">
+
 ${statusText(order.status)}
+
 </span>
 
 </div>
@@ -2588,15 +2747,14 @@ ${statusText(order.status)}
 
 <div class="info-box">
 
-<strong>
-📞 الهاتف
-</strong>
+<strong>📞 الهاتف</strong>
 
 <a
-href="tel:${order.phone || ""}"
-style="color:#087f5b"
->
-${order.phone || "-"}
+href="tel:${order.phone||""}"
+style="color:#087f5b">
+
+${order.phone||"-"}
+
 </a>
 
 </div>
@@ -2604,12 +2762,10 @@ ${order.phone || "-"}
 
 <div class="info-box">
 
-<strong>
-📍 الولاية
-</strong>
+<strong>📍 الولاية</strong>
 
-${order.wilaya_name ||
-order.wilaya_code ||
+${order.wilaya_name||
+order.wilaya_code||
 "-"}
 
 </div>
@@ -2617,23 +2773,19 @@ order.wilaya_code ||
 
 <div class="info-box">
 
-<strong>
-🏘️ البلدية
-</strong>
+<strong>🏘️ البلدية</strong>
 
-${order.municipality || "-"}
+${order.municipality||"-"}
 
 </div>
 
 
 <div class="info-box">
 
-<strong>
-🚚 التوصيل
-</strong>
+<strong>🚚 التوصيل</strong>
 
-${order.delivery_type ||
-order.delivery_method ||
+${order.delivery_type||
+order.delivery_method||
 "-"}
 
 </div>
@@ -2641,14 +2793,11 @@ order.delivery_method ||
 
 <div
 class="info-box"
-style="grid-column:1/-1"
->
+style="grid-column:1/-1">
 
-<strong>
-🏠 العنوان
-</strong>
+<strong>🏠 العنوان</strong>
 
-${order.address || "-"}
+${order.address||"-"}
 
 </div>
 
@@ -2676,72 +2825,69 @@ ${formatPrice(total)}
 
 <div class="status-actions">
 
-<select
-id="status-${order.id}"
->
+<select id="status-${order.id}">
 
-<option
-value="new"
-${order.status === "new"
-? "selected"
-: ""}
->
+<option value="new"
+${order.status==="new"?"selected":""}>
 جديد
 </option>
 
-<option
-value="processing"
-${order.status === "processing"
-? "selected"
-: ""}
->
+<option value="processing"
+${order.status==="processing"?"selected":""}>
 قيد المعالجة
 </option>
 
-<option
-value="shipped"
-${order.status === "shipped"
-? "selected"
-: ""}
->
+<option value="shipped"
+${order.status==="shipped"?"selected":""}>
 تم الشحن
 </option>
 
-<option
-value="delivered"
-${order.status === "delivered"
-? "selected"
-: ""}
->
+<option value="delivered"
+${order.status==="delivered"?"selected":""}>
 تم التوصيل
 </option>
 
-<option
-value="cancelled"
-${order.status === "cancelled"
-? "selected"
-: ""}
->
+<option value="cancelled"
+${order.status==="cancelled"?"selected":""}>
 ملغى
 </option>
 
 </select>
 
-
 <button
 class="save-status"
-onclick="saveOrderStatus('${order.id}')"
->
-حفظ الحالة
-</button>
+onclick="saveOrderStatus('${order.id}')">
 
+حفظ الحالة
+
+</button>
 
 <a
 class="call-btn"
-href="tel:${order.phone || ""}"
->
+href="tel:${order.phone||""}">
 📞 اتصال
 </a>
+
+</div>
+
+
+<div class="order-actions">
+
+<button
+class="edit-btn"
+onclick="editOrder('${order.id}')">
+
+✏️ تعديل الطلب
+
+</button>
+
+<button
+class="delete-btn"
+onclick="deleteOrder('${order.id}')">
+
+🗑️ حذف الطلب
+
+</button>
 
 </div>
 
@@ -2755,31 +2901,24 @@ href="tel:${order.phone || ""}"
 
 
 /* =========================
-   SAVE STATUS
+SAVE STATUS
 ========================= */
 
 async function saveOrderStatus(id){
 
-const select =
-document.getElementById(
-"status-" + id
-);
+const select=
+document.getElementById("status-"+id);
 
-const newStatus =
-select.value;
+if(!select)return;
 
+const newStatus=select.value;
 
-const {error} =
-await supabaseClient
+const {error}=await supabaseClient
 .from("orders")
 .update({
 status:newStatus
 })
-.eq(
-"id",
-id
-);
-
+.eq("id",id);
 
 if(error){
 
@@ -2791,28 +2930,18 @@ showToast(
 );
 
 return;
-
 }
 
-
-const order =
-orders.find(
-item =>
-String(item.id) ===
-String(id)
+const order=orders.find(
+item=>String(item.id)===String(id)
 );
 
+if(order)
+order.status=newStatus;
 
-if(order){
-
-order.status =
-newStatus;
-
-}
-
+updateStatistics();
 
 renderOrders();
-
 
 showToast(
 "تم حفظ حالة الطلب ✓",
@@ -2823,63 +2952,283 @@ showToast(
 
 
 /* =========================
-   TOAST
+DELETE ORDER
 ========================= */
 
-function showToast(
-message,
-type="success"
+async function deleteOrder(id){
+
+const order=orders.find(
+item=>String(item.id)===String(id)
+);
+
+if(!order)return;
+
+const number=
+order.order_number ??
+id;
+
+const confirmed=confirm(
+"هل أنت متأكد من حذف الطلب #"+
+number+
+"؟\n\nلا يمكن التراجع عن هذه العملية."
+);
+
+if(!confirmed)return;
+
+const {error}=await supabaseClient
+.from("orders")
+.delete()
+.eq("id",id);
+
+if(error){
+
+console.error(error);
+
+showToast(
+"تعذر حذف الطلب. تحقق من صلاحيات Supabase.",
+"error"
+);
+
+return;
+}
+
+orders=orders.filter(
+item=>String(item.id)!==String(id)
+);
+
+updateStatistics();
+
+renderOrders();
+
+showToast(
+"تم حذف الطلب بنجاح ✓",
+"success"
+);
+
+}
+
+
+/* =========================
+EDIT ORDER
+========================= */
+
+function editOrder(id){
+
+const order=orders.find(
+item=>String(item.id)===String(id)
+);
+
+if(!order)return;
+
+document.getElementById("editOrderId").value=
+order.id;
+
+document.getElementById("editCustomerName").value=
+order.customer_name||"";
+
+document.getElementById("editCustomerPhone").value=
+order.phone||"";
+
+document.getElementById("editWilaya").value=
+order.wilaya_code||"";
+
+document.getElementById("editMunicipality").value=
+order.municipality||"";
+
+document.getElementById("editAddress").value=
+order.address||"";
+
+document.getElementById("editDelivery").value=
+order.delivery_type||
+order.delivery_method||
+"التوصيل إلى المنزل";
+
+document.getElementById("editOrderModal")
+.classList.add("open");
+
+}
+
+function closeEditOrder(){
+
+document.getElementById("editOrderModal")
+.classList.remove("open");
+
+}
+
+async function saveEditedOrder(){
+
+const id=
+document.getElementById("editOrderId").value;
+
+const name=
+document.getElementById("editCustomerName")
+.value.trim();
+
+const phone=
+document.getElementById("editCustomerPhone")
+.value.trim();
+
+const wilayaCode=
+document.getElementById("editWilaya").value;
+
+const select=
+document.getElementById("editWilaya");
+
+const wilayaName=
+select.options[select.selectedIndex]?.text||"";
+
+const municipality=
+document.getElementById("editMunicipality")
+.value.trim();
+
+const address=
+document.getElementById("editAddress")
+.value.trim();
+
+const delivery=
+document.getElementById("editDelivery").value;
+
+if(
+!name||
+!phone||
+!wilayaCode||
+!municipality||
+!address
 ){
 
-const toast =
-document.getElementById(
-"toast"
+showToast(
+"يرجى ملء جميع المعلومات.",
+"error"
 );
 
-toast.textContent =
-message;
+return;
+}
 
-toast.className =
-"toast show " + type;
-
-
-setTimeout(() => {
-
-toast.classList.remove(
-"show"
+const order=orders.find(
+item=>String(item.id)===String(id)
 );
 
+if(!order)return;
+
+const newDeliveryPrice=
+getShippingPrice(wilayaCode);
+
+const productsTotal=
+Number(
+order.products_total||
+order.subtotal||
+0
+);
+
+const newTotal=
+productsTotal+newDeliveryPrice;
+
+const {data,error}=await supabaseClient
+.from("orders")
+.update({
+
+customer_name:name,
+phone:phone,
+
+wilaya_code:wilayaCode,
+wilaya_name:wilayaName,
+
+municipality:municipality,
+address:address,
+
+delivery_type:delivery,
+delivery_method:delivery,
+
+delivery_price:newDeliveryPrice,
+shipping_cost:newDeliveryPrice,
+
+total_price:newTotal,
+total:newTotal
+
+})
+.eq("id",id)
+.select()
+.single();
+
+if(error){
+
+console.error(error);
+
+showToast(
+"تعذر حفظ التعديلات.",
+"error"
+);
+
+return;
+}
+
+const index=orders.findIndex(
+item=>String(item.id)===String(id)
+);
+
+if(index!==-1)
+orders[index]=data;
+
+closeEditOrder();
+
+updateStatistics();
+
+renderOrders();
+
+showToast(
+"تم تعديل الطلب بنجاح ✓",
+"success"
+);
+
+}
+
+
+/* =========================
+TOAST
+========================= */
+
+function showToast(message,type="success"){
+
+const toast=document.getElementById("toast");
+
+toast.textContent=message;
+
+toast.className="toast show "+type;
+
+setTimeout(()=>{
+toast.classList.remove("show");
 },4000);
 
 }
 
 
 /* =========================
-   START
+START
 ========================= */
 
 document
-.getElementById(
-"searchInput"
-)
+.getElementById("searchInput")
 .addEventListener(
 "input",
 searchProducts
 );
 
+document
+.getElementById("wilaya")
+.addEventListener(
+"change",
+updateCheckoutSummary
+);
 
 function scrollToProducts(){
 
 document
-.getElementById(
-"productsSection"
-)
+.getElementById("productsSection")
 .scrollIntoView({
 behavior:"smooth"
 });
 
 }
-
 
 renderProducts();
 
@@ -2888,10 +3237,11 @@ updateCart();
 updateCheckoutSummary();
 
 
-/* إذا كان المدير مسجل الدخول */
+/* SESSION */
+
 supabaseClient.auth
 .getSession()
-.then(({data}) => {
+.then(({data})=>{
 
 if(data.session){
 
