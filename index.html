@@ -440,9 +440,9 @@ async function loadProducts(){
         console.error(error);
 
         container.innerHTML =
-            '<div class="error">' +
-            'تعذر تحميل المنتجات. تأكد من إعدادات Supabase.' +
-            '</div>';
+    '<div class="error">' +
+    'خطأ Supabase: ' + (error.message || error) +
+    '</div>';
     }
 }
 
