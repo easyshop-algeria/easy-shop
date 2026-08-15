@@ -15,10 +15,21 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 
+:root{
+--navy:#102544;
+--navy-dark:#0b1c35;
+--navy-light:#19365d;
+--gold:#d6a21d;
+--gold-dark:#b8870b;
+--cream:#fbfaf6;
+--bg:#f5f7fa;
+--green:#087f5b
+}
+
 body{
 font-family:Cairo,Arial,sans-serif;
-background:#f5f7fa;
-color:#172033;
+background:var(--bg);
+color:var(--navy);
 line-height:1.6
 }
 
@@ -27,14 +38,22 @@ button{cursor:pointer;border:0}
 img{max-width:100%}
 .hidden{display:none!important}
 
+/* =========================
+   TOP BAR
+========================= */
+
 .topbar{
-background:#087f5b;
+background:var(--navy);
 color:#fff;
 text-align:center;
 padding:8px 15px;
 font-size:14px;
 font-weight:800
 }
+
+/* =========================
+   HEADER
+========================= */
 
 header{
 background:#fff;
@@ -87,7 +106,7 @@ font-size:16px
 }
 
 .search button{
-background:#087f5b;
+background:var(--navy);
 color:#fff;
 padding:0 22px;
 font-size:20px
@@ -99,14 +118,15 @@ background:#fff;
 border:1px solid #ddd;
 border-radius:12px;
 padding:10px 16px;
-font-size:20px
+font-size:20px;
+color:var(--navy)
 }
 
 .cart-count{
 position:absolute;
 top:-7px;
 left:-7px;
-background:#e03131;
+background:var(--gold);
 color:#fff;
 width:23px;
 height:23px;
@@ -117,6 +137,10 @@ align-items:center;
 justify-content:center;
 font-weight:bold
 }
+
+/* =========================
+   BANNER
+========================= */
 
 .hero-banner{
 width:100%;
@@ -130,7 +154,7 @@ width:100%;
 height:300px;
 border-radius:18px;
 overflow:hidden;
-background:linear-gradient(135deg,#087f5b,#0aa36f);
+background:linear-gradient(135deg,var(--navy),var(--navy-light));
 box-shadow:0 5px 25px #00000012;
 position:relative
 }
@@ -153,6 +177,10 @@ font-size:36px;
 font-weight:800
 }
 
+/* =========================
+   MAIN
+========================= */
+
 .container{
 max-width:1250px;
 margin:auto;
@@ -168,8 +196,13 @@ margin:25px 0 15px
 
 .section-title h2{
 font-size:25px;
-font-weight:800
+font-weight:800;
+color:var(--navy)
 }
+
+/* =========================
+   CATEGORIES
+========================= */
 
 .categories{
 display:flex;
@@ -199,8 +232,14 @@ box-shadow:0 4px 15px #0000000a;
 transition:.2s
 }
 
-.category:hover{transform:translateY(-2px)}
-.category.active{border:2px solid #087f5b}
+.category:hover{
+transform:translateY(-2px);
+border-color:#d8b348
+}
+
+.category.active{
+border:2px solid var(--gold)
+}
 
 .category-image{
 width:100%;
@@ -219,12 +258,17 @@ object-fit:cover
 padding:10px 12px;
 font-size:17px;
 text-align:center;
-background:#fff
+background:#fff;
+color:var(--navy)
 }
 
 .category.active .category-name{
-color:#087f5b
+color:var(--navy)
 }
+
+/* =========================
+   PRODUCTS
+========================= */
 
 .products{
 display:grid;
@@ -238,19 +282,20 @@ background:#fff;
 border-radius:16px;
 overflow:hidden;
 border:1px solid #e5e9ec;
-box-shadow:0 4px 16px #0000000a;
+box-shadow:0 4px 16px rgba(16,37,68,.08);
 transition:.2s;
 min-width:0
 }
 
 .product:hover{
-transform:translateY(-2px)
+transform:translateY(-2px);
+box-shadow:0 7px 22px rgba(16,37,68,.12)
 }
 
 .product-gallery{
 position:relative;
 height:320px;
-background:#eef2f4;
+background:#f5f6f7;
 overflow:hidden
 }
 
@@ -278,7 +323,7 @@ transform:translateY(-50%);
 width:38px;
 height:38px;
 border-radius:50%;
-background:#0008;
+background:rgba(16,37,68,.82);
 color:#fff;
 font-size:25px;
 z-index:5
@@ -306,7 +351,7 @@ background:#f1f3f4
 }
 
 .gallery-thumb.active{
-border-color:#087f5b
+border-color:var(--gold)
 }
 
 .gallery-thumb img{
@@ -316,34 +361,51 @@ object-fit:cover;
 border-radius:5px
 }
 
+/* معلومات المنتج */
 .product-info{
-padding:12px 14px 14px
+padding:10px 12px 13px;
+text-align:center
 }
 
+/* اسم المنتج في الوسط وأصغر */
 .product-name{
-font-size:17px;
-font-weight:800;
-min-height:52px;
-line-height:1.55;
+font-size:15px;
+font-weight:700;
+min-height:46px;
+max-height:46px;
+line-height:1.45;
 display:flex;
-align-items:center
+align-items:center;
+justify-content:center;
+text-align:center;
+overflow:hidden;
+color:var(--navy);
+padding:0 4px
 }
 
+/* السعر في الوسط */
 .price{
-color:#087f5b;
-font-size:22px;
+color:var(--gold-dark);
+font-size:20px;
 font-weight:800;
-margin:4px 0
+margin:4px 0;
+text-align:center
 }
 
+/* المخزون في الوسط */
 .stock{
 font-size:13px;
 margin-bottom:9px;
-font-weight:700
+font-weight:700;
+text-align:center
 }
 
 .stock.ok{color:#087f5b}
 .stock.out{color:#d32f2f}
+
+/* =========================
+   PRODUCT BUTTONS
+========================= */
 
 .product-actions{
 display:grid;
@@ -369,18 +431,19 @@ box-shadow:0 4px 10px #00000012
 }
 
 .buy-now-btn{
-background:linear-gradient(135deg,#ffb511,#f59f00);
+background:linear-gradient(135deg,#e0b52d,#c99716);
 color:#fff
 }
 
 .add-btn{
-background:linear-gradient(135deg,#0a9a6d,#087f5b);
+background:linear-gradient(135deg,var(--navy-light),var(--navy));
 color:#fff
 }
 
 .buy-now-btn:hover,
 .add-btn:hover{
-transform:translateY(-2px)
+transform:translateY(-2px);
+box-shadow:0 5px 14px rgba(16,37,68,.18)
 }
 
 button:disabled{
@@ -388,6 +451,10 @@ opacity:.55;
 cursor:not-allowed!important;
 transform:none!important
 }
+
+/* =========================
+   EMPTY
+========================= */
 
 .empty,
 .no-orders{
@@ -399,9 +466,13 @@ border-radius:15px;
 grid-column:1/-1
 }
 
+/* =========================
+   FOOTER
+========================= */
+
 footer{
 margin-top:40px;
-background:#101c32;
+background:var(--navy-dark);
 color:#fff;
 padding:28px;
 text-align:center
@@ -409,11 +480,15 @@ text-align:center
 
 .admin-link{
 margin-top:15px;
-background:#1d2b43;
+background:var(--navy-light);
 color:#fff;
 padding:10px 18px;
 border-radius:9px
 }
+
+/* =========================
+   CART
+========================= */
 
 .overlay{
 display:none;
@@ -486,17 +561,22 @@ color:#c62828
 .total{
 font-size:21px;
 font-weight:bold;
-margin:20px 0
+margin:20px 0;
+color:var(--navy)
 }
 
 .checkout{
 width:100%;
-background:#087f5b;
+background:var(--navy);
 color:#fff;
 padding:14px;
 border-radius:10px;
 font-weight:bold
 }
+
+/* =========================
+   MODALS
+========================= */
 
 .modal{
 display:none;
@@ -559,12 +639,16 @@ border-radius:9px
 
 .confirm{
 flex:2;
-background:#087f5b;
+background:var(--navy);
 color:#fff;
 padding:13px;
 border-radius:9px;
 font-weight:bold
 }
+
+/* =========================
+   CHECKOUT
+========================= */
 
 .checkout-box{
 width:1050px;
@@ -634,7 +718,7 @@ border-top:1px solid #eee
 .checkout-form-card{
 margin:18px;
 background:#fff;
-border:2px solid #087f5b;
+border:2px solid var(--gold);
 border-radius:17px;
 padding:22px;
 box-shadow:0 5px 20px #0000000a
@@ -651,8 +735,8 @@ height:52px
 }
 
 .delivery-info{
-background:#f2fbf7;
-border:1px solid #bce9d9;
+background:#fffaf0;
+border:1px solid #ead48b;
 border-radius:10px;
 padding:12px;
 margin:10px 0 15px;
@@ -680,9 +764,9 @@ border-bottom:0
 }
 
 .checkout-total{
-background:#f2fbf7!important;
+background:#fffaf0!important;
 font-size:21px;
-color:#087f5b
+color:var(--gold-dark)
 }
 
 .checkout-actions{
@@ -695,6 +779,10 @@ margin-top:18px
 .checkout-actions .confirm{
 height:52px
 }
+
+/* =========================
+   PREVIEWS
+========================= */
 
 .multiple-preview{
 display:grid;
@@ -730,6 +818,10 @@ color:#fff;
 font-weight:bold
 }
 
+/* =========================
+   LIGHTBOX
+========================= */
+
 .lightbox{
 display:none;
 position:fixed;
@@ -762,6 +854,10 @@ border-radius:50%;
 font-size:24px
 }
 
+/* =========================
+   TOAST
+========================= */
+
 .toast{
 position:fixed;
 bottom:25px;
@@ -769,7 +865,7 @@ right:25px;
 left:25px;
 max-width:650px;
 margin:auto;
-background:#172033;
+background:var(--navy);
 color:#fff;
 padding:14px 20px;
 border-radius:10px;
@@ -783,6 +879,10 @@ font-weight:600
 .toast.success{background:#087f5b}
 .toast.error{background:#d32f2f}
 
+/* =========================
+   ADMIN
+========================= */
+
 .admin-page{
 display:none;
 min-height:100vh;
@@ -790,7 +890,7 @@ background:#f5f7fa
 }
 
 .admin-head{
-background:#101c32;
+background:var(--navy-dark);
 color:#fff;
 padding:25px 20px
 }
@@ -835,9 +935,9 @@ white-space:nowrap
 }
 
 .admin-nav button.active{
-background:#087f5b;
+background:var(--navy);
 color:#fff;
-border-color:#087f5b
+border-color:var(--navy)
 }
 
 .admin-section{display:none}
@@ -872,7 +972,7 @@ margin-top:8px
 .stat-green{color:#087f5b}
 .stat-purple{color:#673ab7}
 .stat-red{color:#d32f2f}
-.stat-gold{color:#b8860b}
+.stat-gold{color:var(--gold-dark)}
 
 .admin-tools{
 max-width:1200px;
@@ -900,12 +1000,16 @@ min-width:220px
 .refresh,
 .add-product-btn,
 .add-category-btn{
-background:#087f5b;
+background:var(--navy);
 color:#fff;
 padding:13px 20px;
 border-radius:10px;
 font-weight:bold
 }
+
+/* =========================
+   ORDERS
+========================= */
 
 .orders-list{
 max-width:1200px;
@@ -1026,7 +1130,7 @@ font-weight:bold
 }
 
 .save-status{
-background:#087f5b;
+background:var(--navy);
 color:#fff
 }
 
@@ -1040,6 +1144,10 @@ text-decoration:none
 background:#ffe5e5;
 color:#c62828
 }
+
+/* =========================
+   ADMIN PRODUCTS/CATEGORIES
+========================= */
 
 .products-admin,
 .categories-admin{
@@ -1108,7 +1216,7 @@ font-weight:bold
 .admin-product-price{
 font-size:20px;
 font-weight:bold;
-color:#087f5b
+color:var(--gold-dark)
 }
 
 .admin-product-stock{
@@ -1156,6 +1264,10 @@ font-weight:bold
 .product-active{color:#087f5b}
 .product-hidden{color:#c62828}
 
+/* =========================
+   SHIPPING
+========================= */
+
 .shipping-admin{
 max-width:1200px;
 margin:auto;
@@ -1178,7 +1290,7 @@ text-align:center
 }
 
 .shipping-table th{
-background:#101c32;
+background:var(--navy);
 color:#fff
 }
 
@@ -1191,7 +1303,7 @@ text-align:center
 }
 
 .save-shipping{
-background:#087f5b;
+background:var(--navy);
 color:#fff;
 padding:9px 13px;
 border-radius:9px;
@@ -1220,6 +1332,10 @@ overflow:hidden;
 color:#777
 }
 
+/* =========================
+   TABLET
+========================= */
+
 @media(min-width:651px) and (max-width:1100px){
 
 .products{
@@ -1238,6 +1354,10 @@ grid-template-columns:repeat(2,1fr)
 }
 
 }
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:650px){
 
@@ -1277,7 +1397,9 @@ border-radius:13px
 font-size:25px
 }
 
-.container{padding:10px}
+.container{
+padding:10px
+}
 
 .section-title{
 margin:20px 0 12px
@@ -1343,25 +1465,33 @@ height:42px
 }
 
 .product-info{
-padding:7px 8px 9px
+padding:7px 7px 9px;
+text-align:center
 }
 
 .product-name{
-font-size:12.5px;
-line-height:1.45;
-min-height:38px;
-max-height:40px;
-overflow:hidden
+font-size:11.5px;
+line-height:1.4;
+min-height:37px;
+max-height:38px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+overflow:hidden;
+padding:0 3px
 }
 
 .price{
-font-size:17px;
-margin:3px 0
+font-size:16px;
+margin:3px 0;
+text-align:center
 }
 
 .stock{
-font-size:11px;
-margin-bottom:6px
+font-size:10.5px;
+margin-bottom:6px;
+text-align:center
 }
 
 .product-actions{
@@ -1466,6 +1596,10 @@ width:80px
 
 }
 
+/* =========================
+   VERY SMALL PHONES
+========================= */
+
 @media(max-width:390px){
 
 .products{
@@ -1477,21 +1611,25 @@ height:180px
 }
 
 .product-info{
-padding:6px
+padding:6px;
+text-align:center
 }
 
 .product-name{
-font-size:11px;
+font-size:10.5px;
 min-height:34px;
-max-height:36px
+max-height:35px;
+line-height:1.35
 }
 
 .price{
-font-size:15px
+font-size:15px;
+text-align:center
 }
 
 .stock{
-font-size:10px
+font-size:9.5px;
+text-align:center
 }
 
 .buy-now-btn,
