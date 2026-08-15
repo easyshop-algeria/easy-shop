@@ -8,7 +8,7 @@
 <meta name="viewport"
 content="width=device-width,initial-scale=1.0">
 
-<title>Easy Shop Algeria | إيزي شوب الجزائر</title>
+<title>Easy Shop Algeria</title>
 
 <link rel="preconnect"
 href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@ href="https://fonts.googleapis.com">
 href="https://fonts.gstatic.com"
 crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
 rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -35,8 +35,12 @@ margin:0;
 padding:0
 }
 
+html{
+scroll-behavior:smooth
+}
+
 body{
-font-family:"Cairo","Noto Kufi Arabic",Arial,sans-serif;
+font-family:"Cairo",Arial,sans-serif;
 background:#f5f7fa;
 color:#172033;
 line-height:1.7
@@ -71,7 +75,7 @@ TOP BAR
 background:#087f5b;
 color:#fff;
 text-align:center;
-padding:9px;
+padding:9px 15px;
 font-size:14px;
 font-weight:800
 }
@@ -145,7 +149,7 @@ font-size:16px
 
 .search button{
 background:#087f5b;
-color:white;
+color:#fff;
 padding:0 22px;
 font-size:20px
 }
@@ -157,7 +161,7 @@ CART
 
 .cart-btn{
 position:relative;
-background:white;
+background:#fff;
 border:1px solid #ddd;
 border-radius:12px;
 padding:11px 16px;
@@ -169,7 +173,7 @@ position:absolute;
 top:-7px;
 left:-7px;
 background:#e03131;
-color:white;
+color:#fff;
 width:23px;
 height:23px;
 border-radius:50%;
@@ -188,17 +192,42 @@ BANNER
 .hero-banner{
 width:100%;
 max-width:1250px;
-margin:18px auto 5px;
+margin:18px auto 10px;
 padding:0 20px
 }
 
-.hero-banner img{
+.banner-box{
 width:100%;
-height:360px;
-display:block;
+height:330px;
+border-radius:20px;
+overflow:hidden;
+background:linear-gradient(
+135deg,
+#087f5b,
+#0aa36f
+);
+box-shadow:0 5px 25px #00000012;
+position:relative
+}
+
+.banner-box img{
+width:100%;
+height:100%;
 object-fit:cover;
-border-radius:18px;
-box-shadow:0 5px 20px #00000012
+display:block
+}
+
+.banner-fallback{
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+font-size:38px;
+font-weight:800;
+padding:30px
 }
 
 
@@ -243,28 +272,21 @@ padding:5px 3px 15px;
 margin-bottom:25px;
 scroll-behavior:smooth;
 -webkit-overflow-scrolling:touch;
-scrollbar-width:none;
-cursor:grab
+scrollbar-width:none
 }
 
 .categories::-webkit-scrollbar{
 display:none
 }
 
-.categories.dragging{
-cursor:grabbing;
-scroll-behavior:auto
-}
-
 .category{
 flex:0 0 230px;
 width:230px;
 min-width:230px;
-background:white;
+background:#fff;
 border:1px solid #e2e7ea;
 border-radius:17px;
 overflow:hidden;
-padding:0;
 font-weight:800;
 display:flex;
 flex-direction:column;
@@ -311,21 +333,26 @@ color:#087f5b
 
 /* =========================================================
 PRODUCTS
-3 / 4 DESKTOP
+مهم جداً: منتجان فقط في كل سطر
 ========================================================= */
 
 .products{
 display:grid;
-grid-template-columns:repeat(4,minmax(0,1fr));
-gap:22px
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:28px
 }
 
+
+/* =========================================================
+PRODUCT CARD
+========================================================= */
+
 .product{
-background:white;
-border-radius:18px;
+background:#fff;
+border-radius:20px;
 overflow:hidden;
 border:1px solid #e5e9ec;
-box-shadow:0 4px 15px #0000000a;
+box-shadow:0 4px 18px #0000000a;
 transition:.2s
 }
 
@@ -341,7 +368,7 @@ PRODUCT IMAGE
 
 .product-gallery{
 position:relative;
-height:300px;
+height:430px;
 background:#eef2f4;
 overflow:hidden
 }
@@ -349,7 +376,7 @@ overflow:hidden
 .gallery-main-image{
 width:100%;
 height:100%;
-object-fit:cover;
+object-fit:contain;
 display:block;
 cursor:pointer
 }
@@ -359,15 +386,16 @@ height:100%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:65px
+font-size:90px;
+color:#8a9298
 }
 
 .gallery-arrow{
 position:absolute;
 top:50%;
 transform:translateY(-50%);
-width:40px;
-height:40px;
+width:42px;
+height:42px;
 border-radius:50%;
 background:#0008;
 color:#fff;
@@ -376,11 +404,11 @@ z-index:5
 }
 
 .gallery-prev{
-right:10px
+right:12px
 }
 
 .gallery-next{
-left:10px
+left:12px
 }
 
 
@@ -390,16 +418,16 @@ THUMBNAILS
 
 .gallery-thumbnails{
 display:flex;
-gap:7px;
-padding:8px;
-background:white;
+gap:8px;
+padding:9px;
+background:#fff;
 overflow-x:auto
 }
 
 .gallery-thumb{
-flex:0 0 52px;
-width:52px;
-height:52px;
+flex:0 0 55px;
+width:55px;
+height:55px;
 padding:2px;
 border:2px solid transparent;
 border-radius:8px;
@@ -423,28 +451,28 @@ PRODUCT INFO
 ========================================================= */
 
 .product-info{
-padding:15px
+padding:20px
 }
 
 .product-name{
-font-size:17px;
+font-size:22px;
 font-weight:800;
-min-height:52px;
-line-height:1.6
+min-height:62px;
+line-height:1.7
 }
 
 .price{
 color:#087f5b;
-font-size:21px;
+font-size:27px;
 font-weight:800;
 margin:8px 0
 }
 
 .stock{
 color:#087f5b;
-font-size:13px;
-margin-bottom:12px;
-font-weight:600
+font-size:15px;
+margin-bottom:15px;
+font-weight:700
 }
 
 
@@ -455,21 +483,21 @@ PRODUCT BUTTONS
 .product-actions{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:8px
+gap:12px
 }
 
 .buy-now-btn,
 .add-btn{
 width:100%;
-padding:12px 6px;
-border-radius:10px;
+padding:14px 8px;
+border-radius:12px;
 font-weight:800;
-font-size:14px
+font-size:17px
 }
 
 .buy-now-btn{
 background:#f6a400;
-color:white
+color:#fff
 }
 
 .buy-now-btn:hover{
@@ -478,7 +506,7 @@ background:#e99400
 
 .add-btn{
 background:#087f5b;
-color:white
+color:#fff
 }
 
 .add-btn:hover{
@@ -495,7 +523,7 @@ EMPTY
 text-align:center;
 padding:35px;
 color:#777;
-background:white;
+background:#fff;
 border-radius:15px;
 grid-column:1/-1
 }
@@ -508,7 +536,7 @@ FOOTER
 footer{
 margin-top:45px;
 background:#101c32;
-color:white;
+color:#fff;
 padding:28px;
 text-align:center
 }
@@ -516,7 +544,7 @@ text-align:center
 .admin-link{
 margin-top:15px;
 background:#1d2b43;
-color:white;
+color:#fff;
 padding:10px 18px;
 border-radius:9px
 }
@@ -545,7 +573,7 @@ left:-430px;
 width:400px;
 max-width:92%;
 height:100%;
-background:white;
+background:#fff;
 z-index:60;
 transition:.25s;
 padding:22px;
@@ -597,8 +625,7 @@ background:#e9eeee
 
 .remove-cart{
 background:#ffe5e5!important;
-color:#c62828;
-font-size:15px
+color:#c62828
 }
 
 .total{
@@ -610,7 +637,7 @@ margin:20px 0
 .checkout{
 width:100%;
 background:#087f5b;
-color:white;
+color:#fff;
 padding:14px;
 border-radius:10px;
 font-weight:bold
@@ -638,7 +665,7 @@ display:flex
 }
 
 .modal-box{
-background:white;
+background:#fff;
 width:650px;
 max-width:100%;
 border-radius:18px;
@@ -666,7 +693,7 @@ border-radius:10px;
 padding:12px;
 outline:0;
 font-size:15px;
-background:white
+background:#fff
 }
 
 .form-actions{
@@ -685,7 +712,7 @@ border-radius:9px
 .confirm{
 flex:2;
 background:#087f5b;
-color:white;
+color:#fff;
 padding:13px;
 border-radius:9px;
 font-weight:bold
@@ -693,11 +720,11 @@ font-weight:bold
 
 
 /* =========================================================
-NEW CHECKOUT PAGE
+CHECKOUT
 ========================================================= */
 
 .checkout-box{
-width:1000px;
+width:1050px;
 max-width:100%;
 padding:0;
 background:#f5f7fa;
@@ -706,20 +733,22 @@ overflow:auto
 }
 
 
-/* IMAGE + DESCRIPTION */
+/* =========================================================
+CHECKOUT PRODUCT AREA
+الصورة يمين + الوصف يسار
+========================================================= */
 
 .checkout-product-area{
 display:grid;
 grid-template-columns:1fr 1fr;
-direction:ltr;
-gap:0;
-background:white
+direction:rtl;
+background:#fff
 }
 
 .checkout-product-image{
 width:100%;
 height:480px;
-padding:15px;
+padding:18px;
 background:#fff;
 display:flex;
 align-items:center;
@@ -735,38 +764,49 @@ border-radius:14px
 
 .checkout-product-description{
 direction:rtl;
-padding:30px;
+padding:35px;
 display:flex;
 flex-direction:column;
 justify-content:center;
-background:#fff
+background:#fff;
+border-right:1px solid #eee
 }
 
 .checkout-product-description h2{
 font-size:25px;
 font-weight:800;
-margin-bottom:18px;
-line-height:1.6
+margin-bottom:18px
 }
 
 .checkout-description-text{
-font-size:15px;
+font-size:16px;
 color:#555;
 line-height:2;
 white-space:pre-line
 }
 
-.checkout-description-empty{
-color:#888;
-font-size:15px
+
+/* =========================================================
+CHECKOUT TITLE
+========================================================= */
+
+.checkout-title{
+background:#fff;
+text-align:center;
+padding:15px 20px;
+font-size:23px;
+font-weight:800;
+border-top:1px solid #eee
 }
 
 
-/* ORDER FORM */
+/* =========================================================
+ORDER FORM CARD
+========================================================= */
 
 .checkout-form-card{
 margin:18px;
-background:white;
+background:#fff;
 border:2px solid #087f5b;
 border-radius:17px;
 padding:22px;
@@ -783,10 +823,7 @@ margin-bottom:20px
 height:52px
 }
 
-
-/* DELIVERY */
-
-.checkout-form-card .delivery-info{
+.delivery-info{
 background:#f2fbf7;
 border:1px solid #bce9d9;
 border-radius:10px;
@@ -797,7 +834,9 @@ color:#555
 }
 
 
-/* SUMMARY */
+/* =========================================================
+SUMMARY
+========================================================= */
 
 .checkout-summary{
 margin-top:18px;
@@ -825,7 +864,9 @@ color:#087f5b
 }
 
 
-/* ACTIONS */
+/* =========================================================
+CHECKOUT ACTIONS
+========================================================= */
 
 .checkout-actions{
 display:flex;
@@ -840,32 +881,6 @@ height:52px
 .checkout-actions .confirm{
 height:52px;
 font-size:16px
-}
-
-
-/* =========================================================
-SUMMARY
-========================================================= */
-
-.summary{
-background:#f2fbf7;
-border:1px solid #bce9d9;
-border-radius:14px;
-padding:18px;
-margin:18px 0
-}
-
-.summary-row{
-display:flex;
-justify-content:space-between;
-padding:8px 0;
-border-bottom:1px solid #dceee7
-}
-
-.summary-total{
-color:#087f5b;
-font-size:23px;
-font-weight:bold
 }
 
 
@@ -903,27 +918,8 @@ width:25px;
 height:25px;
 border-radius:50%;
 background:#e03131;
-color:white;
+color:#fff;
 font-weight:bold
-}
-
-.image-preview{
-width:100%;
-height:180px;
-border:2px dashed #ccd5da;
-border-radius:12px;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-background:#f8fafb;
-color:#777
-}
-
-.image-preview img{
-width:100%;
-height:100%;
-object-fit:cover
 }
 
 
@@ -957,7 +953,7 @@ border-radius:10px
 position:absolute;
 top:20px;
 right:25px;
-background:white;
+background:#fff;
 color:#222;
 width:42px;
 height:42px;
@@ -978,7 +974,7 @@ left:25px;
 max-width:650px;
 margin:auto;
 background:#172033;
-color:white;
+color:#fff;
 padding:14px 20px;
 border-radius:10px;
 z-index:600;
@@ -1012,7 +1008,7 @@ background:#f5f7fa
 
 .admin-head{
 background:#101c32;
-color:white;
+color:#fff;
 padding:25px 20px
 }
 
@@ -1031,7 +1027,7 @@ font-weight:800
 
 .logout{
 background:#e03131;
-color:white;
+color:#fff;
 padding:12px 20px;
 border-radius:9px;
 font-weight:bold
@@ -1047,7 +1043,7 @@ overflow:auto
 }
 
 .admin-nav button{
-background:white;
+background:#fff;
 border:1px solid #ddd;
 padding:13px 20px;
 border-radius:12px 12px 0 0;
@@ -1057,7 +1053,7 @@ white-space:nowrap
 
 .admin-nav button.active{
 background:#087f5b;
-color:white;
+color:#fff;
 border-color:#087f5b
 }
 
@@ -1070,7 +1066,9 @@ display:block
 }
 
 
-/* STATS */
+/* =========================================================
+STATS
+========================================================= */
 
 .stats{
 max-width:1200px;
@@ -1082,7 +1080,7 @@ gap:18px
 }
 
 .stat-card{
-background:white;
+background:#fff;
 border:1px solid #e0e5e8;
 border-radius:18px;
 padding:25px;
@@ -1120,7 +1118,9 @@ color:#b8860b
 }
 
 
-/* ADMIN TOOLS */
+/* =========================================================
+ADMIN TOOLS
+========================================================= */
 
 .admin-tools{
 max-width:1200px;
@@ -1137,7 +1137,7 @@ flex-wrap:wrap
 border:1px solid #ddd;
 border-radius:10px;
 padding:12px;
-background:white
+background:#fff
 }
 
 .admin-tools input{
@@ -1149,14 +1149,16 @@ min-width:220px
 .add-product-btn,
 .add-category-btn{
 background:#087f5b;
-color:white;
+color:#fff;
 padding:13px 20px;
 border-radius:10px;
 font-weight:bold
 }
 
 
-/* ORDERS */
+/* =========================================================
+ORDERS
+========================================================= */
 
 .orders-list{
 max-width:1200px;
@@ -1165,7 +1167,7 @@ padding:0 20px 30px
 }
 
 .order-card{
-background:white;
+background:#fff;
 border:1px solid #e0e5e8;
 border-radius:18px;
 margin-bottom:18px;
@@ -1278,7 +1280,7 @@ font-weight:bold
 
 .save-status{
 background:#087f5b;
-color:white
+color:#fff
 }
 
 .call-btn{
@@ -1322,7 +1324,7 @@ gap:18px
 
 .admin-product-card,
 .admin-category-card{
-background:white;
+background:#fff;
 border:1px solid #e0e5e8;
 border-radius:16px;
 overflow:hidden
@@ -1432,7 +1434,7 @@ padding:20px
 .shipping-table{
 width:100%;
 border-collapse:collapse;
-background:white;
+background:#fff;
 border-radius:15px;
 overflow:hidden
 }
@@ -1446,7 +1448,7 @@ text-align:center
 
 .shipping-table th{
 background:#101c32;
-color:white
+color:#fff
 }
 
 .shipping-table input{
@@ -1459,7 +1461,7 @@ text-align:center
 
 .save-shipping{
 background:#087f5b;
-color:white;
+color:#fff;
 padding:8px 13px;
 border-radius:8px;
 font-weight:bold
@@ -1478,10 +1480,10 @@ color:#725b00
 RESPONSIVE
 ========================================================= */
 
-@media(max-width:1050px){
+@media(max-width:900px){
 
-.products{
-grid-template-columns:repeat(3,minmax(0,1fr))
+.stats{
+grid-template-columns:repeat(2,1fr)
 }
 
 .admin-products-grid,
@@ -1489,15 +1491,12 @@ grid-template-columns:repeat(3,minmax(0,1fr))
 grid-template-columns:repeat(2,1fr)
 }
 
-.stats{
-grid-template-columns:repeat(2,1fr)
-}
-
 }
 
 
 /* =========================================================
-TABLET / MOBILE
+MOBILE
+مهم: ما زال منتجان فقط
 ========================================================= */
 
 @media(max-width:650px){
@@ -1530,9 +1529,13 @@ padding:0 10px;
 margin-top:10px
 }
 
-.hero-banner img{
+.banner-box{
 height:220px;
-border-radius:12px
+border-radius:13px
+}
+
+.banner-fallback{
+font-size:25px
 }
 
 
@@ -1560,28 +1563,37 @@ padding:9px 5px
 }
 
 
-/* PRODUCTS */
-
+/* PRODUCTS
+منتجان فقط */
 .products{
 grid-template-columns:repeat(2,minmax(0,1fr));
 gap:12px
 }
 
+.product{
+border-radius:15px
+}
+
 .product-gallery{
-height:220px
+height:270px
 }
 
 .product-info{
-padding:9px
+padding:10px
 }
 
 .product-name{
 font-size:14px;
-min-height:48px
+min-height:50px
 }
 
 .price{
-font-size:17px
+font-size:18px
+}
+
+.stock{
+font-size:12px;
+margin-bottom:8px
 }
 
 .product-actions{
@@ -1591,7 +1603,7 @@ gap:6px
 
 .buy-now-btn,
 .add-btn{
-font-size:12px;
+font-size:13px;
 padding:10px 3px
 }
 
@@ -1608,16 +1620,26 @@ direction:rtl
 }
 
 .checkout-product-image{
-height:300px;
+height:310px;
 padding:8px
 }
 
 .checkout-product-description{
-padding:20px
+padding:20px;
+border-right:0;
+border-top:1px solid #eee
 }
 
 .checkout-product-description h2{
 font-size:20px
+}
+
+.checkout-description-text{
+font-size:14px
+}
+
+.checkout-title{
+font-size:19px
 }
 
 .checkout-form-card{
@@ -1680,6 +1702,47 @@ font-size:12px
 
 .shipping-table input{
 width:80px
+}
+
+}
+
+
+/* =========================================================
+شاشات صغيرة جداً
+نحافظ أيضاً على منتجين
+========================================================= */
+
+@media(max-width:390px){
+
+.products{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:8px
+}
+
+.product-gallery{
+height:220px
+}
+
+.product-info{
+padding:8px
+}
+
+.product-name{
+font-size:12px;
+min-height:44px
+}
+
+.price{
+font-size:16px
+}
+
+.stock{
+font-size:11px
+}
+
+.buy-now-btn,
+.add-btn{
+font-size:11px
 }
 
 }
@@ -1762,10 +1825,25 @@ BANNER
 
 <div class="hero-banner">
 
-<img
-src="banner.jpg"
-alt="Easy Shop Algeria"
+<div
+class="banner-box"
+id="bannerBox"
 >
+
+<div
+class="banner-fallback"
+id="bannerFallback"
+>
+Easy Shop Algeria 🇩🇿
+</div>
+
+<img
+id="storeBanner"
+alt=""
+style="display:none"
+>
+
+</div>
 
 </div>
 
@@ -1914,11 +1992,10 @@ class="modal"
 id="checkoutModal"
 >
 
-
 <div class="modal-box checkout-box">
 
 
-<!-- صورة المنتج + الوصف -->
+<!-- صورة المنتج يمين + الوصف يسار -->
 
 <div class="checkout-product-area">
 
@@ -1949,23 +2026,16 @@ class="checkout-description-text"
 </div>
 
 
-<!-- اسم المنتج -->
-
 <div
 id="checkoutProductTitle"
-style="
-background:#fff;
-text-align:center;
-padding:15px 20px;
-font-size:22px;
-font-weight:800;
-border-top:1px solid #eee;
-"
+class="checkout-title"
 >
 </div>
 
 
-<!-- معلومات الطلب -->
+<!-- =========================================================
+ORDER FORM
+========================================================= -->
 
 <div class="checkout-form-card">
 
@@ -2818,8 +2888,6 @@ value="100"
 </div>
 
 
-<!-- وصف المنتج -->
-
 <div class="form-group">
 
 <label>
@@ -3028,26 +3096,148 @@ let shippingRates={};
 
 
 /* =========================================================
+BANNER
+حل مشكلة الصورة المكسورة
+========================================================= */
+
+function loadStoreBanner(){
+
+const banner=
+document.getElementById("storeBanner");
+
+const fallback=
+document.getElementById("bannerFallback");
+
+const sources=[
+
+"banner.jpg",
+"banner.png",
+"banner.webp",
+
+"./banner.jpg",
+"./banner.png",
+"./banner.webp",
+
+"assets/banner.jpg",
+"assets/banner.png",
+"assets/banner.webp",
+
+"images/banner.jpg",
+"images/banner.png",
+"images/banner.webp"
+
+];
+
+let index=0;
+
+
+function tryNext(){
+
+if(index>=sources.length){
+
+/*
+إذا لم يجد أي ملف، لا نعرض
+الصورة المكسورة نهائياً.
+*/
+banner.style.display="none";
+
+fallback.style.display="flex";
+
+return;
+
+}
+
+const src=
+sources[index++];
+
+banner.onload=function(){
+
+banner.style.display="block";
+
+fallback.style.display="none";
+
+};
+
+banner.onerror=function(){
+
+tryNext();
+
+};
+
+banner.src=src;
+
+}
+
+
+tryNext();
+
+}
+
+
+/* =========================================================
 WILAYAS
 ========================================================= */
 
 const wilayas=[
 
-["01","أدرار"],["02","الشلف"],["03","الأغواط"],["04","أم البواقي"],
-["05","باتنة"],["06","بجاية"],["07","بسكرة"],["08","بشار"],
-["09","البليدة"],["10","البويرة"],["11","تمنراست"],["12","تبسة"],
-["13","تلمسان"],["14","تيارت"],["15","تيزي وزو"],["16","الجزائر"],
-["17","الجلفة"],["18","جيجل"],["19","سطيف"],["20","سعيدة"],
-["21","سكيكدة"],["22","سيدي بلعباس"],["23","عنابة"],["24","قالمة"],
-["25","قسنطينة"],["26","المدية"],["27","مستغانم"],["28","المسيلة"],
-["29","معسكر"],["30","ورقلة"],["31","وهران"],["32","البيض"],
-["33","إليزي"],["34","برج بوعريريج"],["35","بومرداس"],["36","الطارف"],
-["37","تندوف"],["38","تيسمسيلت"],["39","الوادي"],["40","خنشلة"],
-["41","سوق أهراس"],["42","تيبازة"],["43","ميلة"],["44","عين الدفلى"],
-["45","النعامة"],["46","عين تموشنت"],["47","غرداية"],["48","غليزان"],
-["49","تيميمون"],["50","برج باجي مختار"],["51","أولاد جلال"],
-["52","بني عباس"],["53","عين صالح"],["54","عين قزام"],["55","تقرت"],
-["56","جانت"],["57","المغير"],["58","المنيعة"]
+["01","أدرار"],
+["02","الشلف"],
+["03","الأغواط"],
+["04","أم البواقي"],
+["05","باتنة"],
+["06","بجاية"],
+["07","بسكرة"],
+["08","بشار"],
+["09","البليدة"],
+["10","البويرة"],
+["11","تمنراست"],
+["12","تبسة"],
+["13","تلمسان"],
+["14","تيارت"],
+["15","تيزي وزو"],
+["16","الجزائر"],
+["17","الجلفة"],
+["18","جيجل"],
+["19","سطيف"],
+["20","سعيدة"],
+["21","سكيكدة"],
+["22","سيدي بلعباس"],
+["23","عنابة"],
+["24","قالمة"],
+["25","قسنطينة"],
+["26","المدية"],
+["27","مستغانم"],
+["28","المسيلة"],
+["29","معسكر"],
+["30","ورقلة"],
+["31","وهران"],
+["32","البيض"],
+["33","إليزي"],
+["34","برج بوعريريج"],
+["35","بومرداس"],
+["36","الطارف"],
+["37","تندوف"],
+["38","تيسمسيلت"],
+["39","الوادي"],
+["40","خنشلة"],
+["41","سوق أهراس"],
+["42","تيبازة"],
+["43","ميلة"],
+["44","عين الدفلى"],
+["45","النعامة"],
+["46","عين تموشنت"],
+["47","غرداية"],
+["48","غليزان"],
+["49","تيميمون"],
+["50","برج باجي مختار"],
+["51","أولاد جلال"],
+["52","بني عباس"],
+["53","عين صالح"],
+["54","عين قزام"],
+["55","تقرت"],
+["56","جانت"],
+["57","المغير"],
+["58","المنيعة"]
 
 ];
 
@@ -3082,7 +3272,8 @@ TOAST
 
 function showToast(message,type="success"){
 
-const t=document.getElementById("toast");
+const t=
+document.getElementById("toast");
 
 t.textContent=message;
 
@@ -3211,9 +3402,11 @@ return `
 <tr>
 
 <td>
+
 <strong>
 ${w[0]} - ${w[1]}
 </strong>
+
 </td>
 
 <td>
@@ -3475,66 +3668,7 @@ box.innerHTML=html;
 
 
 /* =========================================================
-CATEGORY DRAG
-========================================================= */
-
-let categoryDragging=false;
-let categoryStartX=0;
-let categoryScrollLeft=0;
-
-const categoriesBar=
-document.getElementById("categories");
-
-categoriesBar.addEventListener(
-"pointerdown",
-e=>{
-
-categoryDragging=true;
-
-categoriesBar.classList.add("dragging");
-
-categoryStartX=e.pageX;
-
-categoryScrollLeft=
-categoriesBar.scrollLeft;
-
-categoriesBar.setPointerCapture(e.pointerId);
-
-}
-);
-
-categoriesBar.addEventListener(
-"pointermove",
-e=>{
-
-if(!categoryDragging)
-return;
-
-const walk=
-e.pageX-categoryStartX;
-
-categoriesBar.scrollLeft=
-categoryScrollLeft-walk;
-
-}
-);
-
-categoriesBar.addEventListener(
-"pointerup",
-()=>{
-
-categoryDragging=false;
-
-categoriesBar.classList.remove(
-"dragging"
-);
-
-}
-);
-
-
-/* =========================================================
-PRODUCT CATEGORY
+PRODUCT CATEGORIES
 ========================================================= */
 
 function populateProductCategories(){
@@ -3590,7 +3724,9 @@ return;
 
 const all=
 (data||[])
-.filter(p=>p.active!==false);
+.filter(
+p=>p.active!==false
+);
 
 const ids=
 all.map(p=>p.id);
@@ -3614,6 +3750,7 @@ images=result.data||[];
 
 }
 
+
 products=
 all.map(p=>{
 
@@ -3626,6 +3763,7 @@ String(p.id)
 .map(x=>x.image_url)
 .filter(Boolean);
 
+
 if(
 p.image_url&&
 !imgs.includes(p.image_url)
@@ -3634,6 +3772,7 @@ p.image_url&&
 imgs.unshift(p.image_url);
 
 }
+
 
 return {
 ...p,
@@ -4006,10 +4145,6 @@ showToast(
 }
 
 
-/* =========================================================
-BUY NOW
-========================================================= */
-
 function buyNow(id){
 
 const p=
@@ -4042,10 +4177,6 @@ openCheckout();
 }
 
 
-/* =========================================================
-REMOVE CART
-========================================================= */
-
 function removeFromCart(id){
 
 cart=
@@ -4058,8 +4189,7 @@ updateCart();
 updateCheckoutSummary();
 
 showToast(
-"تم حذف المنتج من السلة ✓",
-"success"
+"تم حذف المنتج من السلة ✓"
 );
 
 }
@@ -4181,7 +4311,6 @@ onclick="changeQuantity('${i.id}',-1)"
 
 <button
 class="remove-cart"
-title="حذف المنتج"
 onclick="removeFromCart('${i.id}')"
 >
 🗑️
@@ -4203,10 +4332,6 @@ getProductsTotal()
 
 }
 
-
-/* =========================================================
-OPEN CART
-========================================================= */
 
 function openCart(){
 
@@ -4235,7 +4360,7 @@ document.getElementById(
 
 
 /* =========================================================
-CHECKOUT PRODUCT
+CHECKOUT
 ========================================================= */
 
 function prepareCheckoutProduct(){
@@ -4279,8 +4404,7 @@ font-size:70px;
 titleBox.textContent=
 "إتمام الطلب";
 
-description.textContent=
-"";
+description.textContent="";
 
 return;
 
@@ -4329,10 +4453,6 @@ item.description||
 
 }
 
-
-/* =========================================================
-CHECKOUT
-========================================================= */
 
 function openCheckout(){
 
@@ -4401,7 +4521,9 @@ formatPrice(delivery);
 document.getElementById(
 "summaryTotal"
 ).textContent=
-formatPrice(total+delivery);
+formatPrice(
+total+delivery
+);
 
 
 const info=
@@ -6490,6 +6612,11 @@ document.getElementById(
 src="${URL.createObjectURL(
 selectedCategoryFile
 )}"
+style="
+width:100%;
+height:100%;
+object-fit:cover
+"
 >`;
 
 }
@@ -6780,6 +6907,11 @@ c.image_url?
 
 `<img
 src="${escapeHtml(c.image_url)}"
+style="
+width:100%;
+height:100%;
+object-fit:cover
+"
 >`
 
 :
@@ -6854,10 +6986,15 @@ showToast(
 
 
 /* =========================================================
-START APP
+START
 ========================================================= */
 
 async function startApp(){
+
+/*
+تحميل الـBanner أولاً
+*/
+loadStoreBanner();
 
 populateWilayas();
 
@@ -6902,4 +7039,5 @@ startApp();
 </script>
 
 </body>
+
 </html>
