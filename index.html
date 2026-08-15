@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Easy Shop Algeria</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,41 +12,21 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-box-sizing:border-box;
-margin:0;
-padding:0
-}
-
-html{
-scroll-behavior:smooth
-}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 
 body{
-font-family:"Cairo",Arial,sans-serif;
+font-family:Cairo,Arial,sans-serif;
 background:#f5f7fa;
 color:#172033;
 line-height:1.6
 }
 
-button,input,select,textarea{
-font-family:inherit
-}
+button,input,select,textarea{font-family:inherit}
+button{cursor:pointer;border:0}
+img{max-width:100%}
+.hidden{display:none!important}
 
-button{
-cursor:pointer;
-border:0
-}
-
-img{
-max-width:100%
-}
-
-.hidden{
-display:none!important
-}
-
-/* TOP */
 .topbar{
 background:#087f5b;
 color:#fff;
@@ -56,7 +36,6 @@ font-size:14px;
 font-weight:800
 }
 
-/* HEADER */
 header{
 background:#fff;
 position:sticky;
@@ -84,10 +63,8 @@ height:60px
 
 .logo img{
 width:210px;
-height:auto;
 max-height:58px;
-object-fit:contain;
-display:block
+object-fit:contain
 }
 
 .search{
@@ -141,7 +118,6 @@ justify-content:center;
 font-weight:bold
 }
 
-/* BANNER */
 .hero-banner{
 width:100%;
 max-width:1250px;
@@ -162,8 +138,7 @@ position:relative
 .banner-box img{
 width:100%;
 height:100%;
-object-fit:cover;
-display:block
+object-fit:cover
 }
 
 .banner-fallback{
@@ -175,11 +150,9 @@ justify-content:center;
 text-align:center;
 color:#fff;
 font-size:36px;
-font-weight:800;
-padding:30px
+font-weight:800
 }
 
-/* CONTAINER */
 .container{
 max-width:1250px;
 margin:auto;
@@ -198,22 +171,16 @@ font-size:25px;
 font-weight:800
 }
 
-/* CATEGORIES */
 .categories{
 display:flex;
 gap:14px;
 overflow-x:auto;
-overflow-y:hidden;
 padding:5px 3px 12px;
 margin-bottom:20px;
-scroll-behavior:smooth;
--webkit-overflow-scrolling:touch;
 scrollbar-width:none
 }
 
-.categories::-webkit-scrollbar{
-display:none
-}
+.categories::-webkit-scrollbar{display:none}
 
 .category{
 flex:0 0 210px;
@@ -232,13 +199,8 @@ box-shadow:0 4px 15px #0000000a;
 transition:.2s
 }
 
-.category:hover{
-transform:translateY(-2px)
-}
-
-.category.active{
-border:2px solid #087f5b
-}
+.category:hover{transform:translateY(-2px)}
+.category.active{border:2px solid #087f5b}
 
 .category-image{
 width:100%;
@@ -250,23 +212,20 @@ overflow:hidden
 .category-image img{
 width:100%;
 height:100%;
-object-fit:cover;
-display:block
+object-fit:cover
 }
 
 .category-name{
 padding:10px 12px;
 font-size:17px;
 text-align:center;
-background:#fff;
-color:#172033
+background:#fff
 }
 
 .category.active .category-name{
 color:#087f5b
 }
 
-/* PRODUCTS */
 .products{
 display:grid;
 grid-template-columns:repeat(4,minmax(0,1fr));
@@ -285,11 +244,9 @@ min-width:0
 }
 
 .product:hover{
-transform:translateY(-2px);
-box-shadow:0 7px 20px #00000012
+transform:translateY(-2px)
 }
 
-/* الصورة أصبحت أقصر */
 .product-gallery{
 position:relative;
 height:320px;
@@ -327,13 +284,8 @@ font-size:25px;
 z-index:5
 }
 
-.gallery-prev{
-right:10px
-}
-
-.gallery-next{
-left:10px
-}
+.gallery-prev{right:10px}
+.gallery-next{left:10px}
 
 .gallery-thumbnails{
 display:flex;
@@ -364,7 +316,6 @@ object-fit:cover;
 border-radius:5px
 }
 
-/* معلومات المنتج أقصر */
 .product-info{
 padding:12px 14px 14px
 }
@@ -386,13 +337,14 @@ margin:4px 0
 }
 
 .stock{
-color:#087f5b;
 font-size:13px;
 margin-bottom:9px;
 font-weight:700
 }
 
-/* الأزرار */
+.stock.ok{color:#087f5b}
+.stock.out{color:#d32f2f}
+
 .product-actions{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -408,7 +360,6 @@ padding:8px 5px;
 border-radius:12px;
 font-weight:800;
 font-size:14px;
-line-height:1.3;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -422,24 +373,20 @@ background:linear-gradient(135deg,#ffb511,#f59f00);
 color:#fff
 }
 
-.buy-now-btn:hover{
-transform:translateY(-2px);
-filter:brightness(1.04)
-}
-
 .add-btn{
 background:linear-gradient(135deg,#0a9a6d,#087f5b);
 color:#fff
 }
 
+.buy-now-btn:hover,
 .add-btn:hover{
-transform:translateY(-2px);
-filter:brightness(1.04)
+transform:translateY(-2px)
 }
 
-.buy-now-btn:active,
-.add-btn:active{
-transform:scale(.98)
+button:disabled{
+opacity:.55;
+cursor:not-allowed!important;
+transform:none!important
 }
 
 .empty,
@@ -452,7 +399,6 @@ border-radius:15px;
 grid-column:1/-1
 }
 
-/* FOOTER */
 footer{
 margin-top:40px;
 background:#101c32;
@@ -469,7 +415,6 @@ padding:10px 18px;
 border-radius:9px
 }
 
-/* CART */
 .overlay{
 display:none;
 position:fixed;
@@ -478,9 +423,7 @@ background:#0007;
 z-index:50
 }
 
-.overlay.open{
-display:block
-}
+.overlay.open{display:block}
 
 .drawer{
 position:fixed;
@@ -496,9 +439,7 @@ padding:22px;
 overflow:auto
 }
 
-.drawer.open{
-left:0
-}
+.drawer.open{left:0}
 
 .drawer-head{
 display:flex;
@@ -522,9 +463,7 @@ padding:12px 0;
 border-bottom:1px solid #eee
 }
 
-.cart-item-name{
-flex:1
-}
+.cart-item-name{flex:1}
 
 .qty{
 display:flex;
@@ -559,7 +498,6 @@ border-radius:10px;
 font-weight:bold
 }
 
-/* MODALS */
 .modal{
 display:none;
 position:fixed;
@@ -572,9 +510,7 @@ padding:20px;
 overflow:auto
 }
 
-.modal.open{
-display:flex
-}
+.modal.open{display:flex}
 
 .modal-box{
 background:#fff;
@@ -630,7 +566,6 @@ border-radius:9px;
 font-weight:bold
 }
 
-/* CHECKOUT */
 .checkout-box{
 width:1050px;
 max-width:100%;
@@ -732,7 +667,7 @@ border-radius:12px;
 overflow:hidden
 }
 
-.checkout-summary .summary-row{
+.summary-row{
 display:flex;
 justify-content:space-between;
 padding:13px 15px;
@@ -740,7 +675,7 @@ background:#fff;
 border-bottom:1px solid #e8ecee
 }
 
-.checkout-summary .summary-row:last-child{
+.summary-row:last-child{
 border-bottom:0
 }
 
@@ -756,16 +691,11 @@ gap:10px;
 margin-top:18px
 }
 
-.checkout-actions .cancel{
+.checkout-actions .cancel,
+.checkout-actions .confirm{
 height:52px
 }
 
-.checkout-actions .confirm{
-height:52px;
-font-size:16px
-}
-
-/* PREVIEW */
 .multiple-preview{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -800,7 +730,6 @@ color:#fff;
 font-weight:bold
 }
 
-/* LIGHTBOX */
 .lightbox{
 display:none;
 position:fixed;
@@ -812,9 +741,7 @@ justify-content:center;
 padding:20px
 }
 
-.lightbox.open{
-display:flex
-}
+.lightbox.open{display:flex}
 
 .lightbox img{
 max-width:95%;
@@ -835,7 +762,6 @@ border-radius:50%;
 font-size:24px
 }
 
-/* TOAST */
 .toast{
 position:fixed;
 bottom:25px;
@@ -853,19 +779,10 @@ text-align:center;
 font-weight:600
 }
 
-.toast.show{
-display:block
-}
+.toast.show{display:block}
+.toast.success{background:#087f5b}
+.toast.error{background:#d32f2f}
 
-.toast.success{
-background:#087f5b
-}
-
-.toast.error{
-background:#d32f2f
-}
-
-/* ADMIN */
 .admin-page{
 display:none;
 min-height:100vh;
@@ -923,13 +840,8 @@ color:#fff;
 border-color:#087f5b
 }
 
-.admin-section{
-display:none
-}
-
-.admin-section.active{
-display:block
-}
+.admin-section{display:none}
+.admin-section.active{display:block}
 
 .stats{
 max-width:1200px;
@@ -948,13 +860,8 @@ padding:25px;
 min-height:140px
 }
 
-.stat-icon{
-font-size:38px
-}
-
-.stat-title{
-color:#777
-}
+.stat-icon{font-size:38px}
+.stat-title{color:#777}
 
 .stat-value{
 font-size:30px;
@@ -962,21 +869,10 @@ font-weight:bold;
 margin-top:8px
 }
 
-.stat-green{
-color:#087f5b
-}
-
-.stat-purple{
-color:#673ab7
-}
-
-.stat-red{
-color:#d32f2f
-}
-
-.stat-gold{
-color:#b8860b
-}
+.stat-green{color:#087f5b}
+.stat-purple{color:#673ab7}
+.stat-red{color:#d32f2f}
+.stat-gold{color:#b8860b}
 
 .admin-tools{
 max-width:1200px;
@@ -1216,8 +1112,7 @@ color:#087f5b
 }
 
 .admin-product-stock{
-font-size:14px;
-color:#777
+font-size:14px
 }
 
 .product-actions,
@@ -1258,13 +1153,8 @@ background:#f0f2f4;
 font-weight:bold
 }
 
-.product-active{
-color:#087f5b
-}
-
-.product-hidden{
-color:#c62828
-}
+.product-active{color:#087f5b}
+.product-hidden{color:#c62828}
 
 .shipping-admin{
 max-width:1200px;
@@ -1317,29 +1207,26 @@ margin-bottom:15px;
 color:#725b00
 }
 
-/* TABLET */
+.image-preview{
+height:180px;
+margin-top:10px;
+background:#f1f3f4;
+border:1px solid #ddd;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+color:#777
+}
+
 @media(min-width:651px) and (max-width:1100px){
 
 .products{
-grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-gap:14px !important
+grid-template-columns:repeat(3,minmax(0,1fr))
 }
 
-.product-gallery{
-height:280px
-}
-
-.product-info{
-padding:11px
-}
-
-.product-name{
-font-size:15px
-}
-
-.price{
-font-size:20px
-}
+.product-gallery{height:280px}
 
 .stats{
 grid-template-columns:repeat(2,1fr)
@@ -1352,7 +1239,6 @@ grid-template-columns:repeat(2,1fr)
 
 }
 
-/* PHONE */
 @media(max-width:650px){
 
 .header-inner{
@@ -1391,9 +1277,7 @@ border-radius:13px
 font-size:25px
 }
 
-.container{
-padding:10px
-}
+.container{padding:10px}
 
 .section-title{
 margin:20px 0 12px
@@ -1425,19 +1309,15 @@ font-size:14px;
 padding:8px 4px
 }
 
-/* هاتف = منتجان */
 .products{
-display:grid !important;
-grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-gap:9px !important;
-width:100% !important
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:9px
 }
 
 .product{
 border-radius:13px
 }
 
-/* أهم تعديل: تقصير البطاقة */
 .product-gallery{
 height:205px
 }
@@ -1448,13 +1328,8 @@ height:32px;
 font-size:21px
 }
 
-.gallery-prev{
-right:7px
-}
-
-.gallery-next{
-left:7px
-}
+.gallery-prev{right:7px}
+.gallery-next{left:7px}
 
 .gallery-thumbnails{
 gap:5px;
@@ -1490,8 +1365,7 @@ margin-bottom:6px
 }
 
 .product-actions{
-grid-template-columns:1fr 1fr !important;
-gap:5px !important
+gap:5px
 }
 
 .buy-now-btn,
@@ -1499,18 +1373,11 @@ gap:5px !important
 min-height:39px;
 padding:6px 2px;
 border-radius:9px;
-font-size:10.5px;
-box-shadow:0 3px 7px #00000012
-}
-
-/* CHECKOUT MOBILE */
-.checkout-box{
-border-radius:13px
+font-size:10.5px
 }
 
 .checkout-product-area{
-grid-template-columns:1fr;
-direction:rtl
+grid-template-columns:1fr
 }
 
 .checkout-product-image{
@@ -1599,12 +1466,10 @@ width:80px
 
 }
 
-/* هاتف صغير */
 @media(max-width:390px){
 
 .products{
-grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-gap:7px !important
+gap:7px
 }
 
 .product-gallery{
@@ -1612,7 +1477,7 @@ height:180px
 }
 
 .product-info{
-padding:6px 6px 8px
+padding:6px
 }
 
 .product-name{
@@ -1626,16 +1491,13 @@ font-size:15px
 }
 
 .stock{
-font-size:10px;
-margin-bottom:5px
+font-size:10px
 }
 
 .buy-now-btn,
 .add-btn{
 min-height:36px;
-font-size:9.5px;
-padding:5px 1px;
-border-radius:8px
+font-size:9.5px
 }
 
 .gallery-thumb{
@@ -1644,20 +1506,6 @@ height:38px;
 flex-basis:38px
 }
 
-}
-
-/* IMAGE PREVIEW */
-.image-preview{
-height:180px;
-margin-top:10px;
-background:#f1f3f4;
-border:1px solid #ddd;
-border-radius:10px;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-color:#777
 }
 </style>
 </head>
@@ -1691,7 +1539,8 @@ color:#777
 </header>
 
 <div class="hero-banner">
-<div class="banner-box" id="bannerBox">
+
+<div class="banner-box">
 
 <div class="banner-fallback" id="bannerFallback">
 Easy Shop Algeria 🇩🇿
@@ -1700,6 +1549,7 @@ Easy Shop Algeria 🇩🇿
 <img id="storeBanner" alt="" style="display:none">
 
 </div>
+
 </div>
 
 <main class="container">
@@ -1710,7 +1560,7 @@ Easy Shop Algeria 🇩🇿
 
 <div class="categories" id="categories"></div>
 
-<div class="section-title" id="productsSection">
+<div class="section-title">
 <h2>منتجاتنا</h2>
 </div>
 
@@ -1741,8 +1591,11 @@ Easy Shop Algeria 🇩🇿
 <aside class="drawer" id="cartDrawer">
 
 <div class="drawer-head">
+
 <h2>🛒 سلة المشتريات</h2>
+
 <button class="close" onclick="closeCart()">✕</button>
+
 </div>
 
 <div id="cartItems"></div>
@@ -1759,7 +1612,6 @@ Easy Shop Algeria 🇩🇿
 
 </aside>
 
-<!-- CHECKOUT -->
 <div class="modal" id="checkoutModal">
 
 <div class="modal-box checkout-box">
@@ -1808,6 +1660,7 @@ Easy Shop Algeria 🇩🇿
 
 <div class="form-group">
 <label>طريقة التوصيل</label>
+
 <select id="deliveryMethod">
 
 <option value="home">
@@ -1819,6 +1672,7 @@ Easy Shop Algeria 🇩🇿
 </option>
 
 </select>
+
 </div>
 
 <div class="delivery-info" id="deliveryInfo">
@@ -1857,10 +1711,11 @@ Easy Shop Algeria 🇩🇿
 </div>
 
 </div>
-</div>
+
 </div>
 
-<!-- LOGIN -->
+</div>
+
 <div class="modal" id="loginModal">
 
 <div class="modal-box">
@@ -1890,9 +1745,9 @@ Easy Shop Algeria 🇩🇿
 <div id="loginError" style="color:#d32f2f;text-align:center;margin-top:12px"></div>
 
 </div>
+
 </div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
 
 <button class="lightbox-close" onclick="closeLightbox()">
@@ -1905,7 +1760,6 @@ Easy Shop Algeria 🇩🇿
 
 <div class="toast" id="toast"></div>
 
-<!-- ADMIN PAGE -->
 <div id="adminPage" class="admin-page">
 
 <div class="admin-head">
@@ -1913,8 +1767,11 @@ Easy Shop Algeria 🇩🇿
 <div class="admin-head-inner">
 
 <div>
+
 <h1>إدارة المتجر ⚙️</h1>
+
 <div>Easy Shop Algeria</div>
+
 </div>
 
 <button class="logout" onclick="adminLogout()">
@@ -1922,6 +1779,7 @@ Easy Shop Algeria 🇩🇿
 </button>
 
 </div>
+
 </div>
 
 <div class="admin-nav">
@@ -1944,7 +1802,6 @@ Easy Shop Algeria 🇩🇿
 
 </div>
 
-<!-- ORDERS -->
 <div id="ordersSection" class="admin-section active">
 
 <div class="stats">
@@ -1992,12 +1849,14 @@ Easy Shop Algeria 🇩🇿
 <input id="orderSearch" type="text" placeholder="🔎 بحث بالاسم أو الهاتف" oninput="renderOrders()">
 
 <select id="statusFilter" onchange="renderOrders()">
+
 <option value="all">كل الطلبات</option>
 <option value="new">جديد</option>
 <option value="processing">قيد المعالجة</option>
 <option value="shipped">تم الشحن</option>
 <option value="delivered">تم التوصيل</option>
 <option value="cancelled">ملغى</option>
+
 </select>
 
 <button class="refresh" onclick="loadOrders()">
@@ -2012,7 +1871,6 @@ Easy Shop Algeria 🇩🇿
 
 </div>
 
-<!-- PRODUCTS ADMIN -->
 <div id="productsSectionAdmin" class="admin-section">
 
 <div class="products-admin">
@@ -2035,7 +1893,6 @@ Easy Shop Algeria 🇩🇿
 
 </div>
 
-<!-- CATEGORIES ADMIN -->
 <div id="categoriesSectionAdmin" class="admin-section">
 
 <div class="categories-admin">
@@ -2058,7 +1915,6 @@ Easy Shop Algeria 🇩🇿
 
 </div>
 
-<!-- SHIPPING -->
 <div id="shippingSectionAdmin" class="admin-section">
 
 <div class="shipping-admin">
@@ -2069,7 +1925,6 @@ Easy Shop Algeria 🇩🇿
 
 <div class="shipping-note">
 يمكنك تعديل سعر التوصيل إلى المنزل أو المكتب لكل ولاية من هنا.
-بعد الضغط على حفظ، يتم استخدام السعر الجديد في الطلبات الجديدة.
 </div>
 
 <div style="overflow:auto">
@@ -2077,6 +1932,7 @@ Easy Shop Algeria 🇩🇿
 <table class="shipping-table">
 
 <thead>
+
 <tr>
 <th>الولاية</th>
 <th>المنزل</th>
@@ -2084,12 +1940,17 @@ Easy Shop Algeria 🇩🇿
 <th>الحالة</th>
 <th>حفظ</th>
 </tr>
+
 </thead>
 
 <tbody id="shippingTableBody">
+
 <tr>
-<td colspan="5">جاري تحميل الأسعار...</td>
+<td colspan="5">
+جاري تحميل الأسعار...
+</td>
 </tr>
+
 </tbody>
 
 </table>
@@ -2102,7 +1963,6 @@ Easy Shop Algeria 🇩🇿
 
 </div>
 
-<!-- PRODUCT MODAL -->
 <div class="modal" id="productModal">
 
 <div class="modal-box">
@@ -2112,28 +1972,43 @@ Easy Shop Algeria 🇩🇿
 </h2>
 
 <div class="form-group">
+
 <label>اسم المنتج</label>
+
 <input id="productName" type="text">
+
 </div>
 
 <div class="form-group">
+
 <label>السعر بالدينار</label>
+
 <input id="productPrice" type="number" min="0">
+
 </div>
 
 <div class="form-group">
+
 <label>المخزون</label>
+
 <input id="productStock" type="number" min="0" value="100">
+
 </div>
 
 <div class="form-group">
+
 <label>الفئة</label>
+
 <select id="productCategory"></select>
+
 </div>
 
 <div class="form-group">
+
 <label>وصف المنتج بالتفصيل</label>
+
 <textarea id="productDescription" rows="6"></textarea>
+
 </div>
 
 <div class="form-group">
@@ -2145,6 +2020,7 @@ Easy Shop Algeria 🇩🇿
 <input id="productImage" type="file" accept="image/*" multiple onchange="previewProductImages(event)">
 
 <div id="existingImages" class="multiple-preview"></div>
+
 <div id="newImagesPreview" class="multiple-preview"></div>
 
 </div>
@@ -2162,9 +2038,9 @@ Easy Shop Algeria 🇩🇿
 </div>
 
 </div>
+
 </div>
 
-<!-- CATEGORY MODAL -->
 <div class="modal" id="categoryModal">
 
 <div class="modal-box">
@@ -2174,13 +2050,19 @@ Easy Shop Algeria 🇩🇿
 </h2>
 
 <div class="form-group">
+
 <label>اسم القسم</label>
+
 <input id="categoryName" type="text">
+
 </div>
 
 <div class="form-group">
+
 <label>وصف القسم</label>
+
 <textarea id="categoryDescription" rows="3"></textarea>
+
 </div>
 
 <div class="form-group">
@@ -2208,6 +2090,7 @@ Easy Shop Algeria 🇩🇿
 </div>
 
 </div>
+
 </div>
 
 <script>
@@ -2232,7 +2115,6 @@ let editingCategoryId=null;
 let selectedProductFiles=[];
 let existingProductImages=[];
 let removedExistingImages=[];
-
 let selectedCategoryFile=null;
 
 let lightboxImages=[];
@@ -2240,62 +2122,7 @@ let lightboxIndex=0;
 
 let shippingRates={};
 
-/* BANNER */
-
-function loadStoreBanner(){
-
-const banner=document.getElementById("storeBanner");
-const fallback=document.getElementById("bannerFallback");
-
-const sources=[
-"banner.png",
-"banner.jpg",
-"banner.webp",
-"banner.png.png",
-"./banner.png",
-"./banner.jpg",
-"./banner.webp",
-"./banner.png.png",
-"assets/banner.png",
-"assets/banner.jpg",
-"assets/banner.webp",
-"images/banner.png",
-"images/banner.jpg",
-"images/banner.webp"
-];
-
-let index=0;
-
-function tryNext(){
-
-if(index>=sources.length){
-
-banner.style.display="none";
-fallback.style.display="flex";
-return;
-
-}
-
-const src=sources[index++];
-
-banner.onload=function(){
-banner.style.display="block";
-fallback.style.display="none";
-};
-
-banner.onerror=function(){
-tryNext();
-};
-
-banner.src=src+"?v="+Date.now();
-
-}
-
-tryNext();
-
-}
-
-/* WILAYAS */
+const SHIPPING_LOCAL_KEY="easy_shop_shipping_rates_v4";
 
 const wilayas=[
 ["01","أدرار"],["02","الشلف"],["03","الأغواط"],["04","أم البواقي"],
@@ -2315,26 +2142,21 @@ const wilayas=[
 ["57","المغير"],["58","المنيعة"]
 ];
 
-function formatPrice(n){
-return Number(n||0).toLocaleString("fr-DZ");
-}
-
-function escapeHtml(v){
-
-return String(v??"")
+const esc=v=>String(v??"")
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
 .replace(/"/g,"&quot;")
 .replace(/'/g,"&#039;");
 
-}
+const formatPrice=n=>
+Number(n||0).toLocaleString("fr-DZ");
 
-function showToast(message,type="success"){
+function showToast(m,type="success"){
 
 const t=document.getElementById("toast");
 
-t.textContent=message;
+t.textContent=m;
 t.className="toast show "+type;
 
 setTimeout(()=>{
@@ -2345,101 +2167,122 @@ t.classList.remove("show");
 
 function populateWilayas(){
 
-const select=document.getElementById("wilaya");
-
-select.innerHTML=
+document.getElementById("wilaya").innerHTML=
 '<option value="">اختر الولاية</option>'+
 wilayas.map(w=>
-`<option value="${w[0]}">${w[0]} - ${w[1]}</option>`
+`<option value="${w[0]}">${w[0]} - ${esc(w[1])}</option>`
 ).join("");
 
 }
 
-/* =========================
-   SHIPPING
-========================= */
+function loadStoreBanner(){
 
-const SHIPPING_LOCAL_KEY="easy_shop_shipping_rates_v4";
+const b=document.getElementById("storeBanner");
+const f=document.getElementById("bannerFallback");
+
+const a=[
+"banner.png",
+"banner.jpg",
+"banner.webp",
+"banner.png.png",
+"assets/banner.png",
+"images/banner.png"
+];
+
+let i=0;
+
+function next(){
+
+if(i>=a.length){
+
+b.style.display="none";
+f.style.display="flex";
+
+return;
+
+}
+
+b.onload=()=>{
+b.style.display="block";
+f.style.display="none";
+};
+
+b.onerror=next;
+
+b.src=a[i++]+"?v="+Date.now();
+
+}
+
+next();
+
+}
 
 function readLocalShipping(){
 
 try{
-
-const raw=localStorage.getItem(SHIPPING_LOCAL_KEY);
-
-return raw?JSON.parse(raw):{};
-
-}catch(e){
-
+return JSON.parse(
+localStorage.getItem(SHIPPING_LOCAL_KEY)||"{}"
+);
+}catch{
 return {};
-
 }
 
 }
 
-function writeLocalShipping(data){
+function writeLocalShipping(d){
 
 try{
-
 localStorage.setItem(
 SHIPPING_LOCAL_KEY,
-JSON.stringify(data)
+JSON.stringify(d)
 );
-
-}catch(e){
-
-console.error(e);
-
-}
+}catch{}
 
 }
 
 function normalizeShipping(rows){
 
-const result={};
+const r={};
 
-(rows||[]).forEach(row=>{
+(rows||[]).forEach(x=>{
 
-if(!row)return;
+if(!x)return;
 
-const code=String(row.wilaya_code||"").padStart(2,"0");
+const c=String(
+x.wilaya_code||""
+).padStart(2,"0");
 
-if(!code)return;
+if(c){
 
-result[code]={
-...row,
-wilaya_code:code,
-home_price:Number(row.home_price??0),
-office_price:Number(row.office_price??0),
-active:row.active!==false
+r[c]={
+...x,
+wilaya_code:c,
+home_price:Number(x.home_price??0),
+office_price:Number(x.office_price??0),
+active:x.active!==false
 };
+
+}
 
 });
 
-return result;
+return r;
 
 }
 
 async function loadShippingRates(){
 
-let dbRates={};
+let db={};
 
 try{
 
 const {data,error}=await supabaseClient
 .from("shipping_rates")
 .select("*")
-.order("wilaya_code",{ascending:true});
+.order("wilaya_code");
 
-if(!error){
-
-dbRates=normalizeShipping(data||[]);
-
-}else{
-
-console.error("Shipping load error:",error);
-
-}
+if(!error)
+db=normalizeShipping(data);
 
 }catch(e){
 
@@ -2447,15 +2290,11 @@ console.error(e);
 
 }
 
-const localRaw=readLocalShipping();
-
-const localRates=normalizeShipping(
-Object.values(localRaw)
-);
-
 shippingRates={
-...dbRates,
-...localRates
+...db,
+...normalizeShipping(
+Object.values(readLocalShipping())
+)
 };
 
 renderShippingTable();
@@ -2463,41 +2302,37 @@ updateCheckoutSummary();
 
 }
 
-function getShippingPrice(code,method){
+function getShippingPrice(c,m){
 
-const key=String(code||"").padStart(2,"0");
+const r=
+shippingRates[
+String(c||"").padStart(2,"0")
+];
 
-const row=shippingRates[key];
-
-if(!row)return 0;
-
-return Number(
-method==="office"
-?row.office_price
-:row.home_price
-)||0;
-
-}
-
-function getShippingLabel(method){
-
-return method==="office"
-?"🏢 التوصيل إلى المكتب"
-:"🏠 التوصيل إلى المنزل";
+return r
+?
+Number(
+m==="office"
+?r.office_price
+:r.home_price
+)||0
+:0;
 
 }
 
 function renderShippingTable(){
 
-const body=document.getElementById("shippingTableBody");
+const b=document.getElementById(
+"shippingTableBody"
+);
 
-if(!body)return;
+if(!b)return;
 
-body.innerHTML=wilayas.map(w=>{
+b.innerHTML=
+wilayas.map(w=>{
 
-const code=w[0];
-
-const row=shippingRates[code]||{
+const r=
+shippingRates[w[0]]||{
 home_price:600,
 office_price:450,
 active:true
@@ -2508,15 +2343,17 @@ return `
 <tr>
 
 <td>
-<strong>${code} - ${w[1]}</strong>
+<strong>
+${w[0]} - ${esc(w[1])}
+</strong>
 </td>
 
 <td>
 <input
 type="number"
 min="0"
-id="home-${code}"
-value="${Number(row.home_price||0)}"
+id="home-${w[0]}"
+value="${Number(r.home_price||0)}"
 >
 </td>
 
@@ -2524,22 +2361,24 @@ value="${Number(row.home_price||0)}"
 <input
 type="number"
 min="0"
-id="office-${code}"
-value="${Number(row.office_price||0)}"
+id="office-${w[0]}"
+value="${Number(r.office_price||0)}"
 >
 </td>
 
 <td>
-${row.active!==false?"✅":"❌"}
+${r.active!==false?"✅":"❌"}
 </td>
 
 <td>
+
 <button
 class="save-shipping"
-onclick="saveShippingRate('${code}')"
+onclick="saveShippingRate('${w[0]}')"
 >
 حفظ
 </button>
+
 </td>
 
 </tr>
@@ -2552,19 +2391,28 @@ onclick="saveShippingRate('${code}')"
 
 async function saveShippingRate(code){
 
-const homeInput=document.getElementById("home-"+code);
-const officeInput=document.getElementById("office-"+code);
+const h=Number(
+document.getElementById(
+"home-"+code
+).value
+);
 
-if(!homeInput||!officeInput)return;
+const o=Number(
+document.getElementById(
+"office-"+code
+).value
+);
 
-const home=Number(homeInput.value);
-const office=Number(officeInput.value);
+const name=
+wilayas.find(
+w=>w[0]===code
+)?.[1]||"";
 
 if(
-!Number.isFinite(home)||
-home<0||
-!Number.isFinite(office)||
-office<0
+!Number.isFinite(h)||
+h<0||
+!Number.isFinite(o)||
+o<0
 ){
 
 showToast(
@@ -2576,91 +2424,35 @@ return;
 
 }
 
-const name=
-wilayas.find(w=>w[0]===code)?.[1]||"";
-
 const row={
 wilaya_code:code,
 wilaya_name:name,
-home_price:home,
-office_price:office,
+home_price:h,
+office_price:o,
 active:true
 };
 
-/* حفظ فوري في الهاتف */
-const local=readLocalShipping();
+const l=readLocalShipping();
 
-local[code]=row;
+l[code]=row;
 
-writeLocalShipping(local);
+writeLocalShipping(l);
 
 shippingRates[code]=row;
 
-const button=
-document.querySelector(
-"#home-"+code
-)?.closest("tr")
-?.querySelector(".save-shipping");
-
-if(button){
-
-button.disabled=true;
-button.textContent="...";
-
-}
-
-let saved=false;
+let ok=false;
 
 try{
 
-const result=await supabaseClient
+const {error}=
+await supabaseClient
 .from("shipping_rates")
 .upsert(
 row,
-{
-onConflict:"wilaya_code"
-}
+{onConflict:"wilaya_code"}
 );
 
-if(!result.error){
-
-saved=true;
-
-}else{
-
-console.error(result.error);
-
-/* محاولة update */
-const updateResult=await supabaseClient
-.from("shipping_rates")
-.update({
-wilaya_name:name,
-home_price:home,
-office_price:office,
-active:true
-})
-.eq("wilaya_code",code);
-
-if(!updateResult.error){
-
-saved=true;
-
-}else{
-
-/* محاولة insert */
-const insertResult=await supabaseClient
-.from("shipping_rates")
-.insert(row);
-
-if(!insertResult.error){
-
-saved=true;
-
-}
-
-}
-
-}
+ok=!error;
 
 }catch(e){
 
@@ -2668,41 +2460,22 @@ console.error(e);
 
 }
 
-if(button){
-
-button.disabled=false;
-button.textContent="حفظ";
-
-}
-
 renderShippingTable();
 updateCheckoutSummary();
 
-if(saved){
-
 showToast(
-"تم حفظ سعر التوصيل ✓",
-"success"
-);
-
-}else{
-
-showToast(
-"تم حفظ السعر على الجهاز، لكن تعذر الحفظ في قاعدة البيانات.",
-"error"
+ok
+?"تم حفظ سعر التوصيل ✓"
+:"تم حفظ السعر على الجهاز، لكن تعذر الحفظ في قاعدة البيانات.",
+ok?"success":"error"
 );
 
 }
-
-}
-
-/* =========================
-   CATEGORIES
-========================= */
 
 async function loadCategories(){
 
-const {data,error}=await supabaseClient
+const {data,error}=
+await supabaseClient
 .from("categories")
 .select("*")
 .order("created_at",{ascending:true});
@@ -2710,11 +2483,6 @@ const {data,error}=await supabaseClient
 if(error){
 
 console.error(error);
-
-categories=[];
-
-renderCategories();
-
 return;
 
 }
@@ -2729,9 +2497,9 @@ renderAdminCategories();
 
 function renderCategories(){
 
-const box=document.getElementById("categories");
+document.getElementById("categories").innerHTML=
 
-let html=`
+`
 
 <button
 class="category active"
@@ -2758,13 +2526,13 @@ font-size:50px
 
 </button>
 
-`;
+`+
 
-html+=categories.map(c=>`
+categories.map(c=>`
 
 <button
 class="category"
-onclick="filterCategory('${escapeHtml(c.id)}',this)"
+onclick="filterCategory('${esc(c.id)}',this)"
 >
 
 <div class="category-image">
@@ -2772,7 +2540,10 @@ onclick="filterCategory('${escapeHtml(c.id)}',this)"
 ${
 c.image_url
 ?
-`<img src="${escapeHtml(c.image_url)}" alt="${escapeHtml(c.name)}">`
+`<img
+src="${esc(c.image_url)}"
+alt="${esc(c.name)}"
+>`
 :
 `
 <div style="
@@ -2790,43 +2561,92 @@ font-size:50px
 </div>
 
 <div class="category-name">
-${escapeHtml(c.name)}
+${esc(c.name)}
 </div>
 
 </button>
 
 `).join("");
 
-box.innerHTML=html;
-
 }
 
 function populateProductCategories(){
 
-const select=document.getElementById("productCategory");
+const s=
+document.getElementById(
+"productCategory"
+);
 
-if(!categories.length){
-
-select.innerHTML=
+s.innerHTML=
+categories.length
+?
+categories.map(c=>
+`<option value="${esc(c.id)}">
+${esc(c.name)}
+</option>`
+).join("")
+:
 '<option value="">لا توجد أقسام</option>';
 
-return;
+}
+
+async function fetchProductImages(ids){
+
+if(!ids.length)
+return[];
+
+const {
+data,
+error
+}=
+await supabaseClient
+.from("product_images")
+.select("*")
+.in("product_id",ids)
+.order("created_at");
+
+return error?[]:(data||[]);
 
 }
 
-select.innerHTML=categories.map(c=>
-`<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`
-).join("");
+function attachImages(rows,imgs){
+
+return rows.map(p=>{
+
+let a=
+imgs
+.filter(
+x=>String(x.product_id)===
+String(p.id)
+)
+.map(x=>x.image_url)
+.filter(Boolean);
+
+if(
+p.image_url&&
+!a.includes(p.image_url)
+){
+
+a.unshift(p.image_url);
 
 }
 
-/* =========================
-   PRODUCTS
-========================= */
+return{
+...p,
+images:a
+};
+
+});
+
+}
 
 async function loadProducts(){
 
-const {data,error}=await supabaseClient
+const {
+data,
+error
+}=
+await supabaseClient
 .from("products")
 .select("*")
 .order("created_at",{ascending:false});
@@ -2838,108 +2658,141 @@ return;
 
 }
 
-const all=(data||[])
-.filter(p=>p.active!==false);
+const all=data||[];
 
-const ids=all.map(p=>p.id);
+const imgs=
+await fetchProductImages(
+all.map(p=>p.id)
+);
 
-let images=[];
-
-if(ids.length){
-
-const result=await supabaseClient
-.from("product_images")
-.select("*")
-.in("product_id",ids)
-.order("created_at",{ascending:true});
-
-if(!result.error){
-
-images=result.data||[];
-
-}
-
-}
-
-products=all.map(p=>{
-
-let imgs=images
-.filter(x=>String(x.product_id)===String(p.id))
-.map(x=>x.image_url)
-.filter(Boolean);
-
-if(
-p.image_url&&
-!imgs.includes(p.image_url)
-){
-
-imgs.unshift(p.image_url);
-
-}
-
-return{
-...p,
-images:imgs
-};
-
-});
+products=
+attachImages(
+all.filter(p=>p.active!==false),
+imgs
+);
 
 renderProducts(products);
 
 }
 
-function getProductImages(p){
+async function loadAdminProducts(){
 
-if(Array.isArray(p.images)&&p.images.length)
-return p.images;
+const grid=
+document.getElementById(
+"adminProductsGrid"
+);
 
-if(p.image_url)
-return[p.image_url];
+grid.innerHTML=
+'<div class="no-orders">جاري تحميل المنتجات...</div>';
 
-return[];
+const {
+data,
+error
+}=
+await supabaseClient
+.from("products")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(error){
+
+grid.innerHTML=
+'<div class="no-orders">تعذر تحميل المنتجات.</div>';
+
+return;
 
 }
 
-/* =========================
-   RENDER PRODUCTS
-========================= */
+const all=data||[];
+
+const imgs=
+await fetchProductImages(
+all.map(p=>p.id)
+);
+
+products=
+attachImages(all,imgs);
+
+renderAdminProducts();
+
+renderProducts(
+products.filter(
+p=>p.active!==false
+)
+);
+
+}
+
+function getProductImages(p){
+
+return Array.isArray(p.images)&&p.images.length
+?p.images
+:(p.image_url?[p.image_url]:[]);
+
+}
 
 function renderProducts(list=products){
 
-const box=document.getElementById("products");
+const b=
+document.getElementById("products");
 
 if(!list.length){
 
-box.innerHTML=
+b.innerHTML=
 '<div class="empty">لا توجد منتجات حالياً.</div>';
 
 return;
 
 }
 
-box.innerHTML=list.map(p=>{
+b.innerHTML=
+list.map(p=>{
 
-const imgs=getProductImages(p);
+const imgs=
+getProductImages(p);
 
-let main=imgs.length
+const stock=
+Math.max(
+0,
+Number(p.stock||0)
+);
+
+const out=
+stock<=0;
+
+return `
+
+<article class="product">
+
+<div class="product-gallery">
+
+${
+imgs.length
 ?
 `
+
 <img
 id="main-${p.id}"
 class="gallery-main-image"
-src="${escapeHtml(imgs[0])}"
-alt="${escapeHtml(p.name)}"
+src="${esc(imgs[0])}"
+alt="${esc(p.name)}"
 onclick="openLightboxForProduct('${p.id}')"
 >
+
 `
 :
 `
-<div class="gallery-icon">📦</div>
-`;
+<div class="gallery-icon">
+📦
+</div>
+`
+}
 
-const arrows=imgs.length>1
+${
+imgs.length>1
 ?
 `
+
 <button
 class="gallery-arrow gallery-prev"
 onclick="changeProductImage('${p.id}',1)"
@@ -2953,12 +2806,18 @@ onclick="changeProductImage('${p.id}',-1)"
 >
 ‹
 </button>
-`
-:"";
 
-const thumbs=imgs.length>1
+`
+:""
+}
+
+</div>
+
+${
+imgs.length>1
 ?
 `
+
 <div class="gallery-thumbnails">
 
 ${imgs.map((u,i)=>`
@@ -2968,47 +2827,45 @@ class="gallery-thumb ${i===0?"active":""}"
 onclick="setProductImage('${p.id}',${i})"
 >
 
-<img src="${escapeHtml(u)}">
+<img src="${esc(u)}">
 
 </button>
 
 `).join("")}
 
 </div>
+
 `
-:"";
-
-return`
-
-<article class="product">
-
-<div class="product-gallery">
-
-${main}
-${arrows}
-
-</div>
-
-${thumbs}
+:""
+}
 
 <div class="product-info">
 
 <div class="product-name">
-${escapeHtml(p.name)}
+${esc(p.name)}
 </div>
 
 <div class="price">
 ${formatPrice(p.price)} دج
 </div>
 
-<div class="stock">
-✓ متوفر
+<div class="stock ${out?"out":"ok"}">
+
+${
+out
+?
+"❌ غير متوفر"
+:
+"✓ متوفر — "+stock+" قطعة"
+}
+
 </div>
 
 <div class="product-actions">
 
 <button
 class="buy-now-btn"
+${out?"disabled":""}
 onclick="buyNow('${p.id}')"
 >
 ⚡ شراء الآن
@@ -3016,6 +2873,7 @@ onclick="buyNow('${p.id}')"
 
 <button
 class="add-btn"
+${out?"disabled":""}
 onclick="addToCart('${p.id}')"
 >
 🛒 أضف إلى السلة
@@ -3033,111 +2891,108 @@ onclick="addToCart('${p.id}')"
 
 }
 
-/* =========================
-   GALLERY
-========================= */
+function changeProductImage(id,d){
 
-function changeProductImage(id,direction){
-
-const p=products.find(
+const p=
+products.find(
 x=>String(x.id)===String(id)
 );
 
 if(!p)return;
 
-const imgs=getProductImages(p);
+const a=getProductImages(p);
 
-if(imgs.length<2)return;
+const m=
+document.getElementById(
+"main-"+id
+);
 
-const main=document.getElementById("main-"+id);
+if(a.length<2||!m)return;
 
-let i=imgs.findIndex(
-u=>u===main.src
+let i=
+a.findIndex(
+u=>u===m.src
 );
 
 if(i<0)i=0;
 
-i+=direction;
+i=
+(i+d+a.length)%a.length;
 
-if(i<0)i=imgs.length-1;
-
-if(i>=imgs.length)i=0;
-
-main.src=imgs[i];
+m.src=a[i];
 
 updateGalleryThumbs(id,i);
 
 }
 
-function setProductImage(id,index){
+function setProductImage(id,i){
 
-const p=products.find(
+const p=
+products.find(
 x=>String(x.id)===String(id)
 );
 
-if(!p)return;
+const a=
+p&&getProductImages(p);
 
-const imgs=getProductImages(p);
-
-if(!imgs[index])return;
+if(!a?.[i])return;
 
 document.getElementById(
 "main-"+id
-).src=imgs[index];
+).src=a[i];
 
-updateGalleryThumbs(id,index);
+updateGalleryThumbs(id,i);
 
 }
 
-function updateGalleryThumbs(id,index){
+function updateGalleryThumbs(id,i){
 
-const main=document.getElementById("main-"+id);
-
-if(!main)return;
-
-const card=main.closest(".product");
-
-if(!card)return;
-
-card.querySelectorAll(
-".gallery-thumb"
-).forEach((b,i)=>{
-
-b.classList.toggle(
-"active",
-i===index
+const m=
+document.getElementById(
+"main-"+id
 );
 
-});
+m?.closest(".product")
+?.querySelectorAll(".gallery-thumb")
+.forEach(
+(b,n)=>
+b.classList.toggle(
+"active",
+n===i
+)
+);
 
 }
 
 function openLightboxForProduct(id){
 
-const p=products.find(
+const p=
+products.find(
 x=>String(x.id)===String(id)
 );
 
 if(!p)return;
 
-lightboxImages=getProductImages(p);
+lightboxImages=
+getProductImages(p);
 
-if(!lightboxImages.length)return;
-
-const main=
-document.getElementById("main-"+id);
-
-lightboxIndex=
-lightboxImages.findIndex(
-u=>u===main?.src
+const m=
+document.getElementById(
+"main-"+id
 );
 
-if(lightboxIndex<0)
-lightboxIndex=0;
+lightboxIndex=
+Math.max(
+0,
+lightboxImages.findIndex(
+u=>u===m?.src
+)
+);
 
 document.getElementById(
 "lightboxImage"
-).src=lightboxImages[lightboxIndex];
+).src=
+lightboxImages[lightboxIndex];
 
 document.getElementById(
 "lightbox"
@@ -3153,91 +3008,131 @@ document.getElementById(
 
 }
 
-/* =========================
-   CART
-========================= */
-
 function addToCart(id){
 
-const p=products.find(
+const p=
+products.find(
 x=>String(x.id)===String(id)
 );
 
 if(!p)return;
 
-const item=cart.find(
+const stock=
+Number(p.stock||0);
+
+if(stock<=0){
+
+showToast(
+"هذا المنتج غير متوفر حالياً.",
+"error"
+);
+
+return;
+
+}
+
+const i=
+cart.find(
 x=>String(x.id)===String(id)
 );
 
-if(item)
-item.quantity++;
-else
+if(i){
+
+if(i.quantity>=stock){
+
+showToast(
+"لا يمكنك تجاوز الكمية المتوفرة.",
+"error"
+);
+
+return;
+
+}
+
+i.quantity++;
+
+}else{
+
 cart.push({
 ...p,
 quantity:1
 });
 
+}
+
 updateCart();
+updateCheckoutSummary();
 
 showToast(
-"تمت إضافة المنتج إلى السلة ✓",
-"success"
+"تمت إضافة المنتج إلى السلة ✓"
 );
 
 }
 
 function buyNow(id){
 
-const p=products.find(
+addToCart(id);
+
+if(
+cart.some(
 x=>String(x.id)===String(id)
-);
+)
+){
 
-if(!p)return;
-
-const item=cart.find(
-x=>String(x.id)===String(id)
-);
-
-if(!item){
-
-cart.push({
-...p,
-quantity:1
-});
+openCheckout();
 
 }
-
-updateCart();
-openCheckout();
 
 }
 
 function removeFromCart(id){
 
-cart=cart.filter(
+cart=
+cart.filter(
 x=>String(x.id)!==String(id)
 );
 
 updateCart();
 updateCheckoutSummary();
 
-showToast(
-"تم حذف المنتج من السلة ✓"
-);
-
 }
 
-function changeQuantity(id,change){
+function changeQuantity(id,d){
 
-const item=cart.find(
+const i=
+cart.find(
 x=>String(x.id)===String(id)
 );
 
-if(!item)return;
+if(!i)return;
 
-item.quantity+=change;
+const p=
+products.find(
+x=>String(x.id)===String(id)
+);
 
-if(item.quantity<=0){
+const stock=
+Number(
+p?.stock??i.stock??0
+);
+
+if(
+d>0&&
+i.quantity>=stock
+){
+
+showToast(
+"وصلت إلى الحد المتوفر في المخزون.",
+"error"
+);
+
+return;
+
+}
+
+i.quantity+=d;
+
+if(i.quantity<=0){
 
 removeFromCart(id);
 
@@ -3264,22 +3159,22 @@ Number(x.quantity||0),
 
 function updateCart(){
 
-const count=cart.reduce(
-(s,x)=>s+Number(x.quantity||0),
+document.getElementById(
+"cartCount"
+).textContent=
+cart.reduce(
+(s,x)=>s+x.quantity,
 0
 );
 
+const b=
 document.getElementById(
-"cartCount"
-).textContent=count;
-
-const box=document.getElementById(
 "cartItems"
 );
 
 if(!cart.length){
 
-box.innerHTML=
+b.innerHTML=
 '<div class="empty">السلة فارغة</div>';
 
 document.getElementById(
@@ -3290,31 +3185,55 @@ return;
 
 }
 
-box.innerHTML=cart.map(i=>`
+b.innerHTML=
+cart.map(i=>{
+
+const p=
+products.find(
+x=>String(x.id)===String(i.id)
+);
+
+const stock=
+Number(
+p?.stock??i.stock??0
+);
+
+return `
 
 <div class="cart-item">
 
 <div class="cart-item-name">
 
 <strong>
-${escapeHtml(i.name)}
+${esc(i.name)}
 </strong>
 
 <div>
 ${formatPrice(i.price)} دج
 </div>
 
+<small>
+المتوفر: ${stock}
+</small>
+
 </div>
 
 <div class="qty">
 
-<button onclick="changeQuantity('${i.id}',1)">
+<button
+onclick="changeQuantity('${i.id}',1)"
+${i.quantity>=stock?"disabled":""}
+>
 +
 </button>
 
-<span>${i.quantity}</span>
+<span>
+${i.quantity}
+</span>
 
-<button onclick="changeQuantity('${i.id}',-1)">
+<button
+onclick="changeQuantity('${i.id}',-1)"
+>
 −
 </button>
 
@@ -3329,12 +3248,16 @@ onclick="removeFromCart('${i.id}')"
 
 </div>
 
-`).join("");
+`;
+
+}).join("");
 
 document.getElementById(
 "cartTotal"
 ).textContent=
-formatPrice(getProductsTotal());
+formatPrice(
+getProductsTotal()
+);
 
 }
 
@@ -3362,83 +3285,57 @@ document.getElementById(
 
 }
 
-/* =========================
-   CHECKOUT
-========================= */
-
 function prepareCheckoutProduct(){
 
 const item=
-cart.length
-?
-cart[cart.length-1]
-:null;
+cart[cart.length-1];
 
-const imageBox=
+const ib=
 document.getElementById(
 "checkoutProductImage"
 );
 
-const titleBox=
+const tb=
 document.getElementById(
 "checkoutProductTitle"
 );
 
-const description=
+const d=
 document.getElementById(
 "checkoutDescription"
 );
 
 if(!item){
 
-imageBox.innerHTML=`
-<div style="
-height:100%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:70px
-">
-📦
-</div>
-`;
+ib.innerHTML="📦";
 
-titleBox.textContent="إتمام الطلب";
-description.textContent="";
+tb.textContent="إتمام الطلب";
+
+d.textContent="";
+
 return;
 
 }
 
-const imgs=getProductImages(item);
+const a=
+getProductImages(item);
 
-if(imgs.length){
-
-imageBox.innerHTML=`
+ib.innerHTML=
+a.length
+?
+`
 <img
-src="${escapeHtml(imgs[0])}"
-alt="${escapeHtml(item.name)}"
+src="${esc(a[0])}"
+alt="${esc(item.name)}"
 >
-`;
+`
+:
+"📦";
 
-}else{
+tb.textContent=
+item.name||"";
 
-imageBox.innerHTML=`
-<div style="
-height:100%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:70px
-">
-📦
-</div>
-`;
-
-}
-
-titleBox.textContent=item.name||"";
-
-description.textContent=
+d.textContent=
 item.description||
 "لا يوجد وصف مفصل لهذا المنتج حالياً.";
 
@@ -3476,79 +3373,61 @@ document.getElementById(
 
 function updateCheckoutSummary(){
 
-const total=getProductsTotal();
+const t=
+getProductsTotal();
 
-const code=
+const c=
 document.getElementById(
 "wilaya"
 )?.value||"";
 
-const method=
+const m=
 document.getElementById(
 "deliveryMethod"
 )?.value||"home";
 
-const delivery=
-code
+const d=
+c
 ?
-getShippingPrice(code,method)
+getShippingPrice(c,m)
 :
 0;
 
 document.getElementById(
 "summaryProducts"
 ).textContent=
-formatPrice(total);
+formatPrice(t);
 
 document.getElementById(
 "summaryDelivery"
 ).textContent=
-formatPrice(delivery);
+formatPrice(d);
 
 document.getElementById(
 "summaryTotal"
 ).textContent=
-formatPrice(total+delivery);
+formatPrice(t+d);
 
-const info=
 document.getElementById(
 "deliveryInfo"
-);
-
-if(!code){
-
-info.textContent=
+).textContent=
+c
+?
+(
+m==="office"
+?
+"🏢 التوصيل إلى المكتب"
+:
+"🏠 التوصيل إلى المنزل"
+)
++
+" • "+
+formatPrice(d)+
+" دج"
+:
 "اختر الولاية لمعرفة سعر التوصيل.";
 
-return;
-
 }
-
-info.textContent=
-getShippingLabel(method)+
-" • "+
-formatPrice(delivery)+
-" دج";
-
-}
-
-document.getElementById(
-"wilaya"
-).addEventListener(
-"change",
-updateCheckoutSummary
-);
-
-document.getElementById(
-"deliveryMethod"
-).addEventListener(
-"change",
-updateCheckoutSummary
-);
-
-/* =========================
-   CONFIRM ORDER
-========================= */
 
 async function confirmOrder(){
 
@@ -3604,10 +3483,61 @@ return;
 
 }
 
-const wilayaName=
-wilayas.find(
-w=>w[0]===code
-)?.[1]||"";
+const btn=
+document.getElementById(
+"confirmButton"
+);
+
+btn.disabled=true;
+
+btn.textContent=
+"جاري التحقق من المخزون...";
+
+try{
+
+const {
+data:latest,
+error:loadErr
+}=
+await supabaseClient
+.from("products")
+.select(
+"id,name,price,stock,active"
+)
+.in(
+"id",
+cart.map(x=>x.id)
+);
+
+if(loadErr)
+throw loadErr;
+
+for(const item of cart){
+
+const p=
+(latest||[])
+.find(
+x=>String(x.id)===
+String(item.id)
+);
+
+if(
+!p||
+p.active===false||
+Number(p.stock||0)<
+Number(item.quantity||0)
+){
+
+throw new Error(
+`المخزون غير كافٍ للمنتج: ${item.name}`
+);
+
+}
+
+}
+
+btn.textContent=
+"جاري تأكيد الطلب...";
 
 const productsTotal=
 getProductsTotal();
@@ -3619,7 +3549,8 @@ method
 );
 
 const total=
-productsTotal+deliveryPrice;
+productsTotal+
+deliveryPrice;
 
 const productsData=
 cart.map(i=>({
@@ -3628,41 +3559,73 @@ id:i.id,
 name:i.name,
 price:Number(i.price),
 quantity:Number(i.quantity),
+
 subtotal:
 Number(i.price)*
 Number(i.quantity)
 
 }));
 
-const btn=
-document.getElementById(
-"confirmButton"
+for(const item of cart){
+
+const {
+data:ok,
+error
+}=
+await supabaseClient.rpc(
+"decrease_product_stock",
+{
+p_product_id:item.id,
+p_quantity:Number(item.quantity)
+}
 );
 
-btn.disabled=true;
-btn.textContent=
-"جاري تسجيل الطلب...";
+if(error)
+throw error;
 
-try{
+if(ok!==true){
 
-const {error}=
+throw new Error(
+`لم تعد الكمية متوفرة للمنتج: ${item.name}`
+);
+
+}
+
+}
+
+const {
+error:orderError
+}=
 await supabaseClient
 .from("orders")
 .insert({
 
 customer_name:name,
+
 phone:phone,
+
 status:"new",
 
-products_total:productsTotal,
-delivery_price:deliveryPrice,
-total_price:total,
+products_total:
+productsTotal,
 
-subtotal:productsTotal,
-shipping_cost:deliveryPrice,
-total:total,
+delivery_price:
+deliveryPrice,
 
-products:productsData,
+total_price:
+total,
+
+subtotal:
+productsTotal,
+
+shipping_cost:
+deliveryPrice,
+
+total:
+total,
+
+products:
+productsData,
 
 delivery_method:
 method==="office"
@@ -3678,24 +3641,32 @@ method==="office"
 :
 "التوصيل إلى المنزل",
 
-wilaya_code:code,
-wilaya_name:wilayaName,
-municipality:municipality,
+wilaya_code:
+code,
+
+wilaya_name:
+wilayas.find(
+w=>w[0]===code
+)?.[1]||"",
+
+municipality:
+municipality,
 
 address:"",
+
 notes:""
 
 });
 
-if(error)
-throw error;
-
-closeCheckout();
-closeCart();
+if(orderError)
+throw orderError;
 
 cart=[];
 
 updateCart();
+
+closeCheckout();
+closeCart();
 
 document.getElementById(
 "customerName"
@@ -3715,33 +3686,33 @@ document.getElementById(
 
 updateCheckoutSummary();
 
+await loadProducts();
+
 showToast(
-"تم تسجيل طلبك بنجاح ✓ شكراً لثقتك بـ Easy Shop Algeria",
+"تم تسجيل طلبك بنجاح ✓ وتم تحديث المخزون.",
 "success"
 );
 
-}catch(error){
+}catch(e){
 
-console.error(error);
+console.error(e);
 
 showToast(
-"حدث خطأ أثناء تسجيل الطلب: "+
-(error.message||""),
+"لم يتم تسجيل الطلب: "+
+(e.message||"حدث خطأ"),
 "error"
 );
 
 }finally{
 
 btn.disabled=false;
-btn.textContent="تأكيد الطلب";
+
+btn.textContent=
+"تأكيد الطلب";
 
 }
 
 }
-
-/* =========================
-   SEARCH
-========================= */
 
 function searchProducts(){
 
@@ -3753,62 +3724,46 @@ document.getElementById(
 .trim()
 .toLowerCase();
 
-if(!q){
-
-renderProducts(products);
-return;
-
-}
-
 renderProducts(
-products.filter(p=>
-String(p.name||"")
+q
+?
+products.filter(
+p=>
+String(
+p.name||""
+)
 .toLowerCase()
 .includes(q)
 )
+:
+products
 );
 
 }
 
-document.getElementById(
-"searchInput"
-).addEventListener(
-"input",
-searchProducts
-);
-
-/* =========================
-   CATEGORY FILTER
-========================= */
-
-function filterCategory(category,button){
+function filterCategory(c,b){
 
 document.querySelectorAll(
 ".category"
-).forEach(x=>
-x.classList.remove("active")
+).forEach(
+x=>x.classList.remove("active")
 );
 
-button.classList.add("active");
-
-if(category==="all"){
-
-renderProducts(products);
-return;
-
-}
+b.classList.add("active");
 
 renderProducts(
-products.filter(p=>
-String(p.category)===String(category)
+c==="all"
+?
+products
+:
+products.filter(
+p=>
+String(p.category)===
+String(c)
 )
 );
 
 }
-
-/* =========================
-   LOGIN
-========================= */
 
 function openAdminLogin(){
 
@@ -3842,6 +3797,11 @@ document.getElementById(
 "adminPassword"
 ).value;
 
+const btn=
+document.getElementById(
+"loginButton"
+);
+
 if(!email||!password){
 
 document.getElementById(
@@ -3852,11 +3812,6 @@ document.getElementById(
 return;
 
 }
-
-const btn=
-document.getElementById(
-"loginButton"
-);
 
 btn.disabled=true;
 btn.textContent="جاري الدخول...";
@@ -3872,8 +3827,6 @@ btn.disabled=false;
 btn.textContent="دخول";
 
 if(error){
-
-console.error(error);
 
 document.getElementById(
 "loginError"
@@ -3925,79 +3878,68 @@ window.scrollTo(0,0);
 
 }
 
-/* =========================
-   ADMIN TABS
-========================= */
-
-function showAdminSection(section){
+function showAdminSection(s){
 
 document.querySelectorAll(
 ".admin-section"
-).forEach(x=>
-x.classList.remove("active")
+).forEach(
+x=>x.classList.remove("active")
 );
 
 document.querySelectorAll(
 ".admin-nav button"
-).forEach(x=>
-x.classList.remove("active")
+).forEach(
+x=>x.classList.remove("active")
 );
 
-if(section==="orders"){
+const map={
 
-document.getElementById(
-"ordersSection"
-).classList.add("active");
-
-document.getElementById(
+orders:[
+"ordersSection",
 "ordersTab"
+],
+
+products:[
+"productsSectionAdmin",
+"productsTab"
+],
+
+categories:[
+"categoriesSectionAdmin",
+"categoriesTab"
+],
+
+shipping:[
+"shippingSectionAdmin",
+"shippingTab"
+]
+
+};
+
+const m=
+map[s]||map.shipping;
+
+document.getElementById(
+m[0]
 ).classList.add("active");
 
+document.getElementById(
+m[1]
+).classList.add("active");
+
+if(s==="orders")
 loadOrders();
 
-}else if(section==="products"){
-
-document.getElementById(
-"productsSectionAdmin"
-).classList.add("active");
-
-document.getElementById(
-"productsTab"
-).classList.add("active");
-
+if(s==="products")
 loadAdminProducts();
 
-}else if(section==="categories"){
-
-document.getElementById(
-"categoriesSectionAdmin"
-).classList.add("active");
-
-document.getElementById(
-"categoriesTab"
-).classList.add("active");
-
+if(s==="categories")
 loadCategories();
 
-}else{
-
-document.getElementById(
-"shippingSectionAdmin"
-).classList.add("active");
-
-document.getElementById(
-"shippingTab"
-).classList.add("active");
-
+if(s==="shipping")
 loadShippingRates();
 
 }
-
-}
-
-/* =========================
-   ORDERS
-========================= */
 
 function statusText(s){
 
@@ -4028,25 +3970,29 @@ cancelled:"status-cancelled"
 
 async function loadOrders(){
 
-const box=
+const b=
 document.getElementById(
 "ordersList"
 );
 
-box.innerHTML=
+b.innerHTML=
 '<div class="no-orders">جاري تحميل الطلبات...</div>';
 
-const {data,error}=
+const {
+data,
+error
+}=
 await supabaseClient
 .from("orders")
 .select("*")
-.order("created_at",{ascending:false});
+.order(
+"created_at",
+{ascending:false}
+);
 
 if(error){
 
-console.error(error);
-
-box.innerHTML=
+b.innerHTML=
 '<div class="no-orders">تعذر تحميل الطلبات.</div>';
 
 return;
@@ -4064,7 +4010,8 @@ function updateStats(){
 
 document.getElementById(
 "statOrders"
-).textContent=orders.length;
+).textContent=
+orders.length;
 
 document.getElementById(
 "statNew"
@@ -4094,7 +4041,10 @@ orders.filter(
 x=>x.status==="cancelled"
 ).length;
 
-const sales=
+document.getElementById(
+"statSales"
+).textContent=
+formatPrice(
 orders
 .filter(
 x=>x.status!=="cancelled"
@@ -4108,31 +4058,27 @@ x.total_price??
 0
 ),
 0
-);
-
-document.getElementById(
-"statSales"
-).textContent=
-formatPrice(sales)+" دج";
+)
+)
++" دج";
 
 }
 
-function getOrderNumber(order){
+function getOrderNumber(o){
 
-if(
-order.order_number!==undefined&&
-order.order_number!==null
-)
-return order.order_number;
+if(o.order_number!=null)
+return o.order_number;
 
-const sorted=[...orders].sort(
-(a,b)=>
-new Date(a.created_at)-
-new Date(b.created_at)
+const a=
+[...orders].sort(
+(x,y)=>
+new Date(x.created_at)-
+new Date(y.created_at)
 );
 
-return sorted.findIndex(
-x=>String(x.id)===String(order.id)
+return a.findIndex(
+x=>String(x.id)===
+String(o.id)
 )+1;
 
 }
@@ -4147,40 +4093,43 @@ document.getElementById(
 .trim()
 .toLowerCase();
 
-const filter=
+const f=
 document.getElementById(
 "statusFilter"
 ).value;
 
 const list=
-orders.filter(o=>{
-
-const text=
+orders.filter(
+o=>
+(
+f==="all"||
+o.status===f
+)
+&&
+(
+!q||
 `${o.customer_name||""} ${o.phone||""}`
-.toLowerCase();
-
-return(
-(filter==="all"||o.status===filter)&&
-(!q||text.includes(q))
+.toLowerCase()
+.includes(q)
+)
 );
 
-});
-
-const box=
+const b=
 document.getElementById(
 "ordersList"
 );
 
 if(!list.length){
 
-box.innerHTML=
+b.innerHTML=
 '<div class="no-orders">لا توجد طلبات مطابقة.</div>';
 
 return;
 
 }
 
-box.innerHTML=list.map(o=>{
+b.innerHTML=
+list.map(o=>{
 
 const arr=
 Array.isArray(o.products)
@@ -4193,13 +4142,10 @@ const total=
 Number(
 o.total??
 o.total_price??
-(
-Number(o.products_total||0)+
-Number(o.delivery_price||0)
-)
+0
 );
 
-return`
+return `
 
 <div class="order-card">
 
@@ -4208,20 +4154,26 @@ return`
 <div>
 
 <div class="order-name">
-👤 ${escapeHtml(o.customer_name||"-")}
+👤 ${esc(o.customer_name||"-")}
 </div>
 
 <div class="order-id">
 
 رقم الطلب:
-<strong>#${getOrderNumber(o)}</strong>
+<strong>
+#${getOrderNumber(o)}
+</strong>
 
 <br>
 
-${o.created_at?
+${
+o.created_at
+?
 new Date(o.created_at)
-.toLocaleString("ar-DZ"):
-""}
+.toLocaleString("ar-DZ")
+:
+""
+}
 
 </div>
 
@@ -4240,10 +4192,10 @@ ${statusText(o.status)}
 <strong>📞 الهاتف</strong>
 
 <a
-href="tel:${escapeHtml(o.phone||"")}"
+href="tel:${esc(o.phone||"")}"
 style="color:#087f5b"
 >
-${escapeHtml(o.phone||"-")}
+${esc(o.phone||"-")}
 </a>
 
 </div>
@@ -4252,7 +4204,7 @@ ${escapeHtml(o.phone||"-")}
 
 <strong>📍 الولاية</strong>
 
-${escapeHtml(
+${esc(
 o.wilaya_name||
 o.wilaya_code||
 "-"
@@ -4264,7 +4216,7 @@ o.wilaya_code||
 
 <strong>🏘️ البلدية</strong>
 
-${escapeHtml(
+${esc(
 o.municipality||"-"
 )}
 
@@ -4274,7 +4226,7 @@ o.municipality||"-"
 
 <strong>🚚 التوصيل</strong>
 
-${escapeHtml(
+${esc(
 o.delivery_type||
 o.delivery_method||
 "-"
@@ -4286,32 +4238,37 @@ o.delivery_method||
 
 <div class="products-box">
 
-<strong>🛍️ المنتجات</strong>
+<strong>
+🛍️ المنتجات
+</strong>
 
-${arr.map(i=>`
+${
+arr.map(i=>`
 
 <div class="product-line">
 
 <span>
-${escapeHtml(i.name)} × ${i.quantity}
+${esc(i.name)} × ${i.quantity}
 </span>
 
 <strong>
 ${formatPrice(
 i.subtotal??
-(
 Number(i.price)*
 Number(i.quantity)
-)
-)} دج
+)}
+دج
 </strong>
 
 </div>
 
-`).join("")}
+`).join("")
+}
 
 <div class="order-total">
-الإجمالي: ${formatPrice(total)} دج
+الإجمالي:
+${formatPrice(total)}
+دج
 </div>
 
 </div>
@@ -4320,13 +4277,15 @@ Number(i.quantity)
 
 <select id="status-${o.id}">
 
-${[
+${
+[
 "new",
 "processing",
 "shipped",
 "delivered",
 "cancelled"
-].map(s=>`
+]
+.map(s=>`
 
 <option
 value="${s}"
@@ -4335,7 +4294,8 @@ ${o.status===s?"selected":""}
 ${statusText(s)}
 </option>
 
-`).join("")}
+`).join("")
+}
 
 </select>
 
@@ -4348,7 +4308,7 @@ onclick="saveOrderStatus('${o.id}')"
 
 <a
 class="call-btn"
-href="tel:${escapeHtml(o.phone||"")}"
+href="tel:${esc(o.phone||"")}"
 >
 📞 اتصال
 </a>
@@ -4372,7 +4332,7 @@ onclick="deleteOrder('${o.id}')"
 
 async function saveOrderStatus(id){
 
-const status=
+const s=
 document.getElementById(
 "status-"+id
 ).value;
@@ -4380,7 +4340,7 @@ document.getElementById(
 const {error}=
 await supabaseClient
 .from("orders")
-.update({status})
+.update({status:s})
 .eq("id",id);
 
 if(error){
@@ -4394,12 +4354,13 @@ return;
 
 }
 
-const o=orders.find(
+const o=
+orders.find(
 x=>String(x.id)===String(id)
 );
 
 if(o)
-o.status=status;
+o.status=s;
 
 updateStats();
 renderOrders();
@@ -4412,9 +4373,11 @@ showToast(
 
 async function deleteOrder(id){
 
-if(!confirm(
+if(
+!confirm(
 "هل أنت متأكد من حذف هذا الطلب؟"
-))
+)
+)
 return;
 
 const {error}=
@@ -4434,7 +4397,8 @@ return;
 
 }
 
-orders=orders.filter(
+orders=
+orders.filter(
 x=>String(x.id)!==String(id)
 );
 
@@ -4447,126 +4411,44 @@ showToast(
 
 }
 
-/* =========================
-   ADMIN PRODUCTS
-========================= */
-
-async function loadAdminProducts(){
-
-const grid=
-document.getElementById(
-"adminProductsGrid"
-);
-
-grid.innerHTML=
-'<div class="no-orders">جاري تحميل المنتجات...</div>';
-
-const {data,error}=
-await supabaseClient
-.from("products")
-.select("*")
-.order("created_at",{ascending:false});
-
-if(error){
-
-console.error(error);
-
-grid.innerHTML=
-'<div class="no-orders">تعذر تحميل المنتجات.</div>';
-
-return;
-
-}
-
-const all=data||[];
-
-const ids=all.map(x=>x.id);
-
-let images=[];
-
-if(ids.length){
-
-const r=
-await supabaseClient
-.from("product_images")
-.select("*")
-.in("product_id",ids)
-.order("created_at",{ascending:true});
-
-if(!r.error)
-images=r.data||[];
-
-}
-
-products=all.map(p=>{
-
-let imgs=
-images
-.filter(
-x=>String(x.product_id)===
-String(p.id)
-)
-.map(x=>x.image_url)
-.filter(Boolean);
-
-if(
-p.image_url&&
-!imgs.includes(p.image_url)
-)
-imgs.unshift(p.image_url);
-
-return{
-...p,
-images:imgs
-};
-
-});
-
-renderAdminProducts();
-
-renderProducts(
-products.filter(
-p=>p.active!==false
-)
-);
-
-}
-
 function renderAdminProducts(){
 
-const grid=
+const b=
 document.getElementById(
 "adminProductsGrid"
 );
 
 if(!products.length){
 
-grid.innerHTML=
+b.innerHTML=
 '<div class="no-orders">لا توجد منتجات.</div>';
 
 return;
 
 }
 
-grid.innerHTML=
+b.innerHTML=
 products.map(p=>{
 
-const imgs=
+const a=
 getProductImages(p);
 
 const active=
 p.active!==false;
 
-return`
+const stock=
+Number(p.stock||0);
+
+return `
 
 <div class="admin-product-card">
 
 <div class="admin-product-image">
 
 ${
-imgs.length
+a.length
 ?
-`<img src="${escapeHtml(imgs[0])}">`
+`<img src="${esc(a[0])}">`
 :
 "📦"
 }
@@ -4576,7 +4458,7 @@ imgs.length
 <div class="admin-product-info">
 
 <div class="admin-product-name">
-${escapeHtml(p.name)}
+${esc(p.name)}
 </div>
 
 <div class="admin-product-price">
@@ -4584,7 +4466,15 @@ ${formatPrice(p.price)} دج
 </div>
 
 <div class="admin-product-stock">
-المخزون: ${Number(p.stock||0)}
+
+المخزون:
+
+<strong style="
+color:${stock>0?"#087f5b":"#d32f2f"}
+">
+${stock}
+</strong>
+
 </div>
 
 <div style="
@@ -4592,14 +4482,19 @@ margin-top:6px;
 color:#777;
 font-size:13px
 ">
-🖼️ عدد الصور: ${imgs.length}
+
+🖼️ عدد الصور:
+${a.length}
+
 </div>
 
 <div
 class="${active?"product-active":"product-hidden"}"
 style="margin-top:8px;font-weight:bold"
 >
+
 ${active?"● ظاهر في المتجر":"● مخفي"}
+
 </div>
 
 <div class="product-actions">
@@ -4624,7 +4519,15 @@ onclick="deleteProduct('${p.id}')"
 class="toggle-product"
 onclick="toggleProduct('${p.id}',${active})"
 >
-${active?"👁️ إخفاء المنتج":"👁️ إظهار المنتج"}
+
+${
+active
+?
+"👁️ إخفاء المنتج"
+:
+"👁️ إظهار المنتج"
+}
+
 </button>
 
 </div>
@@ -4637,13 +4540,10 @@ ${active?"👁️ إخفاء المنتج":"👁️ إظهار المنتج"}
 
 }
 
-/* =========================
-   PRODUCT MODAL
-========================= */
-
 function openProductModal(){
 
 editingProductId=null;
+
 selectedProductFiles=[];
 existingProductImages=[];
 removedExistingImages=[];
@@ -4653,21 +4553,19 @@ document.getElementById(
 ).textContent=
 "➕ إضافة منتج جديد";
 
-document.getElementById(
-"productName"
-).value="";
-
-document.getElementById(
-"productPrice"
-).value="";
+[
+"productName",
+"productPrice",
+"productDescription"
+]
+.forEach(
+id=>
+document.getElementById(id).value=""
+);
 
 document.getElementById(
 "productStock"
 ).value="100";
-
-document.getElementById(
-"productDescription"
-).value="";
 
 populateProductCategories();
 
@@ -4722,7 +4620,8 @@ function renderNewImagesPreview(){
 document.getElementById(
 "newImagesPreview"
 ).innerHTML=
-selectedProductFiles.map((f,i)=>`
+selectedProductFiles.map(
+(f,i)=>`
 
 <div class="preview-item">
 
@@ -4737,7 +4636,8 @@ onclick="removeNewProductImage(${i})"
 
 </div>
 
-`).join("");
+`
+).join("");
 
 }
 
@@ -4749,33 +4649,36 @@ renderNewImagesPreview();
 
 }
 
-/* =========================
-   UPLOAD
-========================= */
-
 async function uploadImage(file,prefix){
 
 if(!file)
 return null;
 
-const ext=(
+const ext=
+(
 file.name.split(".").pop()||
 "jpg"
 ).toLowerCase();
 
-const filename=
-prefix+"-"+Date.now()+"-"+
+const fn=
+prefix+
+"-"+
+Date.now()+
+"-"+
 Math.random()
 .toString(36)
 .slice(2)+
-"."+ext;
+"."+
+ext;
 
-const {error}=
+const {
+error
+}=
 await supabaseClient
 .storage
 .from("products")
 .upload(
-filename,
+fn,
 file,
 {
 upsert:false,
@@ -4789,14 +4692,11 @@ throw error;
 return supabaseClient
 .storage
 .from("products")
-.getPublicUrl(filename)
-.data.publicUrl;
+.getPublicUrl(fn)
+.data
+.publicUrl;
 
 }
-
-/* =========================
-   SAVE PRODUCT
-========================= */
 
 async function saveProduct(){
 
@@ -4833,6 +4733,8 @@ if(
 !name||
 !Number.isFinite(price)||
 price<0||
+!Number.isFinite(stock)||
+stock<0||
 !category
 ){
 
@@ -4851,8 +4753,7 @@ document.getElementById(
 );
 
 btn.disabled=true;
-btn.textContent=
-"جاري الحفظ...";
+btn.textContent="جاري الحفظ...";
 
 try{
 
@@ -4880,7 +4781,7 @@ throw error;
 }else{
 
 const {
-data:created,
+data:c,
 error
 }=
 await supabaseClient
@@ -4895,11 +4796,13 @@ active:true
 if(error)
 throw error;
 
-id=created.id;
+id=c.id;
 
 }
 
-if(removedExistingImages.length){
+if(
+removedExistingImages.length
+){
 
 await supabaseClient
 .from("product_images")
@@ -4912,17 +4815,19 @@ removedExistingImages
 
 }
 
-if(selectedProductFiles.length){
+if(
+selectedProductFiles.length
+){
 
 const urls=[];
 
 for(
-const file of selectedProductFiles
+const f of selectedProductFiles
 ){
 
 const u=
 await uploadImage(
-file,
+f,
 "product"
 );
 
@@ -4937,14 +4842,21 @@ const {error}=
 await supabaseClient
 .from("product_images")
 .insert(
-urls.map(u=>({
+urls.map(
+u=>({
 product_id:id,
 image_url:u
-}))
+})
+)
 );
 
 if(error)
 throw error;
+
+if(
+!editingProductId||
+!existingProductImages.length
+){
 
 await supabaseClient
 .from("products")
@@ -4957,7 +4869,9 @@ image_url:urls[0]
 
 }
 
-const wasEditing=
+}
+
+const edit=
 !!editingProductId;
 
 closeProductModal();
@@ -4965,12 +4879,11 @@ closeProductModal();
 await loadAdminProducts();
 
 showToast(
-wasEditing
+edit
 ?
 "تم تعديل المنتج ✓"
 :
-"تمت إضافة المنتج ✓",
-"success"
+"تمت إضافة المنتج ✓"
 );
 
 }catch(e){
@@ -4986,18 +4899,16 @@ showToast(
 }finally{
 
 btn.disabled=false;
-btn.textContent=
-"حفظ المنتج";
+btn.textContent="حفظ المنتج";
 
 }
 
 }
-
-/* EDIT PRODUCT */
 
 function editProduct(id){
 
-const p=products.find(
+const p=
+products.find(
 x=>String(x.id)===String(id)
 );
 
@@ -5019,15 +4930,18 @@ document.getElementById(
 
 document.getElementById(
 "productName"
-).value=p.name||"";
+).value=
+p.name||"";
 
 document.getElementById(
 "productPrice"
-).value=p.price||"";
+).value=
+p.price||"";
 
 document.getElementById(
 "productStock"
-).value=p.stock||0;
+).value=
+p.stock||0;
 
 document.getElementById(
 "productDescription"
@@ -5062,11 +4976,12 @@ function renderExistingProductImages(){
 document.getElementById(
 "existingImages"
 ).innerHTML=
-existingProductImages.map((u,i)=>`
+existingProductImages.map(
+(u,i)=>`
 
 <div class="preview-item">
 
-<img src="${escapeHtml(u)}">
+<img src="${esc(u)}">
 
 <button
 class="preview-remove"
@@ -5077,7 +4992,8 @@ onclick="removeExistingProductImage(${i})"
 
 </div>
 
-`).join("");
+`
+).join("");
 
 }
 
@@ -5095,9 +5011,11 @@ renderExistingProductImages();
 
 async function deleteProduct(id){
 
-if(!confirm(
+if(
+!confirm(
 "هل أنت متأكد من حذف هذا المنتج؟"
-))
+)
+)
 return;
 
 await supabaseClient
@@ -5125,8 +5043,7 @@ return;
 await loadAdminProducts();
 
 showToast(
-"تم حذف المنتج ✓",
-"success"
+"تم حذف المنتج ✓"
 );
 
 }
@@ -5159,15 +5076,10 @@ active
 ?
 "تم إخفاء المنتج ✓"
 :
-"تم إظهار المنتج ✓",
-"success"
+"تم إظهار المنتج ✓"
 );
 
 }
-
-/* =========================
-   CATEGORY MODAL
-========================= */
 
 function openCategoryModal(){
 
@@ -5223,15 +5135,17 @@ document.getElementById(
 `
 <img
 src="${URL.createObjectURL(selectedCategoryFile)}"
-style="width:100%;height:100%;object-fit:cover"
+style="
+width:100%;
+height:100%;
+object-fit:cover
+"
 >
 `;
 
 }
 
 }
-
-/* SAVE CATEGORY */
 
 async function saveCategory(){
 
@@ -5262,8 +5176,7 @@ document.getElementById(
 );
 
 btn.disabled=true;
-btn.textContent=
-"جاري الحفظ...";
+btn.textContent="جاري الحفظ...";
 
 try{
 
@@ -5310,7 +5223,7 @@ throw error;
 
 }
 
-const wasEditing=
+const edit=
 !!editingCategoryId;
 
 closeCategoryModal();
@@ -5318,17 +5231,14 @@ closeCategoryModal();
 await loadCategories();
 
 showToast(
-wasEditing
+edit
 ?
 "تم تعديل القسم ✓"
 :
-"تمت إضافة القسم ✓",
-"success"
+"تمت إضافة القسم ✓"
 );
 
 }catch(e){
-
-console.error(e);
 
 showToast(
 "حدث خطأ أثناء حفظ القسم: "+
@@ -5339,33 +5249,31 @@ showToast(
 }finally{
 
 btn.disabled=false;
-btn.textContent=
-"حفظ القسم";
+btn.textContent="حفظ القسم";
 
 }
 
 }
-
-/* ADMIN CATEGORIES */
 
 function renderAdminCategories(){
 
-const grid=
+const b=
 document.getElementById(
 "adminCategoriesGrid"
 );
 
 if(!categories.length){
 
-grid.innerHTML=
+b.innerHTML=
 '<div class="no-orders">لا توجد أقسام حالياً.</div>';
 
 return;
 
 }
 
-grid.innerHTML=
-categories.map(c=>`
+b.innerHTML=
+categories.map(
+c=>`
 
 <div class="admin-category-card">
 
@@ -5374,7 +5282,7 @@ categories.map(c=>`
 ${
 c.image_url
 ?
-`<img src="${escapeHtml(c.image_url)}">`
+`<img src="${esc(c.image_url)}">`
 :
 "📂"
 }
@@ -5384,16 +5292,16 @@ c.image_url
 <div class="admin-category-info">
 
 <div class="admin-category-name">
-${escapeHtml(c.name)}
+${esc(c.name)}
 </div>
 
 <div style="
 color:#777;
 font-size:13px
 ">
-${escapeHtml(
-c.description||""
-)}
+
+${esc(c.description||"")}
+
 </div>
 
 <div class="category-actions">
@@ -5418,19 +5326,22 @@ onclick="deleteCategory('${c.id}')"
 
 </div>
 
-`).join("");
+`
+).join("");
 
 }
 
 function editCategory(id){
 
-const c=categories.find(
+const c=
+categories.find(
 x=>String(x.id)===String(id)
 );
 
 if(!c)return;
 
 editingCategoryId=c.id;
+
 selectedCategoryFile=null;
 
 document.getElementById(
@@ -5440,7 +5351,8 @@ document.getElementById(
 
 document.getElementById(
 "categoryName"
-).value=c.name||"";
+).value=
+c.name||"";
 
 document.getElementById(
 "categoryDescription"
@@ -5458,8 +5370,12 @@ c.image_url
 ?
 `
 <img
-src="${escapeHtml(c.image_url)}"
-style="width:100%;height:100%;object-fit:cover"
+src="${esc(c.image_url)}"
+style="
+width:100%;
+height:100%;
+object-fit:cover
+"
 >
 `
 :
@@ -5473,12 +5389,15 @@ document.getElementById(
 
 async function deleteCategory(id){
 
-if(!confirm(
+if(
+!confirm(
 "هل أنت متأكد من حذف هذا القسم؟"
-))
+)
+)
 return;
 
-const {data}=await supabaseClient
+const {data}=
+await supabaseClient
 .from("products")
 .select("id")
 .eq("category",id);
@@ -5514,15 +5433,31 @@ return;
 await loadCategories();
 
 showToast(
-"تم حذف القسم ✓",
-"success"
+"تم حذف القسم ✓"
 );
 
 }
 
-/* =========================
-   START
-========================= */
+document.getElementById(
+"wilaya"
+).addEventListener(
+"change",
+updateCheckoutSummary
+);
+
+document.getElementById(
+"deliveryMethod"
+).addEventListener(
+"change",
+updateCheckoutSummary
+);
+
+document.getElementById(
+"searchInput"
+).addEventListener(
+"input",
+searchProducts
+);
 
 async function startApp(){
 
