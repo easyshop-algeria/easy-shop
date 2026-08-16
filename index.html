@@ -927,7 +927,8 @@ margin:auto;
 padding:20px;
 display:flex;
 gap:10px;
-flex-wrap:wrap
+flex-wrap:wrap;
+align-items:center
 }
 
 .admin-tools input,
@@ -942,6 +943,42 @@ background:#fff
 .admin-tools input{
 flex:1;
 min-width:220px
+}
+
+/* FILTERS */
+
+.order-filter{
+min-width:175px;
+height:46px;
+font-size:14px;
+font-weight:700;
+color:var(--navy);
+outline:none;
+cursor:pointer
+}
+
+.order-date-input{
+height:46px;
+min-width:165px;
+font-size:14px;
+font-weight:700;
+color:var(--navy);
+outline:none;
+display:none
+}
+
+.clear-filters{
+background:#eef1f4;
+color:var(--navy);
+border:1px solid #dce2e6;
+padding:12px 17px;
+border-radius:10px;
+font-weight:800;
+white-space:nowrap
+}
+
+.clear-filters:hover{
+background:#e4e9ed
 }
 
 .refresh,
@@ -1531,6 +1568,27 @@ font-size:12px
 width:80px
 }
 
+/* ORDER FILTERS MOBILE */
+
+.admin-tools{
+padding:15px 10px;
+gap:8px
+}
+
+.admin-tools input{
+width:100%;
+min-width:100%;
+flex:100%
+}
+
+.order-filter,
+.order-date-input,
+.clear-filters,
+.admin-tools .refresh{
+width:100%;
+min-width:100%
+}
+
 }
 
 /* VERY SMALL */
@@ -1919,20 +1977,60 @@ Easy Shop Algeria 🇩🇿
 
 </div>
 
+<!-- ORDER FILTERS -->
+
 <div class="admin-tools">
 
-<input id="orderSearch" type="text" placeholder="🔎 بحث بالاسم أو الهاتف" oninput="renderOrders">
+<input
+id="orderSearch"
+type="text"
+placeholder="🔎 بحث بالاسم أو الهاتف"
+oninput="renderOrders()"
+>
 
-<select id="statusFilter" onchange="renderOrders()">
+<select
+id="statusFilter"
+class="order-filter"
+onchange="renderOrders()"
+>
 
-<option value="all">كل الطلبات</option>
-<option value="new">جديد</option>
-<option value="processing">قيد المعالجة</option>
-<option value="shipped">تم الشحن</option>
-<option value="delivered">تم التوصيل</option>
-<option value="cancelled">ملغى</option>
+<option value="all">📦 كل الحالات</option>
+<option value="new">🆕 جديد</option>
+<option value="processing">⚙️ قيد المعالجة</option>
+<option value="shipped">🚚 تم الشحن</option>
+<option value="delivered">✅ تم التوصيل</option>
+<option value="cancelled">❌ ملغى</option>
 
 </select>
+
+<select
+id="dateFilter"
+class="order-filter"
+onchange="handleDateFilterChange()"
+>
+
+<option value="all">📅 كل التواريخ</option>
+<option value="today">📅 اليوم</option>
+<option value="yesterday">📅 أمس</option>
+<option value="7days">📅 آخر 7 أيام</option>
+<option value="30days">📅 آخر 30 يوم</option>
+<option value="custom">📆 تاريخ محدد</option>
+
+</select>
+
+<input
+id="customOrderDate"
+class="order-date-input"
+type="date"
+onchange="renderOrders()"
+>
+
+<button
+class="clear-filters"
+onclick="clearOrderFilters()"
+>
+🔄 مسح الفلاتر
+</button>
 
 <button class="refresh" onclick="loadOrders()">
 🔄 تحديث
@@ -4462,6 +4560,208 @@ cancelled:"status-cancelled"
 
 }
 
+/* =========================
+   ORDER DATE FILTER
+========================= */
+
+function getLocalDateOnly(date){
+
+const d=new Date(date);
+
+if(Number.isNaN(d.getTime()))
+return null;
+
+return new Date(
+d.getFullYear(),
+d.getMonth(),
+d.getDate()
+);
+
+}
+
+function getTodayDateOnly(){
+
+const now=new Date();
+
+return new Date(
+now.getFullYear(),
+now.getMonth(),
+now.getDate()
+);
+
+}
+
+function isOrderDateMatch(order,filter){
+
+if(filter==="all")
+return true;
+
+if(!order.created_at)
+return false;
+
+const orderDate=
+getLocalDateOnly(
+order.created_at
+);
+
+const today=
+getTodayDateOnly();
+
+if(!orderDate)
+return false;
+
+/* اليوم */
+
+if(filter==="today"){
+
+return orderDate.getTime()===
+today.getTime();
+
+}
+
+/* أمس */
+
+if(filter==="yesterday"){
+
+const yesterday=
+new Date(today);
+
+yesterday.setDate(
+yesterday.getDate()-1
+);
+
+return orderDate.getTime()===
+yesterday.getTime();
+
+}
+
+/* آخر 7 أيام */
+
+if(filter==="7days"){
+
+const start=
+new Date(today);
+
+start.setDate(
+start.getDate()-6
+);
+
+return orderDate>=start &&
+orderDate<=today;
+
+}
+
+/* آخر 30 يوم */
+
+if(filter==="30days"){
+
+const start=
+new Date(today);
+
+start.setDate(
+start.getDate()-29
+);
+
+return orderDate>=start &&
+orderDate<=today;
+
+}
+
+/* تاريخ محدد */
+
+if(filter==="custom"){
+
+const selected=
+document.getElementById(
+"customOrderDate"
+)?.value;
+
+if(!selected)
+return true;
+
+const selectedDate=
+new Date(
+selected+"T00:00:00"
+);
+
+return orderDate.getTime()===
+selectedDate.getTime();
+
+}
+
+return true;
+
+}
+
+function handleDateFilterChange(){
+
+const filter=
+document.getElementById(
+"dateFilter"
+).value;
+
+const input=
+document.getElementById(
+"customOrderDate"
+);
+
+if(filter==="custom"){
+
+input.style.display="block";
+
+}else{
+
+input.style.display="none";
+input.value="";
+
+}
+
+renderOrders();
+
+}
+
+function clearOrderFilters(){
+
+const search=
+document.getElementById(
+"orderSearch"
+);
+
+const status=
+document.getElementById(
+"statusFilter"
+);
+
+const date=
+document.getElementById(
+"dateFilter"
+);
+
+const customDate=
+document.getElementById(
+"customOrderDate"
+);
+
+if(search)
+search.value="";
+
+if(status)
+status.value="all";
+
+if(date)
+date.value="all";
+
+if(customDate){
+
+customDate.value="";
+customDate.style.display="none";
+
+}
+
+renderOrders();
+
+}
+
 async function loadOrders(){
 
 const box=
@@ -4593,25 +4893,35 @@ document.getElementById(
 "statusFilter"
 ).value;
 
+const dateFilter=
+document.getElementById(
+"dateFilter"
+).value;
+
 const list=
-orders.filter(
-order=>
+orders.filter(order=>{
 
-(
+const statusOK=
 filter==="all"||
-order.status===filter
-)
+order.status===filter;
 
-&&
+const dateOK=
+isOrderDateMatch(
+order,
+dateFilter
+);
 
-(
+const searchOK=
 !query||
 `${order.customer_name||""} ${order.phone||""}`
 .toLowerCase()
-.includes(query)
-)
+.includes(query);
 
-);
+return statusOK &&
+dateOK &&
+searchOK;
+
+});
 
 const box=
 document.getElementById(
@@ -4621,7 +4931,7 @@ document.getElementById(
 if(!list.length){
 
 box.innerHTML=
-'<div class="no-orders">لا توجد طلبات مطابقة.</div>';
+'<div class="no-orders">لا توجد طلبات مطابقة للفلاتر الحالية.</div>';
 
 return;
 
