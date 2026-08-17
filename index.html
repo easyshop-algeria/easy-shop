@@ -780,12 +780,8 @@ animation:thankFade .3s ease
 }
 
 @keyframes thankFade{
-from{
-opacity:0
-}
-to{
-opacity:1
-}
+from{opacity:0}
+to{opacity:1}
 }
 
 .thank-you-card{
@@ -2215,7 +2211,6 @@ Easy Shop Algeria 🇩🇿
 
 </div>
 
-
 <!-- CART -->
 
 <div class="overlay" id="overlay" onclick="closeCart()"></div>
@@ -2243,7 +2238,6 @@ Easy Shop Algeria 🇩🇿
 </button>
 
 </aside>
-
 
 <!-- CHECKOUT -->
 
@@ -2358,7 +2352,6 @@ Easy Shop Algeria 🇩🇿
 </div>
 </div>
 
-
 <!-- LOGIN -->
 
 <div class="modal" id="loginModal">
@@ -2398,7 +2391,6 @@ Easy Shop Algeria 🇩🇿
 </div>
 </div>
 
-
 <!-- LIGHTBOX -->
 
 <div class="lightbox" id="lightbox">
@@ -2409,13 +2401,9 @@ Easy Shop Algeria 🇩🇿
 
 </div>
 
-
 <div class="toast" id="toast"></div>
 
-
-<!-- =========================
-     THANK YOU PAGE
-========================= -->
+<!-- THANK YOU -->
 
 <div class="thank-you-modal" id="thankYouModal">
 
@@ -2508,7 +2496,6 @@ Easy Shop Algeria 🇩🇿
 
 </div>
 
-
 <!-- ADMIN -->
 
 <div id="adminPage" class="admin-page">
@@ -2552,7 +2539,6 @@ Easy Shop Algeria 🇩🇿
 </button>
 
 </div>
-
 
 <!-- ORDERS -->
 
@@ -2637,7 +2623,6 @@ Easy Shop Algeria 🇩🇿
 
 </div>
 
-
 <!-- PRODUCTS ADMIN -->
 
 <div id="productsSectionAdmin" class="admin-section">
@@ -2662,7 +2647,6 @@ Easy Shop Algeria 🇩🇿
 
 </div>
 
-
 <!-- CATEGORIES ADMIN -->
 
 <div id="categoriesSectionAdmin" class="admin-section">
@@ -2686,7 +2670,6 @@ Easy Shop Algeria 🇩🇿
 </div>
 
 </div>
-
 
 <!-- SHIPPING -->
 
@@ -2737,7 +2720,6 @@ Easy Shop Algeria 🇩🇿
 </div>
 
 </div>
-
 
 <!-- PRODUCT MODAL -->
 
@@ -2816,7 +2798,6 @@ Easy Shop Algeria 🇩🇿
 </div>
 </div>
 
-
 <!-- CATEGORY MODAL -->
 
 <div class="modal" id="categoryModal">
@@ -2869,7 +2850,6 @@ Easy Shop Algeria 🇩🇿
 
 </div>
 </div>
-
 
 <script>
 
@@ -4313,8 +4293,40 @@ formatPrice(delivery)+
 
 /* =====================================================
    THANK YOU
+   تم إصلاح المشكلة هنا
 ===================================================== */
 
+/*
+   إنشاء رقم طلب مختصر وآمن من UUID
+   إذا كانت قاعدة البيانات ترجع order_number
+   سنستخدمه، وإذا لم ترجعه نستخدم هذا الرقم المختصر.
+*/
+function makeShortOrderNumber(value){
+
+if(!value)
+return "ES-"+Date.now().toString().slice(-6);
+
+const text=String(value);
+
+/*
+   إذا كان UUID مثل:
+   89e33486-e6c0-4788-ab99-26b5e37b3a6b
+
+   نأخذ آخر 6 أحرف:
+   ES-3A6B3A
+*/
+const clean=text
+.replace(/-/g,"")
+.toUpperCase();
+
+return "ES-"+clean.slice(-6);
+
+}
+
+
+/*
+   استخراج معلومات الطلب التي ترجعها الدالة
+*/
 function getCreatedOrderInfo(data){
 
 let result=data;
@@ -4323,92 +4335,90 @@ if(Array.isArray(result)){
 result=result[0];
 }
 
-if(result&&typeof result==="object"){
+if(typeof result==="string"){
 
-let orderNumber=
-result.order_number||
-result.order_id||
-result.id||
-"-";
-
-/*
-   إذا كان رقم الطلب UUID طويلاً،
-   نعرض رقمًا قصيرًا بدل UUID
-*/
-if(
-typeof orderNumber==="string"&&
-orderNumber.length>12
-){
-
-orderNumber=
-"ES-"+
-orderNumber
-.replace(/-/g,"")
-.slice(-5)
-.toUpperCase();
+try{
+result=JSON.parse(result);
+}catch{}
 
 }
 
-return{
-id:
+if(result&&typeof result==="object"){
+
+const id=
 result.id||
 result.order_id||
-result.order_number||
-"-",
+result.orderId||
+null;
 
-orderNumber:orderNumber
+const existingNumber=
+result.order_number||
+result.orderNumber||
+result.number||
+null;
+
+return{
+id:id,
+orderNumber:
+existingNumber||
+makeShortOrderNumber(id)
 };
 
 }
 
 if(result!=null){
 
-let orderNumber=String(result);
-
-/*
-   اختصار UUID إذا أرجعته Supabase مباشرة
-*/
-if(orderNumber.length>12){
-
-orderNumber=
-"ES-"+
-orderNumber
-.replace(/-/g,"")
-.slice(-5)
-.toUpperCase();
-
-}
-
 return{
 id:result,
-orderNumber:orderNumber
+orderNumber:
+makeShortOrderNumber(result)
 };
 
 }
 
 return{
-id:"-",
-orderNumber:"-"
+id:null,
+orderNumber:
+makeShortOrderNumber(null)
 };
 
 }
 
 
-function showThankYou(
-orderData,
-productsTotal,
-delivery,
-total
-){
+/*
+   صفحة الشكر أصبحت تستقبل القيم المحفوظة
+   بدل الاعتماد على cart بعد تفريغها
+*/
+function showThankYou(orderData,summary){
 
 const info=getCreatedOrderInfo(
 orderData
 );
 
+
+/*
+   رقم الطلب
+*/
 document.getElementById(
 "thankOrderNumber"
 ).textContent=
 "#"+info.orderNumber;
+
+
+/*
+   قيم الطلب المحفوظة قبل تفريغ السلة
+*/
+const productsTotal=
+Number(summary?.productsTotal||0);
+
+const delivery=
+Number(summary?.delivery||0);
+
+const total=
+Number(summary?.total||(
+productsTotal+delivery
+));
+
 
 document.getElementById(
 "thankProductsTotal"
@@ -4416,17 +4426,20 @@ document.getElementById(
 formatPrice(productsTotal)+
 " دج";
 
+
 document.getElementById(
 "thankDelivery"
 ).textContent=
 formatPrice(delivery)+
 " دج";
 
+
 document.getElementById(
 "thankTotal"
 ).textContent=
 formatPrice(total)+
 " دج";
+
 
 document.getElementById(
 "thankYouModal"
@@ -4524,32 +4537,34 @@ button.disabled=true;
 button.textContent=
 "جاري تسجيل الطلب...";
 
-/*
-   نحسب القيم ونحفظها قبل تفريغ السلة
-*/
-const productsTotal=getProductsTotal();
 
-const deliveryPrice=getShippingPrice(
+/*
+   مهم جداً:
+   نحسب القيم قبل تفريغ cart
+*/
+const productsTotal=
+Number(getProductsTotal());
+
+const deliveryPrice=
+Number(getShippingPrice(
 code,
 method
-);
+));
 
 const total=
 productsTotal+
 deliveryPrice;
 
+
 /*
-   نسخة ثابتة لصفحة الشكر
-   قبل cart=[]
+   نحفظ ملخص الطلب قبل RPC وقبل cart=[]
 */
-const thankProductsTotal=
-productsTotal;
+const thankSummary={
+productsTotal:productsTotal,
+delivery:deliveryPrice,
+total:total
+};
 
-const thankDelivery=
-deliveryPrice;
-
-const thankTotal=
-total;
 
 const productsData=cart.map(item=>({
 
@@ -4655,13 +4670,15 @@ throw new Error(
 
 }
 
+
 /*
-   نحفظ معلومات الطلب قبل تفريغ السلة
+   نحفظ معلومات الطلب
 */
 const thankData=data;
 
+
 /*
-   تفريغ السلة
+   تفريغ السلة بعد حفظ القيم
 */
 cart=[];
 
@@ -4671,9 +4688,6 @@ closeCheckout();
 
 closeCart();
 
-/*
-   مسح بيانات العميل
-*/
 document.getElementById(
 "customerName"
 ).value="";
@@ -4692,19 +4706,20 @@ document.getElementById(
 
 updateCheckoutSummary();
 
+
 /*
    تحديث المخزون
 */
 await loadProducts();
 
+
 /*
-   إظهار صفحة الشكر بالقيم المحفوظة
+   إظهار صفحة الشكر
+   مع تمرير القيم المحفوظة
 */
 showThankYou(
 thankData,
-thankProductsTotal,
-thankDelivery,
-thankTotal
+thankSummary
 );
 
 }catch(error){
@@ -5135,9 +5150,25 @@ formatPrice(sales)+
 
 function getOrderNumber(order){
 
+/*
+   إذا كان order_number موجوداً في قاعدة البيانات
+   نستخدمه مباشرة.
+*/
 if(order.order_number!=null)
 return order.order_number;
 
+
+/*
+   إذا لم يكن موجوداً:
+   نستخدم رقم مختصر من UUID بدل عرضه كاملاً.
+*/
+if(order.id)
+return makeShortOrderNumber(order.id);
+
+
+/*
+   احتياطياً رقم ترتيبي
+*/
 const sorted=[...orders].sort(
 (a,b)=>
 new Date(a.created_at)-
