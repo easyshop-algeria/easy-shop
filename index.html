@@ -4325,6 +4325,30 @@ result=result[0];
 
 if(result&&typeof result==="object"){
 
+let orderNumber=
+result.order_number||
+result.order_id||
+result.id||
+"-";
+
+/*
+   إذا كان رقم الطلب UUID طويلاً،
+   نعرض رقمًا قصيرًا بدل UUID
+*/
+if(
+typeof orderNumber==="string"&&
+orderNumber.length>12
+){
+
+orderNumber=
+"ES-"+
+orderNumber
+.replace(/-/g,"")
+.slice(-5)
+.toUpperCase();
+
+}
+
 return{
 id:
 result.id||
@@ -4332,20 +4356,32 @@ result.order_id||
 result.order_number||
 "-",
 
-orderNumber:
-result.order_number||
-result.order_id||
-result.id||
-"-"
+orderNumber:orderNumber
 };
 
 }
 
 if(result!=null){
 
+let orderNumber=String(result);
+
+/*
+   اختصار UUID إذا أرجعته Supabase مباشرة
+*/
+if(orderNumber.length>12){
+
+orderNumber=
+"ES-"+
+orderNumber
+.replace(/-/g,"")
+.slice(-5)
+.toUpperCase();
+
+}
+
 return{
 id:result,
-orderNumber:result
+orderNumber:orderNumber
 };
 
 }
@@ -4357,7 +4393,13 @@ orderNumber:"-"
 
 }
 
-function showThankYou(orderData){
+
+function showThankYou(
+orderData,
+productsTotal,
+delivery,
+total
+){
 
 const info=getCreatedOrderInfo(
 orderData
@@ -4371,27 +4413,8 @@ document.getElementById(
 document.getElementById(
 "thankProductsTotal"
 ).textContent=
-formatPrice(
-getProductsTotal()
-)+
+formatPrice(productsTotal)+
 " دج";
-
-const code=document.getElementById(
-"wilaya"
-).value;
-
-const method=document.getElementById(
-"deliveryMethod"
-).value;
-
-const delivery=getShippingPrice(
-code,
-method
-);
-
-const total=
-getProductsTotal()+
-delivery;
 
 document.getElementById(
 "thankDelivery"
@@ -4501,6 +4524,9 @@ button.disabled=true;
 button.textContent=
 "جاري تسجيل الطلب...";
 
+/*
+   نحسب القيم ونحفظها قبل تفريغ السلة
+*/
 const productsTotal=getProductsTotal();
 
 const deliveryPrice=getShippingPrice(
@@ -4511,6 +4537,19 @@ method
 const total=
 productsTotal+
 deliveryPrice;
+
+/*
+   نسخة ثابتة لصفحة الشكر
+   قبل cart=[]
+*/
+const thankProductsTotal=
+productsTotal;
+
+const thankDelivery=
+deliveryPrice;
+
+const thankTotal=
+total;
 
 const productsData=cart.map(item=>({
 
@@ -4616,7 +4655,6 @@ throw new Error(
 
 }
 
-
 /*
    نحفظ معلومات الطلب قبل تفريغ السلة
 */
@@ -4633,6 +4671,9 @@ closeCheckout();
 
 closeCart();
 
+/*
+   مسح بيانات العميل
+*/
 document.getElementById(
 "customerName"
 ).value="";
@@ -4657,9 +4698,14 @@ updateCheckoutSummary();
 await loadProducts();
 
 /*
-   إظهار صفحة الشكر
+   إظهار صفحة الشكر بالقيم المحفوظة
 */
-showThankYou(thankData);
+showThankYou(
+thankData,
+thankProductsTotal,
+thankDelivery,
+thankTotal
+);
 
 }catch(error){
 
