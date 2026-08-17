@@ -5414,6 +5414,8 @@ function detailsBuyNow(){
 
 if(!currentDetailsProduct)return;
 
+setProductUrl(currentDetailsProduct.id);
+
 cart=
 cart.filter(
 x=>
@@ -5519,6 +5521,8 @@ showToast(
 }
 
 function buyNow(id){
+
+setProductUrl(id);
 
 const item=
 cart.find(
@@ -5761,6 +5765,57 @@ document.getElementById(
 
 
 /* =====================================================
+DIRECT PRODUCT LINKS
+===================================================== */
+
+function getProductDirectLink(id){
+const url=new URL(window.location.href);
+url.searchParams.set("product",String(id));
+return url.toString();
+}
+
+function setProductUrl(id){
+const url=new URL(window.location.href);
+url.searchParams.set("product",String(id));
+history.pushState({product:String(id)},"",url.toString());
+}
+
+function clearProductUrl(){
+const url=new URL(window.location.href);
+if(!url.searchParams.has("product"))return;
+url.searchParams.delete("product");
+history.replaceState({},"",url.toString());
+}
+
+function copyProductLink(id){
+const link=getProductDirectLink(id);
+if(navigator.clipboard&&navigator.clipboard.writeText){
+navigator.clipboard.writeText(link).then(()=>showToast("تم نسخ رابط المنتج ✓")).catch(()=>showToast("تعذر نسخ الرابط.","error"));
+return;
+}
+const input=document.createElement("textarea");
+input.value=link; input.style.position="fixed"; input.style.opacity="0";
+document.body.appendChild(input); input.select();
+try{document.execCommand("copy");showToast("تم نسخ رابط المنتج ✓");}catch{showToast("الرابط: "+link,"error");}
+document.body.removeChild(input);
+}
+
+async function openDirectProductFromUrl(){
+const url=new URL(window.location.href);
+const productId=url.searchParams.get("product");
+if(!productId)return;
+const product=products.find(p=>String(p.id)===String(productId));
+if(!product)return;
+if(Number(product.stock||0)<=0){showToast("هذا المنتج غير متوفر حالياً.","error");return;}
+cart=[];
+cart.push({...product,quantity:1});
+updateCart();
+prepareCheckoutProduct();
+updateCheckoutSummary();
+document.getElementById("checkoutModal").classList.add("open");
+}
+
+/* =====================================================
 CHECKOUT
 ===================================================== */
 
@@ -5824,6 +5879,8 @@ function closeCheckout(){
 document.getElementById(
 "checkoutModal"
 ).classList.remove("open");
+
+clearProductUrl();
 
 }
 
@@ -6052,7 +6109,48 @@ throw new Error(
 "لم يتم إنشاء الطلب."
 );
 
-const thankData=data;
+let thankData=data;
+
+try{
+
+let returned=data;
+if(Array.isArray(returned))returned=returned[0];
+
+const returnedNumber=
+returned&&typeof returned==="object"
+?shortOrderNumber(returned.order_number)
+:null;
+
+const returnedId=
+returned&&typeof returned==="object"
+?(returned.id||returned.order_id)
+:null;
+
+if(returnedNumber===null&&returnedId){
+
+const {data:createdOrder}=
+await supabaseClient
+.from("orders")
+.select("order_number")
+.eq("id",returnedId)
+.maybeSingle();
+
+if(createdOrder?.order_number){
+
+thankData={
+...(returned&&typeof returned==="object"?returned:{}),
+order_number:createdOrder.order_number
+};
+
+}
+
+}
+
+}catch(resolveError){
+
+console.warn("Could not resolve order number:",resolveError);
+
+}
 
 cart=[];
 
@@ -6081,6 +6179,8 @@ document.getElementById(
 updateCheckoutSummary();
 
 await loadProducts();
+
+clearProductUrl();
 
 showThankYou(
 thankData,
@@ -6114,68 +6214,52 @@ button.textContent=
 THANK YOU
 ===================================================== */
 
+function shortOrderNumber(value){
+
+const raw=String(value??"").trim();
+
+if(!raw)return null;
+
+if(/^ES-\d+$/i.test(raw))
+return String(parseInt(raw.replace(/^ES-/i,""),10));
+
+if(/^\d+$/.test(raw))
+return String(parseInt(raw,10));
+
+return null;
+
+}
+
 function extractOrderInfo(data){
 
 let x=data;
-
-if(Array.isArray(x))
-x=x[0];
+if(Array.isArray(x))x=x[0];
 
 if(x&&typeof x==="object"){
+const candidates=[x.order_number,x.order_id];
+for(const candidate of candidates){
+const short=shortOrderNumber(candidate);
+if(short!==null)return{number:short};
+}
+return{number:"-"};
+}
 
-return{
-number:
-x.order_number||
-x.order_id||
-x.id||
-"-"
-};
+const short=shortOrderNumber(x);
+return{number:short===null?"-":short};
 
 }
 
-return{
-number:x||"-"
-};
+function showThankYou(data,productsTotal,delivery,total){
 
-}
+const info=extractOrderInfo(data);
 
-function showThankYou(
-data,
-productsTotal,
-delivery,
-total
-){
+document.getElementById("thankOrderNumber").textContent=
+info.number==="-"?"-":"#"+info.number;
 
-const info=
-extractOrderInfo(data);
-
-document.getElementById(
-"thankOrderNumber"
-).textContent=
-String(info.number).startsWith("ES-")
-?
-info.number
-:
-"#"+info.number;
-
-document.getElementById(
-"thankProductsTotal"
-).textContent=
-formatPrice(productsTotal)+" دج";
-
-document.getElementById(
-"thankDelivery"
-).textContent=
-formatPrice(delivery)+" دج";
-
-document.getElementById(
-"thankTotal"
-).textContent=
-formatPrice(total)+" دج";
-
-document.getElementById(
-"thankYouModal"
-).classList.add("open");
+document.getElementById("thankProductsTotal").textContent=formatPrice(productsTotal)+" دج";
+document.getElementById("thankDelivery").textContent=formatPrice(delivery)+" دج";
+document.getElementById("thankTotal").textContent=formatPrice(total)+" دج";
+document.getElementById("thankYouModal").classList.add("open");
 
 }
 
@@ -6743,13 +6827,9 @@ formatPrice(sales)+" دج";
 
 function getOrderNumber(order){
 
-return order.order_number||
-(
-"ES-"+
-String(
-orders.indexOf(order)+1
-).padStart(6,"0")
-);
+const short=shortOrderNumber(order.order_number);
+if(short!==null)return short;
+return String(orders.indexOf(order)+1);
 
 }
 
@@ -7315,6 +7395,7 @@ onclick="deleteProduct('${p.id}')"
 </button>
 
 </div>
+
 
 
 <button
@@ -8444,6 +8525,16 @@ closeThankYou();
 });
 
 
+window.addEventListener("popstate",()=>{
+const url=new URL(window.location.href);
+if(url.searchParams.get("product")){
+openDirectProductFromUrl();
+}else{
+closeCheckout();
+}
+});
+
+
 /* =====================================================
 START
 ===================================================== */
@@ -8465,6 +8556,8 @@ await loadProducts();
 updateCart();
 
 updateCheckoutSummary();
+
+await openDirectProductFromUrl();
 
 const {
 data
